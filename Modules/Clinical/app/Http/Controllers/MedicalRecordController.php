@@ -27,7 +27,8 @@ class MedicalRecordController extends Controller
                 $q->where('code', 'ilike', $term) // Cari Kode RM
                   ->orWhereHas('patient', function($subQ) use ($term) {
                       $subQ->where('name', 'ilike', $term) // Cari Nama Pasien
-                           ->orWhere('nik_ktp', 'ilike', $term);
+                           ->orWhere('nik', 'ilike', $term)
+                            ->orWhere('ktp', 'ilike', $term);;
                   })
                   ->orWhereHas('diagnosis', function($subQ) use ($term) {
                       $subQ->where('name', 'ilike', $term); // Cari Nama Penyakit
@@ -87,7 +88,7 @@ class MedicalRecordController extends Controller
                     // KASUS B: User mengetik Diagnosa baru (Input berupa String)
                     $diag = Diagnosis::firstOrCreate(
                         ['name' => $input],
-                        ['code' => 'AUTO-' . rand(1000, 9999)]
+                        ['code' => 'DIAG' . rand(1000, 9999)]
                     );
                     $diagnosisId = $diag->id;
                     $diagnosisName = $diag->name;

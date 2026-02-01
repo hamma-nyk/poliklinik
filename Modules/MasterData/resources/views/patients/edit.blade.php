@@ -31,10 +31,24 @@
                             <input type="text" name="name" value="{{ $patient->name }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500" required>
                         </div>
                         
+                        @if ($patient->type == 'karyawan')
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">NIK KTP</label>
-                            <input type="text" name="nik_ktp" value="{{ $patient->nik_ktp }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">NIK</label>
+                            <input type="text" name="nik" value="{{ $patient->nik }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500">
                         </div>
+                        @endif
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">KTP</label>
+                            <input type="text" name="ktp" value="{{ $patient->ktp }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500">
+                        </div>
+
+                        @if ($patient->type == 'karyawan')
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">BAGIAN</label>
+                            <input type="text" name="subbag_dept" value="{{ $patient->subbag_dept }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500">
+                        </div>
+                        @endif
 
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-2">Tanggal Lahir</label>
@@ -56,7 +70,7 @@
 
                         <div class="md:col-span-2">
                             <label class="block text-sm font-bold text-slate-700 mb-2">Alamat Domisili</label>
-                            <input type="text" name="address" value="{{ $patient->address }}" class="w-full rounded-lg border-slate-300">
+                            <input type="text" name="alamat" value="{{ $patient->alamat }}" class="w-full rounded-lg border-slate-300">
                         </div>
 
                         <div>

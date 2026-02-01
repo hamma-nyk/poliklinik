@@ -69,7 +69,9 @@ class PatientController extends Controller
                 'phone'       => $emp->phone,
                 'alamat'      => $emp->alamat,
                 'blood_type'  => $emp->blood_type,
-                'nik_ktp'     => $emp->ktp ?? $emp->nik, // Prioritas KTP, kalau null pakai NIK Kar
+                'nik'         => $emp->nik ?? NULL,
+                'ktp'         => $emp->ktp ?? NULL,
+                'subbag_dept' => $emp->subbag_dept ?? NULL,
                 'allergies'   => $request->allergies,
                 'family_of_employee_id' => NULL   // Inputan manual medis
             ]);
@@ -81,12 +83,12 @@ class PatientController extends Controller
                 'name' => 'required|string|max:255',
                 'gender' => 'required|in:L,P',
                 //'nik_ktp' => 'nullable|unique:sc_master.patients,nik_ktp',
-                'nik_ktp' => [
+                'ktp' => [
                 'nullable',
                 // Cara Modern & Aman:
                 // Laravel akan cek model Employee, melihat tabel 'sc_master.employees'
                 // dan koneksi 'pgsql', lalu membuat query yang benar otomatis.
-                Rule::unique(Patient::class, 'nik_ktp'),
+                Rule::unique(Patient::class, 'ktp'),
                 ]
             ]);
 
@@ -97,9 +99,11 @@ class PatientController extends Controller
                 'gender'      => $request->gender,
                 'birth_date'  => $request->birth_date,
                 'phone'       => $request->phone,
-                'alamat'     => $request->address,
+                'alamat'      => $request->address,
                 'blood_type'  => $request->blood_type,
-                'nik_ktp'     => $request->nik_ktp,
+                'nik'         => NULL,
+                'ktp'         => $request->ktp,
+                'subbag_dept' => NULL,
                 'allergies'   => $request->allergies,
                 'family_of_employee_id' => $request->family_of_employee_id
             ]);
@@ -121,18 +125,20 @@ class PatientController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             //'nik_ktp' => 'nullable|unique:sc_master.patients,nik_ktp,' . $id,
-            'nik_ktp' => [
+            'ktp' => [
                 'nullable',
                 // Cara Modern & Aman:
                 // Laravel akan cek model Employee, melihat tabel 'sc_master.employees'
                 // dan koneksi 'pgsql', lalu membuat query yang benar otomatis.
-                Rule::unique(Patient::class, 'nik_ktp')->ignore($id),
+                Rule::unique(Patient::class, 'ktp')->ignore($id),
                 ]
         ]);
 
         $patient->update([
             'name'        => $request->name,
-            'nik_ktp'     => $request->nik_ktp,
+            'nik'     => $request->nik,
+            'ktp'     => $request->ktp,
+            'subbag_dept' => $request->subbag_dept,
             'gender'      => $request->gender,
             'birth_date'  => $request->birth_date,
             'alamat'      => $request->address,

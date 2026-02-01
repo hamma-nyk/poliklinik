@@ -76,7 +76,16 @@
                 <span class="font-medium">Cek Lab</span>
             </a>
             @endcan
-
+<div class="pt-4 pb-2">
+                <p class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Laporan</p>
+            </div>
+            @can('laporan')
+                <a href="{{ route('clinical.reports.index') }}" 
+                   class="flex items-center px-4 py-3 transition-colors duration-200 rounded-lg group {{ request()->routeIs('clinical.reports.*') ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    <span class="font-medium">Laporan Poliklinik</span>
+                </a>
+            @endcan
             <div class="pt-4 pb-2">
                 <p class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Pengaturan</p>
             </div>

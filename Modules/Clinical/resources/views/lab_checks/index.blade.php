@@ -78,7 +78,11 @@
                             <td class="px-6 py-4 text-sm text-slate-600">
     {{ $chk->petugas_name }}
 </td>
+
                             <td class="px-6 py-4 text-right">
+                                <a href="{{ route('clinical.lab.print', $chk->id) }}" target="_blank" class="text-blue-600 hover:text-blue-900" title="Cetak Hasil">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+        </a>
                                 <form action="{{ route('clinical.lab.destroy', $chk->id) }}" method="POST" onsubmit="return confirm('Hapus data ini?');">
                                     @csrf @method('DELETE')
                                     <button class="text-red-500 hover:text-red-700">Hapus</button>

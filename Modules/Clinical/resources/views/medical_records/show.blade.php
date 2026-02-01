@@ -39,9 +39,19 @@
                                 <td class="font-bold">{{ $record->patient->name }}</td>
                             </tr>
                             <tr>
-                                <td class="py-1 text-slate-500">NIK / KTP</td>
-                                <td>{{ $record->patient->nik_ktp ?? '-' }}</td>
+                                <td class="py-1 text-slate-500">KTP</td>
+                                <td>{{ $record->patient->ktp ?? '-' }}</td>
                             </tr>
+                            @if ($record->patient->type == 'karyawan')
+                            <tr>
+                                <td class="py-1 text-slate-500">NIK</td>
+                                <td>{{ $record->patient->nik ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 text-slate-500">Bagian</td>
+                                <td>{{ $record->patient->subbag_dept ?? '-' }}</td>
+                            </tr>
+                            @endif
                             <tr>
                                 <td class="py-1 text-slate-500">Jenis Kelamin</td>
                                 <td>{{ $record->patient->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>

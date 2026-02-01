@@ -17,4 +17,9 @@ class Medicine extends Model
     {
         return 'OB'; // Prefix Obat: OB2026...
     }
+
+    public function transactionItems()
+    {
+        return $this->hasMany(MedicineTransactionItem::class, 'medicine_id');
+    }
 }

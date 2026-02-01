@@ -13,7 +13,9 @@ class Patient extends Model
 
     protected $fillable = [
         'code',
-        'nik_ktp', 
+        'nik',
+        'ktp',
+        'subbag_dept', 
         'name', 
         'gender', 
         'birth_date', 

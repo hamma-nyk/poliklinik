@@ -53,10 +53,28 @@
             <td>: {{ $record->doctor->name }}</td>
         </tr>
         <tr>
-            <td class="label">Usia / Gender</td>
-            <td>: {{ \Carbon\Carbon::parse($record->patient->birth_date)->age }} Thn / {{ $record->patient->gender }}</td>
+            <td class="label">KTP</td>
+            <td>: {{ $record->patient->ktp }}</td>
             <td class="label">Kategori</td>
             <td>: {{ ucfirst($record->patient->type) }}</td>
+        </tr>
+        @if ($record->patient->type == 'karyawan')
+        <tr>
+            <td class="label">NIK</td>
+            <td>: {{ $record->patient->nik }}</td>
+            <td class="label">Bagian</td>
+            <td>: {{ $record->patient->subbag_dept }}</td>
+        </tr>
+        @endif        
+        </tr>
+            <td class="label">Usia / Gender</td>
+            <td>: {{ \Carbon\Carbon::parse($record->patient->birth_date)->age }} Thn / {{ $record->patient->gender }}</td>
+            <td class="label">No HP</td>
+            <td>: {{ $record->patient->phone }}</td>
+        </tr>
+        <tr>
+            <td class="label">Alamat</td>
+            <td colspan="3" rowspan="2">: {{ $record->patient->alamat }}</td>
         </tr>
     </table>
 

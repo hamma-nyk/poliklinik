@@ -8,6 +8,7 @@ use Modules\Clinical\App\Models\LabCheck;
 use Modules\MasterData\App\Models\Patient;
 use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
+use Barryvdh\DomPDF\Facade\Pdf;
 class LabCheckController extends Controller
 {
     public function index(Request $request)
@@ -68,5 +69,19 @@ class LabCheckController extends Controller
     public function destroy($id) {
         LabCheck::findOrFail($id)->delete();
         return back()->with('success', 'Data dihapus');
+    }
+
+    public function print($id)
+    {
+        $check = LabCheck::with(['patient', 'doctor', 'nurse'])->findOrFail($id);
+
+        // Load view PDF
+        $pdf = Pdf::loadView('clinical::lab_checks.print', compact('check'));
+        
+        // Ukuran kertas A5 Landscape (biasanya hasil lab kecil) atau A4 Portrait
+        // Kita pakai A4 Portrait standar saja agar rapi
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->stream('LAB-' . $check->code . '.pdf');
     }
 }
