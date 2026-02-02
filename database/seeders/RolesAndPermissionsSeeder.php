@@ -19,9 +19,11 @@ class RolesAndPermissionsSeeder extends Seeder
         $permissions = [
             'view_dashboard',
             'view_master_data', // Menu Dokter, Perawat, dll
-            'view_inventory',   // Menu Stok Obat
+            'view_master_medicine',
+            'view_medicine_history',
             'view_clinical',    // Menu Rekam Medis
             'view_reports',     // Menu Laporan
+            'laporan',          // Menu Laporan Poliklinik
             'manage_users',     // Menu atur user (Khusus Superadmin)
         ];
 
@@ -37,7 +39,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $user = User::create([
             'name' => 'Super Administrator',
             'email' => 'superadmin@poliklinik.com',
-            'password' => Hash::make('password'), // Ganti password nanti!
+            'password' => Hash::make('123456'), // Ganti password nanti!
         ]);
 
         // Assign role superadmin ke user tersebut
