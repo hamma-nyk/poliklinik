@@ -11,17 +11,21 @@ class PatientController extends Controller
 {
     public function index(Request $request)
     {
+        $perPage = $request->input('per_page', 10);
         $query = Patient::with('employee');
 
         // Pencarian
         if ($request->search) {
             $query->where('name', 'ilike', '%' . $request->search . '%')
                   ->orWhere('code', 'ilike', '%' . $request->search . '%') // Cari ID Pasien
-                  ->orWhere('nik_ktp', 'ilike', '%' . $request->search . '%');
+                  ->orWhere('nik', 'ilike', '%' . $request->search . '%')
+                  ->orWhere('ktp', 'ilike', '%' . $request->search . '%');
         }
 
-        $patients = $query->latest()->paginate(10);
-        
+        $patients = $query->latest()
+        ->paginate($perPage)
+        ->onEachSide(1)
+        ->withQueryString();
         return view('masterdata::patients.index', compact('patients'));
     }
 

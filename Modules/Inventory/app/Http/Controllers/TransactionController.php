@@ -14,12 +14,34 @@ class TransactionController extends Controller
     /**
      * Halaman History Transaksi (Masuk & Keluar)
      */
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = MedicineTransaction::with('items')
-            ->latest('transaction_date')
-            ->latest('created_at')
-            ->paginate(10);
+        // 1. Ambil input per_page (default 10 jika tidak ada)
+        $perPage = $request->input('per_page', 10);
+
+        // 2. Mulai Query (Eager Load 'items' agar query ringan)
+        $query = MedicineTransaction::with('items.medicine')->latest();
+
+        // 3. Logic SEARCH (Cari berdasarkan Kode Transaksi atau Catatan)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('code', 'ilike', '%' . $search . '%')
+                  ->orWhere('notes', 'ilike', '%' . $search . '%');
+            });
+        }
+
+        // 4. Logic FILTER TIPE (In / Out)
+        if ($request->filled('type')) {
+            // Hanya jalankan jika value-nya valid 'in' atau 'out'
+            if (in_array($request->type, ['in', 'out'])) {
+                $query->where('type', $request->type);
+            }
+        }
+
+        // 5. Eksekusi Pagination
+        // withQueryString() PENTING agar filter tidak hilang saat pindah halaman
+        $transactions = $query->paginate($perPage)->withQueryString();
 
         return view('inventory::transactions.index', compact('transactions'));
     }

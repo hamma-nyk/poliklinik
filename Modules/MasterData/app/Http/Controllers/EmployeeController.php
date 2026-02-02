@@ -14,18 +14,23 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
+        // 1. Ambil nilai per_page dari request, default 10
+        $perPage = $request->input('per_page', 10);
+
         $query = Employee::query();
 
-        if ($request->search) {
-            $query->where('nama', 'ilike', '%' . $request->search . '%')
-                  ->orWhere('nik', 'ilike', '%' . $request->search . '%')
-                  ->orWhere('bag_dept', 'ilike', '%' . $request->search . '%');
-        }
+        if ($request->has('search')) {
 
-        // Urutkan: Yang aktif diatas, lalu urut nama
+        $query->where('nama', 'ilike', '%' . $request->search . '%')
+              ->orWhere('nik', 'ilike', '%' . $request->search . '%')
+              ->orWhere('jabatan', 'ilike', '%' . $request->search . '%')
+              ->orWhere('bag_dept', 'ilike', '%' . $request->search . '%');
+        }
         $employees = $query->orderByRaw("CASE WHEN is_active IS NULL THEN 0 ELSE 1 END")
-                           ->orderBy('nama', 'asc')
-                           ->paginate(10);
+        ->orderBy('nama', 'asc')
+        ->paginate($perPage)
+        ->onEachSide(1)
+        ->withQueryString();
 
         return view('masterdata::employees.index', compact('employees'));
     }

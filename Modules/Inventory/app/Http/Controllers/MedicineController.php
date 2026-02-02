@@ -5,16 +5,27 @@ namespace Modules\Inventory\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Inventory\App\Models\Medicine;
-
 class MedicineController extends Controller
 {
     /**
      * Menampilkan daftar obat.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Ambil data terbaru, paginasi 10 per halaman
-        $medicines = Medicine::latest()->paginate(10);
+        $perPage = $request->input('per_page', 10);
+        $query = Medicine::query();
+
+        // Pencarian
+        if ($request->search) {
+            $query->where('name', 'ilike', '%' . $request->search . '%')
+                  ->orWhere('code', 'ilike', '%' . $request->search . '%');
+        }
+
+        $medicines = $query->latest()
+        ->paginate($perPage)
+        ->onEachSide(1)
+        ->withQueryString();
+       
         return view('inventory::medicines.index', compact('medicines'));
     }
 
