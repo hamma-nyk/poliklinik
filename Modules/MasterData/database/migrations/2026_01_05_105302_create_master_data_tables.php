@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sip')->nullable();
             $table->string('specialization')->default('Umum');
             $table->string('phone')->nullable();
+            $table->string('alamat')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -25,10 +26,13 @@ return new class extends Migration
         Schema::create('sc_master.nurses', function (Blueprint $table) {
             $table->id();
             $table->string('code', 20)->nullable()->unique();
-            $table->string('name');
-            $table->string('nik_ktp')->unique()->comment('NIK Perusahaan/KTP');
+            $table->string('nama')->nullable();
+            $table->string('nik')->unique()->comment('NIK Perusahaan');
+            $table->string('ktp')->unique()->comment('KTP');
+            $table->string('type', 20)->nullable();
             $table->string('str')->nullable();
             $table->string('phone')->nullable();
+            $table->string('alamat')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

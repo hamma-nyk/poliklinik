@@ -18,7 +18,7 @@ class MedicalRecordController extends Controller
 {
     public function index(Request $request)
     {
-        $query = MedicalRecord::with(['patient', 'doctor', 'diagnosis']);
+        $query = MedicalRecord::with(['patient', 'examiner', 'diagnosis']);
 
         // Fitur Pencarian
         if ($request->search) {
@@ -49,7 +49,7 @@ class MedicalRecordController extends Controller
         // Data Master untuk Dropdown
         $patients = Patient::orderBy('name')->get();
         $doctors = Doctor::active()->orderBy('name')->get();
-        $nurses = Nurse::where('is_active', true)->orderBy('name')->get();
+        $nurses = Nurse::where('is_active', true)->orderBy('nama')->get();
         $medicines = Medicine::orderBy('name')->get();
         $diagnoses = Diagnosis::orderBy('name')->get();
         return view('clinical::medical_records.create', compact('patients', 'doctors', 'nurses', 'medicines', 'diagnoses'));    }
@@ -58,7 +58,7 @@ class MedicalRecordController extends Controller
     {
         $request->validate([
             'patient_id' => 'required',
-            'doctor_id' => 'required',
+            'examiner' => 'required',
             'keluhan_utama' => 'required',
             //'diagnosa' => 'required',
             'diagnosa_input' => 'required',
@@ -70,9 +70,14 @@ class MedicalRecordController extends Controller
 
         DB::beginTransaction();
         try {
-            // 1. LOGIKA DIAGNOSA (Cari atau Buat Baru)
+            $examinerParts = explode('|', $request->examiner);
+            $examinerType  = $examinerParts[0];
+            $examinerId    = $examinerParts[1];
+
+            // 3. LOGIKA DIAGNOSA (Cari atau Buat Baru)
             $diagnosisId = null;
             $diagnosisName = null;
+            
 
             if ($request->filled('diagnosa_input')) {
                 $input = $request->diagnosa_input;
@@ -98,9 +103,10 @@ class MedicalRecordController extends Controller
             // 1. Simpan Header
             $record = MedicalRecord::create([
                 'patient_id' => $request->patient_id,
-                'doctor_id' => $request->doctor_id,
-                'nurse_id' => $request->nurse_id,
-
+                // 'doctor_id' => $request->doctor_id,
+                // 'nurse_id' => $request->nurse_id,
+                'examiner_type' => $examinerType,
+                'examiner_id'   => $examinerId,
                 
                 'diagnosis_id' => $diagnosisId,
                 'diagnosa' => $diagnosisName,
@@ -128,6 +134,10 @@ class MedicalRecordController extends Controller
 
                 foreach ($request->medicines as $med) {
                     if(empty($med['id'])) continue; 
+
+                    $realMedicine = Medicine::find($med['id']);
+                    
+                    if(!$realMedicine) continue;
 
                     // Simpan ke History Medis
                     $record->medicines()->create([
@@ -158,7 +168,7 @@ class MedicalRecordController extends Controller
     public function show($id)
     {
         // Load semua relasi yang dibutuhkan: Pasien, Dokter, Diagnosa, Obat
-        $record = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis', 'medicines.medicine'])
+        $record = MedicalRecord::with(['patient', 'examiner', 'diagnosis', 'medicines.medicine'])
                     ->findOrFail($id);
         
         return view('clinical::medical_records.show', compact('record'));
@@ -166,7 +176,7 @@ class MedicalRecordController extends Controller
 
     public function print($id)
     {
-        $record = MedicalRecord::with(['patient', 'doctor', 'diagnosis', 'medicines.medicine'])
+        $record = MedicalRecord::with(['patient', 'examiner', 'diagnosis', 'medicines.medicine'])
                     ->findOrFail($id);
 
         // Load view khusus PDF (tanpa navbar/sidebar)

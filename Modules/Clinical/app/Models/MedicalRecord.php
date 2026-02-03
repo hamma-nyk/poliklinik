@@ -7,7 +7,7 @@ use App\Traits\HasCustomCode;
 use Modules\MasterData\App\Models\Patient;
 use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
-
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 class MedicalRecord extends Model
 {
     use HasCustomCode;
@@ -15,8 +15,18 @@ class MedicalRecord extends Model
     protected $connection = 'pgsql'; // Penting untuk Schema
     protected $table = 'sc_clinical.medical_records';
 
+    // protected $fillable = [
+    //     'code', 'patient_id', 'doctor_id', 'nurse_id',
+    //     'tensi', 'suhu_tubuh', 'berat_badan', 'tinggi_badan',
+    //     'keluhan_utama', 'riwayat_penyakit', 'riwayat_alergi', 'riwayat_psikososial',
+    //     'diagnosa', 'tindakan', 'diagnosis_id'
+    // ];
+
     protected $fillable = [
-        'code', 'patient_id', 'doctor_id', 'nurse_id',
+        'code', 'patient_id', 
+        'examiner_id',   // Ganti doctor_id jadi ini
+        'examiner_type', // Tambah ini
+        'diagnosis_id',
         'tensi', 'suhu_tubuh', 'berat_badan', 'tinggi_badan',
         'keluhan_utama', 'riwayat_penyakit', 'riwayat_alergi', 'riwayat_psikososial',
         'diagnosa', 'tindakan', 'diagnosis_id'
@@ -29,9 +39,12 @@ class MedicalRecord extends Model
 
     // Relasi
     public function patient() { return $this->belongsTo(Patient::class); }
-    public function doctor() { return $this->belongsTo(Doctor::class); }
-    public function nurse() { return $this->belongsTo(Nurse::class); }
-    
+    // public function doctor() { return $this->belongsTo(Doctor::class); }
+    // public function nurse() { return $this->belongsTo(Nurse::class); }
+    public function examiner(): MorphTo
+    {
+        return $this->morphTo();
+    }
     // Relasi ke Obat
     public function medicines() {
         return $this->hasMany(MedicalRecordMedicine::class);

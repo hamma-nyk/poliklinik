@@ -49,8 +49,15 @@
         <tr>
             <td class="label">Nama Pasien</td>
             <td>: {{ $record->patient->name }}</td>
-            <td class="label">Dokter</td>
-            <td>: {{ $record->doctor->name }}</td>
+            <td class="label">
+                @php
+                    // Cek Tipe untuk menentukan warna avatar
+                    $isDoctor = str_contains($record->examiner_type, 'Doctor');
+                    $label = $isDoctor ? 'Dokter' : 'Perawat';
+                @endphp
+                {{ $label }}
+            </td>
+            <td>: {{ $record->examiner->name ?? $record->examiner->nama }}</td>
         </tr>
         <tr>
             <td class="label">KTP</td>
@@ -136,9 +143,14 @@
 
     <div class="footer">
         <div class="ttd-box">
-            <p>Dokter Pemeriksa,</p>
+            <p>@php
+                    // Cek Tipe untuk menentukan warna avatar
+                    $isDoctor = str_contains($record->examiner_type, 'Doctor');
+                    $label = $isDoctor ? 'Dokter' : 'Perawat';
+                @endphp
+                {{ $label }} Pemeriksa,</p>
             <div class="ttd-space"></div>
-            <p style="text-decoration: underline; font-weight: bold;">{{ $record->doctor->name }}</p>
+            <p style="text-decoration: underline; font-weight: bold;">{{ $record->examiner->name ?? $record->examiner->nama}}</p>
         </div>
     </div>
 

@@ -9,9 +9,9 @@
      class="fixed inset-0 z-20 bg-slate-900/80 backdrop-blur-sm md:hidden"></div>
 
 <div :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" 
-     class="fixed inset-y-0 left-0 z-30 w-72 bg-slate-900 text-white transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-0 flex flex-col border-r border-slate-200 dark:border-slate-800 shadow-2xl">
+     class="fixed inset-y-0 left-0 z-30 w-72 bg-slate-900 text-white transition-all duration-300 ease-in-out md:translate-x-0 md:static md:inset-0 flex flex-col border-r border-slate-200 dark:border-slate-800 shadow-2xl" >
 
-    <div class="flex items-center justify-between h-20 px-6 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+    <div class="flex items-center justify-between h-22 px-6 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
             <div class="relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-lg shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform duration-300">
                 <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,7 +20,7 @@
             </div>
             <div class="flex flex-col">
                 <span class="text-lg font-bold tracking-wide text-slate-800 dark:text-slate-100 ">POLIKLINIK</span>
-                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Sehat Jaya Group</span>
+                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">PT NUSANTARA BUILDING INDUSTRIES</span>
             </div>
         </a>
         
@@ -29,7 +29,7 @@
         </button>
     </div>
 
-    <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto custom-scrollbar bg-white dark:bg-slate-900">
+    <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto custom-scrollbar bg-white dark:bg-slate-900 transition-colors duration-300">
         
         @can('view_dashboard')
         
@@ -95,7 +95,7 @@
                class="flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 group relative {{ request()->routeIs('inventory.transactions.*') ? 'bg-blue-600/10 text-blue-400' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-500 dark:hover:text-slate-100' }}">
                <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-blue-500 rounded-r-full transition-opacity duration-200 {{ request()->routeIs('inventory.transactions.*') ? 'opacity-100' : 'opacity-0' }}"></span>
                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-               <span class="font-medium text-sm">Riwayat Stok</span>
+               <span class="font-medium text-sm">Transaksi Obat</span>
             </a>
         @endcan
 
@@ -153,7 +153,7 @@
         <div class="h-20"></div>
     </nav>
 
-    <div class="absolute bottom-0 left-0 w-full p-4 border-t bg-white border-slate-200 dark:border-slate-800 dark:bg-slate-900 z-10">
+    <div class="absolute bottom-0 left-0 w-full p-4 border-t bg-white border-slate-200 dark:border-slate-800 dark:bg-slate-900 z-10 transition-colors duration-300">
         <div x-data="{ userOpen: false }" class="relative">
             <button @click="userOpen = !userOpen" class="flex items-center w-full p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 group focus:outline-none">
                 <div class="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">
@@ -176,7 +176,7 @@
                  x-transition:leave-start="opacity-100 translate-y-0"
                  x-transition:leave-end="opacity-0 translate-y-2"
                  class="absolute bottom-16 left-0 w-full bg-white border border-slate-200 
-                dark:bg-slate-900 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden py-1 z-50">
+                dark:bg-slate-900 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden py-1 z-50 transition-colors duration-300">
                 
                 <a href="{{ route('profile.edit') }}" class="flex items-center px-4 py-3 text-sm text-slate-400 hover:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>

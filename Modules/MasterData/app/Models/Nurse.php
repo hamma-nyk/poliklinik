@@ -7,9 +7,13 @@ class Nurse extends Model
 {
     use HasCustomCode;
     protected $table = 'sc_master.nurses';
-    protected $fillable = ['code','name', 'nik_ktp', 'str', 'phone', 'is_active'];
+    protected $fillable = ['code','nama', 'nik', 'ktp','alamat', 'type', 'str', 'phone', 'is_active'];
     public function getPrefix(): string
     {
         return 'PER'; // Hasil: PAS2026010001
+    }
+    public function medicalRecords()
+    {
+        return $this->morphMany(MedicalRecord::class, 'examiner');
     }
 }

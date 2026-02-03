@@ -9,7 +9,7 @@ use App\Traits\HasCustomCode; // Import Trait
 class Doctor extends Model
 {
     use HasFactory, HasCustomCode; // Pasang Trait
-protected $connection = 'pgsql';
+    protected $connection = 'pgsql';
     protected $table = 'sc_master.doctors';
 
     protected $fillable = [
@@ -32,5 +32,10 @@ protected $connection = 'pgsql';
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    public function medicalRecords()
+    {
+        return $this->morphMany(MedicalRecord::class, 'examiner');
     }
 }

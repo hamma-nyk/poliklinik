@@ -1,26 +1,45 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tambah Obat Baru') }}
-        </h2>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                    {{ __('Tambah Obat Baru') }}
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Penambahan item logistik ke dalam inventaris klinik</p>
+            </div>
+            <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
+                <span class="hover:text-indigo-600 cursor-pointer transition-colors">Inventaris</span>
+                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Registrasi Obat</span>
+            </div>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
                 
+                <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center">
+                    <span class="w-1.5 h-6 bg-indigo-500 rounded-full mr-3"></span>
+                    Informasi Produk Medis
+                </h3>
+
                 <form action="{{ route('inventory.medicines.store') }}" method="POST">
                     @csrf
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                        <div>
-                            <label class="block font-medium text-sm text-gray-700">Nama Obat</label>
-                            <input type="text" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required placeholder="Contoh: Paracetamol 500mg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        {{-- Nama Obat --}}
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Nama Obat <span class="text-red-500">*</span></label>
+                            <input type="text" name="name" 
+                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all placeholder-slate-400 dark:placeholder-slate-500" 
+                                required placeholder="Contoh: Paracetamol 500mg">
                         </div>
 
-                        <div>
-                            <label class="block font-medium text-sm text-gray-700">Satuan</label>
-                            <select name="unit" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        {{-- Satuan --}}
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Satuan Terkecil</label>
+                            <select name="unit" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
                                 <option value="Tablet">Tablet</option>
                                 <option value="Strip">Strip</option>
                                 <option value="Botol">Botol</option>
@@ -30,26 +49,53 @@
                             </select>
                         </div>
 
-                        <div>
-                            <label class="block font-medium text-sm text-gray-700">Harga Jual (Rp)</label>
-                            <input type="number" name="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required min="0">
+                        {{-- Harga --}}
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Harga Jual (Rp) <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <span class="text-slate-400 dark:text-slate-500 text-sm">Rp</span>
+                                </div>
+                                <input type="number" name="price" 
+                                    class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 pl-10 focus:border-indigo-500 focus:ring-indigo-500 transition-all" 
+                                    required min="0" placeholder="0">
+                            </div>
                         </div>
 
-                        <div>
-                            <label class="block font-medium text-sm text-gray-400">Stok Awal</label>
-                            <input type="text" value="0" disabled class="mt-1 block w-full bg-gray-100 rounded-md border-gray-300 text-gray-500 cursor-not-allowed">
-                            <p class="text-xs text-gray-500 mt-1">*Stok awal selalu 0. Lakukan Transaksi Pembelian untuk menambah stok.</p>
+                        {{-- Stok Awal (Disabled) --}}
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="block text-sm font-bold text-slate-400 dark:text-slate-500">Stok Awal</label>
+                            <div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <input type="text" value="0" disabled 
+                                    class="w-20 text-center rounded-lg border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-400 dark:text-slate-500 font-bold cursor-not-allowed">
+                                <p class="text-xs text-slate-500 dark:text-slate-400 italic">
+                                    Stok awal selalu dimulai dari <span class="font-bold">nol</span>. Silakan gunakan menu <span class="text-indigo-600 dark:text-indigo-400 font-bold">Stok Masuk</span> untuk menambah persediaan setelah data tersimpan.
+                                </p>
+                            </div>
+                        </div>
+
+                        {{-- Deskripsi --}}
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Deskripsi / Keterangan</label>
+                            <textarea name="description" rows="3" 
+                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all"
+                                placeholder="Tuliskan indikasi, dosis umum, atau lokasi rak penyimpanan..."></textarea>
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <label class="block font-medium text-sm text-gray-700">Deskripsi / Keterangan</label>
-                        <textarea name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
-                    </div>
-
-                    <div class="flex items-center justify-end">
-                        <a href="{{ route('inventory.medicines.index') }}" class="text-gray-600 underline mr-4">Batal</a>
-                        <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">Simpan Data</button>
+                    {{-- Action Buttons --}}
+                    <div class="mt-10 pt-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row justify-end gap-3">
+                        <a href="{{ route('inventory.medicines.index') }}" 
+                            class="inline-flex justify-center items-center px-6 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-100 dark:hover:bg-slate-700 transition duration-200">
+                            Batal
+                        </a>
+                        <button type="submit" 
+                            class="inline-flex justify-center items-center px-8 py-2.5 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-500/30 dark:shadow-none transition duration-200 transform hover:-translate-y-0.5">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Simpan ke Inventaris
+                        </button>
                     </div>
                 </form>
 

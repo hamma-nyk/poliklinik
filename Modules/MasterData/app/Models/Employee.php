@@ -8,7 +8,7 @@ use App\Traits\HasCustomCode;
 class Employee extends Model
 {
     use HasCustomCode;
-
+    protected $connection = 'pgsql';
     protected $table = 'sc_master.employees';
     
     protected $fillable = ['code',
