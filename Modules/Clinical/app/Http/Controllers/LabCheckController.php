@@ -25,12 +25,15 @@ class LabCheckController extends Controller
         return view('clinical::lab_checks.index', compact('checks'));
     }
 
-    public function create()
+   public function create()
     {
         $patients = Patient::orderBy('name')->get();
-        // Ambil data Dokter & Perawat Aktif
-        $doctors = Doctor::active()->orderBy('name')->get();
-        $nurses = Nurse::where('is_active', true)->orderBy('name')->get();
+        
+        // Ambil Dokter (Pastikan kolom statusnya benar, misal 'status' = 'active')
+        $doctors = Doctor::where('is_active', true)->orderBy('name')->get();
+        
+        // Ambil Perawat (Pastikan kolom statusnya benar, misal 'is_active' = true)
+        $nurses = Nurse::where('is_active', true)->orderBy('nama')->get();
 
         return view('clinical::lab_checks.create', compact('patients', 'doctors', 'nurses'));
     }
@@ -39,21 +42,22 @@ class LabCheckController extends Controller
     {
         $request->validate([
             'patient_id' => 'required',
-            'petugas_selection' => 'required',
+            'examiner'   => 'required',
             // Minimal satu harus diisi
             'gula_darah' => 'nullable|integer',
             'kolesterol' => 'nullable|integer',
             'asam_urat' => 'nullable|numeric',
         ]);
 
-        $petugasType = explode('_', $request->petugas_selection)[0]; // 'doc' atau 'nur'
-        $petugasId   = explode('_', $request->petugas_selection)[1]; // ID-nya
+        $parts = explode('|', $request->examiner);
+        $type  = $parts[0];
+        $id    = $parts[1];
         
         LabCheck::create([
             'patient_id' => $request->patient_id,
             // Tentukan masuk ke kolom mana
-            'doctor_id' => ($petugasType == 'doc') ? $petugasId : null,
-            'nurse_id'  => ($petugasType == 'nur') ? $petugasId : null,
+            'examiner_type' => $type, // Masuk ke kolom examiner_type
+            'examiner_id'   => $id,
             
             'gula_darah' => $request->gula_darah,
             'kolesterol' => $request->kolesterol,
@@ -73,7 +77,7 @@ class LabCheckController extends Controller
 
     public function print($id)
     {
-        $check = LabCheck::with(['patient', 'doctor', 'nurse'])->findOrFail($id);
+        $check = LabCheck::with(['patient', 'examiner'])->findOrFail($id);
 
         // Load view PDF
         $pdf = Pdf::loadView('clinical::lab_checks.print', compact('check'));

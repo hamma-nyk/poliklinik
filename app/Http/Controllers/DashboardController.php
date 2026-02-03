@@ -65,7 +65,7 @@ class DashboardController extends Controller
         $chartDiseaseData   = $topDiseases->pluck('total')->toArray();
 
         // --- TABEL DATA TERBARU ---
-        $latestRecords = MedicalRecord::with(['patient', 'doctor'])->latest()->take(5)->get();
+        $latestRecords = MedicalRecord::with(['patient', 'examiner'])->latest()->take(5)->get();
         $criticalMedicines = Medicine::where('current_stock', '<=', 10)->orderBy('current_stock', 'asc')->take(5)->get();
 
         return view('dashboard', compact(

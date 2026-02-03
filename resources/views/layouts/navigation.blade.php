@@ -224,6 +224,7 @@
 </div>
 
 <style>
+    /* Mode Terang (Default) */
     .custom-scrollbar::-webkit-scrollbar {
         width: 4px;
     }
@@ -231,7 +232,19 @@
         background: transparent;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #334155;
+        background-color: #334155; /* Slate 700 */
         border-radius: 20px;
+    }
+
+    /* Mode Gelap - Jika menggunakan class .dark pada tag <html> atau <body> */
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #94a3b8; /* Slate 400 - Lebih terang agar terlihat di bg gelap */
+    }
+
+    /* Alternatif Mode Gelap - Mengikuti sistem operasi */
+    @media (prefers-color-scheme: dark) {
+        :not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #94a3b8;
+        }
     }
 </style>

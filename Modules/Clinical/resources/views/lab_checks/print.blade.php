@@ -52,7 +52,7 @@
             <td>: {{ \Carbon\Carbon::parse($check->patient->birth_date)->age }} Thn / {{ $check->patient->gender }}</td>
         </tr>
         <tr>
-            <td class="label">Petugas Pemeriksa</td>
+            <td class="label">{{$check->petugas_type}}</td>
             <td colspan="3">: {{ $check->petugas_name }}</td>
         </tr>
     </table>
@@ -139,13 +139,10 @@
 
     <div class="footer">
         <div class="ttd-box">
-            <p>Pemeriksa,</p>
+            <p>{{$check->petugas_type}} Pemeriksa,</p>
             <div class="ttd-space"></div>
             <p style="text-decoration: underline; font-weight: bold;">
-                @if($check->doctor_id) {{ $check->doctor->name }}
-                @elseif($check->nurse_id) {{ $check->nurse->name }}
-                @else Petugas Medis
-                @endif
+                {{ $check->petugas_name }}
             </p>
         </div>
     </div>

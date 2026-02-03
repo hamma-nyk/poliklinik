@@ -25,7 +25,7 @@ class ReportController extends Controller
         $startDate = $request->start_date ?? date('Y-m-01');
         $endDate   = $request->end_date ?? date('Y-m-d');
 
-        $poliData = MedicalRecord::with(['patient', 'doctor', 'diagnosis'])
+        $poliData = MedicalRecord::with(['patient', 'examiner', 'diagnosis'])
                 ->whereDate('created_at', '>=', $startDate)
                 ->whereDate('created_at', '<=', $endDate)
                 ->latest()
@@ -35,7 +35,7 @@ class ReportController extends Controller
                 return $item;
             });
 
-        $labData = LabCheck::with(['patient', 'doctor', 'nurse'])
+        $labData = LabCheck::with(['patient', 'examiner', 'nurse'])
             ->whereDate('created_at', '>=', $startDate)
             ->whereDate('created_at', '<=', $endDate)
             ->get()

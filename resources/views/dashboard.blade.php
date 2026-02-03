@@ -1,16 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
-                    {{ __('Dashboard') }}
+                    {{ __('Dashboard Utama') }}
                 </h2>
-                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Overview Operasional & Statistik Klinik</p>
+                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Statistik Komprehensif Operasional Klinik</p>
             </div>
-            <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="text-slate-400 cursor-default">Home</span>
-                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-blue-600 dark:text-blue-400">Dashboard</span>
+            <div class="hidden md:flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
+                Data Terakhir diupdate: {{ date('H:i') }} WIB
             </div>
         </div>
     </x-slot>
@@ -18,115 +16,135 @@
     <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-10">
             
-            <div>
-                <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center dark:text-slate-300">
-                    <span class="bg-blue-600 w-1.5 h-6 rounded-full mr-3"></span>
-                    Aktivitas Hari Ini
+            {{-- AKTIVITAS HARI INI (Highlight) --}}
+            <section>
+                <h3 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
+                    <span class="bg-blue-600 w-1.5 h-5 rounded-full mr-3"></span>
+                    Performa Hari Ini
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="{{ route('clinical.records.index') }}" class="group bg-gradient-to-br from-indigo-600 to-blue-700 rounded-3xl p-8 text-white shadow-xl shadow-blue-500/20 relative overflow-hidden transition-all hover:scale-[1.02] active:scale-95 dark:shadow-none">
+                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                        <div class="flex justify-between items-center relative z-10">
+                            <div>
+                                <p class="text-blue-100 font-bold mb-1 text-xs uppercase tracking-widest">Kunjungan Poli Umum</p>
+                                <h4 class="text-5xl font-black">{{ $stats['today_rm'] }}</h4>
+                                <p class="text-xs text-blue-200 mt-2 font-medium italic">*Klik untuk daftar pasien hari ini</p>
+                            </div>
+                            <div class="p-4 bg-white/20 rounded-2xl backdrop-blur-md border border-white/30 group-hover:bg-white/30 transition-colors">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{{ route('clinical.lab.index') }}" class="group bg-gradient-to-br from-purple-600 to-fuchsia-700 rounded-3xl p-8 text-white shadow-xl shadow-purple-500/20 relative overflow-hidden transition-all hover:scale-[1.02] active:scale-95 dark:shadow-none">
+                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                        <div class="flex justify-between items-center relative z-10">
+                            <div>
+                                <p class="text-purple-100 font-bold mb-1 text-xs uppercase tracking-widest">Kunjungan Lab (POCT)</p>
+                                <h4 class="text-5xl font-black">{{ $stats['today_lab'] }}</h4>
+                                <p class="text-xs text-purple-200 mt-2 font-medium italic">*Klik untuk histori cek lab hari ini</p>
+                            </div>
+                            <div class="p-4 bg-white/20 rounded-2xl backdrop-blur-md border border-white/30 group-hover:bg-white/30 transition-colors">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            {{-- TOTAL DATABASE --}}
+            <section>
+                <h3 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
+                    <span class="bg-slate-400 w-1.5 h-5 rounded-full mr-3"></span>
+                    Master Data & Inventaris
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     
-                    <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg shadow-blue-500/20 relative overflow-hidden dark:shadow-none">
-                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
-                        <div class="flex justify-between items-start relative z-10">
-                            <div>
-                                <p class="text-blue-100 font-medium mb-1 text-sm uppercase tracking-wider">Total Kunjungan</p>
-                                <h4 class="text-4xl font-extrabold">{{ $stats['today_activity'] }}</h4>
-                            </div>
-                            <div class="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                        </div>
-                        <div class="mt-6 flex items-center text-xs font-medium text-blue-100 bg-blue-800/30 w-fit px-3 py-1 rounded-full">
-                            Gabungan Poli Umum & Lab
-                        </div>
-                    </div>
+                    {{-- Pasien - Blue --}}
+    <x-dashboard-card 
+        route="master.patients.index" 
+        label="Pasien" 
+        :count="$stats['total_patients']" 
+        activeColor="hover:border-blue-400"
+        bgColor="bg-blue-50 text-blue-600"
+        darkBgColor="dark:bg-blue-900/20 dark:text-blue-400"
+        hoverBg="group-hover:bg-blue-600"
+        icon="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" 
+    />
 
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between hover:shadow-md">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <p class="text-slate-500 dark:text-slate-400 font-medium mb-1 text-sm uppercase">Poli Umum</p>
-                                <h4 class="text-3xl font-bold text-slate-800 dark:text-slate-100">{{ $stats['today_rm'] }}</h4>
-                            </div>
-                            <div class="p-3 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-                            <div class="flex items-center text-xs text-green-600 dark:text-green-400 font-bold">
-                                <span class="relative flex h-2 w-2 mr-2">
-                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                </span>
-                                Sedang Berlangsung
-                            </div>
-                        </div>
-                    </div>
+    {{-- Dokter - Indigo --}}
+    <x-dashboard-card 
+        route="master.doctors.index" 
+        label="Dokter" 
+        :count="$stats['total_doctors']" 
+        activeColor="hover:border-indigo-400"
+        bgColor="bg-indigo-50 text-indigo-600"
+        darkBgColor="dark:bg-indigo-900/20 dark:text-indigo-400"
+        hoverBg="group-hover:bg-indigo-600"
+        icon="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" 
+    />
 
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between hover:shadow-md">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <p class="text-slate-500 dark:text-slate-400 font-medium mb-1 text-sm uppercase">Cek Lab (POCT)</p>
-                                <h4 class="text-3xl font-bold text-slate-800 dark:text-slate-100">{{ $stats['today_lab'] }}</h4>
-                            </div>
-                            <div class="p-3 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-                            <div class="flex items-center text-xs text-purple-600 dark:text-purple-400 font-bold">
-                                <span class="relative flex h-2 w-2 mr-2">
-                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-                                </span>
-                                Sedang Berlangsung
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    {{-- Perawat - Emerald --}}
+    <x-dashboard-card 
+        route="master.nurses.index" 
+        label="Perawat" 
+        :count="$stats['total_nurses']" 
+        activeColor="hover:border-emerald-400"
+        bgColor="bg-emerald-50 text-emerald-600"
+        darkBgColor="dark:bg-emerald-900/20 dark:text-emerald-400"
+        hoverBg="group-hover:bg-emerald-600"
+        icon="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" 
+    />
 
-            <div>
-                <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center dark:text-slate-300">
-                    <span class="bg-slate-500 w-1.5 h-6 rounded-full mr-3"></span>
-                    Ringkasan Database
-                </h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    @php
-                        $dbCards = [
-                            ['label' => 'Total Pasien', 'key' => 'total_patients', 'color' => 'blue', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
-                            ['label' => 'Total Dokter', 'key' => 'total_doctors', 'color' => 'indigo', 'icon' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
-                            ['label' => 'Total Perawat', 'key' => 'total_nurses', 'color' => 'pink', 'icon' => 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'],
-                            ['label' => 'Jenis Obat', 'key' => 'total_medicines', 'color' => 'emerald', 'icon' => 'M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'],
-                            ['label' => 'Arsip RM', 'key' => 'total_records', 'color' => 'cyan', 'icon' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'],
-                            ['label' => 'Arsip Lab', 'key' => 'total_lab_logs', 'color' => 'violet', 'icon' => 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
-                            ['label' => 'Data Penyakit', 'key' => 'total_diseases', 'color' => 'rose', 'icon' => 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'],
-                        ];
-                    @endphp
+    {{-- Jenis Obat - Amber --}}
+    <x-dashboard-card 
+        route="inventory.medicines.index" 
+        label="Jenis Obat" 
+        :count="$stats['total_medicines']" 
+        activeColor="hover:border-amber-400"
+        bgColor="bg-amber-50 text-amber-600"
+        darkBgColor="dark:bg-amber-900/20 dark:text-amber-400"
+        hoverBg="group-hover:bg-amber-600"
+        icon="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" 
+    />
 
-                    @foreach($dbCards as $card)
-                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-{{ $card['color'] }}-300 dark:hover:border-{{ $card['color'] }}-500 group">
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="p-2 bg-{{ $card['color'] }}-50 dark:bg-{{ $card['color'] }}-900/20 text-{{ $card['color'] }}-600 dark:text-{{ $card['color'] }}-400 rounded-lg group-hover:bg-{{ $card['color'] }}-600 dark:group-hover:bg-{{ $card['color'] }}-500 group-hover:text-white">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $card['icon'] }}"></path></svg>
-                            </div>
-                            <span class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ $stats[$card['key']] }}</span>
-                        </div>
-                        <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">{{ $card['label'] }}</div>
-                    </div>
-                    @endforeach
+    {{-- Arsip RM - Cyan --}}
+    <x-dashboard-card 
+        route="clinical.records.index" 
+        label="Arsip RM" 
+        :count="$stats['total_records']" 
+        activeColor="hover:border-cyan-400"
+        bgColor="bg-cyan-50 text-cyan-600"
+        darkBgColor="dark:bg-cyan-900/20 dark:text-cyan-400"
+        hoverBg="group-hover:bg-cyan-600"
+        icon="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+    />
 
-                    <div class="bg-red-50 dark:bg-red-900/20 p-5 rounded-2xl border border-red-100 dark:border-red-900/40 shadow-sm hover:shadow-md group">
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="p-2 bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 rounded-lg shadow-sm">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+    {{-- Arsip Lab - Violet --}}
+    <x-dashboard-card 
+        route="clinical.lab.index" 
+        label="Arsip Lab" 
+        :count="$stats['total_lab_logs'] ?? 0" 
+        activeColor="hover:border-violet-400"
+        bgColor="bg-violet-50 text-violet-600"
+        darkBgColor="dark:bg-violet-900/20 dark:text-violet-400"
+        hoverBg="group-hover:bg-violet-600"
+        icon="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
+    />
+    
+                    <a href="{{ route('inventory.medicines.index') }}" class="group bg-rose-50 dark:bg-rose-900/20 p-6 rounded-3xl border border-rose-100 dark:border-rose-900/40 shadow-sm hover:bg-rose-600 transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="p-2 bg-white dark:bg-slate-800 text-rose-600 dark:text-rose-400 rounded-xl group-hover:bg-white/20 group-hover:text-white transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                             </div>
-                            <span class="text-2xl font-bold text-red-700 dark:text-red-400">{{ $criticalMedicines->count() }}</span>
+                            <span class="text-3xl font-black text-rose-700 dark:text-rose-400 group-hover:text-white tracking-tighter">{{ $criticalMedicines->count() }}</span>
                         </div>
-                        <div class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">Perlu Restock</div>
-                    </div>
+                        <div class="text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-[0.1em] group-hover:text-rose-100">Stok Menipis</div>
+                    </a>
 
                 </div>
-            </div>
+            </section>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 lg:col-span-2">
@@ -201,10 +219,8 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

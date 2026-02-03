@@ -151,10 +151,24 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="h-7 w-7 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-black text-slate-500 dark:text-slate-400 mr-2.5 shadow-sm uppercase">
+                                        @php
+                                            // Cek Tipe untuk menentukan warna avatar
+                                            $isDoctor = $chk->petugas_type == 'Dokter';
+                                            $bgColor = $isDoctor ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300' : 'bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300';
+                                            $borderColor = $isDoctor ? 'border-blue-200 dark:border-blue-700' : 'border-pink-200 dark:border-pink-700';
+                                            $label = $isDoctor ? 'Dokter' : 'Perawat';
+                                            $name = $chk->petugas_name ?? 'Data Terhapus';
+                                        @endphp
+
+                                        <div class="h-9 w-9 rounded-xl {{ $bgColor }} border {{ $borderColor }} flex items-center justify-center text-xs font-black mr-3 shadow-sm">
                                             {{ substr($chk->petugas_name, 0, 2) }}
                                         </div>
-                                        <span class="text-sm font-medium text-slate-600 dark:text-slate-300">{{ $chk->petugas_name }}</span>
+                                        <div>
+                                            <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
+                                            <div class="text-[10px] {{ $isDoctor ? 'text-blue-500' : 'text-pink-500' }} uppercase tracking-widest font-bold">
+                                                {{ $label }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
 

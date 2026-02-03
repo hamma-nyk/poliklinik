@@ -133,11 +133,11 @@
                             </div>
                             <div class="space-y-1">
                                 <p class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase text-[10px]">Tautan Rekam Medis</p>
-                                <a href="{{ route('clinical.records.index') }}?search={{ $transaction->medicalRecord->code }}" class="text-lg font-bold text-blue-600 dark:text-blue-400 hover:underline inline-block">
+                                <a href="{{ route('clinical.records.index') }}?search={{ $transaction->medicalRecord->code }}" class="text-md font-bold text-blue-600 dark:text-blue-400 hover:underline inline-block">
                                     {{ $transaction->medicalRecord->code }} — {{ $transaction->medicalRecord->patient->name }}
                                 </a>
                                 <div class="text-xs text-slate-500 dark:text-slate-400 italic">
-                                    Diagnosa & Resep oleh: <span class="font-bold">{{ $transaction->medicalRecord->doctor->name }}</span>
+                                    Diagnosa & Resep oleh: <span class="font-bold">{{ $transaction->medicalRecord->examiner->name ?? $transaction->medicalRecord->examiner->nama }}</span>
                                 </div>
                             </div>
                         </div>
