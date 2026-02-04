@@ -30,9 +30,9 @@
 <body>
 
     <div class="header">
-        <h1>Poliklinik Perusahaan Sehat Jaya</h1>
-        <p>Jl. Industri No. 123, Kawasan Industri, Jakarta</p>
-        <p>Telp: (021) 1234-5678 | Email: medika@perusahaan.com</p>
+        <h1>Poliklinik PT. Nusantara Building Industries</h1>
+        <p>Jl. Raya Semarang - Demak KM. 17, Wonokerto, Karangtengah, Demak, Jawa Tengah, Indonesia</p>
+        <p>Telp: (0291) 686050 | Email: marketing@nusaboard.co.id</p>
     </div>
 
     <div style="text-align: center; font-weight: bold; font-size: 14px; margin-bottom: 15px;">

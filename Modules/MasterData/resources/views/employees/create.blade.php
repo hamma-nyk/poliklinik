@@ -64,33 +64,92 @@
                                 class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all">
                         </div>
 
-                        {{-- Departemen --}}
-                        <div class="space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Departemen</label>
-                            <input type="text" name="bag_dept" placeholder="Contoh: HRD / Produksi"
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all">
-                        </div>
+                        {{-- 1. Departemen --}}
+<div class="space-y-2">
+    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Departemen (Bagian)</label>
+    <select name="bag_dept" class="select2 w-full">
+        <option value="">-- Pilih Departemen --</option>
+        @foreach($departments as $dept)
+            <option value="{{ $dept->code }}" {{ old('bag_dept') == $dept->code ? 'selected' : '' }}>
+                {{ $dept->code }} - {{ $dept->name }}
+            </option>
+        @endforeach
+    </select>
+    @error('bag_dept')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+</div>
 
-                        {{-- Bagian --}}
-                        <div class="space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Bagian</label>
-                            <input type="text" name="subbag_dept" placeholder="Contoh: HRD / Produksi"
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all">
-                        </div>
+{{-- 2. Bagian (Sub Dept) --}}
+<div class="space-y-2">
+    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Bagian (Sub Dept)</label>
+    <select name="subbag_dept" class="select2 w-full">
+        <option value="">-- Pilih Bagian --</option>
+        @foreach($subDepartments as $sub)
+            <option value="{{ $sub->code }}" {{ old('subbag_dept') == $sub->code ? 'selected' : '' }}>
+                {{ $sub->code }} - {{ $sub->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-                        {{-- Sub Bagian --}}
-                        <div class="space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Sub Bagian</label>
-                            <input type="text" name="sub_subbag_dept" placeholder="Contoh: HRD / Produksi"
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all">
-                        </div>
+{{-- 3. Sub Bagian (Unit) --}}
+<div class="space-y-2">
+    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Sub Bagian (Unit)</label>
+    <select name="sub_subbag_dept" class="select2 w-full">
+        <option value="">-- Pilih Unit --</option>
+        @foreach($units as $unit)
+            <option value="{{ $unit->code }}" {{ old('sub_subbag_dept') == $unit->code ? 'selected' : '' }}>
+                {{ $unit->code }} - {{ $unit->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-                        {{-- Jabatan --}}
-                        <div class="space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Jabatan</label>
-                            <input type="text" name="jabatan" placeholder="Contoh: Staff / Manager"
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all">
-                        </div>
+{{-- 4. Jabatan --}}
+<div class="space-y-2">
+    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Jabatan</label>
+    <select name="jabatan" class="select2 w-full">
+        <option value="">-- Pilih Jabatan --</option>
+        @foreach($positions as $pos)
+            <option value="{{ $pos->code }}" {{ old('jabatan') == $pos->code ? 'selected' : '' }}>
+                {{ $pos->code }} - {{ $pos->name }}
+            </option>
+        @endforeach
+    </select>
+    @error('jabatan')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+</div>
+
+{{-- SCRIPT SELECT2 --}}
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            width: '100%', 
+            placeholder: "Ketik untuk mencari...",
+            allowClear: true
+        });
+    });
+</script>
+@endpush
+
+{{-- STYLE AGAR MIRIP INPUT BAWAAN (Opsional, taruh di layout utama lebih baik) --}}
+@push('styles')
+<style>
+    .select2-container .select2-selection--single {
+        height: 42px !important;
+        border-color: #e2e8f0 !important; /* slate-200 */
+        border-radius: 0.75rem !important; /* rounded-xl */
+        display: flex;
+        align-items: center;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 8px !important;
+    }
+</style>
+@endpush
 
                         {{-- Gender --}}
                         <div class="space-y-2">

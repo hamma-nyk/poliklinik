@@ -27,8 +27,9 @@
 <body>
 
     <div class="header">
-        <h2>Poliklinik Perusahaan Sehat Jaya</h2>
-        <p>Jl. Industri No. 123, Kawasan Industri, Jakarta</p>
+        <h2>Poliklinik PT. Nusantara Building Industries</h2>
+        <p>Jl. Raya Semarang - Demak KM. 17, Wonokerto, Karangtengah, Demak, Jawa Tengah, Indonesia</p>
+        <p>Telp: (0291) 686050 | Email: marketing@nusaboard.co.id</p>
         <p>Laporan Kunjungan Pasien (Rawat Jalan)</p>
         
         <div class="period">
@@ -45,7 +46,7 @@
                 <th style="width: 20%;">Nama Pasien</th>
                 <th style="width: 10%;">Kategori</th>
                 <th style="width: 20%;">Diagnosa (ICD-10)</th>
-                <th style="width: 15%;">Dokter</th>
+                <th style="width: 15%;">Pemeriksa</th>
                 <!-- <th style="width: 9%;">Lab Check</th> -->
             </tr>
         </thead>
@@ -81,19 +82,15 @@
                 {{ $row->diagnosis->name ?? $row->diagnosa }}
             @else
                 <span style="font-size: 9px;">
-                    @if($row->gula_darah) GDS:{{$row->gula_darah}} @endif
-                    @if($row->kolesterol) Chol:{{$row->kolesterol}} @endif
+                    @if($row->gula_darah) GDS:{{$row->gula_darah}} - @endif
+                    @if($row->kolesterol) Chol:{{$row->kolesterol}} - @endif
                     @if($row->asam_urat) UA:{{$row->asam_urat}} @endif
                 </span>
             @endif
         </td>
 
         <td>
-            @if($row->jenis_kunjungan == 'Poli Umum')
-                {{ $row->doctor->name }}
-            @else
-                {{ $row->petugas_name }}
-            @endif
+                {{ $row->petugas_name }} ({{$row->petugas_type}}) 
         </td>
 
         <!-- <td class="text-center">

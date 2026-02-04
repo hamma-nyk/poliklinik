@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\MasterData\App\Models\Employee;
 use Illuminate\Support\Facades\DB;
+use Modules\MasterData\App\Models\Department;
+use Modules\MasterData\App\Models\SubDepartment;
+use Modules\MasterData\App\Models\Unit;
+use Modules\MasterData\App\Models\Position;
 
 class EmployeeController extends Controller
 {
@@ -18,6 +22,10 @@ class EmployeeController extends Controller
         $perPage = $request->input('per_page', 10);
 
         $query = Employee::query();
+        $departments = Department::orderBy('code')->get();
+        $subDepartments = SubDepartment::orderBy('code')->get();
+        $units = Unit::orderBy('code')->get();
+        $positions = Position::orderBy('code')->get();
 
         if ($request->has('search')) {
 
@@ -32,7 +40,11 @@ class EmployeeController extends Controller
         ->onEachSide(1)
         ->withQueryString();
 
-        return view('masterdata::employees.index', compact('employees'));
+        return view('masterdata::employees.index', compact('employees',
+        'departments', 
+        'subDepartments', 
+        'units', 
+        'positions'));
     }
 
     /**
@@ -40,7 +52,16 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('masterdata::employees.create');
+        $departments = Department::orderBy('code')->get();
+        $subDepartments = SubDepartment::orderBy('code')->get();
+        $units = Unit::orderBy('code')->get();
+        $positions = Position::orderBy('code')->get();
+            return view('masterdata::employees.create', compact(
+            'departments', 
+            'subDepartments', 
+            'units', 
+            'positions'
+        ));
     }
 
     /**
@@ -77,7 +98,17 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::findOrFail($id);
-        return view('masterdata::employees.edit', compact('employee'));
+        $query = Employee::query();
+        $departments = Department::orderBy('code')->get();
+        $subDepartments = SubDepartment::orderBy('code')->get();
+        $units = Unit::orderBy('code')->get();
+        $positions = Position::orderBy('code')->get();
+
+        return view('masterdata::employees.edit', compact('employee',
+        'departments', 
+        'subDepartments', 
+        'units', 
+        'positions'));
     }
 
     /**
@@ -86,7 +117,7 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nik' => 'required|unique:sc_master.employees,nik,' . $id,
+            'nik' => 'required|unique:pgsql.sc_master.employees,nik,' . $id,
             'nama' => 'required|string|max:255',
         ]);
 

@@ -29,9 +29,9 @@
 <body>
 
     <div class="header">
-        <h1>Poliklinik Perusahaan Sehat Jaya</h1>
-        <p>Jl. Industri No. 123, Kawasan Industri, Jakarta</p>
-        <p>Telp: (021) 1234-5678 | Layanan Lab Sederhana (POCT)</p>
+        <h1>Poliklinik PT. Nusantara Building Industries</h1>
+        <p>Jl. Raya Semarang - Demak KM. 17, Wonokerto, Karangtengah, Demak, Jawa Tengah, Indonesia</p>
+        <p>Telp: (0291) 686050 | Email: marketing@nusaboard.co.id</p>
     </div>
 
     <div style="text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 20px; text-decoration: underline;">

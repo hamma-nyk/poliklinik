@@ -4,6 +4,10 @@ namespace Modules\MasterData\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\MasterData\App\Models\Department;
+use Modules\MasterData\App\Models\SubDepartment;
+use Modules\MasterData\App\Models\Unit;
+use Modules\MasterData\App\Models\Position;
 use App\Traits\HasCustomCode;
 class Employee extends Model
 {
@@ -38,7 +42,29 @@ class Employee extends Model
     {
         return $this->is_active !== 'KO';
     }
-     public function getPrefix(): string
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'bag_dept', 'code');
+    }
+
+    // Relasi ke Sub Bagian
+    public function subDepartment()
+    {
+        return $this->belongsTo(SubDepartment::class, 'subbag_dept', 'code');
+    }
+
+    // Relasi ke Sub Sub Bagian
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'sub_subbag_dept', 'code');
+    }
+
+    // Relasi ke Jabatan
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'jabatan', 'code');
+    }
+    public function getPrefix(): string
     {
         return 'KAR'; // Hasil: PAS2026010001
     }

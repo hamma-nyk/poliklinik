@@ -35,7 +35,7 @@ class ReportController extends Controller
                 return $item;
             });
 
-        $labData = LabCheck::with(['patient', 'examiner', 'nurse'])
+        $labData = LabCheck::with(['patient', 'examiner'])
             ->whereDate('created_at', '>=', $startDate)
             ->whereDate('created_at', '<=', $endDate)
             ->get()

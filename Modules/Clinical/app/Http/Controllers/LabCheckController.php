@@ -11,13 +11,25 @@ use Modules\MasterData\App\Models\Nurse;
 use Barryvdh\DomPDF\Facade\Pdf;
 class LabCheckController extends Controller
 {
-    public function index(Request $request)
+   public function index(Request $request)
     {
         $query = LabCheck::with('patient')->latest();
 
         if ($request->search) {
-            $query->whereHas('patient', function($q) use ($request) {
-                $q->where('name', 'ilike', '%'.$request->search.'%');
+            $term = '%'.$request->search.'%';
+
+            // Bungkus dalam satu where(function) agar logika OR tidak bocor
+            $query->where(function($q) use ($term) {
+                
+                // 1. Cari berdasarkan KODE LAB (di tabel lab_checks sendiri)
+                $q->where('code', 'ilike', $term) 
+                
+                // 2. ATAU cari berdasarkan Data Pasien (Relasi)
+                  ->orWhereHas('patient', function($subQ) use ($term) {
+                      $subQ->where('name', 'ilike', $term)
+                           ->orWhere('nik', 'ilike', $term) // Ganti 'code' pasien dgn NIK/NoRM jika perlu
+                           ->orWhere('code', 'ilike', $term); // Jika pasien punya kolom code (No RM)
+                  });
             });
         }
 

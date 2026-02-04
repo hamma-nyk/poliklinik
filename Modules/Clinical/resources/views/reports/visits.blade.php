@@ -77,7 +77,11 @@
                                 </td>
                                 <td class="px-6 py-5 whitespace-nowrap">
                                     <div class="text-sm font-bold text-slate-800 dark:text-slate-100">{{ $row->patient->name }}</div>
+                                    @if($row->jenis_kunjungan == 'Poli Umum')
                                     <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-0.5 tracking-tighter"><a href="{{ route('clinical.records.index') }}?search={{ $row->code }}" class="hover:text-amber-600 transition-colors">RM: {{ $row->code }}</a></div>
+                                    @else
+                                    <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-0.5 tracking-tighter"><a href="{{ route('clinical.lab.index') }}?search={{ $row->code }}" class="hover:text-amber-600 transition-colors">LAB: {{ $row->code }}</a></div>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-5 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-tighter border {{ $row->patient->type == 'karyawan' ? 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50' : 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800/50' }}">
