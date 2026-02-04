@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\MasterData\App\Models\Patient;
 use Modules\MasterData\App\Models\Employee;
+use Modules\MasterData\App\Models\SubDepartment;
 use Illuminate\Validation\Rule;
 class PatientController extends Controller
 {
@@ -31,10 +32,8 @@ class PatientController extends Controller
 
     public function create()
     {
-        // Ambil Karyawan Aktif untuk dropdown
-        // Kita urutkan nama agar mudah dicari
-        $employees = Employee::active()->orderBy('nama')->get();
-        
+
+        $employees = Employee::active()->with('subDepartment')->orderBy('nama')->get();
         return view('masterdata::patients.create', compact('employees'));
     }
 

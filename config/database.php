@@ -112,6 +112,35 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        // --- TAMBAHKAN KONEKSI KE DATABASE LAIN ---
+        'db_external' => [
+            'driver' => 'pgsql', // Misal database sana MySQL (sesuaikan drivernya)
+            'host' => '192.168.10.12', // IP Server Master
+            'port' => '5432',
+            'database' => 'NBIM',
+            'username' => 'postgres', // Saran: Pakai user yang hanya bisa SELECT
+            'password' => '89$CrM@*nBi_',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public,sc_mst',
+            'sslmode' => 'prefer',
+        ],
+
+        // 'db_external1' => [
+        //     'driver' => 'pgsql',
+        //     'url' => env('DBEX1_URL'),
+        //     'host' => env('DBEX1_HOST', '127.0.0.1'),
+        //     'port' => env('DBEX1_PORT', '5432'),
+        //     'database' => env('DBEX1_DATABASE', 'laravel'),
+        //     'username' => env('DBEX1_USERNAME', 'root'),
+        //     'password' => env('DBEX1_PASSWORD', ''),
+        //     'charset' => env('DBEX1_CHARSET', 'utf8'),
+        //     'prefix' => '',
+        //     'strict' => true,
+        //     'engine' => null,
+        // ],
     ],
 
     /*

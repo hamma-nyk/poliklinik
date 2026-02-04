@@ -49,14 +49,94 @@
 
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Cari Nama Karyawan <span class="text-red-500">*</span></label>
-                            <select name="employee_id" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 py-2.5">
-                                <option value="">-- Pilih Karyawan Aktif --</option>
-                                @foreach($employees as $emp)
-                                    <option value="{{ $emp->id }}">
-                                        {{ $emp->nama }} — {{ $emp->bag_dept }} ({{ $emp->nik }})
-                                    </option>
-                                @endforeach
-                            </select>
+                            @php
+                                $employeeOptions = $employees->map(function($emp) {
+                                    $subDeptName = $emp->subDepartment->name ?? '-';
+                                    return [
+                                        'id' => $emp->id,
+                                        'label' => $emp->nama . ' — ' . $subDeptName . ' (' . $emp->nik . ')',
+                                        'search_text' => strtolower($emp->nama . ' ' . $subDeptName . ' ' . $emp->nik)
+                                    ];
+                                });
+                            @endphp
+
+<div x-data="{
+        open: false,
+        search: '',
+        selectedId: '',
+        selectedLabel: '',
+        items: {{ $employeeOptions }},
+        
+        // Fungsi untuk menyaring data berdasarkan ketikan
+        get filteredItems() {
+            if (this.search === '') return this.items;
+            return this.items.filter(item => item.search_text.includes(this.search.toLowerCase()));
+        },
+
+        // Fungsi saat item dipilih
+        selectItem(item) {
+            this.selectedId = item.id;
+            this.selectedLabel = item.label;
+            this.search = ''; // Reset search (opsional)
+            this.open = false;
+        },
+
+        // Fungsi inisialisasi (opsional, jika halaman edit)
+        init() {
+            // Jika ada old input (validasi error)
+            @if(old('employee_id'))
+                const oldItem = this.items.find(i => i.id == '{{ old('employee_id') }}');
+                if(oldItem) this.selectItem(oldItem);
+            @endif
+        }
+    }" 
+    class="relative w-full"
+    @click.away="open = false">
+
+    <input type="hidden" name="employee_id" x-model="selectedId">
+
+    <button type="button" 
+            @click="open = !open; $nextTick(() => $refs.searchInput.focus())"
+            class="w-full text-left rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 py-2.5 px-3 flex justify-between items-center shadow-sm">
+        
+        <span x-text="selectedId ? selectedLabel : '-- Pilih Karyawan Aktif --'" 
+              :class="selectedId ? 'font-medium' : 'text-slate-500 dark:text-slate-400'"></span>
+        
+        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+
+    <div x-show="open" 
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="transform opacity-0 scale-95"
+         x-transition:enter-end="transform opacity-100 scale-100"
+         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-600 overflow-hidden"
+         style="display: none;">
+        
+        <div class="p-2 border-b border-slate-100 dark:border-slate-700">
+            <input x-ref="searchInput" 
+                   x-model="search" 
+                   type="text" 
+                   placeholder="Cari nama, nik, atau departemen..." 
+                   class="w-full text-sm rounded-lg border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <ul class="max-h-60 overflow-y-auto">
+            <template x-for="item in filteredItems" :key="item.id">
+                <li @click="selectItem(item)" 
+                    class="cursor-pointer px-4 py-2 text-sm hover:bg-blue-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors border-b border-slate-50 dark:border-slate-700/50 last:border-0"
+                    :class="{'bg-blue-50 dark:bg-slate-700 font-bold text-blue-700 dark:text-blue-400': selectedId === item.id}">
+                    <span x-text="item.label"></span>
+                </li>
+            </template>
+            
+            <li x-show="filteredItems.length === 0" class="px-4 py-3 text-sm text-slate-500 text-center italic">
+                Data tidak ditemukan.
+            </li>
+        </ul>
+    </div>
+</div>
                         </div>
                     </div>
 

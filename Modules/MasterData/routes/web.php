@@ -16,6 +16,8 @@ Route::middleware(['auth', 'verified'])->prefix('master')->name('master.')->grou
     Route::resource('doctors', DoctorController::class);
     Route::resource('nurses', NurseController::class);
     Route::post('employees/import', [EmployeeController::class, 'import'])->name('employees.import');
+    Route::post('employees/bulk-trim', [EmployeeController::class, 'bulkTrim'])->name('employees.trim');
+    Route::post('employees/sync', [EmployeeController::class, 'syncData'])->name('employees.sync');
     Route::resource('employees', EmployeeController::class);
     Route::resource('patients', PatientController::class);
 

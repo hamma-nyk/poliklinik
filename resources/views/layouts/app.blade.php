@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
-        <title>{{ $title ?? config('app.name', 'Klinik App') }}</title>
+        <title>{{ $title ?? config('app.name', 'Poliklinik: PT Nusantara Building Industries') }}</title>
         <link rel="icon" href="{{ asset('logo.ico') }}" type="icon/ico">
 
         <link rel="preconnect" href="https://fonts.bunny.net">

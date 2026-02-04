@@ -80,7 +80,7 @@
                         <div class="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-all">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
                         </div>
-                        <h4 class="font-bold text-slate-800 dark:text-slate-100 tracking-tight">Mutasi Stok</h4>
+                        <h4 class="font-bold text-slate-800 dark:text-slate-100 tracking-tight">Mutasi Stok </h4>
                         <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Aliran barang per item.</p>
                     </a>
 
@@ -96,8 +96,8 @@
                         <div class="w-10 h-10 bg-violet-50 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 rounded-lg flex items-center justify-center mb-4 group-hover:bg-violet-600 group-hover:text-white transition-all">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                         </div>
-                        <h4 class="font-bold text-slate-800 dark:text-slate-100 tracking-tight">Kartu Stok Obat</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Cek transaksi setiap jenis Obat.</p>
+                        <h4 class="font-bold text-slate-800 dark:text-slate-100 tracking-tight">Kartu Stok</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Cek transaksi setiap item.</p>
                     </a>
 
                 </div>

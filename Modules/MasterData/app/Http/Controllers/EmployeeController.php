@@ -21,30 +21,26 @@ class EmployeeController extends Controller
         // 1. Ambil nilai per_page dari request, default 10
         $perPage = $request->input('per_page', 10);
 
-        $query = Employee::query();
-        $departments = Department::orderBy('code')->get();
-        $subDepartments = SubDepartment::orderBy('code')->get();
-        $units = Unit::orderBy('code')->get();
-        $positions = Position::orderBy('code')->get();
-
-        if ($request->has('search')) {
-
-        $query->where('nama', 'ilike', '%' . $request->search . '%')
-              ->orWhere('nik', 'ilike', '%' . $request->search . '%')
-              ->orWhere('jabatan', 'ilike', '%' . $request->search . '%')
-              ->orWhere('bag_dept', 'ilike', '%' . $request->search . '%');
+        $query = Employee::with(['department', 'subDepartment', 'unit', 'position']);
+        
+        if ($request->filled('search')) {
+            $term = '%' . $request->search . '%';
+            $query->where(function($q) use ($term) {
+                $q->where('nama', 'ilike', $term)
+                ->orWhere('nik', 'ilike', $term)
+                ->orWhere('jabatan', 'ilike', $term)
+                ->orWhere('bag_dept', 'ilike', $term);
+            });
         }
-        $employees = $query->orderByRaw("CASE WHEN is_active IS NULL THEN 0 ELSE 1 END")
+        $employees = $query
+        ->orderByRaw("CASE WHEN is_active IS NULL THEN 0 ELSE 1 END")
         ->orderBy('nama', 'asc')
+        ->where('is_active', NULL)
         ->paginate($perPage)
         ->onEachSide(1)
         ->withQueryString();
 
-        return view('masterdata::employees.index', compact('employees',
-        'departments', 
-        'subDepartments', 
-        'units', 
-        'positions'));
+        return view('masterdata::employees.index', compact('employees'));
     }
 
     /**
@@ -235,6 +231,100 @@ class EmployeeController extends Controller
             DB::rollBack();
             fclose($handle); // Pastikan file tertutup jika error
             return back()->with('error', 'Gagal import: ' . $e->getMessage());
+        }
+    }
+    public function bulkTrim()
+    {
+        // Gunakan DB::raw untuk menjalankan fungsi TRIM() level database
+        // Ini support MySQL dan PostgreSQL
+        try {
+            \Modules\MasterData\App\Models\Employee::query()->update([
+                'nik'             => DB::raw("TRIM(nik)"),
+                'ktp'             => DB::raw("TRIM(ktp)"),
+                'phone'             => DB::raw("TRIM(phone)"),
+                'blood_type'             => DB::raw("TRIM(blood_type)"),
+                'bag_dept'        => DB::raw("TRIM(bag_dept)"),
+                'subbag_dept'     => DB::raw("TRIM(subbag_dept)"),
+                'sub_subbag_dept' => DB::raw("TRIM(sub_subbag_dept)"),
+                'jabatan'         => DB::raw("TRIM(jabatan)"),
+            ]);
+            \Modules\MasterData\App\Models\Department::query()->update([
+                'code'      => DB::raw("TRIM(code)")
+            ]);
+             \Modules\MasterData\App\Models\SubDepartment::query()->update([
+                'code'      => DB::raw("TRIM(code)")
+            ]);
+             \Modules\MasterData\App\Models\Unit::query()->update([
+                'code'      => DB::raw("TRIM(code)")
+            ]);
+             \Modules\MasterData\App\Models\Position::query()->update([
+                'code'      => DB::raw("TRIM(code)")
+            ]);
+
+            return back()->with('success', 'Berhasil! Spasi berlebih pada data Jabatan & Departemen telah dibersihkan.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal melakukan trimming: ' . $e->getMessage());
+        }
+    }
+
+    public function syncData()
+    {
+        DB::beginTransaction();
+        try {
+            // 1. Ambil Data Mentah dari Database Luar
+            $sourceData = DB::connection('db_external')
+                            ->table('karyawan')
+                            ->get();
+
+            $count = 0;
+
+            foreach ($sourceData as $row) {
+                // --- STEP 1: BERSIHKAN DATA (TRIM) DISINI ---
+                // Kita tampung dulu ke variabel baru yang sudah bersih
+                
+                $nikClean     = trim($row->nik); 
+                $ktpClean     = trim($row->ktp);
+                $phoneClean   = trim($row->nohp1);
+                $bloodTypeClean = trim($row->gol_darah);
+                $genderClean = trim($row->jk);
+                $deptClean    = trim($row->bag_dept);
+                $subDeptClean = trim($row->subbag_dept);
+                $subSubDeptClean = trim($row->sub_subbag_dept);
+                $jabatanClean = trim($row->jabatan);
+
+                
+                // Tips: Jika Kode Departemen harus huruf besar semua, bisa tambah strtoupper
+                // $deptClean = strtoupper(trim($row->kode_departemen));
+
+                // --- STEP 2: BARU DI-PROSES KE DATABASE ---
+                Employee::updateOrInsert(
+                    ['nik' => $nikClean], // Gunakan variabel yang sudah di-TRIM sebagai kunci
+                    [
+                        'nama'            => $row->nmlengkap,
+                        'ktp'             => $ktpClean,
+                        'alamat'          => $row->alamat,
+                        'phone'           => $phoneClean,
+                        'blood_type'      => $bloodTypeClean,
+                        'gender'          => $genderClean, // Tanggal biasanya aman tanpa trim
+                        'bag_dept'        => $deptClean,
+                        'subbag_dept'     => $subDeptClean,
+                        'sub_subbag_dept' => $subSubDeptClean,
+                        'jabatan'         => $jabatanClean,
+                        'birth_date'      => $row->tgllahir,
+                        'is_active'       => $row->statuskepegawaian,
+                        'updated_at'      => now(),
+                    ]
+                );
+                
+                $count++;
+            }
+
+            DB::commit();
+            return back()->with('success', "Sukses! $count data karyawan berhasil disingkronkan dan dibersihkan.");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal sinkronisasi: ' . $e->getMessage());
         }
     }
 }
