@@ -18,6 +18,8 @@ class InventoryReportController extends Controller
         $openingStock = 0;
         $selectedMedicine = null;
 
+        $totalValueIn = 0;
+        
         if ($request->has('medicine_id') && $request->medicine_id != '') {
             $startDate = $request->start_date ? Carbon::parse($request->start_date)->startOfDay() : Carbon::now()->startOfMonth();
             $endDate   = $request->end_date ? Carbon::parse($request->end_date)->endOfDay() : Carbon::now()->endOfDay();
@@ -53,8 +55,17 @@ class InventoryReportController extends Controller
                 ->orderBy('t.created_at', 'asc')
                 ->select('sc_inventory.medicine_transaction_items.*') // Ambil kolom item saja agar tidak bentrok
                 ->get();
-        }
 
-        return view('inventory::reports.stock_card', compact('medicines', 'transactions', 'openingStock', 'selectedMedicine'));
+            $totalValueIn = $transactions->sum(function($item) {
+                // Hanya hitung jika tipe transaksi IN
+                if ($item->transaction->type == 'in') {
+                    // Rumus: Qty * Harga Saat Itu
+                    return $item->quantity * $item->price_at_moment;
+                }
+                return 0;
+            });
+        }
+           
+        return view('inventory::reports.stock_card', compact('medicines', 'transactions', 'openingStock', 'selectedMedicine', 'totalValueIn'));
     }
 }

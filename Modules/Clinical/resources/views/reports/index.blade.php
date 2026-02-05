@@ -72,8 +72,8 @@
                         <div class="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg>
                         </div>
-                        <h4 class="font-bold text-slate-800 dark:text-slate-100 tracking-tight">Obat Masuk</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Log pengadaan stok baru.</p>
+                        <h4 class="font-bold text-slate-800 dark:text-slate-100 tracking-tight">Pengadaan Obat</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Data pengadaan stok baru.</p>
                     </a>
 
                     <a href="{{ route('clinical.reports.mutation') }}" class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 transition-all duration-300 group">

@@ -44,12 +44,13 @@
                     <div class="p-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg">
                         <svg class="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
-                    <span class="text-xs font-bold tracking-[0.2em] uppercase text-blue-200 border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full">Secure Access</span>
+                    
+                    <span class="text-md font-bold tracking-[0.2em] uppercase text-blue-200 border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full">POLIKLINIK</span>
                 </div>
                 
                 <h1 class="text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight">
-                    Enterprise <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-300">Health System</span>
+                     
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-300">PT. Nusantara Building Industries</span>
                 </h1>
                 
                 <p class="text-slate-300 text-lg font-light leading-relaxed border-l-2 border-blue-500 pl-6">
@@ -148,7 +149,7 @@
 
                 <div class="mt-8 text-center animate-fade-in-up delay-200">
                     <p class="text-xs text-slate-400 leading-relaxed">
-                        &copy; {{ date('Y') }} PT. Corporate Name. <br>
+                        &copy;2026 IKOIT | PT. Nusantara Building Industries<br>
                         Authorized Personnel Only.
                     </p>
                 </div>

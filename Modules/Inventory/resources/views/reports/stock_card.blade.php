@@ -122,13 +122,16 @@
                                         <div class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">{{ \Carbon\Carbon::parse($item->transaction->created_at)->format('H:i') }} WIB</div>
                                     </td>
                                     <td class="px-6 py-5">
-                                        <div class="font-medium text-sm text-slate-700 dark:text-slate-200 uppercase tracking-tight">
+                                        <div class="font-medium text-sm text-slate-700 dark:text-slate-200 tracking-tight">
                                             @if($item->transaction->medical_record_id)
                                                 <span class="text-blue-600 dark:text-blue-400">Resep Pasien</span>
                                             @elseif($item->transaction->notes && str_contains(strtolower($item->transaction->notes), 'pembelian'))
                                                 <span class="text-emerald-600 dark:text-emerald-400">Restock Pembelian</span>
                                             @else
-                                                {{ $item->transaction->type == 'in' ? 'Stok Masuk' : 'Stok Keluar' }}
+                                                {{ $item->transaction->type == 'in' 
+                                                    ? 'STOK MASUK (Rp ' . number_format($item->price_at_moment, 0, ',', '.') . ')' 
+                                                    : 'STOK KELUAR' 
+                                                }}                                            
                                             @endif
                                         </div>
                                         <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-1 italic leading-tight">
@@ -163,11 +166,22 @@
                             @endforelse
 
                             {{-- Footer Summary --}}
-                            <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-t-2 border-slate-100 dark:border-slate-700">
+                            <!-- <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-t-2 border-slate-100 dark:border-slate-700">
                                 <td colspan="2" class="px-8 py-5 text-right text-[11px] font-black text-slate-500 uppercase tracking-[0.2em]">Total Pergerakan</td>
                                 <td class="px-6 py-5 text-center font-black text-emerald-600 dark:text-emerald-400">+{{ $totalIn }}</td>
                                 <td class="px-6 py-5 text-center font-black text-rose-600 dark:text-rose-400">-{{ $totalOut }}</td>
                                 <td class="px-8 py-5 text-center font-black text-blue-600 dark:text-blue-400 text-lg">{{ $currentBalance }}</td>
+                            </tr> -->
+                            <tr class="bg-slate-100 font-bold border-t-2 border-slate-200">
+                                <td colspan="2" class="px-6 py-3 text-right">
+                                    TOTAL QTY <br>
+                                    <span class="text-xs font-normal text-slate-500">Total Nilai Masuk: Rp {{ number_format($totalValueIn, 0, ',', '.') }}</span>
+                                </td>
+                                <td class="px-6 py-3 text-center">
+                                    <div class="text-emerald-600 font-black text-lg">{{ number_format($totalIn) }}</div>
+                                </td>
+                                <td class="px-6 py-3 font-black text-lg text-center text-rose-600">{{ number_format($totalOut) }}</td>
+                                <td class="px-6 py-3 font-black text-lg text-center text-blue-800">{{ number_format($currentBalance) }}</td>
                             </tr>
 
                         </tbody>
