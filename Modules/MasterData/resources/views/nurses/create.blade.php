@@ -64,19 +64,103 @@
                     {{-- Employee Selector --}}
                     <div x-show="type == 'karyawan'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-2" class="mb-8 bg-emerald-50 dark:bg-emerald-900/10 p-5 rounded-xl border border-emerald-100 dark:border-emerald-800/30">
                         <label class="block font-bold text-emerald-800 dark:text-emerald-400 text-sm mb-2">Cari & Sinkron Data Karyawan</label>
-                        <select id="employee_selector" name="employee_id" class="w-full rounded-xl border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500 py-2.5">
-                            <option value="">-- Pilih Karyawan --</option>
-                            @foreach($employees as $emp)
-                                <option value="{{ $emp->id }}" 
-                                    data-nik="{{ $emp->nik }}"
-                                    data-nama="{{ $emp->nama }}"
-                                    data-ktp="{{ $emp->ktp ?? '' }}"
-                                    data-phone="{{ $emp->phone }}"
-                                    data-alamat="{{ $emp->alamat }}">
-                                    {{ $emp->nik }} - {{ $emp->nama }}
-                                </option>
-                            @endforeach
-                        </select>
+                        @php
+    $employeeOptions = $employees->map(function($emp) {
+        return [
+            'id'      => $emp->id,
+            // Gabungkan NIK dan Nama untuk label & pencarian
+            'label'   => $emp->nik . ' - ' . $emp->nama,
+            'search'  => strtolower($emp->nik . ' ' . $emp->nama),
+            
+            // Data tambahan (pengganti data-* attributes)
+            'nik'     => $emp->nik,
+            'nama'    => $emp->nama,
+            'ktp'     => $emp->ktp ?? '',
+            'phone'   => $emp->phone ?? '',
+            'alamat'  => $emp->alamat ?? ''
+        ];
+    });
+@endphp
+                        <div x-data="{
+        open: false,
+        search: '',
+        selectedId: '',
+        selectedLabel: '-- Pilih Karyawan --',
+        items: {{ $employeeOptions }},
+
+        // Filter pencarian
+        get filteredItems() {
+            if (this.search === '') return this.items;
+            return this.items.filter(item => item.search.includes(this.search.toLowerCase()));
+        },
+
+        // Saat item dipilih
+        selectItem(item) {
+            this.selectedId = item.id;
+            this.selectedLabel = item.label;
+            this.open = false;
+            this.search = '';
+
+            // --- LOGIKA AUTO-FILL FORM ---
+            // Karena native <select> hilang, kita isi input lain secara manual di sini.
+            // Sesuaikan ID elemen di bawah dengan ID input di form Anda.
+            
+            if(document.getElementById('nik')) document.getElementById('nik').value = item.nik;
+            if(document.getElementById('nama'))         document.getElementById('nama').value = item.nama;
+            if(document.getElementById('ktp'))      document.getElementById('ktp').value = item.ktp;
+            if(document.getElementById('phone'))        document.getElementById('phone').value = item.phone;
+            if(document.getElementById('address'))      document.getElementById('address').value = item.alamat;
+        }
+    }" 
+    class="relative w-full"
+    @click.away="open = false">
+
+    <input type="hidden" name="employee_id" x-model="selectedId">
+
+    <button type="button" 
+            @click="open = !open; $nextTick(() => $refs.searchInput.focus())"
+            class="w-full text-left rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 py-2.5 px-3 flex justify-between items-center shadow-sm transition-colors">
+        
+        <span x-text="selectedLabel" :class="selectedId ? 'font-medium' : 'text-slate-400'"></span>
+        
+        <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+
+    <div x-show="open" 
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="transform opacity-0 scale-95"
+         x-transition:enter-end="transform opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="transform opacity-100 scale-100"
+         x-transition:leave-end="transform opacity-0 scale-95"
+         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-emerald-100 dark:border-emerald-800 overflow-hidden"
+         style="display: none;">
+        
+        <div class="p-2 border-b border-emerald-50 dark:border-emerald-900">
+            <input x-ref="searchInput" 
+                   x-model="search" 
+                   type="text" 
+                   placeholder="Cari NIK atau Nama..." 
+                   class="w-full text-sm rounded-lg border-emerald-200 dark:border-emerald-700 bg-emerald-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:ring-emerald-500 focus:border-emerald-500">
+        </div>
+
+        <ul class="max-h-60 overflow-y-auto">
+            <template x-for="item in filteredItems" :key="item.id">
+                <li @click="selectItem(item)" 
+                    class="cursor-pointer px-4 py-2 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-900/30 text-slate-700 dark:text-slate-300 transition-colors border-b border-slate-50 dark:border-slate-700/50 last:border-0"
+                    :class="{'bg-emerald-50 dark:bg-emerald-900/50 font-bold text-emerald-700 dark:text-emerald-400': selectedId === item.id}">
+                    <span x-text="item.label"></span>
+                </li>
+            </template>
+            
+            <li x-show="filteredItems.length === 0" class="px-4 py-3 text-sm text-slate-500 text-center italic">
+                Karyawan tidak ditemukan.
+            </li>
+        </ul>
+    </div>
+</div>
                     </div>
 
                     <div class="space-y-5">

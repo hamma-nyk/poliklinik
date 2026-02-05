@@ -33,9 +33,9 @@ class EmployeeController extends Controller
             });
         }
         $employees = $query
-        ->orderByRaw("CASE WHEN is_active IS NULL THEN 0 ELSE 1 END")
+        ->orderByRaw("CASE WHEN is_active != 'KO' THEN 1 ELSE 0 END")
         ->orderBy('nama', 'asc')
-        ->where('is_active', NULL)
+        ->where('is_active', '')
         ->paginate($perPage)
         ->onEachSide(1)
         ->withQueryString();
@@ -272,59 +272,152 @@ class EmployeeController extends Controller
         DB::beginTransaction();
         try {
             // 1. Ambil Data Mentah dari Database Luar
-            $sourceData = DB::connection('db_external')
-                            ->table('karyawan')
-                            ->get();
-
-            $count = 0;
-
-            foreach ($sourceData as $row) {
-                // --- STEP 1: BERSIHKAN DATA (TRIM) DISINI ---
-                // Kita tampung dulu ke variabel baru yang sudah bersih
-                
-                $nikClean     = trim($row->nik); 
-                $ktpClean     = trim($row->ktp);
-                $phoneClean   = trim($row->nohp1);
-                $bloodTypeClean = trim($row->gol_darah);
-                $genderClean = trim($row->jk);
-                $deptClean    = trim($row->bag_dept);
-                $subDeptClean = trim($row->subbag_dept);
-                $subSubDeptClean = trim($row->sub_subbag_dept);
-                $jabatanClean = trim($row->jabatan);
-
-                
-                // Tips: Jika Kode Departemen harus huruf besar semua, bisa tambah strtoupper
-                // $deptClean = strtoupper(trim($row->kode_departemen));
-
-                // --- STEP 2: BARU DI-PROSES KE DATABASE ---
-                Employee::updateOrInsert(
-                    ['nik' => $nikClean], // Gunakan variabel yang sudah di-TRIM sebagai kunci
-                    [
-                        'nama'            => $row->nmlengkap,
-                        'ktp'             => $ktpClean,
-                        'alamat'          => $row->alamat,
-                        'phone'           => $phoneClean,
-                        'blood_type'      => $bloodTypeClean,
-                        'gender'          => $genderClean, // Tanggal biasanya aman tanpa trim
-                        'bag_dept'        => $deptClean,
-                        'subbag_dept'     => $subDeptClean,
-                        'sub_subbag_dept' => $subSubDeptClean,
-                        'jabatan'         => $jabatanClean,
-                        'birth_date'      => $row->tgllahir,
-                        'is_active'       => $row->statuskepegawaian,
-                        'updated_at'      => now(),
-                    ]
-                );
-                
-                $count++;
-            }
+            $countEmployees = $this->_syncEmployees();
+            $countDepartments = $this->_syncDepartments();
+            $countSubDepartments = $this->_syncSubDepartments();
+            $countSubSubDepartments = $this->_syncSubSubDepartments();
+            $countPositions = $this->_syncPositions();
 
             DB::commit();
-            return back()->with('success', "Sukses! $count data karyawan berhasil disingkronkan dan dibersihkan.");
+            return back()->with('success', "Sukses! Karyawan: $countEmployees, Departemen: $countDepartments, Bagian: $countSubDepartments, Sub Bagian: $countSubSubDepartments, Jabatan: $countPositions. ");
 
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Gagal sinkronisasi: ' . $e->getMessage());
         }
+    }
+
+    private function _syncDepartments()
+    {
+        // 1. Ambil data dari DB Luar
+        $source = DB::connection('db_external')->table('sc_mst.departmen')->get();
+        $count = 0;
+        foreach ($source as $row) {
+            // Trim & Bersihkan
+            $codeClean = strtoupper(trim($row->kddept)); // Misal: ' TE ' -> 'TE'
+
+            // Simpan ke DB Lokal (Table: sub_departments atau departments)
+            Department::updateOrInsert(
+                ['code' => $codeClean], // Kunci Pencocokan
+                [
+                    'name' => $row->nmdept,
+                    'updated_at' => now()
+                ]
+            );
+            $count++;
+        }
+        return $count;
+    }
+
+    private function _syncSubDepartments()
+    {
+        // 1. Ambil data dari DB Luar
+        $source = DB::connection('db_external')->table('sc_mst.subdepartmen')->get();
+        $count = 0;
+        foreach ($source as $row) {
+            // Trim & Bersihkan
+            $codeClean = strtoupper(trim($row->kdsubdept)); // Misal: ' TE ' -> 'TE'
+
+            // Simpan ke DB Lokal (Table: sub_departments atau departments)
+            SubDepartment::updateOrInsert(
+                ['code' => $codeClean], // Kunci Pencocokan
+                [
+                    'name' => $row->nmsubdept,
+                    'updated_at' => now()
+                ]
+            );
+            $count++;
+        }
+        return $count;
+    }
+
+    private function _syncSubSubDepartments()
+    {
+        // 1. Ambil data dari DB Luar
+        $source = DB::connection('db_external')->table('sc_mst.section')->get();
+        $count = 0;
+        foreach ($source as $row) {
+            // Trim & Bersihkan
+            $codeClean = strtoupper(trim($row->section_code)); // Misal: ' TE ' -> 'TE'
+
+            // Simpan ke DB Lokal (Table: sub_departments atau departments)
+            Unit::updateOrInsert(
+                ['code' => $codeClean], // Kunci Pencocokan
+                [
+                    'name' => $row->section_name,
+                    'updated_at' => now()
+                ]
+            );
+            $count++;
+        }
+        return $count;
+    }
+
+    private function _syncPositions()
+    {
+        // 1. Ambil data dari DB Luar
+        $source = DB::connection('db_external')->table('sc_mst.jabatan')->get();
+        $count = 0;
+        foreach ($source as $row) {
+            // Trim & Bersihkan
+            $codeClean = strtoupper(trim($row->kdjabatan)); // Misal: ' TE ' -> 'TE'
+
+            // Simpan ke DB Lokal (Table: sub_departments atau departments)
+            Position::updateOrInsert(
+                ['code' => $codeClean], // Kunci Pencocokan
+                [
+                    'name' => $row->nmjabatan,
+                    'updated_at' => now()
+                ]
+            );
+            $count++;
+        }
+        return $count;
+    }
+
+    private function _syncEmployees()
+    {
+        // 1. Ambil data dari DB Luar
+        $sourceData = DB::connection('db_external')->table('sc_mst.karyawan')->get();
+        $count = 0;
+        foreach ($sourceData as $row) {
+            // --- STEP 1: BERSIHKAN DATA (TRIM) DISINI ---
+            // Kita tampung dulu ke variabel baru yang sudah bersih
+            
+            $nikClean     = trim($row->nik); 
+            $ktpClean     = trim($row->noktp);
+            $phoneClean   = trim($row->nohp1);
+            $bloodTypeClean = trim($row->gol_darah);
+            $genderClean = trim($row->jk);
+            $deptClean    = trim($row->bag_dept);
+            $subDeptClean = trim($row->subbag_dept);
+            $subSubDeptClean = trim($row->sub_subbag_dept);
+            $jabatanClean = trim($row->jabatan);
+   
+            // 1. Cari berdasarkan NIK. Jika tidak ada, buat Instance Baru (tapi belum save ke DB)
+            $employee = Employee::firstOrNew([
+                'nik' => $nikClean
+            ]);
+
+            // --- STEP 2: BARU DI-PROSES KE DATABASE ---
+            $employee->nama            = $row->nmlengkap;
+            $employee->ktp             = $ktpClean;
+            $employee->alamat          = $row->alamatktp;
+            $employee->phone           = $phoneClean;
+            $employee->blood_type      = $bloodTypeClean;
+            $employee->gender          = $genderClean; // Tanggal biasanya aman tanpa trim
+            $employee->bag_dept        = $deptClean;
+            $employee->subbag_dept     = $subDeptClean;
+            $employee->sub_subbag_dept = $subSubDeptClean;
+            $employee->jabatan         = $jabatanClean;
+            $employee->birth_date      = $row->tgllahir;
+            $employee->is_active       = trim($row->statuskepegawaian);
+
+            if ($employee->isDirty() || !$employee->exists) {
+                $employee->save();
+                $count++;
+            }    
+        }
+        return $count;
     }
 }

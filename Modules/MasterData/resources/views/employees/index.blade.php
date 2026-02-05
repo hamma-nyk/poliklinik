@@ -132,7 +132,7 @@
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ $emp->nama }}</div>
-                                            <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ $emp->position->name }}</div>
+                                            <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ $emp->position->name ?? '-' }}</div>
                                             <div class="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">NIK: {{ $emp->nik }}</div>
                                         </div>
                                     </div>

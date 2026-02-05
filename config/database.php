@@ -120,7 +120,7 @@ return [
             'database' => 'NBIM',
             'username' => 'postgres', // Saran: Pakai user yang hanya bisa SELECT
             'password' => '89$CrM@*nBi_',
-            'charset' => 'utf8mb4',
+            'charset' => 'utf8',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,

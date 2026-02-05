@@ -30,7 +30,7 @@ class NurseController extends Controller
     {
         // Ambil semua karyawan untuk dropdown
         // Kita bisa ambil name, nik, phone, address untuk auto-fill
-        $employees = Employee::where('is_active', NULL)->orderBy('nama')->get();
+        $employees = Employee::where('is_active', '')->orderBy('nama')->get();
         
         return view('masterdata::nurses.create', compact('employees'));
     }
