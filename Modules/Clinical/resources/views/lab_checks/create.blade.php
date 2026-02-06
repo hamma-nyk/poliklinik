@@ -28,12 +28,119 @@
 
                     <div class="mb-8">
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Pilih Pasien <span class="text-red-500">*</span></label>
-                        <select name="patient_id" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-purple-500 focus:ring-purple-500 transition-all text-sm py-2.5" required>
-                            <option value="">-- Cari Nama / ID Pasien --</option>
-                            @foreach($patients as $p)
-                                <option value="{{ $p->id }}">{{ $p->name }} ({{ $p->code }})</option>
-                            @endforeach
-                        </select>
+                        @php
+    // Format data pasien untuk JavaScript
+    $patientList = $patients->map(function($p) {
+        return [
+            'id' => $p->id,
+            'label' => $p->name . ' (' . $p->code . ')', // Teks yang tampil
+            'search_text' => strtolower($p->name . ' ' . $p->code) // Teks untuk pencarian (lowercase)
+        ];
+    });
+@endphp
+                        <div class="w-full relative"
+     x-data="{
+        options: {{ $patientList }},
+        isOpen: false,
+        search: '',
+        selectedId: '{{ old('patient_id') }}', // Handle old value (validasi error)
+        selectedLabel: '',
+
+        init() {
+            // Jika ada selectedId (dari old value atau edit mode), set labelnya
+            if (this.selectedId) {
+                const found = this.options.find(o => o.id == this.selectedId);
+                if (found) {
+                    this.selectedLabel = found.label;
+                    this.search = found.label;
+                }
+            }
+
+            // Watcher: Reset search jika user menutup dropdown tanpa memilih
+            this.$watch('isOpen', (value) => {
+                if (!value) {
+                    if (this.selectedId) {
+                        // Kembalikan ke label terpilih
+                        this.selectedLabel = this.options.find(o => o.id == this.selectedId)?.label;
+                        this.search = this.selectedLabel;
+                    } else {
+                        // Kosongkan jika belum ada yg dipilih
+                        this.search = '';
+                    }
+                }
+            });
+        },
+
+        get filteredOptions() {
+            if (this.search === '') return this.options;
+            const query = this.search.toLowerCase();
+            return this.options.filter(item => item.search_text.includes(query));
+        },
+
+        selectOption(item) {
+            this.selectedId = item.id;
+            this.selectedLabel = item.label;
+            this.search = item.label;
+            this.isOpen = false;
+        },
+
+        clearSelection() {
+            this.selectedId = '';
+            this.selectedLabel = '';
+            this.search = '';
+            this.isOpen = true; // Tetap buka dropdown
+        }
+     }"
+     @click.outside="isOpen = false">
+
+    <input type="hidden" name="patient_id" :value="selectedId" required>
+
+    <div class="relative">
+        <input type="text"
+               x-model="search"
+               @click="isOpen = true"
+               @keydown.escape="isOpen = false"
+               @input="isOpen = true; selectedId = ''" 
+               placeholder="-- Cari Nama / ID Pasien --"
+               class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-purple-500 focus:ring-purple-500 transition-all text-sm py-2.5 pl-4 pr-10"
+               autocomplete="off">
+
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-slate-400 hover:text-red-500 focus:outline-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-slate-400 focus:outline-none">
+                <svg class="w-4 h-4 transform transition-transform" :class="isOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div x-show="isOpen"
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 max-h-60 overflow-auto py-1"
+         style="display: none;">
+
+        <template x-for="item in filteredOptions" :key="item.id">
+            <div @click="selectOption(item)"
+                 class="px-4 py-2 text-sm cursor-pointer hover:bg-purple-50 dark:hover:bg-slate-700 transition-colors flex justify-between items-center"
+                 :class="selectedId == item.id ? 'bg-purple-50 text-purple-700 dark:bg-slate-700 dark:text-purple-300 font-bold' : 'text-slate-700 dark:text-slate-200'">
+                
+                <span x-text="item.label"></span>
+                
+                <svg x-show="selectedId == item.id" class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+        </template>
+
+        <div x-show="filteredOptions.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">
+            Pasien tidak ditemukan.
+        </div>
+    </div>
+</div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

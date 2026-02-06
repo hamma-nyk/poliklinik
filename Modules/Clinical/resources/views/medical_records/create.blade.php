@@ -22,75 +22,177 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     
                     {{-- SIDEBAR: IDENTITAS & VITAL --}}
-                    <div class="lg:col-span-1 space-y-6">
-                        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-                            <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                                1. Administrasi
-                            </h3>
-                            
-                            <div class="space-y-5">
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Pasien <span class="text-red-500">*</span></label>
-                                    <select name="patient_id" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all text-sm" required>
-                                        <option value="">Cari Nama / ID Pasien...</option>
-                                        @foreach($patients as $p)
-                                            <option value="{{ $p->id }}">{{ $p->name }} ({{ $p->code }})</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-4">
-    <label class="block font-bold mb-1">Pemeriksa (Dokter / Perawat)</label>
-    <select name="examiner" class="w-full rounded-lg border-slate-300 select2" required>
-        <option value="">-- Pilih Pemeriksa --</option>
+<div class="lg:col-span-1 space-y-6">
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
+            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+            1. Administrasi
+        </h3>
         
-        <optgroup label="Dokter">
-            @foreach($doctors as $doc)
-                <option value="Modules\MasterData\App\Models\Doctor|{{ $doc->id }}">
-                    dr. {{ $doc->name }}
-                </option>
-            @endforeach
-        </optgroup>
+        <div class="space-y-5">
+            {{-- INPUT PASIEN (ALPINE JS) --}}
+            <div>
+                @php
+                    $patientOptions = $patients->map(function($p) {
+                        return [
+                            'id' => $p->id,
+                            'label' => $p->name . ' (' . $p->code . ')',
+                            'code' => $p->code
+                        ];
+                    });
+                @endphp
 
-        <optgroup label="Perawat">
-            @foreach($nurses as $nurse)
-                <option value="Modules\MasterData\App\Models\Nurse|{{ $nurse->id }}">
-                    {{ $nurse->nama }} (Perawat)
-                </option>
-            @endforeach
-        </optgroup>
-    </select>
-</div>
-                            </div>
-                        </div>
+                {{-- PERBAIKAN: class="w-full relative" digabung jadi satu --}}
+                <div class="w-full relative"
+                     x-data="{
+                        options: {{ $patientOptions }},
+                        isOpen: false,
+                        search: '',
+                        selectedId: '{{ old('patient_id') }}',
+                        selectedLabel: '',
 
-                        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-                            <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
-                                <span class="w-2 h-2 bg-rose-500 rounded-full mr-3"></span>
-                                2. Tanda Vital
-                            </h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Tensi (mmHg)</label>
-                                    <input type="text" name="tensi" placeholder="120/80" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm">
-                                </div>
-                                <div>
-                                    <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Suhu (°C)</label>
-                                    <input type="number" step="0.1" name="suhu_tubuh" placeholder="36.5" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm">
-                                </div>
-                                <div>
-                                    <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Berat (Kg)</label>
-                                    <input type="number" step="0.1" name="berat_badan" placeholder="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm">
-                                </div>
-                                <div>
-                                    <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Tinggi (cm)</label>
-                                    <input type="number" step="0.1" name="tinggi_badan" placeholder="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm">
-                                </div>
-                            </div>
+                        init() {
+                            if (this.selectedId) {
+                                const found = this.options.find(o => o.id == this.selectedId);
+                                if (found) {
+                                    this.selectedLabel = found.label;
+                                    this.search = found.label;
+                                }
+                            }
+                            this.$watch('isOpen', (value) => {
+                                if (!value && !this.selectedId) {
+                                    this.search = '';
+                                } else if (!value && this.selectedId) {
+                                    this.selectedLabel = this.options.find(o => o.id == this.selectedId)?.label || '';
+                                    this.search = this.selectedLabel;
+                                }
+                            });
+                        },
+                        get filteredOptions() {
+                            if (this.search === '') return this.options;
+                            return this.options.filter(option => 
+                                option.label.toLowerCase().includes(this.search.toLowerCase())
+                            );
+                        },
+                        selectOption(option) {
+                            this.selectedId = option.id;
+                            this.selectedLabel = option.label;
+                            this.search = option.label;
+                            this.isOpen = false;
+                        },
+                        clearSelection() {
+                            this.selectedId = '';
+                            this.selectedLabel = '';
+                            this.search = '';
+                            this.isOpen = true;
+                        }
+                     }"
+                     @click.outside="isOpen = false">
+
+                    <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">
+                        Pilih Pasien <span class="text-red-500">*</span>
+                    </label>
+
+                    <input type="hidden" name="patient_id" :value="selectedId">
+
+                    <div class="relative">
+                        <input type="text"
+                               x-model="search"
+                               @click="isOpen = true"
+                               @keydown.escape="isOpen = false"
+                               @input="isOpen = true; selectedId = ''" 
+                               placeholder="Ketik Nama atau Kode Pasien..."
+                               class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all text-sm py-2.5 pl-4 pr-10"
+                               autocomplete="off">
+
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+                            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-slate-400 hover:text-red-500">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-slate-400">
+                                <svg class="w-4 h-4 transform transition-transform" :class="isOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
                         </div>
                     </div>
 
+                    <div x-show="isOpen"
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 max-h-60 overflow-auto py-1"
+                         style="display: none;">
+                        
+                        <template x-for="option in filteredOptions" :key="option.id">
+                            <div @click="selectOption(option)"
+                                 class="px-4 py-2 text-sm cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors flex justify-between items-center"
+                                 :class="selectedId == option.id ? 'bg-blue-50 text-blue-700 dark:bg-slate-700 dark:text-blue-300 font-bold' : 'text-slate-700 dark:text-slate-200'">
+                                <span x-text="option.label"></span>
+                                <svg x-show="selectedId == option.id" class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </template>
+
+                        <div x-show="filteredOptions.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">
+                            Pasien tidak ditemukan.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- INPUT PEMERIKSA --}}
+            <div class="mb-4">
+                <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">Pemeriksa</label>
+                <select name="examiner" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 text-sm py-2.5" required>
+                    <option value="">-- Pilih Pemeriksa --</option>
+                    <optgroup label="Dokter">
+                        @foreach($doctors as $doc)
+                            <option value="Modules\MasterData\App\Models\Doctor|{{ $doc->id }}">
+                                dr. {{ $doc->name }}
+                            </option>
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Perawat">
+                        @foreach($nurses as $nurse)
+                            <option value="Modules\MasterData\App\Models\Nurse|{{ $nurse->id }}">
+                                {{ $nurse->nama }} (Perawat)
+                            </option>
+                        @endforeach
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    {{-- VITAL SIGNS --}}
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
+            <span class="w-2 h-2 bg-rose-500 rounded-full mr-3"></span>
+            2. Tanda Vital
+        </h3>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Tensi (mmHg)</label>
+                <input type="text" name="tensi" placeholder="120/80" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
+            </div>
+            <div>
+                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Suhu (°C)</label>
+                <input type="number" step="0.1" name="suhu_tubuh" placeholder="36.5" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
+            </div>
+            <div>
+                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Berat (Kg)</label>
+                <input type="number" step="0.1" name="berat_badan" placeholder="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
+            </div>
+            <div>
+                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Tinggi (cm)</label>
+                <input type="number" step="0.1" name="tinggi_badan" placeholder="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
+            </div>
+        </div>
+    </div>
+</div>
+
+                               
                     {{-- MAIN CONTENT: ANAMNESA & RESEP --}}
                     <div class="lg:col-span-2 space-y-6">
                         <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">

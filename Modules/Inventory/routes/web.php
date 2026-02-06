@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Modules\Inventory\App\Http\Controllers\MedicineController;
 use Modules\Inventory\App\Http\Controllers\TransactionController;
 use Modules\Inventory\App\Http\Controllers\InventoryReportController;
+use Modules\Inventory\App\Http\Controllers\StockOpnameController;
+use Modules\Inventory\App\Http\Controllers\StockAdjustmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,4 +20,7 @@ Route::middleware(['auth', 'verified'])->prefix('inventory')->name('inventory.')
     // Transaksi stok sebaiknya tidak diedit/hapus sembarangan untuk menjaga integritas data audit.
     // Jika ada salah, buat transaksi koreksi (Stok Opname).
     Route::get('/reports/stock-card', [InventoryReportController::class, 'stockCard'])->name('reports.stock_card');
+    Route::resource('stock-opnames', StockOpnameController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('adjustments', StockAdjustmentController::class)->only(['index', 'create', 'store']);
+    
 });
