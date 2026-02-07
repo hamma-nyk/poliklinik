@@ -180,13 +180,13 @@
                     {{-- Tanda Tangan --}}
                     <div class="mt-12 pt-12 border-t border-slate-100 dark:border-slate-700 flex justify-end">
                         <div class="text-center w-64">
-                            @if ($record->doctor?->sip)
+                            @if ($record->doctor?->id)
                             <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Dokter Pemeriksa,</p>
                             <div class="relative inline-block">
                                 <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->doctor->name ?? '-'}}</p>                                
                                 <p class="text-[12px] text-slate-400 mt-2"> {{ ('SIP.' . $record->doctor->sip) }}</p>
                             </div>
-                            @elseif ($record->nurse->str)
+                            @elseif ($record->nurse?->id)
                             <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Perawat Pemeriksa,</p>
                             <div class="relative inline-block">
                                 <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->nurse->nama ?? '-'}}</p>                                

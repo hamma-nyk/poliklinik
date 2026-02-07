@@ -99,6 +99,8 @@
             </a>
         @endcan
 
+        
+
          @can('adjustment_obat')
             <a href="{{ route('inventory.adjustments.index') }}" 
                class="flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 group relative {{ request()->routeIs('inventory.adjustments.*') ? 'bg-blue-600/10 text-blue-400' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-500 dark:hover:text-slate-100' }}">
@@ -116,6 +118,13 @@
                <span class="font-medium text-sm">Rekam Medis</span>
             </a>
             
+            <a href="{{ route('clinical.sick-leaves.index') }}" 
+               class="flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 group relative {{ request()->routeIs('clinical.sick-leaves.*') ? 'bg-blue-600/10 text-blue-400' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-500 dark:hover:text-slate-100' }}">
+               <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-blue-500 rounded-r-full transition-opacity duration-200 {{ request()->routeIs('clinical.sick-leaves.*') ? 'opacity-100' : 'opacity-0' }}"></span>
+               <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+               <span class="font-medium text-sm">Surat Keterangan (SKD)</span>
+            </a>
+        
             <a href="{{ route('clinical.lab.index') }}" 
                class="flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 group relative {{ request()->routeIs('clinical.lab.*') ? 'bg-blue-600/10 text-blue-400' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-500 dark:hover:text-slate-100' }}">
                <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-blue-500 rounded-r-full transition-opacity duration-200 {{ request()->routeIs('clinical.lab.*') ? 'opacity-100' : 'opacity-0' }}"></span>
@@ -136,7 +145,7 @@
                <span class="font-medium text-sm">Stock Opname</span>
             </a>
         @endcan
-        
+
         <div class="pt-6 pb-2 px-4">
             <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Laporan</p>
         </div>

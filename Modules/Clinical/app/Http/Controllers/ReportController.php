@@ -13,6 +13,9 @@ use Modules\Clinical\App\Models\LabCheck;
 use Modules\MasterData\App\Models\Patient;
 use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
+use Modules\Clinical\App\Models\SickLeave;
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Clinical\App\Exports\SickLeaveExport;
 class ReportController extends Controller
 {
     // Halaman Menu Utama Laporan
@@ -198,5 +201,44 @@ class ReportController extends Controller
         }
 
         return view('clinical::reports.mutation', compact('data', 'startDate', 'endDate'));
+    }
+
+    public function indexSkd()
+    {
+        return view('clinical::reports.skd');
+    }
+    public function exportSkd(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date'   => 'required|date|after_or_equal:start_date',
+            'format'     => 'required|in:excel,pdf,view',
+        ]);
+
+        $startDate = $request->start_date;
+        $endDate   = $request->end_date;
+
+        // A. EXPORT EXCEL
+        if ($request->format == 'excel') {
+            $fileName = 'Laporan_SKD_' . $startDate . '_sd_' . $endDate . '.xlsx';
+            return Excel::download(new SickLeaveExport($startDate, $endDate), $fileName);
+        }
+
+        // Ambil Data untuk View / PDF
+        $data = SickLeave::with(['patient', 'medicalRecord.doctor', 'medicalRecord.nurse'])
+            ->whereBetween('start_date', [$startDate, $endDate])
+            ->orderBy('start_date', 'asc')
+            ->get();
+
+        // B. EXPORT PDF
+        if ($request->format == 'pdf') {
+            $pdf = Pdf::loadView('clinical::reports.pdf_skd', compact('data', 'startDate', 'endDate'))
+                ->setPaper('a4', 'landscape'); // Landscape biar muat kolomnya
+            
+            return $pdf->download('Laporan_SKD.pdf');
+        }
+
+        // C. VIEW DI BROWSER (Preview)
+        return view('clinical::reports.skd_view', compact('data', 'startDate', 'endDate'));
     }
 }

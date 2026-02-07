@@ -5,6 +5,7 @@ use Modules\Clinical\Http\Controllers\ClinicalController;
 use Modules\Clinical\App\Http\Controllers\MedicalRecordController;
 use Modules\Clinical\App\Http\Controllers\LabCheckController;
 use Modules\Clinical\App\Http\Controllers\ReportController;
+use Modules\Clinical\App\Http\Controllers\SickLeaveController;
 
 Route::middleware(['auth'])->prefix('clinical')->name('clinical.')->group(function () {
     
@@ -15,6 +16,12 @@ Route::middleware(['auth'])->prefix('clinical')->name('clinical.')->group(functi
     // 2. Route Lab
     Route::get('lab/{id}/print', [LabCheckController::class, 'print'])->name('lab.print');
     Route::resource('lab', LabCheckController::class);
+
+    Route::resource('sick-leaves', SickLeaveController::class);
+    Route::get('sick-leaves/{id}', [SickLeaveController::class, 'show'])->name('sick-leaves.show');
+
+    // 2. Route Khusus Cetak PDF / Print (Opsional tapi sangat disarankan)
+    Route::get('sick-leaves/{id}/print', [SickLeaveController::class, 'print'])->name('sick-leaves.print');
 
     // 3. Route Reports (PERBAIKAN DISINI)
     // Cukup tulis 'reports' karena sudah di dalam grup 'clinical'
@@ -34,5 +41,7 @@ Route::middleware(['auth'])->prefix('clinical')->name('clinical.')->group(functi
         Route::get('/low-stock', [ReportController::class, 'lowStock'])->name('low_stock');
         Route::get('/incoming', [ReportController::class, 'incoming'])->name('incoming');
         Route::get('/mutation', [ReportController::class, 'mutation'])->name('mutation');
+        Route::get('/skd', [ReportController::class, 'indexSkd'])->name('skd');
+        Route::post('/skd/export', [ReportController::class, 'exportSkd'])->name('skd_export');
     });
 });

@@ -74,7 +74,10 @@ class PatientController extends Controller
                 'blood_type'  => $emp->blood_type,
                 'nik'         => $emp->nik ?? NULL,
                 'ktp'         => $emp->ktp ?? NULL,
+                'bag_dept'    => $emp->bag_dept ?? NULL,
                 'subbag_dept' => $emp->subbag_dept ?? NULL,
+                'sub_subbag_dept' => $emp->sub_subbag_dept ?? NULL,
+                'jabatan'     => $emp->jabatan ?? NULL,
                 'allergies'   => $request->allergies,
                 'family_of_employee_id' => NULL   // Inputan manual medis
             ]);

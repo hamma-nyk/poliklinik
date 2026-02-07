@@ -5,6 +5,11 @@ namespace Modules\MasterData\App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory; // Pastikan Huruf Besar
 use App\Traits\HasCustomCode;
+use Modules\MasterData\App\Models\Employee;
+use Modules\MasterData\App\Models\Department;
+use Modules\MasterData\App\Models\SubDepartment;
+use Modules\MasterData\App\Models\Unit;
+use Modules\MasterData\App\Models\Position;
 
 class Patient extends Model
 {
@@ -15,7 +20,10 @@ class Patient extends Model
         'code',
         'nik',
         'ktp',
-        'subbag_dept', 
+        'bag_dept',
+        'subbag_dept',
+        'sub_subbag_dept',
+        'jabatan', 
         'name', 
         'gender', 
         'birth_date', 
@@ -37,4 +45,28 @@ class Patient extends Model
     {
         return 'PAS'; 
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'bag_dept', 'code');
+    }
+
+    // Relasi ke Sub Bagian
+    public function subDepartment()
+    {
+        return $this->belongsTo(SubDepartment::class, 'subbag_dept', 'code');
+    }
+
+    // Relasi ke Sub Sub Bagian
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'sub_subbag_dept', 'code');
+    }
+
+    // Relasi ke Jabatan
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'jabatan', 'code');
+    }
+
 }

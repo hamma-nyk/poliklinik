@@ -12,6 +12,11 @@ use Modules\MasterData\App\Models\Nurse;
 use Modules\Inventory\App\Models\Medicine;
 use Modules\Inventory\App\Models\MedicineTransaction; // Import Transaksi
 use Modules\MasterData\App\Models\Diagnosis; // <--- Import Model Diagnosis
+use Modules\MasterData\App\Models\Department;
+use Modules\MasterData\App\Models\SubDepartment;
+use Modules\MasterData\App\Models\Unit;
+use Modules\MasterData\App\Models\Position;
+use Modules\Clinical\App\Models\SickLeave;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 class MedicalRecordController extends Controller
@@ -52,7 +57,11 @@ class MedicalRecordController extends Controller
         $nurses = Nurse::where('is_active', true)->orderBy('nama')->get();
         $medicines = Medicine::orderBy('name')->get();
         $diagnoses = Diagnosis::orderBy('name')->get();
-        return view('clinical::medical_records.create', compact('patients', 'doctors', 'nurses', 'medicines', 'diagnoses'));    }
+        $departments = Department::orderBy('code')->get();
+        $subDepartments = SubDepartment::orderBy('code')->get();
+        $units = Unit::orderBy('code')->get();
+        $positions = Position::orderBy('code')->get();
+        return view('clinical::medical_records.create', compact('patients', 'doctors', 'nurses', 'medicines', 'diagnoses', 'departments', 'subDepartments', 'units', 'positions'));    }
 
     public function store(Request $request)
     {
@@ -72,6 +81,9 @@ class MedicalRecordController extends Controller
             'keluhan_utama' => 'required',
             //'diagnosa' => 'required',
             'diagnosa_input' => 'required',
+            'visit_type'    => 'required|in:sakit,kecelakaan_kerja',
+            'is_sick_leave' => 'nullable|boolean', // Checkbox kirim '1' atau null
+            'is_referred'   => 'nullable|boolean',
             // Validasi Obat (Array)
             'medicines' => 'nullable|array',
             'medicines.*.id' => 'required',
@@ -131,6 +143,8 @@ class MedicalRecordController extends Controller
                 'riwayat_alergi' => $request->riwayat_alergi,
                 'riwayat_psikososial' => $request->riwayat_psikososial,
                 'tindakan' => $request->tindakan,
+                'is_sick_leave' => $request->boolean('is_sick_leave'),
+                'is_referred'   => $request->boolean('is_referred'),
             ]);
 
             // 2. Simpan Detail Obat
@@ -199,4 +213,6 @@ class MedicalRecordController extends Controller
         // Stream: Tampilkan di browser (bisa didownload manual)
         return $pdf->stream('RM-' . $record->code . '.pdf');
     }
+
+    
 }

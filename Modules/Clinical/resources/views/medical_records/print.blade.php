@@ -140,13 +140,15 @@
 
     <div class="footer">
         <div class="ttd-box">
-            @if ($record->doctor?->sip)
+            @if ($record->doctor?->id)
             <p>Dokter Pemeriksa,</p>
-            @else
-            <p>Perawat Pemeriksa,</p>
-            @endif
             <div class="ttd-space"></div>
-            <p style="text-decoration: underline; font-weight: bold;">{{ $record->doctor->name ?? $record->nurse->nama}}</p>
+            <p style="text-decoration: underline; font-weight: bold;">{{ $record->doctor->name ?? '-'}}</p>
+            @elseif ($record->nurse?->id)
+            <p>Perawat Pemeriksa,</p>
+            <div class="ttd-space"></div>
+            <p style="text-decoration: underline; font-weight: bold;">{{ $record->nurse->nama ?? '-'}}</p>
+            @endif
         </div>
     </div>
 

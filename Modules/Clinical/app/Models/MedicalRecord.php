@@ -28,6 +28,9 @@ class MedicalRecord extends Model
         'doctor_id',   // Ganti doctor_id jadi ini
         'nurse_id', // Tambah ini
         'diagnosis_id',
+        'visit_type',
+        'is_sick_leave',
+        'is_referred',
         'tensi', 'suhu_tubuh', 'berat_badan', 'tinggi_badan',
         'keluhan_utama', 'riwayat_penyakit', 'riwayat_alergi', 'riwayat_psikososial',
         'diagnosa', 'tindakan', 'diagnosis_id'
@@ -53,8 +56,13 @@ class MedicalRecord extends Model
 
     // Modules/Clinical/App/Models/MedicalRecord.php
 
-public function diagnosis()
-{
-    return $this->belongsTo(\Modules\MasterData\App\Models\Diagnosis::class, 'diagnosis_id');
-}
+    public function diagnosis()
+    {
+        return $this->belongsTo(\Modules\MasterData\App\Models\Diagnosis::class, 'diagnosis_id');
+    }
+    public function sickLeave()
+    {
+        // Parameter kedua ('medical_record_id') adalah foreign key di tabel sick_leaves
+        return $this->hasOne(SickLeave::class, 'medical_record_id');
+    }
 }

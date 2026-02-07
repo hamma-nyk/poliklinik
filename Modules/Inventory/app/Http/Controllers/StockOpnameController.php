@@ -41,7 +41,7 @@ class StockOpnameController extends Controller
         
         // Generate No Opname Otomatis (SO-TahunBulan-Urut)
         $count = StockOpname::whereYear('created_at', date('Y'))->count() + 1;
-        $opnameNumber = 'SO-' . date('Ym') . '' . str_pad($count, 3, '0', STR_PAD_LEFT);
+        $opnameNumber = 'SO' . date('Ym') . '' . str_pad($count, 3, '0', STR_PAD_LEFT);
 
         return view('inventory::stock_opnames.create', compact('medicines', 'opnameNumber'));
     }

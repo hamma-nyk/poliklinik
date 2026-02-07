@@ -66,7 +66,10 @@ return new class extends Migration
             // Identitas Pasien
             $table->string('nik')->nullable()->unique(); 
             $table->string('ktp')->nullable()->unique();
-            $table->string('subbag_dept')->nullable();// Untuk pencarian umum// Untuk pencarian umum
+            $table->string('bag_dept')->nullable();
+            $table->string('subbag_dept')->nullable();
+            $table->string('sub_subbag_dept')->nullable();
+            $table->string('jabatan')->nullable(); // Untuk pencarian umum// Untuk pencarian umum
             $table->string('name');
             $table->string('gender', 1);
             $table->date('birth_date')->nullable();
