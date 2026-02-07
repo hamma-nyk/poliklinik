@@ -45,7 +45,7 @@ class MedicineController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'unit' => 'required|string|max:50', // cth: Tablet, Botol, Strip
-            'price' => 'required|numeric|min:0',
+            // 'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
         ]);
 
@@ -54,7 +54,7 @@ class MedicineController extends Controller
         Medicine::create([
             'name' => $request->name,
             'unit' => $request->unit,
-            'price' => $request->price,
+            // 'price' => $request->price,
             'description' => $request->description,
             'current_stock' => 0 
         ]);
@@ -80,7 +80,7 @@ class MedicineController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'unit' => 'required|string|max:50',
-            'price' => 'required|numeric|min:0',
+            // 'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
         ]);
 
@@ -91,7 +91,7 @@ class MedicineController extends Controller
         $medicine->update([
             'name' => $request->name,
             'unit' => $request->unit,
-            'price' => $request->price,
+            // 'price' => $request->price,
             'description' => $request->description,
         ]);
 

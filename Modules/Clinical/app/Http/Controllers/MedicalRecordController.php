@@ -143,6 +143,7 @@ class MedicalRecordController extends Controller
                 'riwayat_alergi' => $request->riwayat_alergi,
                 'riwayat_psikososial' => $request->riwayat_psikososial,
                 'tindakan' => $request->tindakan,
+                'visit_type' => $request->visit_type,
                 'is_sick_leave' => $request->boolean('is_sick_leave'),
                 'is_referred'   => $request->boolean('is_referred'),
             ]);

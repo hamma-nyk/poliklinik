@@ -74,7 +74,7 @@
                             <tr class="bg-slate-50/50 dark:bg-slate-800/50">
                                 <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Detail Obat</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Satuan</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Harga Jual</th>
+                                <!-- <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Harga Jual</th> -->
                                 <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Stok</th>
                                 <th class="px-6 py-4 text-right text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Aksi</th>
                             </tr>
@@ -100,9 +100,9 @@
                                     </div>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-700 dark:text-slate-300">
+                                <!-- <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-700 dark:text-slate-300">
                                     Rp {{ number_format($medicine->price, 0, ',', '.') }}
-                                </td>
+                                </td> -->
 
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     @if($medicine->current_stock <= 5)

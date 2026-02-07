@@ -40,19 +40,27 @@ class SickLeaveController extends Controller
 
     public function create()
     {
-        // 1. Ambil List Pasien (Untuk opsi External)
-        $patients = Patient::orderBy('name')->get();
+        // --- UBAH BAGIAN INI (Sesuaikan nama kolom di database Anda) ---
+        $kategoriKaryawan = 'karyawan'; // Contoh value di database
+        // ---------------------------------------------------------------
 
-        // 2. Ambil List Rekam Medis INTERNAL yang:
-        //    - Dicentang "is_sick_leave"
-        //    - Belum pernah dibuatkan SKD (agar tidak duplikat)
+        // 1. Ambil List Pasien (Hanya Karyawan)
+        $patients = Patient::where('type', $kategoriKaryawan) // <-- Filter disini
+            ->orderBy('name')
+            ->get();
+
+        // 2. Ambil List Rekam Medis INTERNAL (Hanya Karyawan)
         $internalCandidates = MedicalRecord::with(['patient', 'doctor', 'nurse'])
+            ->whereHas('patient', function($query) use ($kategoriKaryawan) {
+                // Filter relasi pasien agar hanya karyawan
+                $query->where('type', $kategoriKaryawan); 
+            })
             ->where('is_sick_leave', true)
-            ->whereDoesntHave('sickLeave') // Pastikan relasi di model MedicalRecord ada: public function sickLeave()
+            ->whereDoesntHave('sickLeave') 
             ->latest()
             ->get();
 
-        // Generate No Surat Otomatis (SKD/TahunBulan/Urut)
+        // Generate No Surat
         $count = SickLeave::whereMonth('created_at', date('m'))->count() + 1;
         $regNumber = 'SKD' . date('Ym') . '' . str_pad($count, 3, '0', STR_PAD_LEFT);
 

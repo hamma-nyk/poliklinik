@@ -18,6 +18,26 @@
             
             {{-- AKTIVITAS HARI INI (Highlight) --}}
             <section>
+
+                <form action="{{ route('dashboard') }}" method="GET" class="mb-6 flex items-center gap-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                {{-- Dropdown Bulan --}}
+                <select name="month" onchange="this.form.submit()" class="border-none bg-transparent text-sm font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer py-1 pl-3 pr-8">
+                    @foreach(range(1, 12) as $m)
+                        <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>
+                            {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <span class="text-slate-300 dark:text-slate-600">|</span>
+
+                {{-- Dropdown Tahun --}}
+                <select name="year" onchange="this.form.submit()" class="border-none bg-transparent text-sm font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer py-1 pl-3 pr-8">
+                    @for($y = date('Y'); $y >= date('Y') - 5; $y--)
+                        <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
+                    @endfor
+                </select>
+            </form>
                 <h3 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
                     <span class="bg-blue-600 w-1.5 h-5 rounded-full mr-3"></span>
                     Performa Hari Ini
@@ -146,77 +166,169 @@
                 </div>
             </section>
 
+            {{-- ZONA 1: GRAFIK UTAMA (Trend & Diagnosa) --}}
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {{-- Chart Trend Harian --}}
                 <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 lg:col-span-2">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">Tren Kunjungan (7 Hari)</h3>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800 dark:text-slate-100">Tren Kunjungan Harian</h3>
+                            <p class="text-xs text-slate-500">Jumlah pasien per hari</p>
+                        </div>
+                        <span class="bg-indigo-50 text-indigo-600 text-xs font-bold px-2.5 py-1 rounded-lg border border-indigo-100">
+                            {{ \Carbon\Carbon::create()->month($month)->translatedFormat('F') }}
+                        </span>
                     </div>
-                    <div id="chart-visits"></div>
+                    <div id="chart-trend-daily" class="h-64"></div>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-                    <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6">Top 5 Diagnosa</h3>
-                    <div id="chart-diseases"></div>
+                {{-- Top 5 Diagnosa --}}
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col">
+                    <h3 class="font-bold text-lg text-slate-800 dark:text-slate-100 mb-2">Top 5 Diagnosa</h3>
+                    <p class="text-xs text-slate-500 mb-6">Penyakit terbanyak bulan ini</p>
+                    <div id="chart-diseases" class="flex-grow flex items-center justify-center"></div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
+            {{-- ZONA 2: STATISTIK K3 (Donut & Summary) --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{-- Donut Chart Proporsi --}}
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+                    <h3 class="font-bold text-lg text-slate-800 dark:text-slate-100 mb-2">Proporsi Kunjungan</h3>
+                    <p class="text-xs text-slate-500 mb-4">Sakit Umum vs Kecelakaan Kerja</p>
+                    <div id="chart-visit-types" class="flex justify-center"></div>
+                </div>
                 
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-                    <div class="p-5 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
-                        <h3 class="font-bold text-slate-800 dark:text-slate-100">Pasien Terakhir</h3>
-                        <a href="{{ route('clinical.records.index') }}" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 flex items-center">
-                            Lihat Semua <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                {{-- Ringkasan Angka K3 --}}
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 lg:col-span-2 flex flex-col justify-center">
+                    <h3 class="font-bold text-lg text-slate-800 dark:text-slate-100 mb-6">Ringkasan K3</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        {{-- Card Sakit --}}
+                        <div class="relative p-6 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-800 overflow-hidden group hover:border-emerald-300 transition-colors]">
+                            <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <svg class="w-16 h-16 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="text-sm font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">Sakit (Umum)</div>
+                                <div class="text-4xl font-black text-slate-800 dark:text-slate-100">{{ $sakitCount }}</div>
+                                <div class="text-xs text-slate-500 mt-2 font-medium">Kasus bulan ini</div>
+                            </div>
+                        </div>
+                        
+                        {{-- Card Kecelakaan --}}
+                        <div class="relative p-6 bg-rose-50 dark:bg-rose-900/10 rounded-2xl border border-rose-100 dark:border-rose-800 overflow-hidden group hover:border-rose-300 transition-colors">
+                            <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <svg class="w-16 h-16 text-rose-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="text-sm font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider mb-1">Kecelakaan Kerja</div>
+                                <div class="text-4xl font-black text-slate-800 dark:text-slate-100">{{ $kecelakaanCount }}</div>
+                                <div class="text-xs text-slate-500 mt-2 font-medium">Kasus bulan ini</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 dark:bg-blue-900/10 border-l-4 border-blue-500 p-4 rounded-r-xl flex items-start gap-3 col-span-2">
+                            <svg class="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-bold text-blue-800 dark:text-blue-300">Safety First!</p>
+                                <p class="text-xs text-blue-600 dark:text-blue-400 mt-1 italic">
+                                    "Kecelakaan kerja dapat dihindari. Selalu gunakan APD dan patuhi prosedur kerja. Keluarga Anda menunggu di rumah."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ZONA 3: OPERASIONAL (Tabel Pasien & Stok Obat) --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                {{-- Tabel Pasien Terakhir --}}
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col">
+                    <div class="p-5 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800">
+                        <div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">Pasien Terakhir</h3>
+                            <p class="text-xs text-slate-500">5 kunjungan terbaru hari ini</p>
+                        </div>
+                        <a href="{{ route('clinical.records.index') }}" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-100 transition-colors">
+                            Lihat Semua
                         </a>
                     </div>
-                    <table class="w-full text-sm text-left">
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                            @forelse($latestRecords as $rec)
-                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
-                                <td class="px-5 py-3">
-                                    <div class="font-bold text-slate-800 dark:text-slate-200">{{ $rec->patient->name }}</div>
-                                    <div class="text-xs text-slate-400 dark:text-slate-500 font-mono mt-0.5">{{ $rec->code }}</div>
-                                </td>
-                                <td class="px-5 py-3 text-right">
-                                    <span class="text-[10px] font-bold bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-2 py-1 rounded-full">
-                                        {{ $rec->created_at->diffForHumans() }}
-                                    </span>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr><td colspan="2" class="p-6 text-center text-slate-400 italic">Belum ada data kunjungan.</td></tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto flex-grow">
+                        <table class="w-full text-sm text-left">
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                                @forelse($latestRecords as $rec)
+                                <tr class="group hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                    <td class="px-5 py-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-300 mr-3">
+                                                {{ substr($rec->patient->name, 0, 1) }}
+                                            </div>
+                                            <div>
+                                                <div class="font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">{{ $rec->patient->name }}</div>
+                                                <div class="text-xs text-slate-400 font-mono">{{ $rec->code }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-4 text-right">
+                                        <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-1 rounded-md border border-slate-200">
+                                            {{ $rec->created_at->format('H:i') }} WIB
+                                        </span>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr><td colspan="2" class="p-8 text-center text-slate-400 italic">Belum ada data kunjungan.</td></tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-                    <div class="p-5 border-b border-red-50 dark:border-red-900/30 flex justify-between items-center bg-red-50/30 dark:bg-red-900/20">
-                        <div class="flex items-center">
-                            <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
-                            <h3 class="font-bold text-red-800 dark:text-red-400">Stok Obat Menipis (≤ 10)</h3>
+                {{-- Tabel Stok Obat Kritis --}}
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col">
+                    <div class="p-5 border-b border-red-100 dark:border-red-900/30 flex justify-between items-center bg-red-50/30 dark:bg-red-900/10">
+                        <div class="flex items-center gap-2">
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                            </span>
+                            <div>
+                                <h3 class="font-bold text-red-800 dark:text-red-400">Stok Obat Menipis</h3>
+                                <p class="text-xs text-red-600/70 dark:text-red-400/70">Perlu re-stock segera (≤ 10)</p>
+                            </div>
                         </div>
-                        <a href="{{ route('inventory.medicines.index') }}" class="text-xs font-bold text-red-600 dark:text-red-400 hover:text-red-800 hover:underline">Kelola</a>
+                        <a href="{{ route('inventory.medicines.index') }}" class="text-xs font-bold text-red-700 hover:text-red-900 bg-red-100/50 px-3 py-1.5 rounded-lg border border-red-200 transition-colors">
+                            Kelola Stok
+                        </a>
                     </div>
-                    <table class="w-full text-sm text-left">
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                            @forelse($criticalMedicines as $med)
-                            <tr class="hover:bg-red-50/30 dark:hover:bg-red-900/10">
-                                <td class="px-5 py-3">
-                                    <div class="font-bold text-slate-800 dark:text-slate-200">{{ $med->name }}</div>
-                                    <div class="text-xs text-slate-400 dark:text-slate-500 font-mono">{{ $med->code }}</div>
-                                </td>
-                                <td class="px-5 py-3 text-right">
-                                    <span class="bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400 px-2 py-1 rounded-lg text-xs font-bold border border-red-200 dark:border-red-800">
-                                        Sisa: {{ $med->current_stock }} {{ $med->unit }}
-                                    </span>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr><td colspan="2" class="p-6 text-center text-green-600 font-medium">Stok aman! Tidak ada yang kritis.</td></tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto flex-grow">
+                        <table class="w-full text-sm text-left">
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                                @forelse($criticalMedicines as $med)
+                                <tr class="hover:bg-red-50/30 dark:hover:bg-red-900/20 transition-colors">
+                                    <td class="px-5 py-4">
+                                        <div class="font-bold text-slate-800 dark:text-slate-200">{{ $med->name }}</div>
+                                        <div class="text-xs text-slate-400 font-mono">{{ $med->code }}</div>
+                                    </td>
+                                    <td class="px-5 py-4 text-right">
+                                        <span class="bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400 px-2.5 py-1 rounded-lg text-xs font-bold border border-red-200 dark:border-red-800 shadow-sm">
+                                            Sisa: {{ $med->current_stock }} {{ $med->unit }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="2" class="p-8 text-center flex flex-col items-center justify-center">
+                                        <svg class="w-10 h-10 text-emerald-400 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <span class="text-emerald-600 font-bold text-sm">Stok aman! Tidak ada yang kritis.</span>
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,33 +341,14 @@
             const gridColor = isDark ? '#334155' : '#f1f5f9';
             const labelColor = isDark ? '#94a3b8' : '#64748b';
 
-            // 1. Chart Visits
-            var optionsVisits = {
-                chart: { type: 'area', height: 300, toolbar: { show: false }, fontFamily: 'inherit' },
-                series: [{ name: 'Total Pasien', data: @json($chartVisits) }],
-                xaxis: { 
-                    categories: @json($chartDates),
-                    labels: { style: { colors: labelColor, fontSize: '12px' } },
-                    axisBorder: { show: false },
-                    axisTicks: { show: false }
-                },
-                yaxis: { labels: { style: { colors: labelColor, fontSize: '12px' } } },
-                colors: ['#3b82f6'],
-                stroke: { curve: 'smooth', width: 3 },
-                fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.05, stops: [0, 90, 100] } },
-                dataLabels: { enabled: false },
-                grid: { borderColor: gridColor, strokeDashArray: 4 },
-                tooltip: { theme: isDark ? 'dark' : 'light' }
-            };
-            new ApexCharts(document.querySelector("#chart-visits"), optionsVisits).render();
-
+            
             // 2. Chart Diseases
-            var dataDisease = @json($chartDiseaseData);
+            var dataDisease = @json($diagData);
             if(dataDisease.length > 0) {
                 var optionsDiseases = {
                     chart: { type: 'donut', height: 320, fontFamily: 'inherit' },
                     series: dataDisease,
-                    labels: @json($chartDiseaseLabels),
+                    labels: @json($diagLabels),
                     colors: ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'],
                     legend: { 
                         position: 'bottom', 
@@ -289,6 +382,55 @@
             } else {
                 document.querySelector("#chart-diseases").innerHTML = `<div class='text-center text-slate-400 py-20 italic bg-slate-50 dark:bg-slate-800/50 rounded-xl'>Belum ada data diagnosa.</div>`;
             }
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- 1. CHART DONAT (Sakit vs Kecelakaan) ---
+            var optionsDonut = {
+                series: [{{ $sakitCount }}, {{ $kecelakaanCount }}], // Data dari Controller
+                labels: ['Sakit', 'Kecelakaan Kerja'],
+                chart: { type: 'donut', height: 250 },
+                colors: ['#10b981', '#f43f5e'],
+                dataLabels: { enabled: false },
+                legend: { position: 'bottom' },
+                plotOptions: {
+                    pie: { donut: { size: '65%' } }
+                }
+            };
+            new ApexCharts(document.querySelector("#chart-visit-types"), optionsDonut).render();
+
+
+            // --- 2. CHART TREND HARIAN (Line Chart) ---
+            var optionsTrend = {
+                series: [{
+                    name: "Jumlah Pasien",
+                    data: @json($trendData) // Array Data [0, 2, 5, 1, ...]
+                }],
+                chart: {
+                    height: 300,
+                    type: 'area',
+                    toolbar: { show: false },
+                    fontFamily: 'Inter, sans-serif',
+                },
+                dataLabels: { enabled: false },
+                stroke: { curve: 'smooth', width: 2 },
+                xaxis: {
+                    categories: @json($trendLabels), // Array Tanggal [1, 2, 3, ... 30]
+                    title: { text: 'Tanggal' }
+                },
+                yaxis: { title: { text: 'Pasien' } },
+                colors: ['#6366f1'], // Indigo
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.2,
+                    }
+                }
+            };
+            new ApexCharts(document.querySelector("#chart-trend-daily"), optionsTrend).render();
+
         });
     </script>
 </x-app-layout>

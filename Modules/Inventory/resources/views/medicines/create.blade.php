@@ -49,7 +49,7 @@
                             </select>
                         </div>
 
-                        {{-- Harga --}}
+                        <!-- {{-- Harga --}}
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Harga Jual (Rp) <span class="text-red-500">*</span></label>
                             <div class="relative">
@@ -60,7 +60,7 @@
                                     class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 pl-10 focus:border-indigo-500 focus:ring-indigo-500 transition-all" 
                                     required min="0" placeholder="0">
                             </div>
-                        </div>
+                        </div> -->
 
                         {{-- Stok Awal (Disabled) --}}
                         <div class="md:col-span-2 space-y-2">

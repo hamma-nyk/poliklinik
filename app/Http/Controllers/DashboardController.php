@@ -16,14 +16,86 @@ use Modules\MasterData\App\Models\Diagnosis;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+// 1. FILTER INPUT (Default: Bulan & Tahun Sekarang)
+        $month = (int) $request->input('month', date('m'));
+        $year  = (int) $request->input('year', date('Y'));
         $today = date('Y-m-d');
 
         // Hitung Data Hari Ini
         $rmToday = MedicalRecord::whereDate('created_at', $today)->count();
         $labToday = LabCheck::whereDate('created_at', $today)->count();
+        // ==========================================
+        // A. DATA GRAFIK TREND HARIAN (Line Chart)
+        // ==========================================
         
+        // Buat array tanggal 1 s/d akhir bulan (agar grafik tidak bolong)
+        $daysInMonth = Carbon::createFromDate($year, $month)->daysInMonth;
+        $trendLabels = [];
+        $trendData   = [];
+        
+        // Ambil data real dari DB dikelompokkan per hari
+        $dailyVisits = MedicalRecord::selectRaw('EXTRACT(DAY FROM created_at) as day, count(*) as count') // <--- Ganti di sini
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->groupBy('day')
+            ->pluck('count', 'day')
+            ->toArray();
+
+        // Loop tanggal 1..30/31
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $trendLabels[] = $i; // Label X-Axis (Tanggal)
+            $trendData[]   = $dailyVisits[$i] ?? 0; // Data Y-Axis (Jumlah Pasien)
+        }
+
+        // ==========================================
+        // B. DATA K3: SAKIT vs KECELAKAAN (Donut Chart)
+        // ==========================================
+        $visitTypes = MedicalRecord::selectRaw('visit_type, count(*) as count')
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->groupBy('visit_type')
+            ->pluck('count', 'visit_type')
+            ->toArray();
+
+        $sakitCount = $visitTypes['sakit'] ?? 0;
+        $kecelakaanCount = $visitTypes['kecelakaan_kerja'] ?? 0;
+
+        // ==========================================
+        // C. DATA TOP 5 DIAGNOSA (Bar Chart)
+        // ==========================================
+        // Asumsi: Anda menyimpan diagnosa di tabel `medical_records` kolom `diagnosa_input` (string)
+        // Jika pakai relasi ID, sesuaikan join-nya.
+        
+        $topDiagnosesRaw = MedicalRecord::select('diagnosa', DB::raw('count(*) as total'))
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->whereNotNull('diagnosa') // Pastikan tidak null
+            ->groupBy('diagnosa')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->get();
+
+        $diagLabels = $topDiagnosesRaw->pluck('diagnosa')->toArray(); // Nama Penyakit
+        $diagData   = $topDiagnosesRaw->pluck('total')->toArray(); // Jumlah Kasus
+
+        // ==========================================
+        // D. DATA OPERASIONAL (Tabel Bawah)
+        // ==========================================
+
+        // 1. 5 Pasien Terakhir (Hari ini/Bulan ini terserah, disini saya ambil latest global)
+        $latestRecords = MedicalRecord::with('patient')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        // 2. Stok Obat Kritis (<= 10)
+        $criticalMedicines = Medicine::where('current_stock', '<=', 10)
+            ->orderBy('current_stock', 'asc')
+            ->take(5) // Ambil 5 terparah
+            ->get();
+
         $stats = [
             // --- AKTIVITAS HARI INI ---
             'today_activity' => $rmToday + $labToday, // Total Gabungan
@@ -40,39 +112,13 @@ class DashboardController extends Controller
             'total_lab_logs'  => LabCheck::count(),      // Arsip Lab
         ];
 
-        // --- DATA GRAFIK (TREN 7 HARI) ---
-        $chartVisits = [];
-        $chartDates = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $date = Carbon::now()->subDays($i);
-            $chartDates[] = $date->format('d M');
-            
-            $d_rm = MedicalRecord::whereDate('created_at', $date->format('Y-m-d'))->count();
-            $d_lab = LabCheck::whereDate('created_at', $date->format('Y-m-d'))->count();
-            
-            $chartVisits[] = $d_rm + $d_lab;
-        }
-
-        // --- DATA GRAFIK (TOP 5 PENYAKIT) ---
-        $topDiseases = MedicalRecord::select('diagnosis_id', DB::raw('count(*) as total'))
-            ->whereNotNull('diagnosis_id')
-            ->with('diagnosis')
-            ->groupBy('diagnosis_id')
-            ->orderByDesc('total')
-            ->take(5)
-            ->get();
-        $chartDiseaseLabels = $topDiseases->map(fn($item) => $item->diagnosis->name ?? '-')->toArray();
-        $chartDiseaseData   = $topDiseases->pluck('total')->toArray();
-
-        // --- TABEL DATA TERBARU ---
-        $latestRecords = MedicalRecord::with(['patient', 'doctor', 'nurse'])->latest()->take(5)->get();
-        $criticalMedicines = Medicine::where('current_stock', '<=', 10)->orderBy('current_stock', 'asc')->take(5)->get();
-
         return view('dashboard', compact(
-            'stats', 
-            'chartDates', 'chartVisits', 
-            'chartDiseaseLabels', 'chartDiseaseData',
-            'latestRecords', 'criticalMedicines'
+            'month', 'year',
+            'trendLabels', 'trendData',
+            'sakitCount', 'kecelakaanCount',
+            'diagLabels', 'diagData',
+            'latestRecords', 'criticalMedicines',
+            'stats'
         ));
     }
 }
