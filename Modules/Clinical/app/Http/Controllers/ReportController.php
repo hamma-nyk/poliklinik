@@ -10,7 +10,9 @@ use Modules\Clinical\App\Models\MedicalRecord;
 use Modules\Inventory\App\Models\Medicine;
 use Modules\Inventory\App\Models\MedicineTransactionItem;
 use Modules\Clinical\App\Models\LabCheck;
-
+use Modules\MasterData\App\Models\Patient;
+use Modules\MasterData\App\Models\Doctor;
+use Modules\MasterData\App\Models\Nurse;
 class ReportController extends Controller
 {
     // Halaman Menu Utama Laporan
@@ -25,7 +27,7 @@ class ReportController extends Controller
         $startDate = $request->start_date ?? date('Y-m-01');
         $endDate   = $request->end_date ?? date('Y-m-d');
 
-        $poliData = MedicalRecord::with(['patient', 'examiner', 'diagnosis'])
+        $poliData = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis'])
                 ->whereDate('created_at', '>=', $startDate)
                 ->whereDate('created_at', '<=', $endDate)
                 ->latest()
@@ -35,7 +37,7 @@ class ReportController extends Controller
                 return $item;
             });
 
-        $labData = LabCheck::with(['patient', 'examiner'])
+        $labData = LabCheck::with(['patient', 'doctor', 'nurse'])
             ->whereDate('created_at', '>=', $startDate)
             ->whereDate('created_at', '<=', $endDate)
             ->get()

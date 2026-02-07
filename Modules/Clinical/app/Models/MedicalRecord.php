@@ -23,9 +23,10 @@ class MedicalRecord extends Model
     // ];
 
     protected $fillable = [
-        'code', 'patient_id', 
-        'examiner_id',   // Ganti doctor_id jadi ini
-        'examiner_type', // Tambah ini
+        'code', 
+        'patient_id', 
+        'doctor_id',   // Ganti doctor_id jadi ini
+        'nurse_id', // Tambah ini
         'diagnosis_id',
         'tensi', 'suhu_tubuh', 'berat_badan', 'tinggi_badan',
         'keluhan_utama', 'riwayat_penyakit', 'riwayat_alergi', 'riwayat_psikososial',
@@ -39,12 +40,12 @@ class MedicalRecord extends Model
 
     // Relasi
     public function patient() { return $this->belongsTo(Patient::class); }
-    // public function doctor() { return $this->belongsTo(Doctor::class); }
-    // public function nurse() { return $this->belongsTo(Nurse::class); }
-    public function examiner(): MorphTo
-    {
-        return $this->morphTo();
-    }
+    public function doctor() { return $this->belongsTo(Doctor::class); }
+    public function nurse() { return $this->belongsTo(Nurse::class); }
+    // public function examiner(): MorphTo
+    // {
+    //     return $this->morphTo();
+    // }
     // Relasi ke Obat
     public function medicines() {
         return $this->hasMany(MedicalRecordMedicine::class);

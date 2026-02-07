@@ -24,7 +24,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'view_clinical',    // Menu Rekam Medis
             'view_reports',     // Menu Laporan
             'laporan',          // Menu Laporan Poliklinik
-            'manage_users',     // Menu atur user (Khusus Superadmin)
+            'manage_users',
+            'stock_opname',
+            'adjustment'     // Menu atur user (Khusus Superadmin)
         ];
 
         foreach ($permissions as $permission) {

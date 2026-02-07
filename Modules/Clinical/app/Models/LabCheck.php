@@ -14,18 +14,17 @@ class LabCheck extends Model
     protected $connection = 'pgsql';
     protected $table = 'sc_clinical.lab_checks';
     protected $fillable = [
-        'patient_id', 'examiner_id', 
-        'examiner_type', 
+        'patient_id', 'doctor_id', 'nurse_id',
         'gula_darah', 'kolesterol', 'asam_urat', 'tensi', 'notes'
     ];
 
     public function patient() { return $this->belongsTo(Patient::class); }
-    // public function doctor() { return $this->belongsTo(Doctor::class); }
-    // public function nurse() { return $this->belongsTo(Nurse::class); }
-    public function examiner(): MorphTo
-    {
-        return $this->morphTo();
-    }
+    public function doctor() { return $this->belongsTo(Doctor::class); }
+    public function nurse() { return $this->belongsTo(Nurse::class); }
+    // public function examiner(): MorphTo
+    // {
+    //     return $this->morphTo();
+    // }
 
     // public function getPetugasNameAttribute()
     // {
@@ -36,33 +35,33 @@ class LabCheck extends Model
     //     }
     //     return '-';
     // }
-    public function getPetugasNameAttribute()
-    {
-        if (!$this->examiner) return '-';
+    // public function getPetugasNameAttribute()
+    // {
+    //     if (!$this->examiner) return '-';
 
-        // Cek Tipe Modelnya
-        if (str_contains($this->examiner_type, 'Doctor')) {
-            return $this->examiner->name;
-        } elseif (str_contains($this->examiner_type, 'Nurse')) {
-            return $this->examiner->nama;
-        }
+    //     // Cek Tipe Modelnya
+    //     if (str_contains($this->examiner_type, 'Doctor')) {
+    //         return $this->examiner->name;
+    //     } elseif (str_contains($this->examiner_type, 'Nurse')) {
+    //         return $this->examiner->nama;
+    //     }
         
-        return $this->examiner->name;
-    }
+    //     return $this->examiner->name;
+    // }
 
-    public function getPetugasTypeAttribute()
-    {
-        if (!$this->examiner) return '-';
+    // public function getPetugasTypeAttribute()
+    // {
+    //     if (!$this->examiner) return '-';
 
-        // Cek Tipe Modelnya
-        if (str_contains($this->examiner_type, 'Doctor')) {
-            return 'Dokter';
-        } elseif (str_contains($this->examiner_type, 'Nurse')) {
-            return 'Perawat';
-        }
+    //     // Cek Tipe Modelnya
+    //     if (str_contains($this->examiner_type, 'Doctor')) {
+    //         return 'Dokter';
+    //     } elseif (str_contains($this->examiner_type, 'Nurse')) {
+    //         return 'Perawat';
+    //     }
         
-        return 'Tidak Diketahui';
-    }
+    //     return 'Tidak Diketahui';
+    // }
     
     // Cek Status Gula (> 200 Tinggi)
     public function getStatusGulaAttribute()

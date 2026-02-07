@@ -18,7 +18,7 @@ return new class extends Migration
             
             // Relasi Personil
             $table->foreignId('patient_id')->constrained('sc_master.patients');
-            $table->foreignId('doctor_id')->constrained('sc_master.doctors');
+            $table->foreignId('doctor_id')->nullable()->constrained('sc_master.doctors');
             $table->foreignId('nurse_id')->nullable()->constrained('sc_master.nurses');
 
             // Tanda Vital (Fisik)

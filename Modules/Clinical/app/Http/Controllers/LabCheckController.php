@@ -4,10 +4,12 @@ namespace Modules\Clinical\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Modules\Clinical\App\Models\LabCheck;
 use Modules\MasterData\App\Models\Patient;
 use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
+use Modules\Inventory\App\Models\Medicine;
 use Barryvdh\DomPDF\Facade\Pdf;
 class LabCheckController extends Controller
 {
@@ -47,29 +49,43 @@ class LabCheckController extends Controller
         // Ambil Perawat (Pastikan kolom statusnya benar, misal 'is_active' = true)
         $nurses = Nurse::where('is_active', true)->orderBy('nama')->get();
 
-        return view('clinical::lab_checks.create', compact('patients', 'doctors', 'nurses'));
+        $medicines = Medicine::orderBy('name')->get();
+
+        return view('clinical::lab_checks.create', compact('patients', 'doctors', 'nurses', 'medicines'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'patient_id' => 'required',
-            'examiner'   => 'required',
+            'doctor_id'  => [
+                'nullable',
+                'required_without:nurse_id',
+                // Pastikan Doctor::class mengarah ke model yang benar (misal Employee)
+                Rule::exists(Doctor::class, 'id') 
+            ],
+            'nurse_id'   => [
+                'nullable', 
+                'required_without:doctor_id',
+                Rule::exists(Nurse::class, 'id')
+            ],
+            // 'examiner_id' => 'required',
             // Minimal satu harus diisi
             'gula_darah' => 'nullable|integer',
             'kolesterol' => 'nullable|integer',
             'asam_urat' => 'nullable|numeric',
+        ],[
+            'doctor_id.required_without' => 'Pemeriksa wajib diisi (Pilih Dokter atau Perawat).',
+            'nurse_id.required_without'  => 'Pemeriksa wajib diisi (Pilih Dokter atau Perawat).',
+            'doctor_id.exists' => 'Data dokter tidak valid.',
+            'nurse_id.exists' => 'Data perawat tidak valid.',
         ]);
-
-        $parts = explode('|', $request->examiner);
-        $type  = $parts[0];
-        $id    = $parts[1];
         
         LabCheck::create([
             'patient_id' => $request->patient_id,
             // Tentukan masuk ke kolom mana
-            'examiner_type' => $type, // Masuk ke kolom examiner_type
-            'examiner_id'   => $id,
+            'doctor_id' => $request->doctor_id, // Masuk ke kolom examiner_type
+            'nurse_id' => $request->nurse_id, // Masuk ke kolom examiner_type
             
             'gula_darah' => $request->gula_darah,
             'kolesterol' => $request->kolesterol,
@@ -89,7 +105,7 @@ class LabCheckController extends Controller
 
     public function print($id)
     {
-        $check = LabCheck::with(['patient', 'examiner'])->findOrFail($id);
+        $check = LabCheck::with(['patient', 'doctor', 'nurse'])->findOrFail($id);
 
         // Load view PDF
         $pdf = Pdf::loadView('clinical::lab_checks.print', compact('check'));

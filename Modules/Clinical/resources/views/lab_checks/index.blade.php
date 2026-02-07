@@ -77,7 +77,8 @@
                                 <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Gula Darah</th>
                                 <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Kolesterol</th>
                                 <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Asam Urat</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Petugas</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Dokter</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Perawat</th>
                                 <th class="px-6 py-4 text-right text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Aksi</th>
                             </tr>
                         </thead>
@@ -152,26 +153,45 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         @php
-                                            // Cek Tipe untuk menentukan warna avatar
-                                            $isDoctor = $chk->petugas_type == 'Dokter';
-                                            $bgColor = $isDoctor ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300' : 'bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300';
-                                            $borderColor = $isDoctor ? 'border-blue-200 dark:border-blue-700' : 'border-pink-200 dark:border-pink-700';
-                                            $label = $isDoctor ? 'Dokter' : 'Perawat';
-                                            $name = $chk->petugas_name ?? 'Data Terhapus';
+                                            $name = $chk->doctor->name ?? '-';
                                         @endphp
 
-                                        <div class="h-9 w-9 rounded-xl {{ $bgColor }} border {{ $borderColor }} flex items-center justify-center text-xs font-black mr-3 shadow-sm">
-                                            {{ substr($chk->petugas_name, 0, 2) }}
+                                        @if($chk->doctor == null)
+                                            <span class="text-sm text-slate-400 dark:text-slate-500 italic">-</span>
+                                        @else
+                                        <div class="h-9 w-9 rounded-xl bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 border border-blue-200 dark:border-blue-700 flex items-center justify-center text-xs font-black mr-3 shadow-sm">
+                                            {{ substr($name, 0, 2) }}
                                         </div>
                                         <div>
                                             <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
-                                            <div class="text-[10px] {{ $isDoctor ? 'text-blue-500' : 'text-pink-500' }} uppercase tracking-widest font-bold">
-                                                {{ $label }}
+                                            <div class="text-[10px] text-blue-500 uppercase tracking-widest font-bold">
+                                                Dokter
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </td>
+<td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        @php
+                                            $name = $chk->nurse->nama ?? '-';
+                                        @endphp
 
+                                        @if($chk->nurse == null)
+                                            <span class="text-sm text-slate-400 dark:text-slate-500 italic">-</span>
+                                        @else
+                                        <div class="h-9 w-9 rounded-xl bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 border border-pink-200 dark:border-pink-700 flex items-center justify-center text-xs font-black mr-3 shadow-sm">
+                                            {{ substr($name, 0, 2) }}
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
+                                            <div class="text-[10px] text-pink-500 uppercase tracking-widest font-bold">
+                                                Perawat
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex items-center justify-end gap-1.5">
                                         <a href="{{ route('clinical.lab.print', $chk->id) }}" target="_blank" 

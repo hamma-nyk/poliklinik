@@ -51,9 +51,19 @@
             <td class="label">Usia / Gender</td>
             <td>: {{ \Carbon\Carbon::parse($check->patient->birth_date)->age }} Thn / {{ $check->patient->gender }}</td>
         </tr>
+        @if ($check->patient->type == 'karyawan')
         <tr>
-            <td class="label">{{$check->petugas_type}}</td>
-            <td colspan="3">: {{ $check->petugas_name }}</td>
+            <td class="label">NIK</td>
+            <td>: {{ $check->patient->nik }}</td>
+            <td class="label">Bagian</td>
+            <td>: {{ $check->patient->bagian }}</td>
+        </tr>
+        @endif
+        <tr>
+            <td class="label">Dokter</td>
+            <td>: {{ $check->doctor->name ?? '-' }}</td>
+            <td class="label">Perawat</td>
+            <td>: {{ $check->nurse->nama ?? '-' }}</td>
         </tr>
     </table>
 
@@ -138,13 +148,23 @@
     </p>
 
     <div class="footer">
+        @if($check->doctor?->sip != null)
         <div class="ttd-box">
-            <p>{{$check->petugas_type}} Pemeriksa,</p>
+            <p>Dokter Pemeriksa,</p>
             <div class="ttd-space"></div>
             <p style="text-decoration: underline; font-weight: bold;">
-                {{ $check->petugas_name }}
+                {{ $check->doctor->name }}
             </p>
         </div>
+        @elseif($check->nurse?->str != null)
+        <div class="ttd-box">
+            <p>Perawat Pemeriksa,</p>
+            <div class="ttd-space"></div>
+            <p style="text-decoration: underline; font-weight: bold;">
+                {{ $check->nurse->nama }}
+            </p>
+        </div>
+        @endif
     </div>
 
 </body>

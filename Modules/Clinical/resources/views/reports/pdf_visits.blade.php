@@ -46,7 +46,8 @@
                 <th style="width: 20%;">Nama Pasien</th>
                 <th style="width: 10%;">Kategori</th>
                 <th style="width: 20%;">Diagnosa (ICD-10)</th>
-                <th style="width: 15%;">Pemeriksa</th>
+                <th style="width: 15%;">Dokter</th>
+                <th style="width: 15%;">Perawat</th>
                 <!-- <th style="width: 9%;">Lab Check</th> -->
             </tr>
         </thead>
@@ -90,7 +91,10 @@
         </td>
 
         <td>
-                {{ $row->petugas_name }} ({{$row->petugas_type}}) 
+                {{ $row->doctor->name ?? '-' }}  
+        </td>
+         <td>
+                {{ $row->nurse->nama ?? '-' }}  
         </td>
 
         <!-- <td class="text-center">

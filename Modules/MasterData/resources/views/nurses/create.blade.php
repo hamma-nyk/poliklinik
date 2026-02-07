@@ -173,7 +173,7 @@
 
                             {{-- NIK KTP --}}
                             <div :class="type == 'eksternal' ? 'col-span-2' : ''">
-                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">NIK (KTP)</label>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">KTP</label>
                                 <input type="text" name="ktp" id="ktp" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 dark:text-slate-100 focus:border-emerald-500 focus:ring-emerald-500" placeholder="16 digit nomor KTP">
                             </div>
                         </div>

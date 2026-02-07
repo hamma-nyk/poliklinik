@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-orange-600 transition-colors">{{ $patient->name }}</div>
-                                            <div class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">NIK: {{ $patient->nik ?? $patient->ktp }}</div>
+                                            <div class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{{ $patient->nik ? "NIK: ".$patient->nik : "KTP: ".$patient->ktp }}</div>
                                         </div>
                                     </div>
                                 </td>

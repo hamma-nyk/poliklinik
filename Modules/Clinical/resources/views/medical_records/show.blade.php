@@ -180,15 +180,19 @@
                     {{-- Tanda Tangan --}}
                     <div class="mt-12 pt-12 border-t border-slate-100 dark:border-slate-700 flex justify-end">
                         <div class="text-center w-64">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Pemeriksa,</p>
+                            @if ($record->doctor?->sip)
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Dokter Pemeriksa,</p>
                             <div class="relative inline-block">
-                                <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->examiner->name ?? $record->examiner->nama}}</p>
-                                @if ($record->examiner->sip)
-                                <p class="text-[12px] text-slate-400 mt-2"> {{ ('SIP.' . $record->examiner->sip) }}</p>
-                                @elseif ($record->examiner->str)
-                                <p class="text-[12px] text-slate-400 mt-2"> {{ ('STR.' . $record->examiner->str) }}</p>
-                                @endif
+                                <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->doctor->name ?? '-'}}</p>                                
+                                <p class="text-[12px] text-slate-400 mt-2"> {{ ('SIP.' . $record->doctor->sip) }}</p>
                             </div>
+                            @elseif ($record->nurse->str)
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Perawat Pemeriksa,</p>
+                            <div class="relative inline-block">
+                                <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->nurse->nama ?? '-'}}</p>                                
+                                <p class="text-[12px] text-slate-400 mt-2"> {{ ('STR.' . $record->nurse->str) }}</p>
+                            </div>
+                            @endif
                         </div>
                     </div>
 

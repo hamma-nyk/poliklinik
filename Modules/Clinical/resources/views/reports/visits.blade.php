@@ -65,7 +65,8 @@
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Identitas Pasien</th>
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Status</th>
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Diagnosa Klinis</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Pemeriksa</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Dokter</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Perawat</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -89,32 +90,61 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-5">
-                                    <div class="text-sm text-slate-700 dark:text-slate-300 line-clamp-1 max-w-xs font-medium" title="{{ $row->diagnosis->name ?? $row->diagnosa }}">
-                                        {{ $row->diagnosis->name ?? $row->diagnosa }}
-                                    </div>
-                                    @if($row->diagnosis)
+                                    @if($row->jenis_kunjungan == 'Poli Umum')
+                                        <div class="text-sm text-slate-700 dark:text-slate-300 line-clamp-1 max-w-xs font-medium" title="{{ $row->diagnosis->name ?? $row->diagnosa }}">
+                                            {{ $row->diagnosis->name ?? $row->diagnosa }}
+                                        </div>
+                                        @if($row->diagnosis)
                                         <div class="text-[10px] font-mono text-slate-400 dark:text-slate-500 uppercase">{{ $row->diagnosis->code }}</div>
+                                        @endif
+                                    @else
+                                        <span style="font-size: 9px;">
+                                            @if($row->gula_darah) GDS:{{$row->gula_darah}} - @endif
+                                            @if($row->kolesterol) Chol:{{$row->kolesterol}} - @endif
+                                            @if($row->asam_urat) UA:{{$row->asam_urat}} @endif
+                                        </span>
                                     @endif
                                 </td>
                                 <td class="px-6 py-5 whitespace-nowrap">
                                     <div class="flex items-center">
                                         @php
-                                            // Cek Tipe untuk menentukan warna avatar
-                                            $isDoctor = str_contains($row->examiner_type, 'Doctor');
-                                            $bgColor = $isDoctor ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300' : 'bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300';
-                                            $borderColor = $isDoctor ? 'border-blue-200 dark:border-blue-700' : 'border-pink-200 dark:border-pink-700';
-                                            $label = $isDoctor ? 'Dokter' : 'Perawat';
-                                            $name = $row->examiner->name ?? $row->examiner->nama ?? 'Data Terhapus';
+                                            $name = $row->doctor->name ?? '-';
                                         @endphp
-                                        <div class="h-9 w-9 rounded-xl {{ $bgColor }} border {{ $borderColor }} flex items-center justify-center text-xs font-black mr-3 shadow-sm">
+
+                                        @if($row->doctor == null)
+                                            <span class="text-sm text-slate-400 dark:text-slate-500 italic">-</span>
+                                        @else
+                                        <div class="h-9 w-9 rounded-xl bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 border border-blue-200 dark:border-blue-700 flex items-center justify-center text-xs font-black mr-3 shadow-sm">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div>
                                             <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
-                                            <div class="text-[10px] {{ $isDoctor ? 'text-blue-500' : 'text-pink-500' }} uppercase tracking-widest font-bold">
-                                                {{ $label }}
+                                            <div class="text-[10px] text-blue-500 uppercase tracking-widest font-bold">
+                                                Dokter
                                             </div>
                                         </div>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        @php
+                                            $name = $row->nurse->nama ?? '-';
+                                        @endphp
+
+                                        @if($row->nurse == null)
+                                            <span class="text-sm text-slate-400 dark:text-slate-500 italic">-</span>
+                                        @else
+                                        <div class="h-9 w-9 rounded-xl bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 border border-pink-200 dark:border-pink-700 flex items-center justify-center text-xs font-black mr-3 shadow-sm">
+                                            {{ substr($name, 0, 2) }}
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
+                                            <div class="text-[10px] text-pink-500 uppercase tracking-widest font-bold">
+                                                Perawat
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

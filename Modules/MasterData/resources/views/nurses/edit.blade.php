@@ -65,7 +65,7 @@
                         </div>
 
                         <div :class="type == 'eksternal' ? 'col-span-2' : ''">
-                            <label class="block text-sm font-bold text-slate-700 mb-2">NIK (KTP)</label>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">KTP</label>
                             <input type="text" name="ktp" id="ktp" value="{{ old('ktp', $nurse->ktp) }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
                         </div>
 

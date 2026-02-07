@@ -49,21 +49,20 @@
         <tr>
             <td class="label">Nama Pasien</td>
             <td>: {{ $record->patient->name }}</td>
-            <td class="label">
-                @php
-                    // Cek Tipe untuk menentukan warna avatar
-                    $isDoctor = str_contains($record->examiner_type, 'Doctor');
-                    $label = $isDoctor ? 'Dokter' : 'Perawat';
-                @endphp
-                {{ $label }}
-            </td>
-            <td>: {{ $record->examiner->name ?? $record->examiner->nama }}</td>
+            <td class="label">Dokter</td>
+            <td>: {{ $record->doctor->name ?? '-' }}</td>
         </tr>
         <tr>
+            <td class="label">Perawat</td>
+            <td>: {{ $record->nurse->nama ?? '-' }}</td>
             <td class="label">KTP</td>
             <td>: {{ $record->patient->ktp }}</td>
-            <td class="label">Kategori</td>
-            <td>: {{ ucfirst($record->patient->type) }}</td>
+        </tr>
+        <tr>
+            <td class="label">Tipe Pasien</td>
+            <td>: {{ $record->patient->type }}</td>
+            <td class="label">Jenis Kelamin</td>
+            <td>: {{ $record->patient->gender }}</td>
         </tr>
         @if ($record->patient->type == 'karyawan')
         <tr>
@@ -74,9 +73,7 @@
         </tr>
         @endif        
         </tr>
-            <td class="label">Usia / Gender</td>
-            <td>: {{ \Carbon\Carbon::parse($record->patient->birth_date)->age }} Thn / {{ $record->patient->gender }}</td>
-            <td class="label">No HP</td>
+           <td class="label">No HP</td>
             <td>: {{ $record->patient->phone }}</td>
         </tr>
         <tr>
@@ -143,14 +140,13 @@
 
     <div class="footer">
         <div class="ttd-box">
-            <p>@php
-                    // Cek Tipe untuk menentukan warna avatar
-                    $isDoctor = str_contains($record->examiner_type, 'Doctor');
-                    $label = $isDoctor ? 'Dokter' : 'Perawat';
-                @endphp
-                {{ $label }} Pemeriksa,</p>
+            @if ($record->doctor?->sip)
+            <p>Dokter Pemeriksa,</p>
+            @else
+            <p>Perawat Pemeriksa,</p>
+            @endif
             <div class="ttd-space"></div>
-            <p style="text-decoration: underline; font-weight: bold;">{{ $record->examiner->name ?? $record->examiner->nama}}</p>
+            <p style="text-decoration: underline; font-weight: bold;">{{ $record->doctor->name ?? $record->nurse->nama}}</p>
         </div>
     </div>
 

@@ -27,9 +27,9 @@ return new class extends Migration
             $table->id();
             $table->string('code', 20)->nullable()->unique();
             $table->string('nama')->nullable();
-            $table->string('nik')->unique()->comment('NIK Perusahaan');
-            $table->string('ktp')->unique()->comment('KTP');
-            $table->string('type', 20)->nullable();
+            $table->string('nik')->unique()->nullable()->comment('NIK Perusahaan');
+            $table->string('ktp')->unique()->nullable()->comment('KTP');
+            $table->string('type', 20)->default('eksternal');
             $table->string('str')->nullable();
             $table->string('phone')->nullable();
             $table->string('alamat')->nullable();

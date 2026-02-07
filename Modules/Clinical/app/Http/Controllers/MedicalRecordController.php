@@ -13,12 +13,12 @@ use Modules\Inventory\App\Models\Medicine;
 use Modules\Inventory\App\Models\MedicineTransaction; // Import Transaksi
 use Modules\MasterData\App\Models\Diagnosis; // <--- Import Model Diagnosis
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Validation\Rule;
 class MedicalRecordController extends Controller
 {
     public function index(Request $request)
     {
-        $query = MedicalRecord::with(['patient', 'examiner', 'diagnosis']);
+        $query = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis']);
 
         // Fitur Pencarian
         if ($request->search) {
@@ -56,9 +56,19 @@ class MedicalRecordController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = \Validator::make($request->all(), [
             'patient_id' => 'required',
-            'examiner' => 'required',
+            'doctor_id'  => [
+                'nullable',
+                'required_without:nurse_id',
+                // Pastikan Doctor::class mengarah ke model yang benar (misal Employee)
+                Rule::exists(Doctor::class, 'id') 
+            ],
+            'nurse_id'   => [
+                'nullable', 
+                'required_without:doctor_id',
+                Rule::exists(Nurse::class, 'id')
+            ],
             'keluhan_utama' => 'required',
             //'diagnosa' => 'required',
             'diagnosa_input' => 'required',
@@ -66,14 +76,17 @@ class MedicalRecordController extends Controller
             'medicines' => 'nullable|array',
             'medicines.*.id' => 'required',
             'medicines.*.qty' => 'required|integer|min:1',
+        ], [
+            'doctor_id.required_without' => 'Pemeriksa wajib diisi (Pilih Dokter atau Perawat).',
+            'nurse_id.required_without'  => 'Pemeriksa wajib diisi (Pilih Dokter atau Perawat).',
+            'doctor_id.exists' => 'Data dokter tidak valid.',
+            'nurse_id.exists' => 'Data perawat tidak valid.',
         ]);
-
+        if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
         DB::beginTransaction();
         try {
-            $examinerParts = explode('|', $request->examiner);
-            $examinerType  = $examinerParts[0];
-            $examinerId    = $examinerParts[1];
-
             // 3. LOGIKA DIAGNOSA (Cari atau Buat Baru)
             $diagnosisId = null;
             $diagnosisName = null;
@@ -103,10 +116,8 @@ class MedicalRecordController extends Controller
             // 1. Simpan Header
             $record = MedicalRecord::create([
                 'patient_id' => $request->patient_id,
-                // 'doctor_id' => $request->doctor_id,
-                // 'nurse_id' => $request->nurse_id,
-                'examiner_type' => $examinerType,
-                'examiner_id'   => $examinerId,
+                'doctor_id' => $request->doctor_id,
+                'nurse_id' => $request->nurse_id,
                 
                 'diagnosis_id' => $diagnosisId,
                 'diagnosa' => $diagnosisName,
@@ -168,7 +179,7 @@ class MedicalRecordController extends Controller
     public function show($id)
     {
         // Load semua relasi yang dibutuhkan: Pasien, Dokter, Diagnosa, Obat
-        $record = MedicalRecord::with(['patient', 'examiner', 'diagnosis', 'medicines.medicine'])
+        $record = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis', 'medicines.medicine'])
                     ->findOrFail($id);
         
         return view('clinical::medical_records.show', compact('record'));
@@ -176,7 +187,7 @@ class MedicalRecordController extends Controller
 
     public function print($id)
     {
-        $record = MedicalRecord::with(['patient', 'examiner', 'diagnosis', 'medicines.medicine'])
+        $record = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis', 'medicines.medicine'])
                     ->findOrFail($id);
 
         // Load view khusus PDF (tanpa navbar/sidebar)

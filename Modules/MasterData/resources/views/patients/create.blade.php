@@ -148,8 +148,8 @@
                                 <input type="text" name="name" placeholder="Nama sesuai identitas" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500">
                             </div>
                             <div class="space-y-2">
-                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">NIK KTP <span class="text-red-500">*</span></label>
-                                <input type="text" name="nik_ktp" placeholder="16 digit NIK" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500">
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">KTP <span class="text-red-500">*</span></label>
+                                <input type="text" name="ktp" placeholder="16 digit NIK" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500">
                             </div>
                             <div class="space-y-2">
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Tanggal Lahir</label>
