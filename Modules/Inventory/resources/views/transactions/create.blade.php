@@ -30,9 +30,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Tipe Transaksi</label>
-                            <select name="type" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all font-bold">
-                                <option value="in">MASUK (Pembelian / Hibah)</option>
-                                <option value="out">KELUAR (Rusak / Expired / Lainnya)</option>
+                            <select name="type" disabled class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all font-bold">
+                                <option value="in">Penambahan (Pembelian/Hibah)</option>
+                                <!-- <option value="out">KELUAR (Rusak / Expired / Lainnya)</option> -->
                             </select>
                             <p class="text-[10px] text-slate-500 dark:text-slate-400 italic font-medium leading-tight">*Catatan: Pengeluaran resep pasien dilakukan melalui menu Rekam Medis.</p>
                         </div>
@@ -95,9 +95,9 @@
                                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                                     <span class="text-slate-400 dark:text-slate-500 text-xs">Rp</span>
                                                 </div>
-                                                <input type="number" :name="'items['+index+'][price]'" min="0" 
+                                                <input required type="number" :name="'items['+index+'][price]'" min="0" 
                                                     class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-slate-100 pl-8 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5" 
-                                                    placeholder="Opsional">
+                                                    placeholder="5000">
                                             </div>
                                         </td>
                                         <td class="py-4 text-center">

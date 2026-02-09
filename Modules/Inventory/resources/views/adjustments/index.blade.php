@@ -40,11 +40,47 @@
                         <p class="text-xs text-slate-500 dark:text-slate-400">Menampilkan mutasi penyesuaian manual</p>
                     </div>
                 </div>
-                
+                <div class="mb-4 flex gap-2">
                 <a href="{{ route('inventory.adjustments.create') }}" class="w-full md:w-auto inline-flex justify-center items-center px-6 py-3 bg-indigo-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-wider">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
                     Buat Penyesuaian
                 </a>
+                
+    {{-- Tombol untuk membuka Modal Filter --}}
+    <div x-data="{ openFilter: false }" class="relative">
+        <button @click="openFilter = !openFilter" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-sm hover:bg-indigo-700">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            Laporan Per Periode
+        </button>
+
+        {{-- Dropdown / Modal Kecil --}}
+        <div x-show="openFilter" 
+             @click.outside="openFilter = false"
+             class="absolute z-50 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 p-4"
+             style="display: none;">
+            
+            <form action="{{ route('inventory.stock_adjustment.export_period') }}" method="GET" target="_blank">
+                <div class="mb-3">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Dari Tanggal</label>
+                    <input type="date" name="start_date" class="w-full border-slate-300 rounded-lg text-sm" required value="{{ date('Y-m-01') }}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Sampai Tanggal</label>
+                    <input type="date" name="end_date" class="w-full border-slate-300 rounded-lg text-sm" required value="{{ date('Y-m-d') }}">
+                </div>
+
+                <div class="flex gap-2">
+                    <button type="submit" name="type" value="pdf" class="flex-1 bg-red-600 text-white text-xs py-2 rounded font-bold hover:bg-red-700">
+                        PDF
+                    </button>
+                    <button type="submit" name="type" value="excel" class="flex-1 bg-green-600 text-white text-xs py-2 rounded font-bold hover:bg-green-700">
+                        Excel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
             </div>
 
             {{-- Table Content --}}

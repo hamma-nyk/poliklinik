@@ -74,7 +74,7 @@
                 <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-2">
                     <a href="{{ route('inventory.transactions.create') }}" class="inline-flex justify-center items-center px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 hover:scale-105 transition-all duration-200 w-full sm:w-auto dark:shadow-none">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        Input Transaksi
+                        Input Transaksi Obat Masuk
                     </a>
                 </div>
             </div>

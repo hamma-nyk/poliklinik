@@ -11,6 +11,9 @@ use Modules\Inventory\App\Models\MedicineTransaction;
 use Modules\Inventory\App\Models\MedicineTransactionItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Modules\Inventory\App\Exports\StockOpnameExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StockOpnameController extends Controller
 {
@@ -134,5 +137,29 @@ class StockOpnameController extends Controller
     {
         $opname = StockOpname::with(['items.medicine', 'creator'])->findOrFail($id);
         return view('inventory::stock_opnames.show', compact('opname'));
+    }
+
+    public function exportExcel($id)
+    {
+        $opname = StockOpname::with(['items.medicine'])->findOrFail($id);
+        // dd($opname);
+        $filename = 'Stock_Opname_' . $opname->opname_number . '.xlsx';
+        
+        return Excel::download(new StockOpnameExport($opname), $filename);
+    }
+
+    // 2. EXPORT PDF
+    public function exportPdf($id)
+    {
+        $opname = StockOpname::with(['items.medicine', 'creator'])->findOrFail($id);        
+        $pdf = Pdf::loadView('inventory::stock_opnames.print', [
+            'opname' => $opname,
+            'is_excel' => false
+        ]);
+
+        // Setup kertas A4 Potrait
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->stream('Stock_Opname_' . $opname->code . '.pdf');
     }
 }

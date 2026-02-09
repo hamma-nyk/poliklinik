@@ -12,7 +12,7 @@ class StockOpname extends Model
 
     public function items()
     {
-        return $this->hasMany(StockOpnameItem::class);
+        return $this->hasMany(StockOpnameItem::class, 'stock_opname_id');
     }
 
     public function creator()

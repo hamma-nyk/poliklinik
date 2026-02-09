@@ -56,7 +56,8 @@ class MedicineController extends Controller
             'unit' => $request->unit,
             // 'price' => $request->price,
             'description' => $request->description,
-            'current_stock' => 0 
+            'current_stock' => 0,
+            'created_by' => auth()->id(),
         ]);
 
         return redirect()->route('inventory.medicines.index')
@@ -93,6 +94,7 @@ class MedicineController extends Controller
             'unit' => $request->unit,
             // 'price' => $request->price,
             'description' => $request->description,
+            'updated_by' => auth()->id(),
         ]);
 
         return redirect()->route('inventory.medicines.index')

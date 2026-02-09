@@ -20,7 +20,11 @@ Route::middleware(['auth', 'verified'])->prefix('inventory')->name('inventory.')
     // Transaksi stok sebaiknya tidak diedit/hapus sembarangan untuk menjaga integritas data audit.
     // Jika ada salah, buat transaksi koreksi (Stok Opname).
     Route::get('/reports/stock-card', [InventoryReportController::class, 'stockCard'])->name('reports.stock_card');
+    Route::get('stock-opname/{id}/export-excel', [StockOpnameController::class, 'exportExcel'])->name('stock_opname.export_excel');
+    Route::get('stock-opname/{id}/export-pdf', [StockOpnameController::class, 'exportPdf'])->name('stock_opname.export_pdf');
     Route::resource('stock-opnames', StockOpnameController::class)->only(['index', 'create', 'store', 'show']);
+
+    Route::get('adjustments/export-period', [StockAdjustmentController::class, 'exportPeriod'])->name('stock_adjustment.export_period');
     Route::resource('adjustments', StockAdjustmentController::class)->only(['index', 'create', 'store']);
     
 });

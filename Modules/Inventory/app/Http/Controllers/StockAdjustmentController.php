@@ -8,6 +8,9 @@ use Modules\Inventory\App\Models\Medicine;
 use Modules\Inventory\App\Models\MedicineTransaction;
 use Modules\Inventory\App\Models\MedicineTransactionItem;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Modules\Inventory\App\Exports\StockAdjustmentPeriodExport;
 
 class StockAdjustmentController extends Controller
 {
@@ -80,6 +83,41 @@ class StockAdjustmentController extends Controller
 
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Terjadi kesalahan sistem: ' . $e->getMessage()]);
+        }
+    }
+    public function exportPeriod(Request $request)
+    {
+        $startDate = $request->start_date;
+        $endDate   = $request->end_date;
+        $type      = $request->type;
+
+        // QUERY KUNCI: Ambil Item, Filter berdasarkan Parent (Transaction)
+        $items = MedicineTransactionItem::with(['transaction', 'medicine'])
+            ->whereHas('transaction', function($q) use ($startDate, $endDate) {
+                // Syarat Adjustment Anda:
+                $q->whereNull('medical_record_id') 
+                  ->whereDate('transaction_date', '>=', $startDate)
+                  ->whereDate('transaction_date', '<=', $endDate);
+            })
+            // Urutkan dari tanggal transaksi terbaru
+            ->join('medicine_transactions', 'medicine_transaction_items.medicine_transaction_id', '=', 'medicine_transactions.id')
+            ->orderBy('medicine_transactions.transaction_date', 'asc')
+            ->select('medicine_transaction_items.*') // Ambil data item saja biar ID gak bentrok
+            ->get();
+
+        // LOGIKA EXPORT
+        if ($type === 'excel') {
+            $filename = 'Laporan_Adjustment_' . $startDate . '_sd_' . $endDate . '.xlsx';
+            return Excel::download(new StockAdjustmentPeriodExport($items, $startDate, $endDate), $filename);
+        } else {
+            $pdf = Pdf::loadView('inventory::adjustments.print_period', [
+                'items'      => $items,
+                'start_date' => $startDate,
+                'end_date'   => $endDate,
+                'is_excel'   => false
+            ]);
+            $pdf->setPaper('a4', 'portrait');
+            return $pdf->stream('Laporan_Adjustment_Periode.pdf');
         }
     }
 }
