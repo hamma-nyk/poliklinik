@@ -453,20 +453,170 @@
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         Diagnosa Utama (A) - ICD 10
                                     </label>
-                                    
-                                    <div class="dark:tom-select-dark">
-                                        <select id="select-diagnosa" name="diagnosa_input" placeholder="Cari Kode atau Nama Penyakit..." autocomplete="off">
-                                            <option value="">Cari Diagnosa...</option>
-                                            @foreach($diagnoses as $d)
-                                                <option value="{{ $d->id }}">{{ $d->code }} — {{ $d->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <p class="text-[10px] text-slate-400 dark:text-slate-500 mt-2 italic">
+                                    @php
+    // 1. Format Data Diagnosa (Sama seperti Pasien)
+    // Pastikan $diagnoses diambil dari Controller: Diagnosis::orderBy('name')->get();
+    $diagnosaOptions = $diagnoses->map(function($d) {
+        return [
+            'id'    => $d->id,
+            // Label gabungan Kode + Nama agar mudah dibaca
+            'label' => '[' . $d->code . '] ' . $d->name, 
+            'code'  => $d->code,
+            'name'  => $d->name
+        ];
+    })->values(); // Reset keys jadi array murni
+@endphp
+
+{{-- 2. KOMPONEN DIAGNOSA (Style mirip Pasien) --}}
+<div class="w-full relative"
+     x-data="{
+        options: {{ Js::from($diagnosaOptions) }},
+        isOpen: false,
+        search: '',
+        selectedId: '{{ old('diagnosa_input') }}', // ID Diagnosa (jika ada error)
+        selectedLabel: '',
+        isNewInput: false, // Flag untuk input manual (teks baru)
+
+        init() {
+            // A. Cek Old Value (Apakah ID atau Text Baru?)
+            if (this.selectedId) {
+                // Cek apakah angka (ID)?
+                if (!isNaN(this.selectedId)) {
+                    const found = this.options.find(o => o.id == this.selectedId);
+                    if (found) {
+                        this.selectedLabel = found.label;
+                        this.search = found.label;
+                    }
+                } else {
+                    // Jika teks (Diagnosa Baru), anggap sebagai search text
+                    this.search = this.selectedId;
+                    this.isNewInput = true;
+                }
+            }
+
+            // B. Watcher: Reset search saat dropdown ditutup
+            this.$watch('isOpen', (value) => {
+                if (!value) {
+                    // Jika tutup dropdown, kembalikan teks ke item yang dipilih
+                    if (this.selectedId && !this.isNewInput) {
+                        const found = this.options.find(o => o.id == this.selectedId);
+                        this.search = found ? found.label : '';
+                    } else if (this.isNewInput) {
+                        // Jika input baru, biarkan teksnya (jangan di-reset)
+                        this.search = this.selectedId; 
+                    } else {
+                        // Jika tidak ada pilihan, kosongkan
+                        this.search = '';
+                    }
+                }
+            });
+        },
+
+        get filteredOptions() {
+            if (this.search === '') return this.options.slice(0, 50); // Limit 50
+            const lower = this.search.toLowerCase();
+            return this.options.filter(option => 
+                option.label.toLowerCase().includes(lower)
+            ).slice(0, 50);
+        },
+
+        // Pilih dari List
+        selectOption(option) {
+            this.selectedId = option.id;
+            this.selectedLabel = option.label;
+            this.search = option.label;
+            this.isNewInput = false;
+            this.isOpen = false;
+        },
+
+        // Tambah Baru (Enter)
+        selectNew() {
+            if (this.search.length > 0) {
+                this.selectedId = this.search; // Kirim teks sebagai value
+                this.selectedLabel = this.search;
+                this.isNewInput = true;
+                this.isOpen = false;
+            }
+        },
+
+        // Logic Enter Utama
+        handleEnter() {
+            const list = this.filteredOptions;
+            // Jika dropdown terbuka dan ada list, pilih yg pertama (opsional)
+            // Atau jika list kosong tapi ada teks, anggap baru
+            if (list.length === 0 && this.search.length > 0) {
+                this.selectNew();
+            }
+        },
+
+        clearSelection() {
+            this.selectedId = '';
+            this.selectedLabel = '';
+            this.search = '';
+            this.isNewInput = false;
+            this.isOpen = true;
+        }
+     }"
+     @click.outside="isOpen = false">
+
+    <input type="hidden" name="diagnosa_input" :value="selectedId">
+
+    <div class="relative">
+        <input type="text"
+               x-model="search"
+               @click="isOpen = true"
+               @keydown.escape="isOpen = false"
+               @keydown.enter.prevent="handleEnter()"
+               @input="isOpen = true; selectedId = ''; isNewInput = false" 
+               placeholder="Cari Kode atau Nama Penyakit..."
+               class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 transition-all text-sm py-2.5 pl-4 pr-10"
+               autocomplete="off">
+
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-slate-400 hover:text-red-500">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-slate-400">
+                <svg class="w-4 h-4 transform transition-transform" :class="isOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div x-show="isOpen"
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 max-h-60 overflow-auto py-1 custom-scrollbar"
+         style="display: none;">
+        
+        <template x-for="option in filteredOptions" :key="option.id">
+            <div @click="selectOption(option)"
+                 class="px-4 py-2 text-sm cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors flex justify-between items-center"
+                 :class="selectedId == option.id ? 'bg-blue-50 text-blue-700 dark:bg-slate-700 dark:text-blue-300 font-bold' : 'text-slate-700 dark:text-slate-200'">
+                <span x-text="option.label"></span>
+                <svg x-show="selectedId == option.id" class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+        </template>
+
+        <div x-show="filteredOptions.length === 0 && search.length > 0" 
+             @click="selectNew()"
+             class="px-4 py-3 text-sm cursor-pointer bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border-t border-yellow-100 dark:border-yellow-800/30 hover:bg-yellow-100">
+            <b>Gunakan Baru:</b> "<span x-text="search"></span>"<br>
+            <span class="text-xs text-slate-500">(Klik atau Tekan Enter)</span>
+        </div>
+
+        <div x-show="filteredOptions.length === 0 && search.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">
+            Ketik untuk mencari diagnosa...
+        </div>
+    </div>
+</div>
+<p class="text-[10px] text-slate-400 dark:text-slate-500 mt-2 italic">
                                         * Jika diagnosa tidak ditemukan, Anda dapat mengetik diagnosa baru dan menekan <span class="font-bold">Enter</span>. Penyakit baru akan tersimpan otomatis.
                                     </p>
                                 </div>
-
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Tindakan / Terapi Non-Obat (P)</label>
                                     <textarea name="tindakan" rows="2" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm" placeholder="Contoh: Edukasi diet rendah garam, Rawat luka..."></textarea>
@@ -651,46 +801,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var diagnosaSelect = new TomSelect("#select-diagnosa",{
-                create: true,
-                persist: false,
-                createOnBlur: true,
-                maxOptions: 50,
-                onOptionAdd: function(value, data) {
-                    console.log('Diagnosa baru disiapkan:', value);
-                }
-            });
-
-            // Prevent Submit on Enter inside TomSelect
-            const tsInput = document.querySelector('.ts-control input');
-            if(tsInput) {
-                tsInput.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                    }
-                });
-            }
-        });
         window.medicineOptions = @json($medicineListJS);
     </script>
-
-    <style>
-        /* Dark mode compatibility for TomSelect */
-        .dark .ts-control {
-            background-color: #334155;
-            border-color: #475569;
-            color: #f1f5f9;
-            border-radius: 0.75rem;
-        }
-        .dark .ts-dropdown {
-            background-color: #1e293b;
-            color: #f1f5f9;
-            border-color: #475569;
-        }
-        .dark .ts-dropdown .active {
-            background-color: #334155;
-            color: #fff;
-        }
-    </style>
 </x-app-layout>

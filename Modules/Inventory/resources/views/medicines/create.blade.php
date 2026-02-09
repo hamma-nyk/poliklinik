@@ -44,7 +44,14 @@
                                 <option value="Strip">Strip</option>
                                 <option value="Botol">Botol</option>
                                 <option value="Kapsul">Kapsul</option>
+                                <option value="Tube">Tube</option>
                                 <option value="Pcs">Pcs</option>
+                                <option value="Pot">Pot</option>
+                                <option value="Roll">Roll</option>
+                                <option value="Lembar">Lembar</option>
+                                <option value="Bungkus">Bungkus</option>
+                                <option value="Ampul">Ampul</option>
+                                <option value="Flatbot">Flatbot</option>
                                 <option value="Box">Box</option>
                             </select>
                         </div>

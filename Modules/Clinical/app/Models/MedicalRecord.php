@@ -8,6 +8,7 @@ use Modules\MasterData\App\Models\Patient;
 use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\MasterData\App\Models\Diagnosis;
 class MedicalRecord extends Model
 {
     use HasCustomCode;
@@ -58,7 +59,7 @@ class MedicalRecord extends Model
 
     public function diagnosis()
     {
-        return $this->belongsTo(\Modules\MasterData\App\Models\Diagnosis::class, 'diagnosis_id');
+        return $this->belongsTo(Diagnosis::class, 'diagnosis_id');
     }
     public function sickLeave()
     {

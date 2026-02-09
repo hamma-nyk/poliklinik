@@ -57,11 +57,13 @@ class MedicalRecordController extends Controller
         $nurses = Nurse::where('is_active', true)->orderBy('nama')->get();
         $medicines = Medicine::orderBy('name')->get();
         $diagnoses = Diagnosis::orderBy('name')->get();
+        //dd($diagnoses);
         $departments = Department::orderBy('code')->get();
         $subDepartments = SubDepartment::orderBy('code')->get();
         $units = Unit::orderBy('code')->get();
         $positions = Position::orderBy('code')->get();
-        return view('clinical::medical_records.create', compact('patients', 'doctors', 'nurses', 'medicines', 'diagnoses', 'departments', 'subDepartments', 'units', 'positions'));    }
+        return view('clinical::medical_records.create', compact('patients', 'doctors', 'nurses', 'medicines', 'diagnoses', 'departments', 'subDepartments', 'units', 'positions')); 
+    }
 
     public function store(Request $request)
     {
