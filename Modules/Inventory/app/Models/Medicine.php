@@ -11,7 +11,7 @@ class Medicine extends Model
 {
     use HasFactory, SoftDeletes, HasCustomCode;
     protected $table = 'sc_inventory.medicines';
-    protected $fillable = ['code', 'name', 'unit', 'price', 'current_stock', 'description'];
+    protected $fillable = ['code', 'name', 'unit', 'price', 'current_stock', 'description','created_by','updated_by'];
 
     public function getPrefix(): string
     {
@@ -21,5 +21,10 @@ class Medicine extends Model
     public function transactionItems()
     {
         return $this->hasMany(MedicineTransactionItem::class, 'medicine_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 }

@@ -15,7 +15,7 @@ class LabCheck extends Model
     protected $table = 'sc_clinical.lab_checks';
     protected $fillable = [
         'patient_id', 'doctor_id', 'nurse_id',
-        'gula_darah', 'kolesterol', 'asam_urat', 'tensi', 'notes'
+        'gula_darah', 'kolesterol', 'asam_urat', 'tensi', 'notes', 'created_by',
     ];
 
     public function patient() { return $this->belongsTo(Patient::class); }
@@ -89,5 +89,10 @@ class LabCheck extends Model
     public function getPrefix(): string
     {
         return 'LAB'; // Hasil: LAB2026010001
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 }

@@ -34,7 +34,7 @@ class MedicalRecord extends Model
         'is_referred',
         'tensi', 'suhu_tubuh', 'berat_badan', 'tinggi_badan',
         'keluhan_utama', 'riwayat_penyakit', 'riwayat_alergi', 'riwayat_psikososial',
-        'diagnosa', 'tindakan', 'diagnosis_id'
+        'diagnosa', 'tindakan', 'diagnosis_id', 'created_by'
     ];
 
     public function getPrefix(): string
@@ -65,5 +65,10 @@ class MedicalRecord extends Model
     {
         // Parameter kedua ('medical_record_id') adalah foreign key di tabel sick_leaves
         return $this->hasOne(SickLeave::class, 'medical_record_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 }

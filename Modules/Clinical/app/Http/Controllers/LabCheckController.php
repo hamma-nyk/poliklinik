@@ -92,6 +92,7 @@ class LabCheckController extends Controller
             'asam_urat'  => $request->asam_urat,
             'tensi'      => $request->tensi,
             'notes'      => $request->notes,
+            'created_by' => auth()->id(),
         ]);
 
         return redirect()->route('clinical.lab.index')->with('success', 'Hasil Lab tercatat.');

@@ -148,6 +148,7 @@ class MedicalRecordController extends Controller
                 'visit_type' => $request->visit_type,
                 'is_sick_leave' => $request->boolean('is_sick_leave'),
                 'is_referred'   => $request->boolean('is_referred'),
+                'created_by' => auth()->id(),
             ]);
 
             // 2. Simpan Detail Obat

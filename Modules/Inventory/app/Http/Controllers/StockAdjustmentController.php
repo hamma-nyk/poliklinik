@@ -71,7 +71,8 @@ class StockAdjustmentController extends Controller
                     'medicine_transaction_id' => $transaction->id,
                     'medicine_id'             => $request->medicine_id,
                     'quantity'                => $request->quantity,
-                    'price_at_moment'         => 0, // Adjustment biasanya tidak ada harga beli baru
+                    'price_at_moment'         => 0,
+                    'created_by'              => auth()->id(), // Adjustment biasanya tidak ada harga beli baru
                 ]);
 
                 // UPDATE STOK UTAMA
