@@ -47,7 +47,7 @@
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Satuan Terkecil</label>
                             <select name="unit" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
-                                @foreach(['Tablet', 'Strip', 'Botol', 'Kapsul', 'Pcs', 'Box'] as $unit)
+                                @foreach(['Pcs'] as $unit)
                                     <option value="{{ $unit }}" {{ $medicine->unit == $unit ? 'selected' : '' }}>{{ $unit }}</option>
                                 @endforeach
                             </select>

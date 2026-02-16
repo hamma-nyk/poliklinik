@@ -65,7 +65,7 @@
                         
                         {{-- SEARCH SUPPLIER (Client Side) --}}
                         {{-- INPUT SUPPLIER (COMBO BOX) --}}
-        <div class="relative z-50"> {{-- Z-index tinggi --}}
+        <div class="relative z-1"> {{-- Z-index tinggi --}}
             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Supplier <span class="text-red-500">*</span></label>
             
             <div class="relative">
@@ -153,10 +153,11 @@
                         <table class="min-w-full">
                             <thead>
                                 <tr>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-5/12">Nama Obat</th>
+                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-4/12">Nama Obat</th>
                                     <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Satuan</th>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Jumlah</th>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-3/12">Harga Beli (@)</th>
+                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/12">Jumlah</th>
+                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Total Harga (Rp)</th> {{-- Kolom Baru --}}
+                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Harga Satuan (@)</th>
                                     <th class="w-10"></th>
                                 </tr>
                             </thead>
@@ -227,13 +228,38 @@
                 <input type="number" :name="'items['+index+'][quantity]'" x-model="item.quantity" min="1" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-indigo-500 focus:ring-indigo-500" required>
             </td>
 
-            {{-- KOLOM HARGA --}}
+            {{-- TOTAL HARGA (INPUT MANUAL) --}}
+            <td class="p-2">
+                <div class="relative">
+                    <span class="absolute left-3 top-2.5 text-slate-400 text-xs">Rp</span>
+                    <input type="number" 
+                           x-model="item.total_price" 
+                           @input="updatePricePerItem(index)" {{-- Hitung saat total berubah --}}
+                           class="w-full rounded-xl border-slate-200 pl-8 text-sm bg-blue-50/50" 
+                           placeholder="8000">
+                </div>
+            </td>
+
+            {{-- HARGA BELI (@) - OTOMATIS --}}
+            <td class="p-2">
+                <div class="relative">
+                    <span class="absolute left-3 top-2.5 text-slate-400 text-xs">Rp</span>
+                    <input type="number" 
+                        :name="'items['+index+'][price]'" 
+                        x-model="item.price" 
+                        step="0.01"
+                        readonly 
+                        class="w-full rounded-xl border-slate-200 bg-slate-100 pl-8 text-sm font-bold text-indigo-600">
+                </div>
+            </td>
+
+            <!-- {{-- KOLOM HARGA --}}
             <td class="p-2">
                 <div class="relative">
                     <span class="absolute left-3 top-2.5 text-slate-400 text-xs">Rp</span>
                     <input type="number" :name="'items['+index+'][price]'" x-model="item.price" min="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-slate-100 pl-8 text-sm focus:border-indigo-500 focus:ring-indigo-500">
                 </div>
-            </td>
+            </td> -->
 
             {{-- TOMBOL HAPUS ROW --}}
             <td class="p-2 text-center pt-3">
@@ -328,6 +354,24 @@
                 this.items[index].price = 0;
                 // Tetap buka dropdown agar user bisa langsung cari lagi
                 this.items[index].showDropdown = true; 
+            },
+
+            // FUNGSI HITUNG OTOMATIS
+            updatePricePerItem(index) {
+                let item = this.items[index];
+                let qty = parseFloat(item.quantity) || 0;
+                let total = parseFloat(item.total_price) || 0;
+
+                if (qty > 0 && total > 0) {
+                    // 1. Hitung pembagian
+                    let result = total / qty;
+                    
+                    // 2. Ambil 2 angka di belakang koma
+                    // Gunakan parseFloat lagi agar hasilnya bukan String
+                    item.price = parseFloat(result.toFixed(2));
+                } else {
+                    item.price = 0;
+                }
             },
 
             // 4. Tambah Baris

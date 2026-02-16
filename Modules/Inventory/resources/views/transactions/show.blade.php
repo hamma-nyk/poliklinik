@@ -101,8 +101,10 @@
                                             {{ $item->quantity }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-right text-sm text-slate-600 dark:text-slate-400">
-                                        Rp {{ number_format($item->price_at_moment, 0, ',', '.') }}
+                                    <td class="px-6 py-4 text-right text-sm text-slate-600 dark:text-slate-400 font-medium">
+                                        Rp {{ $item->price_at_moment == floor($item->price_at_moment) 
+                                            ? number_format($item->price_at_moment, 0, ',', '.') 
+                                            : number_format($item->price_at_moment, 2, ',', '.') }}
                                     </td>
                                     <td class="px-6 py-4 text-right text-sm font-bold text-slate-800 dark:text-slate-100">
                                         Rp {{ number_format($subtotal, 0, ',', '.') }}
