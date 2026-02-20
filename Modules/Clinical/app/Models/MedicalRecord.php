@@ -9,6 +9,7 @@ use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\MasterData\App\Models\Diagnosis;
+use Modules\Inventory\App\Models\MedicineTransaction;
 class MedicalRecord extends Model
 {
     use HasCustomCode;
@@ -70,5 +71,11 @@ class MedicalRecord extends Model
     public function creator()
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+    public function medicineTransactions()
+    {
+        // Pastikan foreign key di tabel medicine_transactions adalah medical_record_id
+        return $this->hasMany(MedicineTransaction::class, 'medical_record_id');
     }
 }

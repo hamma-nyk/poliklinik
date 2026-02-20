@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Modules\Clinical\App\Models\MedicalRecord;
 use Modules\Inventory\App\Models\Medicine;
+use Modules\Inventory\App\Models\MedicineTransaction;
 use Modules\Inventory\App\Models\MedicineTransactionItem;
 use Modules\Clinical\App\Models\LabCheck;
 use Modules\MasterData\App\Models\Patient;
@@ -30,13 +31,14 @@ class ReportController extends Controller
         $startDate = $request->start_date ?? date('Y-m-01');
         $endDate   = $request->end_date ?? date('Y-m-d');
 
-        $poliData = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis'])
+        $poliData = MedicalRecord::with(['patient', 'doctor', 'nurse', 'diagnosis','medicineTransactions.items.medicine'])
                 ->whereDate('created_at', '>=', $startDate)
                 ->whereDate('created_at', '<=', $endDate)
                 ->latest()
                 ->get()
                 ->map(function($item) {
                 $item->jenis_kunjungan = 'Poli Umum';
+                $item->has_medicine = $item->medicineTransactions->isNotEmpty();
                 return $item;
             });
 
@@ -47,6 +49,8 @@ class ReportController extends Controller
             ->map(function($item) {
                 $item->jenis_kunjungan = 'Cek Lab';
                 $item->diagnosis = null; // Lab tidak ada diagnosa
+                $item->medicineTransactions = collect(); // Berikan collection kosong agar tidak error saat di-loop
+                $item->has_medicine = false;
                 return $item;
             });
 
@@ -92,32 +96,34 @@ class ReportController extends Controller
         return view('clinical::reports.diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
     }
 
-    // --- 3. LAPORAN PEMAKAIAN OBAT ---
-    public function medicines(Request $request)
-    {
-        $startDate = $request->start_date ?? date('Y-m-01');
-        $endDate   = $request->end_date ?? date('Y-m-d');
+public function medicines(Request $request)
+{
+    $startDate = $request->start_date ?? date('Y-m-01');
+    $endDate   = $request->end_date ?? date('Y-m-d');
 
-        // Ambil item transaksi tipe 'out' (dari resep)
-        // Kita perlu join tabel untuk filter tanggal transaksi
-        $data = MedicineTransactionItem::whereHas('transaction', function($q) use ($startDate, $endDate) {
-                    $q->where('type', 'out')
-                      ->whereDate('transaction_date', '>=', $startDate)
-                      ->whereDate('transaction_date', '<=', $endDate);
-                })
-                ->select('medicine_id', DB::raw('sum(quantity) as total_qty'))
-                ->with('medicine')
-                ->groupBy('medicine_id')
-                ->orderByDesc('total_qty')
-                ->get();
+    // Query Detail (Bukan Rekap)
+    $data = MedicineTransactionItem::with([
+            'medicine', 
+            'transaction.medicalRecord.patient', // Tarik data pasien lewat rekam medis
+        ])
+        ->whereHas('transaction', function($q) use ($startDate, $endDate) {
+            $q->where('type', 'out') // Filter hanya yang keluar
+              ->whereDate('transaction_date', '>=', $startDate)
+              ->whereDate('transaction_date', '<=', $endDate);
+        })
+        // Join manual untuk mengurutkan berdasarkan tanggal transaksi di tabel parent
+        ->join('medicine_transactions', 'medicine_transaction_items.medicine_transaction_id', '=', 'medicine_transactions.id')
+        ->orderBy('medicine_transactions.transaction_date', 'asc')
+        ->select('medicine_transaction_items.*') 
+        ->get();
 
-        if ($request->action == 'pdf') {
-            $pdf = Pdf::loadView('clinical::reports.pdf_medicines', compact('data', 'startDate', 'endDate'));
-            return $pdf->stream('Laporan-Obat.pdf');
-        }
-
-        return view('clinical::reports.medicines', compact('data', 'startDate', 'endDate'));
+    if ($request->action == 'pdf') {
+        $pdf = Pdf::loadView('clinical::reports.pdf_medicines', compact('data', 'startDate', 'endDate'));
+        return $pdf->setPaper('a4', 'portrait')->stream('Laporan-Detail-Obat-Keluar.pdf');
     }
+
+    return view('clinical::reports.medicines', compact('data', 'startDate', 'endDate'));
+}
     public function lowStock(Request $request)
     {
         // Ambil obat yang stoknya <= 10 (atau batas minimum lainnya)

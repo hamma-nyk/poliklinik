@@ -48,6 +48,7 @@
                 <th style="width: 20%;">Diagnosa (ICD-10)</th>
                 <th style="width: 15%;">Dokter</th>
                 <th style="width: 15%;">Perawat</th>
+                <th style="width: 35%;">Terapi Obat (Item, Qty)</th>
                 <!-- <th style="width: 9%;">Lab Check</th> -->
             </tr>
         </thead>
@@ -104,6 +105,30 @@
                 -
             @endif
         </td> -->
+        {{-- KOLOM OBAT --}}
+                <td>
+                    @if($row->medicineTransactions->isNotEmpty())
+                        <ul class="medicine-list">
+                            @foreach($row->medicineTransactions as $trans)
+                                @foreach($trans->items as $item)
+                                <li>
+                                    <div style="float: left; width: 100%;">
+                                        {{ $item->medicine->name }}
+                                        <br> 
+                                        <strong>({{ $item->quantity }} {{ $item->medicine->unit }})</strong>
+                                    </div>
+                                    <!-- <div style="float: right; width: 35%; text-align: right;" class="font-mono">
+                                        @ {{ number_format($item->price_at_moment, 0, ',', '.') }}
+                                    </div> -->
+                                    <div style="clear: both;"></div>
+                                </li>
+                                @endforeach
+                            @endforeach
+                        </ul>
+                    @else
+                        <span style="color: #999; font-style: italic; padding-left: 30px;">Tanpa terapi obat</span>
+                    @endif
+                </td>
     </tr>
     @empty
     <tr>

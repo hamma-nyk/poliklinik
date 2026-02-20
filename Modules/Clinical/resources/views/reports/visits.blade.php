@@ -67,6 +67,7 @@
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Diagnosa Klinis</th>
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Dokter</th>
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Perawat</th>
+                                <th class="px-6 py-4 text-left bg-slate-50/50 dark:bg-slate-700/30">Terapi Obat (Item & Qty)</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -146,6 +147,32 @@
                                         </div>
                                         @endif
                                     </div>
+                                </td>
+                                {{-- KOLOM DETAIL OBAT (RAPID VIEW) --}}
+                                <td class="px-6 py-5 bg-slate-50/30 dark:bg-slate-800/30 min-w-[250px]">
+                                    @if($row->medicineTransactions->isNotEmpty())
+                                        <div class="space-y-1.5">
+                                            @foreach($row->medicineTransactions as $trans)
+                                                @foreach($trans->items as $item)
+                                                <div class="flex items-start justify-between gap-4 text-[10px] border-b border-slate-100 dark:border-slate-700/50 pb-1 last:border-0 group-hover:border-indigo-200 transition-colors">
+                                                    <div class="flex flex-col">
+                                                        <span class="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-tighter">{{ $item->medicine->name }}</span>
+                                                        <span class="text-slate-400 dark:text-slate-500 italic">{{ number_format($item->quantity) }} {{ $item->medicine->unit }}</span>
+                                                    </div>
+                                                    <!-- <div class="text-right flex flex-col">
+                                                        <span class="font-mono text-slate-400 dark:text-slate-500">@ {{ number_format($item->price_at_moment, 0, ',', '.') }}</span>
+                                                        <span class="font-bold text-indigo-600 dark:text-indigo-400 leading-none">Rp{{ number_format($item->quantity * $item->price_at_moment, 0, ',', '.') }}</span>
+                                                    </div> -->
+                                                </div>
+                                                @endforeach
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <span class="text-[10px] text-slate-400 dark:text-slate-600 italic flex items-center">
+                                            <svg class="w-3 h-3 mr-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                            Tanpa Terapi Obat
+                                        </span>
+                                    @endif
                                 </td>
                             </tr>
                             @empty

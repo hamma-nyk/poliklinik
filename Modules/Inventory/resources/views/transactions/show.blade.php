@@ -139,7 +139,7 @@
                                     {{ $transaction->medicalRecord->code }} — {{ $transaction->medicalRecord->patient->name }}
                                 </a>
                                 <div class="text-xs text-slate-500 dark:text-slate-400 italic">
-                                    Diagnosa & Resep oleh: <span class="font-bold">{{ $transaction->medicalRecord->examiner->name ?? $transaction->medicalRecord->examiner->nama }}</span>
+                                    Diagnosa & Resep oleh: <span class="font-bold">{{ $transaction->medicalRecord->doctor->name ?? $transaction->medicalRecord->nurse->nama }}</span>
                                 </div>
                             </div>
                         </div>
