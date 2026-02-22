@@ -53,6 +53,13 @@
                                         class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all text-sm" required>
                                 </div>
 
+                                {{-- Username (TAMBAHAN BARU) --}}
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Username</label>
+                                    <input type="text" name="username" placeholder="Masukkan username..." 
+                                        class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all text-sm" required>
+                                </div>
+
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Alamat Email</label>
                                     <input type="email" name="email" placeholder="nama@klinik.com" 

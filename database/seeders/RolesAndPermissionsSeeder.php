@@ -41,6 +41,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $user = User::create([
             'name' => 'Super Administrator',
             'email' => 'superadmin@poliklinik.com',
+            'username' => 'superadmin',
             'password' => Hash::make('123456'), // Ganti password nanti!
         ]);
 

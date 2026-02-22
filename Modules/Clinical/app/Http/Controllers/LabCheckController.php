@@ -11,6 +11,7 @@ use Modules\MasterData\App\Models\Doctor;
 use Modules\MasterData\App\Models\Nurse;
 use Modules\Inventory\App\Models\Medicine;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 class LabCheckController extends Controller
 {
    public function index(Request $request)
@@ -74,6 +75,8 @@ class LabCheckController extends Controller
             'gula_darah' => 'nullable|integer',
             'kolesterol' => 'nullable|integer',
             'asam_urat' => 'nullable|numeric',
+            'medicines.*.medicine_id' => 'required|exists:pgsql.sc_inventory.medicines,id',
+            'medicines.*.quantity'    => 'required|integer|min:1',
         ],[
             'doctor_id.required_without' => 'Pemeriksa wajib diisi (Pilih Dokter atau Perawat).',
             'nurse_id.required_without'  => 'Pemeriksa wajib diisi (Pilih Dokter atau Perawat).',
@@ -81,21 +84,59 @@ class LabCheckController extends Controller
             'nurse_id.exists' => 'Data perawat tidak valid.',
         ]);
         
-        LabCheck::create([
-            'patient_id' => $request->patient_id,
-            // Tentukan masuk ke kolom mana
-            'doctor_id' => $request->doctor_id, // Masuk ke kolom examiner_type
-            'nurse_id' => $request->nurse_id, // Masuk ke kolom examiner_type
+        try {
+            DB::beginTransaction();
             
-            'gula_darah' => $request->gula_darah,
-            'kolesterol' => $request->kolesterol,
-            'asam_urat'  => $request->asam_urat,
-            'tensi'      => $request->tensi,
-            'notes'      => $request->notes,
-            'created_by' => auth()->id(),
-        ]);
+            $lab = LabCheck::create([
+                'patient_id' => $request->patient_id,
+                'doctor_id'  => $request->doctor_id,
+                'nurse_id'   => $request->nurse_id,
+                'gula_darah' => $request->gula_darah,
+                'kolesterol' => $request->kolesterol,
+                'asam_urat'  => $request->asam_urat,
+                'tensi'      => $request->tensi,
+                'notes'      => $request->notes,
+                'created_by' => auth()->id(),
+            ]);
 
-        return redirect()->route('clinical.lab.index')->with('success', 'Hasil Lab tercatat.');
+            if ($request->has('medicines') && count($request->medicines) > 0) {
+            
+                // Buat Header Transaksi Keluar
+                $transaction = \Modules\Inventory\App\Models\MedicineTransaction::create([
+                    'type'             => 'out',
+                    'transaction_date' => now(),
+                    'lab_check_id'     => $lab->id, // Relasi yang baru kita buat
+                    'notes'            => 'Penggunaan BHP untuk Lab Pasien: ' . $lab->patient->name,
+                    'created_by'       => auth()->id(),
+                ]);
+
+                foreach ($request->medicines as $item) {
+                    $medicine = \Modules\Inventory\App\Models\Medicine::lockForUpdate()->find($item['medicine_id']);
+
+                    // Cek stok apakah cukup
+                    if ($medicine->current_stock < $item['quantity']) {
+                        throw new \Exception("Stok {$medicine->name} tidak mencukupi (Tersisa: {$medicine->current_stock})");
+                    }
+
+                    // Simpan Detail Item
+                    $transaction->items()->create([
+                        'medicine_id'     => $item['medicine_id'],
+                        'quantity'        => $item['quantity'],
+                        'price_at_moment' => $medicine->price,
+                    ]);
+
+                    // Kurangi Stok Master
+                    //$medicine->decrement('current_stock', $item['quantity']);
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('clinical.lab.index')->with('success', 'Hasil Lab dan BHP berhasil tercatat.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', 'Gagal simpan data: ' . $e->getMessage());
+        }
     }
     
     // Tambahkan method destroy jika perlu hapus

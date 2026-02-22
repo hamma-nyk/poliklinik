@@ -67,7 +67,7 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-[2rem] border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
+            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-slate-100 dark:divide-slate-700">
                         <thead>
@@ -76,7 +76,7 @@
                                 <th class="px-6 py-4 text-left">No. Dokumen</th>
                                 <th class="px-6 py-4 text-left">Catatan Penyesuaian</th>
                                 <th class="px-6 py-4 text-left">Petugas</th>
-                                <th class="px-6 py-4 text-right">Aksi</th>
+                                <th class="px-6 py-4 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -108,7 +108,7 @@
                                         <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">{{ $opname->creator->name ?? 'Sistem' }}</span>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 text-right whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     <a href="{{ route('inventory.stock-opnames.show', $opname->id) }}" class="inline-flex items-center px-4 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[10px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300 shadow-sm hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all active:scale-95">
                                         Detail
                                         <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>

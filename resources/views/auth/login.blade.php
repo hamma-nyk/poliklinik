@@ -93,7 +93,7 @@
                 <form method="POST" action="{{ route('login') }}" class="space-y-6">
                     @csrf
 
-                    <div class="group">
+                    <!-- <div class="group">
                         <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Corporate Email</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -106,6 +106,21 @@
                                 placeholder="user@company.com">
                         </div>
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div> -->
+
+                    <div class="group">
+                        <label for="username" class="block text-sm font-semibold text-slate-700 mb-2">Username</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />                                </svg>
+                            </div>
+                            <input id="username" name="username" type="text" autocomplete="username" required value="{{ old('email') }}"
+                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-lg leading-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition duration-150 ease-in-out sm:text-sm"
+                                placeholder="user">
+                        </div>
+                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
                     </div>
 
                     <div class="group">

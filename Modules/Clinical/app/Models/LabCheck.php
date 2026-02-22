@@ -95,4 +95,10 @@ class LabCheck extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
+
+    // Di dalam file Modules/Clinical/App/Models/LabCheck.php
+    public function transactions()
+    {
+        return $this->hasMany(\Modules\Inventory\App\Models\MedicineTransaction::class, 'lab_check_id');
+    }
 }

@@ -24,6 +24,11 @@
         .ttd-box { float: right; text-align: center; width: 200px; }
         .ttd-space { height: 70px; }
         .notes-box { border: 1px dashed #ccc; padding: 10px; margin-top: 20px; background: #fafafa; }
+    
+        .bhp-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .bhp-table th, .bhp-table td { border: 1px solid #eee; padding: 5px; font-size: 10px; }
+        .bhp-table th { background-color: #fafafa; text-align: left; color: #666; }
+        .bhp-title { font-size: 11px; font-weight: bold; margin-top: 20px; color: #444; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -135,7 +140,32 @@
 
         </tbody>
     </table>
-
+@if($check->transactions->isNotEmpty())
+    <div class="bhp-title">Alat Kesehatan / BHP yang Digunakan:</div>
+    <table class="bhp-table">
+        <thead>
+            <tr>
+                <th width="5%" class="text-center">No</th>
+                <th width="65%">Nama Alat / Bahan Habis Pakai</th>
+                <th width="15%" class="text-center">Jumlah</th>
+                <th width="15%" class="text-center">Satuan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $no = 1; @endphp
+            @foreach($check->transactions as $trans)
+                @foreach($trans->items as $item)
+                <tr>
+                    <td class="text-center">{{ $no++ }}</td>
+                    <td>{{ $item->medicine->name }}</td>
+                    <td class="text-center">{{ number_format($item->quantity, 0, ',', '.') }}</td>
+                    <td class="text-center">{{ $item->medicine->unit }}</td>
+                </tr>
+                @endforeach
+            @endforeach
+        </tbody>
+    </table>
+@endif
     @if($check->notes)
     <div class="notes-box">
         <strong>Catatan:</strong><br>

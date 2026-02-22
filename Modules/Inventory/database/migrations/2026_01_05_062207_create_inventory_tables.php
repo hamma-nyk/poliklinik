@@ -34,6 +34,12 @@ return new class extends Migration
             // Kita buat nullable dulu biar fleksibel
             $table->unsignedBigInteger('medical_record_id')->nullable(); 
             
+            // TAMBAHAN: Relasi ke Lab Check (Agar spuit/jarum bisa terpotong dari Lab)
+            $table->unsignedBigInteger('lab_check_id')->nullable(); 
+            
+            // TAMBAHAN: Relasi ke Supplier (Untuk Obat Masuk)
+            $table->unsignedBigInteger('supplier_id')->nullable();
+
             $table->timestamps();
         });
 

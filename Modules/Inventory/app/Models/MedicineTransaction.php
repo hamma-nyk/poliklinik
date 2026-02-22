@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Traits\HasCustomCode;
 use Modules\Clinical\App\Models\MedicalRecord;
 use Modules\MasterData\App\Models\Supplier; // Import Model RM
+use Modules\Clinical\App\Models\LabCheck;
 class MedicineTransaction extends Model
 {
     use HasFactory, HasCustomCode;
     protected $table = 'sc_inventory.medicine_transactions';
     protected $fillable = ['code', 'type', 'transaction_date', 'notes', 'medical_record_id','invoice_number', // No Faktur
-        'invoice_date',   // Tgl Faktur
+    'lab_check_id',
+    'supplier_id',    
+    'invoice_date',   // Tgl Faktur
         'arrival_date',
         'created_by', // <--- Wajib didaftarkan di sini
         'updated_by', // <--- Wajib didaftarkan di sini
@@ -46,6 +49,11 @@ class MedicineTransaction extends Model
     public function creator()
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+    public function labCheck()
+    {
+        return $this->belongsTo(LabCheck::class, 'lab_check_id');
     }
     
 }

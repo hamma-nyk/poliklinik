@@ -32,6 +32,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
             'password' => 'required|min:8',
             'permissions' => 'array' // Array hasil ceklis
         ]);
@@ -39,6 +40,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 
@@ -72,6 +74,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'username' => $request->username
         ]);
         
         if($request->filled('password')){

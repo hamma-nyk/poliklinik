@@ -346,6 +346,122 @@
         <p x-show="!docId && !nurId" class="text-xs text-red-500 mt-1">Wajib diisi jika tidak memilih dokter.</p>
     </div>
 
+    @php
+    $medicineList = $medicines->map(function($m) {
+        return [
+            'id' => $m->id,
+            'label' => $m->name . ' (' . $m->unit . ')',
+            'stock' => $m->current_stock,
+            'search_text' => strtolower($m->name . ' ' . $m->code)
+        ];
+    });
+@endphp
+
+{{-- SECTION PENGGUNAAN BHP / ALAT LAB --}}
+<div class="mb-10 p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700"
+     x-data="{
+        allMedicines: {{ $medicineList }},
+        items: [],
+        
+        addItem() {
+            this.items.push({
+                medicine_id: '',
+                medicine_label: '',
+                quantity: 1,
+                search: '',
+                isOpen: false
+            });
+        },
+        
+        removeItem(index) {
+            this.items.splice(index, 1);
+        },
+
+        getFiltered(search) {
+            if (search === '') return this.allMedicines;
+            return this.allMedicines.filter(m => m.search_text.includes(search.toLowerCase()));
+        }
+     }" x-init="addItem()"> {{-- Otomatis tambah 1 baris saat load --}}
+
+    <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center">
+            <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.673.337a4 4 0 01-2.509.394L6.47 15.11a2 2 0 00-1.458.342l-1.457 1.1c-.893.673-.985 1.969-.202 2.752l.183.183a2 2 0 002.828 0l1.414-1.414m11.656-5.656l-3.315-3.315a6.5 6.5 0 010-9.192 6.5 6.5 0 019.192 0 6.5 6.5 0 010 9.192l-3.315 3.315"></path>
+            </svg>
+            Penggunaan BHP / Jarum Spuit
+        </h3>
+        <button type="button" @click="addItem()" class="text-[10px] font-black bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg text-purple-600 hover:bg-purple-50 transition-all uppercase">
+            + Tambah Alat
+        </button>
+    </div>
+
+    <div class="space-y-3">
+        <template x-for="(item, index) in items" :key="index">
+            <div class="flex gap-3 items-start animate-fade-in">
+                
+                {{-- Searchable Select --}}
+                <div class="flex-1 relative" @click.outside="item.isOpen = false">
+                    <input type="hidden" :name="'medicines['+index+'][medicine_id]'" x-model="item.medicine_id">
+                    
+                    <div class="relative">
+                        <input type="text" 
+                               x-model="item.search"
+                               @click="item.isOpen = true"
+                               @input="item.isOpen = true; item.medicine_id = ''"
+                               placeholder="Cari jarum, spuit, dll..."
+                               class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm py-2 pl-4 pr-10 focus:ring-purple-500">
+                        
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                    </div>
+
+                    {{-- Dropdown Hasil Cari --}}
+                    <div x-show="item.isOpen" 
+                         class="absolute z-[60] mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-100 dark:border-slate-700 max-h-48 overflow-auto py-1 text-sm">
+                        <template x-for="med in getFiltered(item.search)" :key="med.id">
+                            <div @click="
+                                    item.medicine_id = med.id;
+                                    item.medicine_label = med.label;
+                                    item.search = med.label;
+                                    item.isOpen = false;
+                                 "
+                                 class="px-4 py-2 hover:bg-purple-50 dark:hover:bg-slate-700 cursor-pointer flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-slate-700 dark:text-slate-200" x-text="med.label"></div>
+                                    <div class="text-[10px] text-slate-400">Tersedia: <span x-text="med.stock"></span></div>
+                                </div>
+                                <svg x-show="item.medicine_id == med.id" class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                        </template>
+                        <div x-show="getFiltered(item.search).length === 0" class="px-4 py-2 text-xs text-slate-400 italic">Alat tidak ditemukan.</div>
+                    </div>
+                </div>
+
+                {{-- Input Quantity --}}
+                <div class="w-24">
+                    <input type="number" 
+                           :name="'medicines['+index+'][quantity]'" 
+                           x-model="item.quantity" 
+                           min="1"
+                           class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm py-2 text-center font-bold text-slate-700 dark:text-slate-200">
+                </div>
+
+                {{-- Tombol Hapus --}}
+                <button type="button" 
+                        @click="removeItem(index)" 
+                        x-show="items.length > 1"
+                        class="mt-2 text-slate-400 hover:text-red-500 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+            </div>
+        </template>
+    </div>
+    
+    <div x-show="items.length === 0" class="text-center py-4 text-xs text-slate-400 italic">
+        Klik + Tambah Alat jika pasien menggunakan jarum/BHP lainnya.
+    </div>
+</div>
     {{-- Indikator Status Global --}}
     <div class="p-3 rounded-lg text-sm flex items-center transition-colors duration-300"
          :class="(docId || nurId) ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-slate-100 text-slate-500 border border-slate-200'">

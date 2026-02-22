@@ -32,4 +32,5 @@ class Supplier extends Model
     {
         return 'SUP'; 
     }
+    
 }
