@@ -7,10 +7,11 @@
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pencatatan Point of Care Testing (POCT)</p>
             </div>
-            <a href="{{ route('clinical.lab.index') }}" class="inline-flex items-center px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm text-sm">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Kembali
-            </a>
+             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
+                <span class="hover:text-purple-600 cursor-pointer transition-colors"><a href="{{ route('clinical.lab.index') }}">Laboratorium</a></span>
+                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Cek</span>
+            </div>
         </div>
     </x-slot>
 
@@ -18,7 +19,7 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
                 
-                <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8 flex items-center">
+                <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8 flex items-center">
                     <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
                     Form Pemeriksaan Spesimen
                 </h3>
@@ -361,10 +362,10 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-end items-center gap-4">
-                        <a href="{{ route('clinical.lab.index') }}" class="text-sm font-bold text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
-                            Batalkan
+                        <a href="{{ route('clinical.lab.index') }}" class="w-full sm:w-auto bg-slate-100 border border-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 px-4 py-3.5 rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-600 shadow-xl shadow-slate-200 dark:shadow-none transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs">
+                            BATAL
                         </a>
-                        <button type="submit" class="w-full sm:w-auto bg-slate-900 dark:bg-purple-600 text-white px-10 py-3.5 rounded-2xl font-black hover:bg-slate-800 dark:hover:bg-purple-500 shadow-xl shadow-slate-200 dark:shadow-none transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs">
+                        <button type="submit" class="w-full sm:w-auto bg-slate-900 dark:bg-purple-600 text-white px-10 py-3.5 rounded-2xl font-bold hover:bg-slate-800 dark:hover:bg-purple-500 shadow-xl shadow-slate-200 dark:shadow-none transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs">
                             Simpan & Cetak Hasil
                         </button>
                     </div>
@@ -377,7 +378,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="text-xs font-black text-purple-800 dark:text-purple-300 uppercase tracking-tighter mb-1">Referensi Batas Normal (Dewasa)</h4>
+                    <h4 class="text-xs font-bold text-purple-800 dark:text-purple-300 uppercase tracking-tighter mb-1">Referensi Batas Normal (Dewasa)</h4>
                     <p class="text-[11px] text-purple-700 dark:text-purple-400/80 leading-relaxed font-medium italic">
                         Gula Darah: < 200 mg/dL (Sewaktu) | Kolesterol: < 200 mg/dL | Asam Urat: L(3.4-7.0), P(2.4-6.0) mg/dL.
                     </p>

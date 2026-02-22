@@ -20,7 +20,7 @@
             
             {{-- Laporan Operasional --}}
             <div>
-                <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
+                <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
                     <span class="bg-blue-600 w-1.5 h-5 rounded-full mr-3"></span>
                     Statistik Operasional Klinis
                 </h3>
@@ -54,7 +54,7 @@
 
             {{-- Laporan Farmasi --}}
             <div>
-                <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
+                <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
                     <span class="bg-indigo-600 w-1.5 h-5 rounded-full mr-3"></span>
                     Manajemen Farmasi & Logistik
                 </h3>

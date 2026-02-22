@@ -32,6 +32,13 @@
                             class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-rose-500 focus:ring-rose-500 text-sm transition-all shadow-sm">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto">
+                        <a href="{{ route('clinical.reports.index') }}" 
+                        class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
+                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Kembali
+                        </a>
                         <button type="submit" name="action" value="filter" 
                             class="flex-1 md:flex-none bg-slate-800 dark:bg-rose-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 dark:hover:bg-rose-700 transition-all shadow-lg shadow-slate-200 dark:shadow-none">
                             Tampilkan
@@ -60,106 +67,119 @@
                <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-slate-100 dark:divide-slate-700">
         <thead>
-            <tr class="bg-slate-50/30 dark:bg-slate-900/20">
-                <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-16">No</th>
-                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Tanggal & Obat</th>
-                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Referensi / Pasien</th>
-                <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Qty</th>
-                <!-- <th class="px-6 py-4 text-right text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Harga (@)</th>
-                <th class="px-6 py-4 text-right text-[11px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-tighter bg-indigo-50/30 dark:bg-indigo-900/10">Subtotal</th> -->
-            </tr>
-        </thead>
+    <tr class="bg-slate-50/30 dark:bg-slate-900/20">
+        {{-- No kecil saja --}}
+        <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-16">
+            No
+        </th>
+        
+        {{-- Tanggal Transaksi --}}
+        <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-32">
+            Tanggal
+        </th>
+        
+        {{-- Referensi (Pasien/Catatan) dibuat lebar --}}
+        <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">
+            Referensi / Pasien / Keterangan
+        </th>
+        
+        {{-- Status/Jenis Pasien --}}
+        <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-32">
+            Jenis Pasien
+        </th>
+        
+        {{-- Qty Keluar --}}
+        <th class="px-6 py-4 text-center text-[11px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-tighter bg-rose-50/30 dark:bg-rose-900/10 w-36">
+            Qty Keluar
+        </th>
+    </tr>
+</thead>
         <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
-            @php 
-                $grandTotal = 0; 
-                $totalqty = 0;
-            @endphp
-            @forelse($data as $index => $row)
-                @php 
-                    $subtotal = $row->quantity * $row->price_at_moment;
-                    $totalqty += $row->quantity;
-                    $grandTotal += $subtotal;
-                @endphp
-                <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
-                    {{-- NO --}}
-                    <td class="px-6 py-5 text-center text-sm font-medium text-slate-400 dark:text-slate-500">{{ $index + 1 }}</td>
-                    
-                    {{-- INFO OBAT --}}
-                    <td class="px-6 py-5">
-                        <div class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-1">
-                            {{ $row->transaction->transaction_date->format('d M Y') }}
-                        </div>
-                        <div class="text-sm font-bold text-slate-800 dark:text-slate-100">{{ $row->medicine->name ?? 'Obat Dihapus' }}</div>
-                        <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">{{ $row->medicine->code ?? 'N/A' }}</div>
-                    </td>
+    @php $grandTotalQty = 0; @endphp
 
-                    {{-- REFERENSI / PASIEN --}}
-                    <td class="px-6 py-5">
-                        @if($row->transaction->medicalRecord)
-                            <div class="flex items-center">
-                                <div class="p-1.5 bg-blue-50 dark:bg-blue-900/30 rounded-lg mr-3">
-                                    <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-bold text-slate-700 dark:text-slate-200 uppercase">{{ $row->transaction->medicalRecord->patient->name }}</div>
-                                    <div class="text-[10px] text-slate-400 italic">Resep Rawat Jalan ({{ $row->transaction->medicalRecord->code }})</div>
-                                </div>
-                            </div>
-                        @else
-                            <div class="flex items-center">
-                                <div class="p-1.5 bg-amber-50 dark:bg-amber-900/30 rounded-lg mr-3">
-                                    <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-medium text-slate-600 dark:text-slate-400">{{ $row->transaction->notes ?? 'Adjustment Stok' }}</div>
-                                    <div class="text-[10px] text-amber-600 font-bold uppercase tracking-tighter">Non-Resep</div>
-                                </div>
-                            </div>
-                        @endif
-                    </td>
+    @forelse($data as $medicineId => $items)
+        @php
+            // Ambil info obat dari item pertama dalam grup
+            $medicine = $items->first()->medicine;
+            $subtotalQtyPerMedicine = $items->sum('quantity');
+            $grandTotalQty += $subtotalQtyPerMedicine;
+        @endphp
 
-                    {{-- QTY --}}
-                    <td class="px-6 py-5 text-center">
-                        <div class="text-sm font-black text-slate-700 dark:text-slate-200">
-                            {{ number_format($row->quantity, 0, ',', '.') }}
-                        </div>
-                        <!-- <div class="text-[10px] text-slate-400 uppercase font-bold">{{ $row->medicine->unit }}</div> -->
-                    </td>
+        {{-- BARIS HEADER PER OBAT --}}
+        <tr class="bg-slate-50/50 dark:bg-slate-900/40">
+            <td colspan="4" class="px-6 py-3 border-l-4 bg-slate-200 dark:bg-rose-900/10 border-rose-600 dark:border-rose-500">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <span class="text-sm font-black text-slate-800 dark:text-slate-100 uppercase">
+                            {{ $medicine->name ?? 'Obat Dihapus' }}
+                        </span>
+                        <span class="text-[10px] text-slate-400 ml-2">({{ $medicine->code ?? '-' }})</span>
+                    </div>
+                    <div class="text-xs font-bold text-rose-600 dark:text-rose-400">
+                        Total Keluar: {{ number_format($subtotalQtyPerMedicine, 0, ',', '.') }} {{ $medicine->unit }}
+                    </div>
+                </div>
+            </td>
+            <td class="px-6 py-3 text-center bg-slate-200 dark:bg-rose-900/10">
+                {{-- Kosongkan atau isi sisa stok --}}
+                <span class="text-[10px] font-bold text-slate-400">STOK SAAT INI: {{ $medicine->current_stock }}</span>
+            </td>
+        </tr>
 
-                    <!-- {{-- HARGA SATUAN --}}
-                    <td class="px-6 py-5 text-right">
-                        <div class="text-[10px] text-slate-400 mb-0.5">Price @</div>
-                        <div class="text-sm font-bold text-slate-600 dark:text-slate-400">
-                            {{ number_format($row->price_at_moment, 2, ',', '.') }}
-                        </div>
-                    </td>
-
-                    {{-- SUBOTOTAL --}}
-                    <td class="px-6 py-5 text-right bg-indigo-50/10 dark:bg-indigo-900/5">
-                        <div class="text-sm font-black text-indigo-600 dark:text-indigo-400">
-                            Rp {{ number_format($subtotal, 2, ',', '.') }}
-                        </div>
-                    </td> -->
-                </tr>
-            @empty
-                {{-- Bagian Empty Tetap Sama --}}
-            @endforelse
-        </tbody>
-
-        {{-- FOOTER UNTUK TOTAL KESELURUHAN --}}
-        @if($data->isNotEmpty())
-        <tfoot class="bg-slate-50 dark:bg-slate-900/50">
-            <tr>
-                <td colspan="3" class="px-6 py-4 text-right text-[11px] font-black text-slate-500 uppercase tracking-widest">Total Obat Keluar</td>
-                <td class="px-6 py-5 text-center">
-                    <div class="text-lg font-black text-indigo-600 dark:text-indigo-400">
-                        <!-- Rp {{ number_format($grandTotal, 2, ',', '.') }} -->
-                        {{ number_format($totalqty, 0, ',', '.') }}
+        {{-- LOOP DETAIL TRANSAKSI UNTUK OBAT INI --}}
+        @foreach($items as $index => $row)
+            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
+                <td class="px-6 py-4 text-center text-xs text-slate-400">{{ $loop->iteration }}</td>
+                <td class="px-6 py-4">
+                    <div class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest">
+                        {{ $row->transaction->transaction_date->format('d M Y') }}
                     </div>
                 </td>
+                <td class="px-6 py-4">
+                    @if($row->transaction->medicalRecord)
+                        <div class="text-xs font-bold text-slate-700 dark:text-slate-200">
+                            {{ $row->transaction->medicalRecord->patient->name }}
+                        </div>
+                        <div class="text-[9px] text-slate-400 italic">Resep: {{ $row->transaction->medicalRecord->code }}</div>
+                    @else
+                        <div class="text-xs text-slate-600 italic">{{ $row->transaction->notes ?? 'Adjustment' }}</div>
+                    @endif
+                </td>
+                <td class="px-6 py-4 text-center">
+                    @if($row->transaction->medicalRecord?->patient)
+                     <span class="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase {{ $row->transaction->medicalRecord?->patient->type == 'karyawan' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700' }}">
+                        {{ $row->transaction->medicalRecord?->patient->type ?? 'UMUM' }}
+                    </span>
+                    @else
+                        <span class="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase bg-green-100 text-green-700">
+                            ADJ/LAIN
+                        </span>
+                    @endif
+                </td>
+                <td class="px-6 py-4 text-center font-bold text-slate-700 dark:text-slate-200 text-sm">
+                    {{ number_format($row->quantity, 0, ',', '.') }}
+                </td>
             </tr>
-        </tfoot>
-        @endif
+        @endforeach
+
+    @empty
+        <tr>
+            <td colspan="5" class="px-6 py-20 text-center text-slate-400 italic">Data tidak ditemukan.</td>
+        </tr>
+    @endforelse
+</tbody>
+
+        {{-- FOOTER GRAND TOTAL --}}
+@if($data->isNotEmpty())
+    <tfoot class="bg-slate-200 dark:bg-slate-800 text-white">
+        <tr>
+            <td colspan="4" class="px-8 py-4 text-right text-xs text-slate-400  dark:text-slate-300 font-black uppercase tracking-widest">Grand Total Seluruh Obat Keluar</td>
+            <td class="px-6 py-4 text-center text-lg font-black text-rose-400">
+                {{ number_format($grandTotalQty, 0, ',', '.') }}
+            </td>
+        </tr>
+    </tfoot>
+@endif
     </table>
 </div>
             </div>

@@ -32,6 +32,13 @@
                             class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 text-sm transition-all">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto">
+                        <a href="{{ route('clinical.reports.index') }}" 
+                        class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
+                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Kembali
+                        </a>
                         <button type="submit" name="action" value="filter" 
                             class="flex-1 md:flex-none bg-slate-800 dark:bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 dark:hover:bg-indigo-700 transition-all shadow-lg shadow-slate-200 dark:shadow-none">
                             Tampilkan
@@ -60,63 +67,136 @@
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-slate-100 dark:divide-slate-700">
                         <thead>
-                            <tr class="bg-slate-50/30 dark:bg-slate-900/20">
-                                <th class="px-8 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-16">No</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Identitas Obat</th>
-                                <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Satuan</th>
-                                <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Volume Masuk</th>
-                                <th class="px-8 py-4 text-right text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Total Nilai Pengadaan</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                            @forelse($data as $index => $row)
-                            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
-                                <td class="px-8 py-5 text-center text-sm font-medium text-slate-400">{{ $index + 1 }}</td>
-                                <td class="px-6 py-5">
-                                    <div class="text-sm font-bold text-slate-800 dark:text-slate-100">{{ $row->medicine->name ?? 'Obat Dihapus' }}</div>
-                                    <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-wider">{{ $row->medicine->code ?? 'N/A' }}</div>
-                                </td>
-                                <td class="px-6 py-5 text-center">
-                                    <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg text-[10px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">
-                                        {{ $row->medicine->unit ?? '-' }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-5 text-center">
-                                    <div class="inline-flex items-center px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-xl font-black text-sm border border-emerald-100 dark:border-emerald-800/50">
-                                        <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
-                                        {{ number_format($row->total_qty, 0, ',', '.') }}
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-right font-black text-slate-800 dark:text-slate-100">
-                                    <span class="text-slate-400 dark:text-slate-500 text-xs font-normal mr-1">Rp</span>
-                                    {{ number_format($row->total_amount, 0, ',', '.') }}
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5" class="px-6 py-20 text-center">
-                                    <div class="flex flex-col items-center justify-center">
-                                        <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-full mb-4">
-                                            <svg class="w-12 h-12 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0l-8 5-8-5"></path></svg>
-                                        </div>
-                                        <h3 class="text-slate-500 dark:text-slate-400 font-bold">Data Kosong</h3>
-                                        <p class="text-slate-400 dark:text-slate-500 text-xs mt-1">Tidak ada transaksi barang masuk pada rentang tanggal yang dipilih.</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                        @if($data->isNotEmpty())
-                        <tfoot class="bg-slate-50 dark:bg-slate-900/50 border-t-2 border-slate-100 dark:border-slate-700">
-                            <tr>
-                                <td colspan="4" class="px-8 py-5 text-right text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Total Nilai Investasi Stok</td>
-                                <td class="px-8 py-5 text-right text-lg font-black text-indigo-600 dark:text-indigo-400">
-                                    <span class="text-xs mr-1">Rp</span>
-                                    {{ number_format($data->sum('total_amount'), 0, ',', '.') }}
-                                </td>
-                            </tr>
-                        </tfoot>
-                        @endif
+    <tr class="bg-slate-50/30 dark:bg-slate-900/20">
+        {{-- No - Cukup kecil --}}
+        <th class="px-8 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-16">
+            No
+        </th>
+
+        {{-- Tanggal & Supplier --}}
+        <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">
+            Tanggal & Supplier
+        </th>
+
+        {{-- Nomor Faktur / Invoice --}}
+        <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-48">
+            Nomor Faktur
+        </th>
+
+        {{-- Volume Masuk --}}
+        <th class="px-6 py-4 text-center text-[11px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-tighter bg-indigo-50/30 dark:bg-indigo-900/10 w-32">
+            Volume Masuk
+        </th>
+
+        {{-- Harga Beli Satuan --}}
+        <th class="px-8 py-4 text-right text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-48">
+            Harga Beli (@)
+        </th>
+    </tr>
+</thead>
+                        <tbody class="bg-white dark:bg-slate-800">
+    @php 
+        $grandTotalInvestasi = 0; 
+    @endphp
+
+    @forelse($data as $medicineId => $group)
+        @php
+            $medicine = $group->first()->medicine;
+            $subtotalQty = $group->sum('quantity');
+            $subtotalAmount = $group->sum(function($i) { return $i->quantity * $i->price_at_moment; });
+            $grandTotalInvestasi += $subtotalAmount;
+        @endphp
+
+        {{-- HEADER GRUP OBAT --}}
+        <tr class="bg-slate-50/50 dark:bg-slate-900/40 border-t-2 border-slate-100 dark:border-slate-700">
+            <td colspan="3" class="px-8 py-3 border-l-4 border-indigo-500">
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Master Barang</span>
+                    <span class="text-sm font-black text-slate-800 dark:text-slate-100 uppercase">
+                        {{ $medicine->name ?? 'Obat Dihapus' }} 
+                        <span class="text-indigo-500 ml-2">[{{ $medicine->code ?? 'N/A' }}]</span>
+                    </span>
+                </div>
+            </td>
+            <td class="px-6 py-3 text-center bg-indigo-50/30 dark:bg-indigo-900/20">
+                <span class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase block">Total Volume</span>
+                <span class="text-sm font-black text-indigo-700 dark:text-indigo-300">
+                    {{ number_format($subtotalQty, 0, ',', '.') }} {{ $medicine->unit }}
+                </span>
+            </td>
+            <td class="px-8 py-3 text-right bg-indigo-50/50 dark:bg-indigo-900/30">
+                <span class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase block">Subtotal Investasi</span>
+                <span class="text-sm font-black text-indigo-700 dark:text-indigo-300">
+                    Rp {{ number_format($subtotalAmount, 0, ',', '.') }}
+                </span>
+            </td>
+        </tr>
+
+        {{-- DETAIL TRANSAKSI MASUK --}}
+        @foreach($group as $row)
+            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group border-b border-slate-100 dark:border-slate-700">
+                <td class="px-8 py-4 text-center text-xs font-medium text-slate-400 italic">
+                    {{ $loop->iteration }}
+                </td>
+                <td class="px-6 py-4">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
+                        {{ $row->transaction->transaction_date->format('d M Y') }}
+                    </div>
+                    <div class="text-xs font-bold text-slate-700 dark:text-slate-200 uppercase">
+                        {{ $row->transaction->supplier->name ?? 'Tanpa Supplier' }}
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-center">
+                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">No. Faktur</div>
+                    <div class="text-xs font-medium text-slate-600 dark:text-slate-400">
+                        {{ $row->transaction->invoice_number ?? '-' }}
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-center">
+                    <div class="text-xs font-bold text-slate-700 dark:text-slate-300">
+                        {{ number_format($row->quantity, 0, ',', '.') }}
+                    </div>
+                    <div class="text-[9px] text-slate-400 uppercase tracking-widest">{{ $medicine->unit }}</div>
+                </td>
+                <td class="px-8 py-4 text-right">
+                    <div class="text-[9px] text-slate-400 font-bold uppercase mb-1">Price @</div>
+                    <div class="text-xs font-bold text-slate-700 dark:text-slate-200">
+                        Rp {{ number_format($row->price_at_moment, 2, ',', '.') }}
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+
+    @empty
+        <tr>
+            <td colspan="5" class="px-6 py-20 text-center">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-full mb-4 text-slate-300">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0l-8 5-8-5"></path></svg>
+                    </div>
+                    <h3 class="text-slate-500 font-bold uppercase text-xs tracking-widest">Data Tidak Ditemukan</h3>
+                </div>
+            </td>
+        </tr>
+    @endforelse
+</tbody>
+
+{{-- GRAND TOTAL FOOTER --}}
+@if($data->isNotEmpty())
+    <tfoot class="bg-slate-800 dark:bg-indigo-600 text-white">
+        <tr>
+            <td colspan="4" class="px-8 py-5 text-right text-xs font-black uppercase tracking-[0.3em]">
+                Total Nilai Investasi Pengadaan Seluruhnya
+            </td>
+            <td class="px-8 py-5 text-right">
+                <div class="text-[10px] font-bold text-indigo-200 uppercase mb-1 tracking-widest">Grand Total</div>
+                <div class="text-2xl font-black italic">
+                    <span class="text-sm mr-1">Rp</span>{{ number_format($grandTotalInvestasi, 0, ',', '.') }}
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+@endif
                     </table>
                 </div>
             </div>

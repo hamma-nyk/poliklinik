@@ -78,7 +78,7 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-[2rem] border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
+            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left">
                         <thead>
@@ -87,7 +87,7 @@
                                 <th class="px-6 py-5">Nama Pasien</th>
                                 <th class="px-6 py-5">Jenis / Sumber</th>
                                 <th class="px-6 py-5">Durasi Izin</th>
-                                <th class="px-8 py-5 text-right">Aksi</th>
+                                <th class="px-8 py-5 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -118,8 +118,8 @@
                                         {{ \Carbon\Carbon::parse($letter->start_date)->format('d/m') }} - {{ \Carbon\Carbon::parse($letter->end_date)->format('d/m/y') }}
                                     </div>
                                 </td>
-                                <td class="px-8 py-6 text-right whitespace-nowrap">
-                                    <div class="flex justify-end gap-2">
+                                <td class="px-8 py-6 text-center whitespace-nowrap">
+                                    <div class="flex justify-center gap-2">
                                         <a href="{{ route('clinical.sick-leaves.show', $letter->id) }}" class="p-2 text-slate-400 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl transition-all shadow-sm active:scale-95" title="Detail">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                         </a>

@@ -44,6 +44,7 @@
                 <th style="width: 12%;">Waktu</th>
                 <th style="width: 10%;">No. RM</th>
                 <th style="width: 20%;">Nama Pasien</th>
+                <th style="width: 10%;">Bagian</th>
                 <th style="width: 10%;">Kategori</th>
                 <th style="width: 20%;">Diagnosa (ICD-10)</th>
                 <th style="width: 15%;">Dokter</th>
@@ -67,6 +68,10 @@
         <td>
             <strong>{{ $row->patient->name }}</strong>
             <br><span style="font-size: 9px;">{{ $row->patient->gender }}/{{ \Carbon\Carbon::parse($row->patient->birth_date)->age }}Th</span>
+        </td>
+
+        <td>
+            {{ $row->patient->subDepartment->name ?? '-' }}
         </td>
 
         <td class="text-center">

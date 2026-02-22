@@ -3,14 +3,14 @@
         <div class="flex flex-col md:flex-row justify-between items-center">
             <div>
                 <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
-                    {{ __('Tambah Perawat') }}
+                    {{ __('Tambah Perawat Baru') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pendaftaran tenaga keperawatan internal maupun eksternal</p>
             </div>
             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-emerald-600 cursor-pointer transition-colors">Perawat</span>
+                <span class="hover:text-emerald-600 cursor-pointer transition-colors"><a href="{{ route('master.nurses.index') }}">Perawat</a></span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Registrasi Baru</span>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Registrasi</span>
             </div>
         </div>
     </x-slot>
@@ -29,9 +29,9 @@
                     }
                  }">
                 
-                <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center">
-                    <span class="w-1.5 h-6 bg-emerald-500 rounded-full mr-3"></span>
-                    Konfigurasi Kepegawaian
+                <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center mb-6">
+                    <span class="bg-emerald-500 w-1.5 h-5 rounded-full mr-3"></span>
+                   Informasi biodata perawat
                 </h3>
 
                 <form action="{{ route('master.nurses.store') }}" method="POST">
@@ -42,7 +42,7 @@
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Tipe Tenaga Medis</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <label class="flex items-center p-4 border rounded-xl cursor-pointer transition-all duration-200" 
-                                   :class="type == 'karyawan' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-500' : 'border-slate-200 dark:border-slate-700 dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'">
+                                :class="type == 'karyawan' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-500' : 'border-slate-200 dark:border-slate-700 dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'">
                                 <input type="radio" name="type" value="karyawan" x-model="type" @change="resetForm()" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300">
                                 <div class="ml-3">
                                     <span class="block font-bold text-slate-700 dark:text-slate-200">Internal</span>
@@ -51,7 +51,7 @@
                             </label>
                             
                             <label class="flex items-center p-4 border rounded-xl cursor-pointer transition-all duration-200"
-                                   :class="type == 'eksternal' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-500' : 'border-slate-200 dark:border-slate-700 dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'">
+                                :class="type == 'eksternal' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-500' : 'border-slate-200 dark:border-slate-700 dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'">
                                 <input type="radio" name="type" value="eksternal" x-model="type" @change="resetForm()" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300">
                                 <div class="ml-3">
                                     <span class="block font-bold text-slate-700 dark:text-slate-200">Eksternal</span>
@@ -61,112 +61,120 @@
                         </div>
                     </div>
 
-                    {{-- Employee Selector --}}
-                    <div x-show="type == 'karyawan'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-2" class="mb-8 bg-emerald-50 dark:bg-emerald-900/10 p-5 rounded-xl border border-emerald-100 dark:border-emerald-800/30">
-                        <label class="block font-bold text-emerald-800 dark:text-emerald-400 text-sm mb-2">Cari & Sinkron Data Karyawan</label>
-                        @php
-    $employeeOptions = $employees->map(function($emp) {
-        return [
-            'id'      => $emp->id,
-            // Gabungkan NIK dan Nama untuk label & pencarian
-            'label'   => $emp->nik . ' - ' . $emp->nama,
-            'search'  => strtolower($emp->nik . ' ' . $emp->nama),
+                        {{-- Employee Selector --}}
+<div x-show="type == 'karyawan'" 
+
+     class="mb-8 bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-[2rem] border border-emerald-100 dark:border-emerald-800/30">
+    
+    <label class="block text-[10px] font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-[0.2em] mb-3 ml-1">Cari & Sinkron Data Karyawan</label>
+    
+    @php
+        $employeeOptions = $employees->map(function($emp) {
+            return [
+                'id'      => $emp->id,
+                'label'   => $emp->nik . ' - ' . $emp->nama,
+                'search'  => strtolower($emp->nik . ' ' . $emp->nama),
+                'nik'     => $emp->nik,
+                'nama'    => $emp->nama,
+                'ktp'     => $emp->ktp ?? '',
+                'phone'   => $emp->phone ?? '',
+                'alamat'  => $emp->alamat ?? ''
+            ];
+        });
+    @endphp
+
+    <div x-data="{
+            open: false,
+            search: '',
+            selectedId: '',
+            selectedLabel: '-- Pilih Karyawan --',
+            items: {{ $employeeOptions }},
+
+            get filteredItems() {
+                if (this.search === '') return this.items.slice(0, 10); // Batasi 10 untuk performa
+                return this.items.filter(item => item.search.includes(this.search.toLowerCase())).slice(0, 10);
+            },
+
+            selectItem(item) {
+                this.selectedId = item.id;
+                this.selectedLabel = item.label;
+                this.open = false;
+                this.search = '';
+
+                // Auto-fill form fields
+                if(document.getElementById('nik')) document.getElementById('nik').value = item.nik;
+                if(document.getElementById('nama')) document.getElementById('nama').value = item.nama;
+                if(document.getElementById('ktp')) document.getElementById('ktp').value = item.ktp;
+                if(document.getElementById('phone')) document.getElementById('phone').value = item.phone;
+                if(document.getElementById('address')) document.getElementById('address').value = item.alamat;
+            }
+        }" 
+        class="relative w-full"
+        @click.away="open = false">
+
+        <input type="hidden" name="employee_id" x-model="selectedId">
+
+        {{-- Trigger Button --}}
+        <button type="button" 
+                @click="open = !open; if(open) $nextTick(() => $refs.searchInput.focus())"
+                class="w-full h-12 text-left rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 py-2.5 px-5 flex justify-between items-center shadow-sm transition-all active:scale-[0.99]">
             
-            // Data tambahan (pengganti data-* attributes)
-            'nik'     => $emp->nik,
-            'nama'    => $emp->nama,
-            'ktp'     => $emp->ktp ?? '',
-            'phone'   => $emp->phone ?? '',
-            'alamat'  => $emp->alamat ?? ''
-        ];
-    });
-@endphp
-                        <div x-data="{
-        open: false,
-        search: '',
-        selectedId: '',
-        selectedLabel: '-- Pilih Karyawan --',
-        items: {{ $employeeOptions }},
-
-        // Filter pencarian
-        get filteredItems() {
-            if (this.search === '') return this.items;
-            return this.items.filter(item => item.search.includes(this.search.toLowerCase()));
-        },
-
-        // Saat item dipilih
-        selectItem(item) {
-            this.selectedId = item.id;
-            this.selectedLabel = item.label;
-            this.open = false;
-            this.search = '';
-
-            // --- LOGIKA AUTO-FILL FORM ---
-            // Karena native <select> hilang, kita isi input lain secara manual di sini.
-            // Sesuaikan ID elemen di bawah dengan ID input di form Anda.
+            <span x-text="selectedLabel" :class="selectedId ? 'font-bold' : 'text-slate-400 dark:text-slate-500'"></span>
             
-            if(document.getElementById('nik')) document.getElementById('nik').value = item.nik;
-            if(document.getElementById('nama'))         document.getElementById('nama').value = item.nama;
-            if(document.getElementById('ktp'))      document.getElementById('ktp').value = item.ktp;
-            if(document.getElementById('phone'))        document.getElementById('phone').value = item.phone;
-            if(document.getElementById('address'))      document.getElementById('address').value = item.alamat;
-        }
-    }" 
-    class="relative w-full"
-    @click.away="open = false">
+            <svg class="w-5 h-5 text-emerald-500 transition-transform duration-300" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
 
-    <input type="hidden" name="employee_id" x-model="selectedId">
+        {{-- Dropdown Menu --}}
+        <div x-show="open" 
 
-    <button type="button" 
-            @click="open = !open; $nextTick(() => $refs.searchInput.focus())"
-            class="w-full text-left rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 py-2.5 px-3 flex justify-between items-center shadow-sm transition-colors">
-        
-        <span x-text="selectedLabel" :class="selectedId ? 'font-medium' : 'text-slate-400'"></span>
-        
-        <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-        </svg>
-    </button>
+            class="absolute z-[60] mt-2 w-full bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden origin-top"
+            style="display: none;">
+            
+            {{-- Search Input in Dropdown --}}
+            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border-b border-slate-100 dark:border-slate-700">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input x-ref="searchInput" 
+                        x-model="search" 
+                        type="text" 
+                        placeholder="Ketik NIK atau Nama..." 
+                        class="w-full pl-10 pr-4 py-2 text-sm rounded-xl border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                </div>
+            </div>
 
-    <div x-show="open" 
-         x-transition:enter="transition ease-out duration-100"
-         x-transition:enter-start="transform opacity-0 scale-95"
-         x-transition:enter-end="transform opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-75"
-         x-transition:leave-start="transform opacity-100 scale-100"
-         x-transition:leave-end="transform opacity-0 scale-95"
-         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-emerald-100 dark:border-emerald-800 overflow-hidden"
-         style="display: none;">
-        
-        <div class="p-2 border-b border-emerald-50 dark:border-emerald-900">
-            <input x-ref="searchInput" 
-                   x-model="search" 
-                   type="text" 
-                   placeholder="Cari NIK atau Nama..." 
-                   class="w-full text-sm rounded-lg border-emerald-200 dark:border-emerald-700 bg-emerald-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:ring-emerald-500 focus:border-emerald-500">
+            {{-- Items List --}}
+            <ul class="max-h-64 overflow-y-auto custom-scrollbar">
+                <template x-for="item in filteredItems" :key="item.id">
+                    <li @click="selectItem(item)" 
+                        class="cursor-pointer px-5 py-3 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-900/30 text-slate-700 dark:text-slate-300 transition-colors border-b border-slate-50 dark:border-slate-700/50 last:border-0 group">
+                        <div class="flex flex-col">
+                            <span class="font-bold group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" x-text="item.label"></span>
+                        </div>
+                    </li>
+                </template>
+                
+                {{-- Empty State --}}
+                <div x-show="filteredItems.length === 0" class="px-5 py-10 text-center flex flex-col items-center justify-center gap-2">
+                    <svg class="w-8 h-8 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                    <span class="text-xs text-slate-400 dark:text-slate-500 italic">Data karyawan tidak ditemukan.</span>
+                </div>
+            </ul>
         </div>
-
-        <ul class="max-h-60 overflow-y-auto">
-            <template x-for="item in filteredItems" :key="item.id">
-                <li @click="selectItem(item)" 
-                    class="cursor-pointer px-4 py-2 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-900/30 text-slate-700 dark:text-slate-300 transition-colors border-b border-slate-50 dark:border-slate-700/50 last:border-0"
-                    :class="{'bg-emerald-50 dark:bg-emerald-900/50 font-bold text-emerald-700 dark:text-emerald-400': selectedId === item.id}">
-                    <span x-text="item.label"></span>
-                </li>
-            </template>
-            
-            <li x-show="filteredItems.length === 0" class="px-4 py-3 text-sm text-slate-500 text-center italic">
-                Karyawan tidak ditemukan.
-            </li>
-        </ul>
     </div>
 </div>
-                    </div>
 
                     <div class="space-y-5">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             {{-- NIK Karyawan --}}
-                            <div x-show="type == 'karyawan'" x-transition>
+                            <div x-show="type == 'karyawan'"
+
+                                class="space-y-2">
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">NIK Perusahaan</label>
                                 <input type="text" name="nik" id="nik" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-700/50 dark:text-slate-400 font-mono text-sm" readonly placeholder="Otomatis...">
                             </div>
@@ -213,7 +221,6 @@
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

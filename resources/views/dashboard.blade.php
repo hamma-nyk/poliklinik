@@ -7,8 +7,9 @@
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Statistik Komprehensif Operasional Klinik</p>
             </div>
-            <div class="hidden md:flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
-                Data Terakhir diupdate: {{ date('H:i') }} WIB
+            <div class="hidden md:flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
+                <span class="inline-block w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+                Sistem Online: {{ date('H:i') }} WIB
             </div>
         </div>
     </x-slot>
@@ -19,29 +20,28 @@
             {{-- AKTIVITAS HARI INI (Highlight) --}}
             <section>
 
-                <form action="{{ route('dashboard') }}" method="GET" class="mb-6 flex items-center gap-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                {{-- Dropdown Bulan --}}
-                <select name="month" onchange="this.form.submit()" class="border-none bg-transparent text-sm font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer py-1 pl-3 pr-8">
-                    @foreach(range(1, 12) as $m)
-                        <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>
-                            {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}
-                        </option>
-                    @endforeach
-                </select>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] flex items-center">
+                        <span class="bg-indigo-600 w-1.5 h-5 rounded-full mr-3"></span>
+                        Performa Klinis & Filter Periode
+                    </h3>
 
-                <span class="text-slate-300 dark:text-slate-600">|</span>
-
-                {{-- Dropdown Tahun --}}
-                <select name="year" onchange="this.form.submit()" class="border-none bg-transparent text-sm font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer py-1 pl-3 pr-8">
-                    @for($y = date('Y'); $y >= date('Y') - 5; $y--)
-                        <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
-                    @endfor
-                </select>
-            </form>
-                <h3 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
-                    <span class="bg-blue-600 w-1.5 h-5 rounded-full mr-3"></span>
-                    Performa Hari Ini
-                </h3>
+                    <form action="{{ route('dashboard') }}" method="GET" class="flex items-center gap-2 bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm transition-all">
+                        <select name="month" onchange="this.form.submit()" class="border-none bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer py-1 pl-3 pr-8 uppercase tracking-wider">
+                            @foreach(range(1, 12) as $m)
+                                <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }} class="dark:bg-slate-800">
+                                    {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <span class="text-slate-200 dark:text-slate-700">|</span>
+                        <select name="year" onchange="this.form.submit()" class="border-none bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer py-1 pl-3 pr-8 uppercase tracking-wider">
+                            @for($y = date('Y'); $y >= date('Y') - 5; $y--)
+                                <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }} class="dark:bg-slate-800">{{ $y }}</option>
+                            @endfor
+                        </select>
+                    </form>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <a href="{{ route('clinical.records.index') }}" class="group bg-gradient-to-br from-indigo-600 to-blue-700 rounded-3xl p-8 text-white shadow-xl shadow-blue-500/20 relative overflow-hidden transition-all hover:scale-[1.02] active:scale-95 dark:shadow-none">
                         <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
@@ -75,7 +75,7 @@
 
             {{-- TOTAL DATABASE --}}
             <section>
-                <h3 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
+                <h3 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-6 flex items-center">
                     <span class="bg-slate-400 w-1.5 h-5 rounded-full mr-3"></span>
                     Master Data & Inventaris
                 </h3>
@@ -155,12 +155,12 @@
     
                     <a href="{{ route('inventory.medicines.index') }}" class="group bg-rose-50 dark:bg-rose-900/20 p-6 rounded-3xl border border-rose-100 dark:border-rose-900/40 shadow-sm hover:bg-rose-600 transition-all duration-300 transform hover:-translate-y-1">
                         <div class="flex justify-between items-center mb-4">
-                            <div class="p-2 bg-white dark:bg-slate-800 text-rose-600 dark:text-rose-400 rounded-xl group-hover:bg-white/20 group-hover:text-white transition-colors">
+                            <div class="p-3 bg-white dark:bg-slate-800 text-rose-600 dark:text-rose-400 rounded-xl group-hover:bg-white/20 group-hover:text-white transition-colors">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                             </div>
-                            <span class="text-3xl font-black text-rose-700 dark:text-rose-400 group-hover:text-white tracking-tighter">{{ $criticalMedicines->count() }}</span>
+                            <span class="text-3xl font-bold text-rose-700 dark:text-rose-400 group-hover:text-white tracking-tighter">{{ $criticalMedicines->count() }}</span>
                         </div>
-                        <div class="text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-[0.1em] group-hover:text-rose-100">Stok Menipis</div>
+                        <div class="text-[10px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-[0.1em] group-hover:text-rose-100">Stok Menipis</div>
                     </a>
 
                 </div>

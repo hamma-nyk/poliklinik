@@ -24,7 +24,7 @@
 
     <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-slate-800 rounded-[2rem] shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
                 
                 {{-- Header Status --}}
                 <div class="bg-slate-50 dark:bg-slate-700/30 px-8 py-5 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">

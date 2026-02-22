@@ -22,7 +22,7 @@
 
     <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-slate-200 dark:border-slate-700 transition-all" x-data="{ format: 'view' }">
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition-all" x-data="{ format: 'view' }">
                 <form action="{{ route('clinical.reports.skd_export') }}" method="POST" target="_blank">
                     @csrf
                     
@@ -81,9 +81,25 @@
 
                     {{-- Submit Button --}}
                     <div class="flex flex-col items-center gap-4">
-                        <button type="submit" class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs">
-                            Generate & Unduh Laporan
-                        </button>
+                        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+    {{-- Tombol Kembali: Lapis Slate 700 --}}
+    <a href="{{ route('clinical.reports.index') }}" 
+       class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-[1.25rem] text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
+        <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Kembali
+    </a>
+
+    {{-- Tombol Action Utama: Indigo Accent --}}
+    <button type="submit" 
+        class="w-full sm:flex-1 inline-flex items-center justify-center px-8 py-3 bg-indigo-600 text-white font-bold rounded-[1.25rem] hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 dark:shadow-none transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-[11px]">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+        </svg>
+        Generate & Unduh Laporan
+    </button>
+</div>
                         <p class="text-[10px] text-slate-400 dark:text-slate-600 italic text-center leading-relaxed">
                             Laporan akan diproses secara otomatis sesuai filter tanggal yang dipilih.<br>Pastikan data SKD telah difinalisasi sebelum diekspor.
                         </p>

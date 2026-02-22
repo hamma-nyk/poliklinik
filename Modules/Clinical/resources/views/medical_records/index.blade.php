@@ -77,7 +77,7 @@
                                 <th class="px-6 py-4 text-left">Diagnosa (ICD-10)</th>
                                 <th class="px-6 py-4 text-left">Dokter</th>
                                 <th class="px-6 py-4 text-left">Perawat</th>
-                                <th class="px-6 py-4 text-right">Aksi</th>
+                                <th class="px-6 py-4 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-100 dark:divide-slate-700">
@@ -85,7 +85,7 @@
                             <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition duration-150 group">
                                 {{-- Kolom 1 --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-bold text-slate-900 dark:text-slate-100">
+                                    <div class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase">
                                         {{ $rm->created_at->format('d M Y') }}
                                     </div>
                                     <div class="text-[11px] text-slate-500 dark:text-slate-500 mb-1.5 flex items-center">
@@ -177,19 +177,31 @@
                                 </td>
 
                                 {{-- Kolom 5: Aksi --}}
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex items-center justify-end gap-1.5">
-                                        <a href="{{ route('clinical.records.show', $rm->id) }}" 
-                                           class="inline-flex items-center px-3 py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 shadow-sm hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-all">
-                                            Detail
-                                        </a>
-                                        
-                                        <a href="{{ route('clinical.records.print', $rm->id) }}" target="_blank" 
-                                           class="p-2 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all" title="Cetak PDF">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-                                        </a>
-                                    </div>
-                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+    <div class="flex items-center justify-center gap-2">
+        {{-- Button Detail: Boxed dengan Icon & Text --}}
+        <a href="{{ route('clinical.records.show', $rm->id) }}" 
+           class="inline-flex items-center gap-2 p-2.5 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 rounded-xl shadow-sm transition-all hover:scale-105 active:scale-95 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 group/btn">
+            
+            <svg class="w-5 h-5 transition-transform duration-300 group-hover/btn:rotate-12" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+
+            <!-- <span class="text-[11px] font-bold uppercase tracking-widest">Detail</span> -->
+        </a>
+        
+        {{-- Button Cetak: Icon Only dengan Slate elevation --}}
+        <a href="{{ route('clinical.records.print', $rm->id) }}" target="_blank" 
+           class="p-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-400 dark:text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-xl transition-all hover:scale-110 active:scale-95 shadow-sm group/print" 
+           title="Cetak PDF">
+            <svg class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+            </svg>
+        </a>
+    </div>
+</td>
                             </tr>
                             @empty
                             <tr>

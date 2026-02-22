@@ -32,6 +32,13 @@
                             class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 text-sm transition-all shadow-sm">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto">
+                        <a href="{{ route('clinical.reports.index') }}" 
+                        class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
+                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Kembali
+                        </a>
                         <button type="submit" name="action" value="filter" 
                             class="flex-1 md:flex-none bg-slate-800 dark:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 dark:hover:bg-blue-700 transition-all shadow-lg shadow-slate-200 dark:shadow-none">
                             Tampilkan
@@ -67,14 +74,15 @@
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Diagnosa Klinis</th>
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Dokter</th>
                                 <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Perawat</th>
-                                <th class="px-6 py-4 text-left bg-slate-50/50 dark:bg-slate-700/30">Terapi Obat (Item & Qty)</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Terapi Obat (Item & Qty)</th>
+
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                             @forelse($data as $row)
                             <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
                                 <td class="px-6 py-5 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">
-                                    <div class="font-bold text-slate-800 dark:text-slate-100">{{ $row->created_at->format('d/m/Y') }}</div>
+                                    <div class="font-bold text-slate-800 dark:text-slate-100 uppercase">{{ $row->created_at->format('d M Y') }}</div>
                                     <div class="text-[11px] text-slate-400 dark:text-slate-500 font-medium tracking-tight">{{ $row->created_at->format('H:i') }} WIB</div>
                                 </td>
                                 <td class="px-6 py-5 whitespace-nowrap">
@@ -89,6 +97,8 @@
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-tighter border {{ $row->patient->type == 'karyawan' ? 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50' : 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800/50' }}">
                                         {{ $row->patient->type }}
                                     </span>
+                                    <br>
+                                    <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-0.5 tracking-tighter">{{ $row->patient->type == 'karyawan' ? 'NIK:' : 'KTP:' }} {{ $row->patient->nik ?? $row->patient->ktp }}</div>
                                 </td>
                                 <td class="px-6 py-5">
                                     @if($row->jenis_kunjungan == 'Poli Umum')

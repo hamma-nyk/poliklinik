@@ -102,7 +102,7 @@ public function medicines(Request $request)
     $endDate   = $request->end_date ?? date('Y-m-d');
 
     // Query Detail (Bukan Rekap)
-    $data = MedicineTransactionItem::with([
+    $rawData = MedicineTransactionItem::with([
             'medicine', 
             'transaction.medicalRecord.patient', // Tarik data pasien lewat rekam medis
         ])
@@ -116,6 +116,8 @@ public function medicines(Request $request)
         ->orderBy('medicine_transactions.transaction_date', 'asc')
         ->select('medicine_transaction_items.*') 
         ->get();
+    
+    $data = $rawData->groupBy('medicine_id');
 
     if ($request->action == 'pdf') {
         $pdf = Pdf::loadView('clinical::reports.pdf_medicines', compact('data', 'startDate', 'endDate'));
@@ -147,29 +149,29 @@ public function medicines(Request $request)
         $startDate = $request->start_date ?? date('Y-m-01');
         $endDate   = $request->end_date ?? date('Y-m-d');
 
-        $data = \Modules\Inventory\App\Models\MedicineTransactionItem::whereHas('transaction', function($q) use ($startDate, $endDate) {
-                    $q->where('type', 'in')
-                      ->whereDate('transaction_date', '>=', $startDate)
-                      ->whereDate('transaction_date', '<=', $endDate);
-                })
-                ->select(
-                    'medicine_id', 
-                    DB::raw('sum(quantity) as total_qty'),
-                    // TAMBAHAN: Hitung Total Rupiah (Qty * Harga saat itu)
-                    DB::raw('sum(quantity * price_at_moment) as total_amount') 
-                )
-                ->with('medicine')
-                ->groupBy('medicine_id')
-                ->orderByDesc('total_qty')
-                ->get();
+        $rawData = \Modules\Inventory\App\Models\MedicineTransactionItem::with([
+                'medicine', 
+                'transaction.supplier' // Penting untuk melihat asal barang
+            ])
+            ->whereHas('transaction', function($q) use ($startDate, $endDate) {
+                $q->where('type', 'in')
+                ->whereDate('transaction_date', '>=', $startDate)
+                ->whereDate('transaction_date', '<=', $endDate);
+            })
+            ->join('medicine_transactions', 'medicine_transaction_items.medicine_transaction_id', '=', 'medicine_transactions.id')
+            ->orderBy('medicine_transactions.transaction_date', 'asc')
+            ->select('medicine_transaction_items.*')
+            ->get();
+
+        // Grouping berdasarkan medicine_id
+        $data = $rawData->groupBy('medicine_id');
 
         if ($request->action == 'pdf') {
             $pdf = Pdf::loadView('clinical::reports.pdf_incoming', compact('data', 'startDate', 'endDate'));
-            return $pdf->stream('Laporan-Obat-Masuk.pdf');
-        }
-
-        return view('clinical::reports.incoming', compact('data', 'startDate', 'endDate'));
+            return $pdf->setPaper('a4', 'portrait')->stream('Laporan-Logistik-Masuk.pdf');
     }
+
+    return view('clinical::reports.incoming', compact('data', 'startDate', 'endDate'));    }
     // --- 6. LAPORAN MUTASI (KELUAR - MASUK) ---
     public function mutation(Request $request)
     {

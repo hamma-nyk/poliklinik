@@ -8,9 +8,9 @@
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Log mutasi stok barang masuk dan keluar inventaris</p>
             </div>
             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-indigo-600 cursor-pointer transition-colors">Inventaris</span>
+                <span class="hover:text-indigo-600 cursor-pointer transition-colors">Transaksi</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Transaksi</span>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Obat</span>
             </div>
         </div>
     </x-slot>
@@ -86,10 +86,10 @@
                         <thead>
                             <tr class="bg-slate-50/50 dark:bg-slate-800/50">
                                 <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tanggal & Kode</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tipe</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tipe</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Jumlah Item</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Catatan</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Aksi</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-100 dark:divide-slate-700">
@@ -109,16 +109,16 @@
                                     </div>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
                                     @if($trx->type == 'in')
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700 border border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800/30 uppercase tracking-tighter">
                                             <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                                            MASUK (Beli)
+                                            MASUK
                                         </span>
                                     @else
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-orange-100 text-orange-700 border border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800/30 uppercase tracking-tighter">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-800 uppercase tracking-tighter">
                                             <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-                                            KELUAR (Pakai)
+                                            KELUAR
                                         </span>
                                     @endif
                                 </td>
@@ -135,12 +135,23 @@
                                     </div>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('inventory.transactions.show', $trx->id) }}" 
-                                       class="text-slate-400 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors p-2 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/30 inline-flex items-center gap-1 group/btn">
-                                        <span class="text-xs font-bold group-hover/btn:underline">Detail</span>
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                    </a>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <div class="flex justify-center items-center">
+                                        <a href="{{ route('inventory.transactions.show', $trx->id) }}" 
+                                        class="inline-flex items-center gap-2.5 px-4 py-2 bg-white dark:bg-slate-700 text-slate-400 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 border border-slate-200 dark:border-slate-600 rounded-xl shadow-sm transition-all hover:scale-105 active:scale-95 group/btn">
+                                            
+                                            {{-- Icon Eye: Lebih kecil agar teks dominan --}}
+                                            <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:rotate-12" 
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+
+                                            {{-- Label: Bold proporsional & Tracking lebar --}}
+                                            <span class="text-[11px] font-bold uppercase tracking-widest">Detail</span>
+                                            
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             @empty

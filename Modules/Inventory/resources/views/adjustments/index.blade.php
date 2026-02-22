@@ -84,16 +84,16 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-[2rem] border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
+            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left">
                         <thead>
-                            <tr class="bg-slate-50/50 dark:bg-slate-700/30 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-700">
-                                <th class="px-8 py-5">Tanggal</th>
-                                <th class="px-6 py-5">Item Obat</th>
-                                <th class="px-6 py-5 text-center">Tipe Adjustment</th>
-                                <th class="px-6 py-5 text-center">Kuantitas</th>
-                                <th class="px-8 py-5">Alasan / Catatan</th>
+                            <tr class="bg-slate-50/50 dark:bg-slate-800/50">
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tanggal</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Item Obat</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tipe Adjustment</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Kuantitas</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Alasan / Catatan</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -111,18 +111,19 @@
                                     <td class="px-6 py-6 text-center">
                                         @if($trx->type == 'in')
                                             <span class="inline-flex items-center px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-emerald-200 dark:border-emerald-800">
-                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                                                 Masuk
                                             </span>
                                         @else
                                             <span class="inline-flex items-center px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-rose-200 dark:border-rose-800">
-                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                                                                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+
                                                 Keluar
                                             </span>
                                         @endif
                                     </td>
                                     <td class="px-6 py-6 text-center">
-                                        <div class="text-xl font-bold tabular-nums {{ $trx->type == 'in' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400' }}">
+                                        <div class="text-md font-bold tabular-nums {{ $trx->type == 'in' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400' }}">
                                             {{ $trx->type == 'in' ? '+' : '-' }}{{ number_format($item->quantity) }}
                                         </div>
                                         <div class="text-[10px] text-slate-400 uppercase font-semibold">{{ $item->medicine->unit }}</div>

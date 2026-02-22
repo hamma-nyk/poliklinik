@@ -24,7 +24,7 @@
                     {{-- SIDEBAR: IDENTITAS & VITAL --}}
 <div class="lg:col-span-1 space-y-6">
     <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-        <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
+        <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
             <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
             1. Administrasi
         </h3>
@@ -353,8 +353,8 @@
             </label>
             <div class="relative">
                 <select name="visit_type" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5">
-                    <option value="sakit" selected>🤒 Sakit (Umum)</option>
-                    <option value="kecelakaan_kerja">⚠️ Kecelakaan Kerja</option>
+                    <option value="sakit" selected>Sakit (Umum)</option>
+                    <option value="kecelakaan_kerja">Kecelakaan Kerja</option>
                 </select>
                 <p class="text-[10px] text-slate-400 mt-1 italic">Pilih "Kecelakaan Kerja" untuk pelaporan K3.</p>
             </div>
@@ -397,25 +397,25 @@
 
     {{-- VITAL SIGNS --}}
     <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-        <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
+        <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
             <span class="w-2 h-2 bg-rose-500 rounded-full mr-3"></span>
             2. Tanda Vital
         </h3>
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Tensi (mmHg)</label>
+                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Tensi (mmHg)</label>
                 <input type="text" name="tensi" placeholder="120/80" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
             </div>
             <div>
-                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Suhu (°C)</label>
+                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Suhu (°C)</label>
                 <input type="number" step="0.1" name="suhu_tubuh" placeholder="36.5" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
             </div>
             <div>
-                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Berat (Kg)</label>
+                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Berat (Kg)</label>
                 <input type="number" step="0.1" name="berat_badan" placeholder="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
             </div>
             <div>
-                <label class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase">Tinggi (cm)</label>
+                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Tinggi (cm)</label>
                 <input type="number" step="0.1" name="tinggi_badan" placeholder="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-rose-500 focus:ring-rose-500">
             </div>
         </div>
@@ -426,7 +426,7 @@
                     {{-- MAIN CONTENT: ANAMNESA & RESEP --}}
                     <div class="lg:col-span-2 space-y-6">
                         <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-                            <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
+                            <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center">
                                 <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
                                 3. Anamnesa & Pemeriksaan
                             </h3>
@@ -439,11 +439,11 @@
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-[10px] font-black text-slate-500 uppercase mb-2">Riwayat Penyakit Dahulu</label>
+                                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Riwayat Penyakit Dahulu</label>
                                         <textarea name="riwayat_penyakit" rows="2" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 text-sm"></textarea>
                                     </div>
                                     <div>
-                                        <label class="block text-[10px] font-black text-red-500 uppercase mb-2 tracking-tighter">Riwayat Alergi (Kritis)</label>
+                                        <label class="block text-[10px] font-bold text-red-500 uppercase mb-2 tracking-tighter">Riwayat Alergi (Kritis)</label>
                                         <textarea name="riwayat_alergi" rows="2" class="w-full rounded-xl border-red-200 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 dark:text-red-200 text-sm placeholder-red-300" placeholder="Sebutkan alergi obat/makanan..."></textarea>
                                     </div>
                                 </div>
@@ -626,7 +626,7 @@
 @php
     // 1. Format data obat untuk JavaScript
     $medicineListJS = $medicines->map(function($m) {
-        error_log($m);
+        //error_log($m);
         return [
             'id' => $m->id,
             'label' => $m->name,
@@ -648,18 +648,18 @@
      }">
     
     <div class="flex justify-between items-center mb-6">
-        <h3 class="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center">
+        <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center">
             <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
             4. Resep Obat
         </h3>
-        <button type="button" @click="addRow()" class="inline-flex items-center px-4 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-xs font-black rounded-xl border border-indigo-100 dark:border-indigo-800 hover:bg-indigo-600 hover:text-white transition-all">
+        <button type="button" @click="addRow()" class="inline-flex items-center px-4 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded-xl border border-indigo-100 dark:border-indigo-800 hover:bg-indigo-600 hover:text-white transition-all">
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             TAMBAH BARIS
         </button>
     </div>
 
     <div class="overflow-x-visible"> <table class="w-full text-sm">
-            <thead class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">
+            <thead class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
                 <tr>
                     <th class="px-2 py-3 text-left w-5/12">Nama Obat</th>
                     <th class="px-2 py-3 text-center w-2/12">Qty</th>
@@ -787,7 +787,7 @@
     </div>
 
     <div class="flex justify-end pt-6 mt-4 border-t border-slate-100 dark:border-slate-700">
-        <button type="submit" class="w-full md:w-auto bg-indigo-600 text-white px-10 py-4 rounded-2xl font-black hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 transform hover:-translate-y-1 transition-all uppercase tracking-widest text-sm">
+        <button type="submit" class="w-full md:w-auto bg-indigo-600 text-white px-10 py-4 rounded-2xl font-bold hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 transform hover:-translate-y-1 transition-all uppercase tracking-widest text-sm">
             Simpan Rekam Medis
         </button>
     </div>

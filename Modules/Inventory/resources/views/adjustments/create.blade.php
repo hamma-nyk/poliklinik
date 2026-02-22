@@ -1,17 +1,17 @@
 <x-app-layout title="Buat Penyesuaian Stok">
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 transition-all duration-300">
-            <div class="flex items-center gap-3">
-                <div class="p-2 bg-indigo-50 dark:bg-slate-700 rounded-xl text-indigo-600 dark:text-indigo-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                    </svg>
-                </div>
-                <h2 class="font-bold text-2xl text-slate-800 dark:text-slate-100 tracking-tight">Input Penyesuaian Manual</h2>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                    {{ __('Input Adjustment Stok') }}
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Koreksi manual inventaris (Rusak, Hilang, atau Temuan)</p>
             </div>
-            <a href="{{ route('inventory.adjustments.index') }}" class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95">
-                Batal
-            </a>
+            <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
+                <span class="hover:text-indigo-600 cursor-pointer transition-colors"><a href="{{ route('inventory.adjustments.index') }}">Inventaris</a></span>
+                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Buat Adjustment</span>
+            </div>
         </div>
     </x-slot>
 
@@ -144,16 +144,32 @@
                     </div>
 
                     {{-- Action Button --}}
-                    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                        <div class="flex items-center gap-2 text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                            <span>Efek permanen pada saldo stok</span>
-                        </div>
-                        <button type="submit" 
-                            class="w-full md:w-auto px-10 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs">
-                            Simpan Adjustment
-                        </button>
-                    </div>
+                    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100 dark:border-slate-700/50 mt-8">
+    {{-- Warning Info --}}
+    <div class="flex items-center gap-3 text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-[0.2em]">
+        <div class="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+        </div>
+        <span>Efek permanen pada saldo stok</span>
+    </div>
+
+    {{-- Action Buttons --}}
+    <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+        {{-- Tombol Batal: Lapis Slate 700 --}}
+        <a href="{{ route('inventory.adjustments.index') }}" 
+            class="w-full sm:w-auto px-5 py-4 bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold rounded-2xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all active:scale-95 uppercase tracking-widest text-[11px] text-center shadow-sm">
+            Batal
+        </a>
+
+        {{-- Tombol Simpan: Indigo Accent --}}
+        <button type="submit" 
+            class="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-[11px]">
+            Simpan Adjustment
+        </button>
+    </div>
+</div>
 
                 </div>
             </form>

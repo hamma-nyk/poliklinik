@@ -8,7 +8,7 @@
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pembaruan informasi profil dan status kepegawaian</p>
             </div>
             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-blue-600 cursor-pointer transition-colors">Karyawan</span>
+                <span class="hover:text-blue-600 cursor-pointer transition-colors"><a href="{{ route('master.employees.index') }}">Karyawan</a></span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 <span class="font-semibold text-slate-700 dark:text-slate-200">Edit Data</span>
             </div>
@@ -20,8 +20,8 @@
             
             <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
                 
-                <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center">
-                    <span class="w-1.5 h-6 bg-amber-500 rounded-full mr-3"></span>
+                <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center mb-6">
+                    <span class="bg-amber-500 w-1.5 h-5 rounded-full mr-3"></span>
                     Perbarui Informasi Karyawan
                 </h3>
 

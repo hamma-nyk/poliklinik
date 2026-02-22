@@ -18,7 +18,7 @@
             <form action="{{ route('clinical.sick-leaves.store') }}" method="POST">
                 @csrf
                 
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-slate-200 dark:border-slate-700">
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
                     
                     {{-- Header Form --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-b border-slate-100 dark:border-slate-700 pb-8">

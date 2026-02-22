@@ -7,6 +7,11 @@
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pencatatan barang masuk (pembelian/hibah) dengan data supplier & faktur.</p>
             </div>
+            <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
+                <span class="hover:text-indigo-600 cursor-pointer transition-colors"><a href="{{ route('inventory.transactions.index') }}">Transaksi</a></span>
+                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Pengadaan Obat</span>
+            </div>
         </div>
     </x-slot>
 
@@ -56,9 +61,9 @@
 
                 {{-- 1. Informasi Header (Supplier & Faktur) --}}
                 <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8 mb-6">
-                    <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center">
-                        <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-3"></span>
-                        1. Informasi Supplier & Faktur
+                     <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center mb-6">
+                    <span class="bg-indigo-600 w-1.5 h-5 rounded-full mr-3"></span>
+                   Informasi Supplier & Faktur
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -139,9 +144,9 @@
                 {{-- 2. Daftar Obat (Searchable Items) --}}
                 <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center">
-                            <span class="w-1.5 h-6 bg-emerald-500 rounded-full mr-3"></span>
-                            2. Item Logistik
+                         <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center">
+                    <span class="bg-emerald-500 w-1.5 h-5 rounded-full mr-3"></span>
+                   Daftar Obat
                         </h3>
                         <button type="button" @click="addItem()" class="inline-flex items-center px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-sm font-bold rounded-xl border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-600 hover:text-white transition-all shadow-sm">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>

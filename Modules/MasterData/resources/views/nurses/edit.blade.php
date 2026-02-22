@@ -1,8 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-slate-800 leading-tight">
-            {{ __('Edit Perawat') }}
-        </h2>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                    {{ __('Edit Data Perawat ') }}
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pembaruan informasi profil dan status kepegawaian</p>
+            </div>
+            <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
+                <span class="hover:text-emerald-600 cursor-pointer transition-colors"><a href="{{ route('master.nurses.index') }}">Perawat</a></span>
+                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Edit Data</span>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -11,7 +21,10 @@
                  x-data="{ 
                     type: '{{ old('type', $nurse->type) }}',
                  }">
-                
+                <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center mb-6">
+                    <span class="bg-amber-500 w-1.5 h-5 rounded-full mr-3"></span>
+                    Perbarui Informasi Perawat
+                </h3>
                 <form action="{{ route('master.nurses.update', $nurse->id) }}" method="POST">
                     @csrf
                     @method('PUT')

@@ -32,6 +32,13 @@
                             class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 text-sm transition-all">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto">
+                        <a href="{{ route('clinical.reports.index') }}" 
+                        class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
+                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Kembali
+                        </a>
                         <button type="submit" name="action" value="filter" 
                             class="flex-1 md:flex-none bg-slate-800 dark:bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 dark:hover:bg-indigo-700 transition-all shadow-lg shadow-slate-200 dark:shadow-none">
                             Tampilkan
@@ -66,6 +73,7 @@
                                 <th class="px-6 py-4 text-center text-[11px] font-black text-green-600 dark:text-green-400 uppercase tracking-tighter bg-green-50/30 dark:bg-green-900/10">Total Masuk</th>
                                 <th class="px-6 py-4 text-center text-[11px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-tighter bg-rose-50/30 dark:bg-rose-900/10">Total Keluar</th>
                                 <th class="px-8 py-4 text-center text-[11px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-tighter bg-blue-50/30 dark:bg-blue-900/10">Stok Akhir</th>
+                                <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-20">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
@@ -101,6 +109,15 @@
                                         {{ number_format($row->current_stock, 0, ',', '.') }}
                                     </span>
                                 </td>
+                                <td class="px-6 py-5 text-center">
+    <a href="{{ url('/inventory/reports/stock-card') }}?medicine_id={{ $row->id }}&start_date={{ $startDate }}&end_date={{ $endDate }}" 
+       class="inline-flex p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-xl transition-all"
+       title="Lihat Kartu Stok">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+    </a>
+</td>
                             </tr>
                             @empty
                             <tr>

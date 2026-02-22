@@ -28,14 +28,14 @@
                 {{-- ID Header --}}
                 <div class="bg-slate-50/50 dark:bg-slate-800/50 px-8 py-6 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <div class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Nomor Registrasi RM</div>
-                        <div class="text-3xl font-black text-indigo-600 dark:text-indigo-400 font-mono tracking-tight">{{ $record->code }}</div>
+                        <div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Nomor Registrasi RM</div>
+                        <div class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 font-mono tracking-tight">{{ $record->code }}</div>
                     </div>
                     <div class="md:text-right">
-                        <div class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Waktu Pemeriksaan</div>
+                        <div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Waktu Pemeriksaan</div>
                         <div class="font-bold text-slate-700 dark:text-slate-200 flex items-center md:justify-end">
                             <svg class="w-4 h-4 mr-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            {{ $record->created_at->format('d M Y') }} 
+                            {{ strtoupper($record->created_at->format('d M Y')) }} 
                             <span class="mx-2 text-slate-300">|</span>
                             {{ $record->created_at->format('H:i') }} WIB
                         </div>
@@ -47,7 +47,7 @@
                         
                         {{-- Data Pasien --}}
                         <div class="lg:col-span-1">
-                            <h3 class="font-black text-slate-800 dark:text-slate-100 text-sm uppercase tracking-widest mb-6 flex items-center">
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-widest mb-6 flex items-center">
                                 <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
                                 Identitas Pasien
                             </h3>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-700">
                                         <div class="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase mb-1">Kategori</div>
-                                        <span class="px-2 py-0.5 rounded-lg text-[10px] font-black uppercase {{ $record->patient->type == 'karyawan' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30' }}">
+                                        <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase {{ $record->patient->type == 'karyawan' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30' }}">
                                             {{ $record->patient->type }}
                                         </span>
                                     </div>
@@ -79,7 +79,7 @@
 
                         {{-- Tanda Vital & Hasil Pemeriksaan --}}
                         <div class="lg:col-span-2">
-                            <h3 class="font-black text-slate-800 dark:text-slate-100 text-sm uppercase tracking-widest mb-6 flex items-center">
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-widest mb-6 flex items-center">
                                 <span class="w-2 h-2 bg-rose-500 rounded-full mr-3"></span>
                                 Pemeriksaan Klinis
                             </h3>
@@ -87,50 +87,50 @@
                             {{-- Vital Signs Grid --}}
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                                 <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-2xl border border-blue-100 dark:border-blue-800/30">
-                                    <div class="text-[10px] text-blue-600 dark:text-blue-400 font-black uppercase tracking-tighter">Tensi (mmHg)</div>
-                                    <div class="text-xl font-black text-slate-800 dark:text-slate-100">{{ $record->tensi ?? '-' }}</div>
+                                    <div class="text-[10px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-tighter">Tensi (mmHg)</div>
+                                    <div class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ $record->tensi ?? '-' }}</div>
                                 </div>
                                 <div class="bg-rose-50 dark:bg-rose-900/20 p-4 rounded-2xl border border-rose-100 dark:border-rose-800/30">
-                                    <div class="text-[10px] text-rose-600 dark:text-rose-400 font-black uppercase tracking-tighter">Suhu (°C)</div>
-                                    <div class="text-xl font-black text-slate-800 dark:text-slate-100">{{ $record->suhu_tubuh ?? '-' }}</div>
+                                    <div class="text-[10px] text-rose-600 dark:text-rose-400 font-bold uppercase tracking-tighter">Suhu (°C)</div>
+                                    <div class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ $record->suhu_tubuh ?? '-' }}</div>
                                 </div>
                                 <div class="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-2xl border border-emerald-100 dark:border-emerald-800/30">
-                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-tighter">Berat (Kg)</div>
-                                    <div class="text-xl font-black text-slate-800 dark:text-slate-100">{{ $record->berat_badan ?? '-' }}</div>
+                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-tighter">Berat (Kg)</div>
+                                    <div class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ $record->berat_badan ?? '-' }}</div>
                                 </div>
                                 <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-2xl border border-amber-100 dark:border-amber-800/30">
-                                    <div class="text-[10px] text-amber-600 dark:text-amber-400 font-black uppercase tracking-tighter">Tinggi (cm)</div>
-                                    <div class="text-xl font-black text-slate-800 dark:text-slate-100">{{ $record->tinggi_badan ?? '-' }}</div>
+                                    <div class="text-[10px] text-amber-600 dark:text-amber-400 font-bold uppercase tracking-tighter">Tinggi (cm)</div>
+                                    <div class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ $record->tinggi_badan ?? '-' }}</div>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div class="space-y-6">
                                     <div>
-                                        <label class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Keluhan Utama</label>
+                                        <label class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Keluhan Utama</label>
                                         <p class="text-slate-700 dark:text-slate-300 leading-relaxed">{{ $record->keluhan_utama }}</p>
                                     </div>
                                     <div>
-                                        <label class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Riwayat Penyakit</label>
+                                        <label class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Riwayat Penyakit</label>
                                         <p class="text-slate-700 dark:text-slate-300 leading-relaxed">{{ $record->riwayat_penyakit ?? '-' }}</p>
                                     </div>
                                     @if($record->riwayat_alergi)
                                     <div class="p-3 bg-red-50 dark:bg-red-900/10 border-l-4 border-red-500 rounded-r-xl">
-                                        <label class="text-[10px] font-black text-red-600 dark:text-red-400 uppercase block mb-1">Alergi Obat</label>
+                                        <label class="text-[10px] font-bold text-red-600 dark:text-red-400 uppercase block mb-1">Alergi Obat</label>
                                         <p class="text-red-700 dark:text-red-300 font-bold text-sm">{{ $record->riwayat_alergi }}</p>
                                     </div>
                                     @endif
                                 </div>
                                 <div class="space-y-6">
                                     <div>
-                                        <label class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest block mb-2">Diagnosa (ICD-10)</label>
+                                        <label class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest block mb-2">Diagnosa (ICD-10)</label>
                                         <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800/30 p-4 rounded-2xl">
-                                            <div class="font-black text-lg text-indigo-800 dark:text-indigo-300 leading-tight mb-1">{{ $record->diagnosis->name ?? $record->diagnosa }}</div>
+                                            <div class="font-bold text-lg text-indigo-800 dark:text-indigo-300 leading-tight mb-1">{{ $record->diagnosis->name ?? $record->diagnosa }}</div>
                                             <div class="font-mono text-sm text-indigo-600 dark:text-indigo-400">{{ $record->diagnosis->code ?? '' }}</div>
                                         </div>
                                     </div>
                                     <div>
-                                        <label class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Tindakan / Terapi</label>
+                                        <label class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Tindakan / Terapi</label>
                                         <p class="text-slate-700 dark:text-slate-300 leading-relaxed">{{ $record->tindakan ?? '-' }}</p>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
 
                     {{-- Resep Obat --}}
                     <div class="mt-12">
-                        <h3 class="font-black text-slate-800 dark:text-slate-100 text-sm uppercase tracking-widest mb-6 flex items-center">
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-widest mb-6 flex items-center">
                             <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
                             Resep Obat & Farmasi
                         </h3>
@@ -148,9 +148,9 @@
                             <table class="w-full text-sm">
                                 <thead class="bg-slate-50 dark:bg-slate-700/50">
                                     <tr>
-                                        <th class="px-6 py-4 text-left font-black text-slate-500 dark:text-slate-400 uppercase text-[10px]">Item Obat</th>
-                                        <th class="px-6 py-4 text-center font-black text-slate-500 dark:text-slate-400 uppercase text-[10px]">Qty</th>
-                                        <th class="px-6 py-4 text-left font-black text-slate-500 dark:text-slate-400 uppercase text-[10px]">Aturan Pakai / Instruksi</th>
+                                        <th class="px-6 py-4 text-left font-bold text-slate-500 dark:text-slate-400 uppercase text-[10px]">Item Obat</th>
+                                        <th class="px-6 py-4 text-center font-bold text-slate-500 dark:text-slate-400 uppercase text-[10px]">Qty</th>
+                                        <th class="px-6 py-4 text-left font-bold text-slate-500 dark:text-slate-400 uppercase text-[10px]">Aturan Pakai / Instruksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -161,7 +161,7 @@
                                             <div class="text-[10px] font-mono text-slate-400 uppercase mt-0.5">{{ $item->medicine->code ?? '' }}</div>
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg font-black text-slate-700 dark:text-slate-200">{{ $item->quantity }}</span>
+                                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg font-bold text-slate-700 dark:text-slate-200">{{ $item->quantity }}</span>
                                         </td>
                                         <td class="px-6 py-4 italic text-slate-600 dark:text-slate-400">
                                             {{ $item->instructions }}
@@ -183,13 +183,13 @@
                             @if ($record->doctor?->id)
                             <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Dokter Pemeriksa,</p>
                             <div class="relative inline-block">
-                                <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->doctor->name ?? '-'}}</p>                                
+                                <p class="font-bold text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->doctor->name ?? '-'}}</p>                                
                                 <p class="text-[12px] text-slate-400 mt-2"> {{ ('SIP.' . $record->doctor->sip) }}</p>
                             </div>
                             @elseif ($record->nurse?->id)
                             <p class="text-xs text-slate-500 dark:text-slate-400 mb-20 uppercase tracking-widest font-bold">Perawat Pemeriksa,</p>
                             <div class="relative inline-block">
-                                <p class="font-black text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->nurse->nama ?? '-'}}</p>                                
+                                <p class="font-bold text-slate-800 dark:text-slate-100 underline decoration-indigo-500 underline-offset-8">{{ $record->nurse->nama ?? '-'}}</p>                                
                                 <p class="text-[12px] text-slate-400 mt-2"> {{ ('STR.' . $record->nurse->str) }}</p>
                             </div>
                             @endif

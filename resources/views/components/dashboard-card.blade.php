@@ -8,12 +8,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $icon }}"></path>
             </svg>
         </div>
-        <span class="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tighter">
+        <span class="text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tighter">
             {{ number_format($count) }}
         </span>
     </div>
     <div>
-        <div class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.15em] mb-1">
+        <div class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-[0.15em] mb-1">
             {{ $label }}
         </div>
         <div class="flex items-center text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity {{ str_replace('bg-', 'text-', explode(' ', $bgColor)[0]) }}">
