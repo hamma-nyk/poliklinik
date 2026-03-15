@@ -30,6 +30,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('permissions', PermissionController::class); // <--- INI
     });
 
+    Route::prefix('settings')->group(function () {
+        Route::get('/whatsapp', [App\Http\Controllers\WhatsAppController::class, 'index'])->name('settings.whatsapp');
+    });
+
 });
 
 require __DIR__.'/auth.php';

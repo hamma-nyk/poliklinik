@@ -7,14 +7,23 @@ use Modules\Clinical\App\Http\Controllers\LabCheckController;
 use Modules\Clinical\App\Http\Controllers\ReportController;
 use Modules\Clinical\App\Http\Controllers\SickLeaveController;
 
+
+// --- AREA PUBLIC (Hanya untuk Cetak dengan Link Rahasia) ---
+Route::get('clinical/records/{id}/print', [MedicalRecordController::class, 'print'])
+    ->name('clinical.records.print')
+    ->middleware('signed'); // WAJIB: Hanya link yang punya "tanda tangan" yang bisa buka
+
+Route::get('clinical/lab/{id}/print', [LabCheckController::class, 'print'])
+    ->name('clinical.lab.print')
+    ->middleware('signed');
+
 Route::middleware(['auth'])->prefix('clinical')->name('clinical.')->group(function () {
     
     // 1. Route Medical Records
-    Route::get('records/{id}/print', [MedicalRecordController::class, 'print'])->name('records.print');
+    Route::get('records/{id}/send-wa', [MedicalRecordController::class, 'sendToWhatsApp'])->name('records.send_wa');
     Route::resource('records', MedicalRecordController::class);
 
     // 2. Route Lab
-    Route::get('lab/{id}/print', [LabCheckController::class, 'print'])->name('lab.print');
     Route::resource('lab', LabCheckController::class);
 
     Route::resource('sick-leaves', SickLeaveController::class);
@@ -44,4 +53,5 @@ Route::middleware(['auth'])->prefix('clinical')->name('clinical.')->group(functi
         Route::get('/skd', [ReportController::class, 'indexSkd'])->name('skd');
         Route::post('/skd/export', [ReportController::class, 'exportSkd'])->name('skd_export');
     });
+
 });

@@ -191,6 +191,26 @@
             </a>
         @endrole
 
+        @can('manage_whatsapp')
+            <a href="{{ route('settings.whatsapp') }}" 
+            class="flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 group relative {{ request()->routeIs('settings.whatsapp') ? 'bg-blue-600/10 text-blue-400' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-500 dark:hover:text-slate-100' }}">
+                
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-blue-500 rounded-r-full transition-opacity duration-200 {{ request()->routeIs('settings.whatsapp') ? 'opacity-100' : 'opacity-0' }}"></span>
+                
+                <svg class="w-5 h-5 mr-3 transition-colors {{ request()->routeIs('settings.whatsapp') ? 'text-blue-400' : 'text-slate-400 dark:text-slate-400 dark:group-hover:text-slate-100' }}" 
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                
+                <span class="font-medium text-sm">WhatsApp Bot</span>
+                
+                {{-- Indikator Dot Aktif --}}
+                @if(request()->routeIs('settings.whatsapp'))
+                    <span class="ml-auto flex h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+                @endif
+            </a>
+        @endcan
+
         <div class="h-20"></div>
     </nav>
 

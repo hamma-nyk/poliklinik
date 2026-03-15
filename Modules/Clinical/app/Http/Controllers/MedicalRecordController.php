@@ -19,6 +19,8 @@ use Modules\MasterData\App\Models\Position;
 use Modules\Clinical\App\Models\SickLeave;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\URL;
+
 class MedicalRecordController extends Controller
 {
     public function index(Request $request)
@@ -218,5 +220,58 @@ class MedicalRecordController extends Controller
         return $pdf->stream('RM-' . $record->code . '.pdf');
     }
 
-    
+    public function sendToWhatsApp($id, \App\Services\WhatsAppService $waService)
+    {
+        try {
+            $statusRes = \Illuminate\Support\Facades\Http::timeout(3)->get('http://localhost:3001/api/status');
+            $status = $statusRes->json();
+
+            if ($status['status'] !== 'connected') {
+                return back()->with('error', 'Gagal: WhatsApp Bot belum terhubung (Silakan scan QR dulu).');
+            }
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal: Service Bot Offline (Port 3001 tidak merespon).');
+        }
+
+        $record = MedicalRecord::with('patient')->findOrFail($id);
+        
+        $phone = $record->patient->phone;
+        if (!$phone) return back()->with('error', 'Nomor WA Pasien Kosong');
+
+        // Buat link rahasia yang hanya berlaku 10 menit untuk bot
+        $fileUrl = URL::temporarySignedRoute(
+            'clinical.records.print', 
+            now()->addMinutes(10), 
+            ['id' => $record->id]
+        );
+        // 1. Ambil NIK atau KTP
+        $nik_ktp = $record->patient->nik ?? $record->patient->ktp ?? 'Tanpa_ID';
+        
+        // 2. Format Tanggal Periksa (misal: 15-03-2026)
+        $tgl_periksa = $record->created_at->format('d-m-Y');
+
+        // 3. Bersihkan nama pasien dari spasi agar tidak error di URL/Sistem File
+        $cleanName = str_replace(' ', '_', trim($record->patient->name));
+
+        // 4. Formulasi Nama File: RM_Nama_NIK_Tanggal.pdf
+        $fileName = "RM_{$cleanName}_{$nik_ktp}_{$tgl_periksa}.pdf";
+        
+        // --- FORMULASI PESAN WHATSAPP ---
+        $text = "*POLIKLINIK PT. NUSANTARA BUILDING INDUSTRIES*\n";
+        $text .= "----------------------------------------------------\n\n";
+        $text .= "Halo, berikut kami lampirkan dokumen Rekam Medis Anda:\n\n";
+        $text .= "*Nama:* " . $record->patient->name . "\n";
+        $text .= "*NIK/No. KTP:* " . ($record->patient->nik ?? $record->patient->ktp ?? '-') . "\n";
+        $text .= "*Tgl Periksa:* " . $record->created_at->format('d/m/Y H:i') . "\n\n";
+        $text .= "_Dokumen ini bersifat rahasia. Harap simpan dengan baik._";
+        
+        $result = $waService->sendDocument($phone, $text, $fileUrl, $fileName);
+
+        if ($result['success']) {
+            return back()->with('success', 'Rekam Medis berhasil dikirim ke WhatsApp Pasien.');
+        }
+
+        return back()->with('error', 'Gagal mengirim: ' . ($result['message'] ?? 'Service Bot Offline'));
+    }
+
 }
