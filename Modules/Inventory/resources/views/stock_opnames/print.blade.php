@@ -125,12 +125,23 @@
             </tr>
         </thead>
         <tbody>
+			@php 
+				$grandTotalSystem = 0;
+				$grandTotalPhysical = 0;
+				$grandTotalDiff = 0;
+			@endphp
+			
             @foreach($opname->items as $index => $item)
                 @php
                     $system = $item->system_stock ?? 0;
-                    $real   = $item->real_stock ?? 0;
+                    $real   = $item->physical_stock ?? 0;
                     $diff   = $real - $system;
-
+					
+					// Akumulasi Total
+					$grandTotalSystem += $system;
+					$grandTotalPhysical += $real;
+					$grandTotalDiff += $diff;
+					
                     // Logika Warna Excel & PDF
                     // Menggunakan Hex Code agar Excel membacanya dengan baik
                     $textColor = '#000000';
@@ -154,10 +165,21 @@
                     <td class="text-center font-bold" style="color: {{ $textColor }};">
                         {{ $diff > 0 ? '+'.$diff : $diff }}
                     </td>
-                    <td>{{ $item->note ?? '' }}</td>
+                    <td>{{ $item->opname_notes ?? '' }}</td>
                 </tr>
             @endforeach
         </tbody>
+		<tfoot>
+			<tr style="background-color: #eee; font-weight: bold;">
+				<td colspan="4" class="text-right">TOTAL KESELURUHAN</td>
+				<td class="text-center">{{ $grandTotalSystem }}</td>
+				<td class="text-center">{{ $grandTotalPhysical }}</td>
+				<td class="text-center" style="color: {{ $grandTotalDiff < 0 ? '#FF0000' : ($grandTotalDiff > 0 ? '#008000' : '#000') }}">
+					{{ $grandTotalDiff > 0 ? '+'.$grandTotalDiff : $grandTotalDiff }}
+				</td>
+				<td></td>
+			</tr>
+		</tfoot>
     </table>
 
     {{-- TANDA TANGAN (Hanya muncul di PDF) --}}
@@ -168,19 +190,25 @@
                 Dibuat Oleh,<br>
                 <div class="signature-space"></div>
                 <div class="signer-name">{{ $opname->creator->name ?? 'Admin Logistik' }}</div>
-                <div>Pelaksana</div>
+                <div>Pelaksana P2K2</div>
             </td>
             <td>
                 Diperiksa Oleh,<br>
                 <div class="signature-space"></div>
-                <div class="signer-name">____________________</div>
-                <div>Apoteker / SPV</div>
+                <div class="signer-name">Riya Kumayarini</div>
+                <div>SPV Personalia</div>
             </td>
             <td>
-                Disetujui Oleh,<br>
+                Diketahui,<br>
                 <div class="signature-space"></div>
-                <div class="signer-name">____________________</div>
-                <div>Kepala Klinik</div>
+                <div class="signer-name">Nur Hidayah</div>
+                <div>Kabag HRD</div>
+            </td>
+            <td>
+                Disetujui,<br>
+                <div class="signature-space"></div>
+                <div class="signer-name">Alexander Handoyo</div>
+                <div>Manager Operasional</div>
             </td>
         </tr>
     </table>

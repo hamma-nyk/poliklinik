@@ -129,7 +129,8 @@
                                 <th class="px-6 py-4 text-center w-32">Stok Sistem</th>
                                 <th class="px-6 py-4 text-center w-32 bg-slate-50/50 dark:bg-slate-900/40">Stok Fisik</th>
                                 <th class="px-6 py-4 text-center w-32">Selisih</th>
-                                <th class="px-8 py-4 text-right">Status Audit</th>
+                                <th class="px-8 py-4 text-center">Keterangan</th>
+                                <th class="px-8 py-4 text-center">Status Audit</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
@@ -172,7 +173,13 @@
                                     @endif
                                 </td>
 
-                                <td class="px-8 py-6 text-right whitespace-nowrap">
+                                <td class="px-6 py-6 text-center bg-slate-50/30 dark:bg-slate-900/20">
+                                    <span class="text-md text-slate-800 dark:text-slate-100">
+                                        {{ $item->opname_notes }}
+                                    </span>
+                                </td>
+
+                                <td class="px-8 py-6 text-center whitespace-nowrap">
                                     @if($item->difference > 0)
                                         <span class="inline-flex items-center px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                                             Surplus

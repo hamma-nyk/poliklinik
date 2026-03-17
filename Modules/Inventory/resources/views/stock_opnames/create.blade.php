@@ -60,6 +60,7 @@
                                     <th class="px-6 py-4 text-center w-48 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-400">Stok Fisik</th>
                                     <th class="px-6 py-4 text-center w-32">Selisih</th>
                                     <th class="px-8 py-4">Satuan</th>
+                                    <th class="px-8 py-4">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -91,6 +92,11 @@
                                             {{ $med->unit }}
                                         </span>
                                     </td>
+
+                                    <td class="px-6 py-5 bg-indigo-50/10 dark:bg-indigo-900/10">
+                                        <input type="text" name="items[{{ $med->id }}][opname_notes]" 
+                                            class="w-full text-center text-indigo-700 dark:text-indigo-400 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl transition-all tabular-nums">
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -115,32 +121,44 @@
     @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('.physical-input');
+            // 1. Fokus hanya pada input angka (Stok Fisik)
+            // Gunakan selector atribut agar lebih spesifik
+            const physicalInputs = document.querySelectorAll('input[type="number"].physical-input');
 
-            inputs.forEach(input => {
-                input.addEventListener('input', calculateDiff);
-                // Trigger once on load
-                calculateDiff({ target: input });
-            });
+            // 2. Fungsi hitung yang bisa dipanggil per baris
+            function updateRowDiff(inputEl) {
+                const row = inputEl.closest('tr');
+                if (!row) return;
 
-            function calculateDiff(e) {
-                const row = e.target.closest('tr');
                 const systemStock = parseInt(row.querySelector('.system-stock').value) || 0;
-                const physicalStock = parseInt(e.target.value) || 0;
+                const physicalStock = parseInt(inputEl.value) || 0;
                 const diff = physicalStock - systemStock;
                 const display = row.querySelector('.diff-display');
 
-                display.textContent = (diff > 0 ? '+' : '') + diff;
+                if (display) {
+                    display.textContent = (diff > 0 ? '+' : '') + diff;
 
-                // Color Logic
-                if (diff > 0) {
-                    display.className = 'diff-display font-black text-base text-emerald-600 dark:text-emerald-400';
-                } else if (diff < 0) {
-                    display.className = 'diff-display font-black text-base text-rose-600 dark:text-rose-400';
-                } else {
-                    display.className = 'diff-display font-black text-base text-slate-300 dark:text-slate-600';
+                    // Color Logic
+                    if (diff > 0) {
+                        display.className = 'diff-display font-black text-base text-emerald-600 dark:text-emerald-400';
+                    } else if (diff < 0) {
+                        display.className = 'diff-display font-black text-base text-rose-600 dark:text-rose-400';
+                    } else {
+                        display.className = 'diff-display font-black text-base text-slate-300 dark:text-slate-600';
+                    }
                 }
             }
+
+            // 3. Loop semua input untuk pasang Event Listener DAN hitung nilai awal
+            physicalInputs.forEach(input => {
+                // Jalankan saat user mengetik
+                input.addEventListener('input', function() {
+                    updateRowDiff(this);
+                });
+
+                // JALANKAN SEKARANG (saat page load) agar selisih muncul otomatis
+                updateRowDiff(input);
+            });
         });
     </script>
     @endpush

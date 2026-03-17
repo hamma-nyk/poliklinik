@@ -73,6 +73,7 @@ class StockOpnameController extends Controller
                 $systemStock = $data['system_stock'];
                 $physicalStock = $data['physical_stock'];
                 $difference = $physicalStock - $systemStock;
+                $opnameNotes = $data['opname_notes'];
 
                 // 2. Simpan Detail Opname (Hanya history)
                 StockOpnameItem::create([
@@ -81,6 +82,8 @@ class StockOpnameController extends Controller
                     'system_stock'    => $systemStock,
                     'physical_stock'  => $physicalStock,
                     'difference'      => $difference,
+                    'opname_notes'    => $opnameNotes,
+                    'created_by'      => Auth::id(),
                 ]);
 
                 // 3. Logic Penyesuaian Stok (Hanya jika ada selisih)
@@ -160,6 +163,6 @@ class StockOpnameController extends Controller
         // Setup kertas A4 Potrait
         $pdf->setPaper('a4', 'portrait');
 
-        return $pdf->stream('Stock_Opname_' . $opname->code . '.pdf');
+        return $pdf->stream('Stock_Opname_' . $opname->opname_number . '.pdf');
     }
 }
