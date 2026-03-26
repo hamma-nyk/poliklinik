@@ -66,11 +66,16 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 ml-1">Data Karyawan / Pasien</label>
-                                <select id="patient_select" name="patient_id" x-ref="patientSelect" class="w-full">
+                                <select id="patient_select" name="target_person" x-ref="patientSelect" class="w-full">
                                     <option value="">-- Ketik Nama atau NIK --</option>
-                                    @foreach($patients as $p)
-                                        <option value="{{ $p->id }}">{{ $p->name }} — {{ $p->nik }}</option>
+                                    @foreach($externalCandidates as $candidate)
+                                        <option value="{{ $candidate['value'] }}">
+                                            {{ $candidate['label'] }}
+                                        </option>
                                     @endforeach
+                                    <!-- @foreach($patients as $p)
+                                        <option value="{{ $p->id }}">{{ $p->name }} — {{ $p->nik }}</option>
+                                    @endforeach -->
                                 </select>
                             </div>
                             <div class="space-y-1">

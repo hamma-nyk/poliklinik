@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
-                    {{ __('Laporan 10 Besar Penyakit') }}
+                    {{ __('Laporan Penyakit') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analisis pola penyakit (Morbiditas) berdasarkan diagnosa ICD-10</p>
             </div>

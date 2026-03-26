@@ -44,21 +44,49 @@ class SickLeaveController extends Controller
         $kategoriKaryawan = 'karyawan'; // Contoh value di database
         // ---------------------------------------------------------------
 
-        // 1. Ambil List Pasien (Hanya Karyawan)
-        $patients = Patient::where('type', $kategoriKaryawan) // <-- Filter disini
-            ->orderBy('name')
-            ->get();
-
-        // 2. Ambil List Rekam Medis INTERNAL (Hanya Karyawan)
+        // 1. Ambil List Rekam Medis INTERNAL
         $internalCandidates = MedicalRecord::with(['patient', 'doctor', 'nurse'])
             ->whereHas('patient', function($query) use ($kategoriKaryawan) {
-                // Filter relasi pasien agar hanya karyawan
                 $query->where('type', $kategoriKaryawan); 
             })
             ->where('is_sick_leave', true)
             ->whereDoesntHave('sickLeave') 
             ->latest()
             ->get();
+
+        // 2. GABUNGKAN DATA UNTUK EKSTERNAL (Pasien + Master Karyawan)
+        // Ambil data pasien karyawan
+        $patients = Patient::where('type', $kategoriKaryawan)->get();
+
+        // Ambil semua NIK pasien yang sudah terdaftar (abaikan yang NIK-nya kosong)
+        $registeredNiks = $patients->pluck('nik')->filter()->toArray();
+
+        // Ambil data dari Master Karyawan yang NIK-nya BELUM ADA di tabel Pasien
+        // Asumsi model master karyawan Anda bernama Employee (Sesuaikan jika beda)
+        $employees = \App\Models\Employee::whereNotIn('nik', $registeredNiks)->get();
+
+        // Buat Collection baru untuk digabungkan ke Dropdown Blade
+        $combinedList = collect();
+
+        foreach ($patients as $p) {
+            $combinedList->push([
+                // Value diberi prefix untuk membedakan sumber datanya saat di method store
+                'value' => 'patient_' . $p->id, 
+                'name'  => $p->name,
+                'label' => $p->name . ' (Data Pasien - NIK: ' . ($p->nik ?? '-') . ')'
+            ]);
+        }
+
+        foreach ($employees as $e) {
+            $combinedList->push([
+                'value' => 'employee_' . $e->id, 
+                'name'  => $e->name,
+                'label' => $e->name . ' (Master Karyawan - NIK: ' . ($e->nik ?? '-') . ')'
+            ]);
+        }
+
+        // Urutkan dropdown berdasarkan nama sesuai abjad
+        $externalCandidates = $combinedList->sortBy('name');
 
         // Generate No Surat
         $count = SickLeave::whereMonth('created_at', date('m'))->count() + 1;
@@ -97,12 +125,44 @@ class SickLeaveController extends Controller
         } else {
             // Validasi External
             $request->validate([
-                'patient_id'           => 'required',
+                'target_person'        => 'required', // Di blade, name select-nya ganti jadi target_person
                 'external_clinic_name' => 'required',
                 'external_doctor_name' => 'required',
             ]);
+       
+            // Pecah value dari dropdown (Contoh: "patient_10" atau "employee_5")
+            $personParts = explode('_', $request->target_person);
+            $sourceType  = $personParts[0]; 
+            $sourceId    = $personParts[1];
 
-            $data['patient_id']           = $request->patient_id;
+            if ($sourceType === 'patient') {
+                // Jika dia sudah ada di tabel pasien, langsung pakai ID-nya
+                $data['patient_id'] = $sourceId;
+            } else {
+                // Jika dia dari Master Karyawan, AUTO-CREATE ke tabel Pasien dulu
+                $employee = \App\Models\Employee::findOrFail($sourceId);
+                
+                $newPatient = Patient::create([
+                    'employee_id' => $employee->id,
+                    'type'        => 'karyawan',
+                    'name'        => $employee->name,
+                    'gender'      => $employee->gender,
+                    'birth_date'  => $employee->birth_date,
+                    'phone'       => $employee->phone,
+                    'alamat'      => $employee->alamat,
+                    'blood_type'  => $employee->blood_type,
+                    'nik'         => $employee->nik ?? NULL,
+                    'ktp'         => $employee->ktp ?? NULL,
+                    'bag_dept'    => $employee->bag_dept ?? NULL,
+                    'subbag_dept' => $employee->subbag_dept ?? NULL,
+                    'sub_subbag_dept' => $employee->sub_subbag_dept ?? NULL,
+                    'jabatan'     => $employee->jabatan ?? NULL,
+                    'allergies'   => NULL,
+                    'family_of_employee_id' => NULL   // Inputan manual medis
+                ]);
+                // Gunakan ID Pasien yang baru saja dibuat
+                $data['patient_id'] = $newPatient->id;
+            }
             $data['external_clinic_name'] = $request->external_clinic_name;
             $data['external_doctor_name'] = $request->external_doctor_name;
         }

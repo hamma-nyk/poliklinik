@@ -78,7 +78,7 @@ class ReportController extends Controller
                 ->with('diagnosis')
                 ->groupBy('diagnosis_id')
                 ->orderByDesc('total')
-                ->take(10)
+                // ->take(10)
                 ->get();
 
         // 2. Hitung Total Seluruh Kasus (Untuk penyebut persentase)
@@ -90,7 +90,7 @@ class ReportController extends Controller
         // 3. Export PDF
         if ($request->action == 'pdf') {
             $pdf = Pdf::loadView('clinical::reports.pdf_diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
-            return $pdf->stream('Top-10-Penyakit.pdf');
+            return $pdf->stream('Laporan-Daftar-Penyakit.pdf');
         }
 
         return view('clinical::reports.diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
