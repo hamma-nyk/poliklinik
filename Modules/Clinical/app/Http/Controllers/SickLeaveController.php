@@ -8,6 +8,7 @@ use Modules\Clinical\App\Models\SickLeave;
 use Modules\Clinical\App\Models\MedicalRecord;
 use Modules\Clinical\App\Models\LabCheck;
 use Modules\MasterData\App\Models\Patient;
+use Modules\MasterData\App\Models\Employee;
 use Carbon\Carbon;
 
 class SickLeaveController extends Controller
@@ -63,7 +64,11 @@ class SickLeaveController extends Controller
 
         // Ambil data dari Master Karyawan yang NIK-nya BELUM ADA di tabel Pasien
         // Asumsi model master karyawan Anda bernama Employee (Sesuaikan jika beda)
-        $employees = \App\Models\Employee::whereNotIn('nik', $registeredNiks)->get();
+        $employees = Employee::whereNotIn('nik', $registeredNiks)
+            ->whereIn('is_active', ['', 'KT', 'KK'])
+            ->orderByRaw("CASE WHEN is_active != 'KO' THEN 1 ELSE 0 END")
+            // ->orderBy('nama', 'asc') // Sesuaikan: apakah nama kolomnya 'nama' atau 'name' di DB Anda?
+            ->get();
 
         // Buat Collection baru untuk digabungkan ke Dropdown Blade
         $combinedList = collect();
@@ -80,8 +85,8 @@ class SickLeaveController extends Controller
         foreach ($employees as $e) {
             $combinedList->push([
                 'value' => 'employee_' . $e->id, 
-                'name'  => $e->name,
-                'label' => $e->name . ' (Master Karyawan - NIK: ' . ($e->nik ?? '-') . ')'
+                'name'  => $e->nama,
+                'label' => $e->nama . ' (Master Karyawan - NIK: ' . ($e->nik ?? '-') . ')'
             ]);
         }
 
@@ -92,7 +97,7 @@ class SickLeaveController extends Controller
         $count = SickLeave::whereMonth('created_at', date('m'))->count() + 1;
         $regNumber = 'SKD' . date('Ym') . '' . str_pad($count, 3, '0', STR_PAD_LEFT);
 
-        return view('clinical::sick_leaves.create', compact('patients', 'internalCandidates', 'regNumber'));
+        return view('clinical::sick_leaves.create', compact('patients', 'externalCandidates', 'internalCandidates', 'regNumber'));
     }
 
     public function store(Request $request)
@@ -140,12 +145,12 @@ class SickLeaveController extends Controller
                 $data['patient_id'] = $sourceId;
             } else {
                 // Jika dia dari Master Karyawan, AUTO-CREATE ke tabel Pasien dulu
-                $employee = \App\Models\Employee::findOrFail($sourceId);
+                $employee = Employee::findOrFail($sourceId);
                 
                 $newPatient = Patient::create([
                     'employee_id' => $employee->id,
                     'type'        => 'karyawan',
-                    'name'        => $employee->name,
+                    'name'        => $employee->nama,
                     'gender'      => $employee->gender,
                     'birth_date'  => $employee->birth_date,
                     'phone'       => $employee->phone,
