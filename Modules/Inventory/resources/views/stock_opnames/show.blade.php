@@ -137,13 +137,23 @@
                             @foreach($opname->items as $item)
                             <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
                                 <td class="px-8 py-6">
-                                    <div class="font-bold text-slate-800 dark:text-slate-100 text-base leading-none mb-1 group-hover:text-indigo-600 transition-colors">
-                                        {{ $item->medicine->name }}
-                                    </div>
-                                    <div class="text-[10px] text-slate-400 dark:text-slate-500 font-mono font-bold tracking-widest uppercase italic">
-                                        {{ $item->medicine->code }} • {{ $item->medicine->unit }}
-                                    </div>
-                                </td>
+									<div class="flex items-center gap-2 mb-1">
+										<div class="font-bold text-slate-800 dark:text-slate-100 text-base leading-none group-hover:text-indigo-600 transition-colors">
+											{{ $item->medicine->name ?? 'Obat Tidak Ditemukan' }}
+										</div>
+										
+										{{-- Indikator Obat Terhapus (Soft Deleted) --}}
+										@if($item->medicine && $item->medicine->trashed())
+											<span class="px-2 py-0.5 text-[9px] font-black uppercase tracking-widest bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 rounded-md">
+												Dihapus
+											</span>
+										@endif
+									</div>
+									
+									<div class="text-[10px] text-slate-400 dark:text-slate-500 font-mono font-bold tracking-widest uppercase italic">
+										{{ $item->medicine->code ?? '-' }} • {{ $item->medicine->unit ?? '-' }}
+									</div>
+								</td>
                                 
                                 <td class="px-6 py-6 text-center">
                                     <span class="text-sm font-black text-slate-500 dark:text-slate-400 tabular-nums">
@@ -224,7 +234,13 @@
             const isDark = document.documentElement.classList.contains('dark');
             
             // Persiapkan data dari Backend
-            const labels = @json($opname->items->map(fn($item) => $item->medicine->name));
+            const labels = @json($opname->items->map(function($item) {
+                if (!$item->medicine) return 'Unknown Item';
+                
+                // PERBAIKAN: Gunakan titik (.) untuk menyambung string di PHP
+                return $item->medicine->trashed() ? $item->medicine->name . ' (Dihapus)' : $item->medicine->name;
+            }));
+
             const dataDiff = @json($opname->items->map(fn($item) => $item->difference));
 
             const options = {
@@ -290,7 +306,7 @@
         });
     </script>
     <script>
-    // console.log("Labels:", @json($opname->items->map(fn($item) => $item->medicine->name)));
+    // console.log("Labels:", @json($opname->items->map(fn($item) => $item->medicine->name ?? 'Unknown Item')));
     // console.log("Data:", @json($opname->items->map(fn($item) => $item->difference)));
 </script>
     @endpush

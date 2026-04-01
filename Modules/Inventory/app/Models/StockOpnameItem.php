@@ -11,6 +11,6 @@ class StockOpnameItem extends Model
 
     public function medicine()
     {
-        return $this->belongsTo(Medicine::class, 'medicine_id');
-    }
+		return $this->belongsTo(Medicine::class, 'medicine_id')->withTrashed();
+	}
 }
