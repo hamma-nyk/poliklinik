@@ -5,6 +5,8 @@ namespace Modules\Inventory\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Inventory\App\Models\Medicine;
+use Modules\Inventory\App\Exports\MedicineExport;
+use Maatwebsite\Excel\Facades\Excel;
 class MedicineController extends Controller
 {
     /**
@@ -118,4 +120,13 @@ class MedicineController extends Controller
         return redirect()->route('inventory.medicines.index')
             ->with('success', 'Data obat berhasil dihapus.');
     }
+
+
+public function exportExcel()
+{
+    $tanggal = now()->format('d-m-Y');
+    $namaFile = "Data_Stok_Obat_Poliklinik_NBI_{$tanggal}.xlsx";
+
+    return Excel::download(new MedicineExport, $namaFile);
+}
 }

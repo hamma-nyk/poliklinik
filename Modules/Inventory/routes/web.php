@@ -15,6 +15,8 @@ use Modules\Inventory\App\Http\Controllers\StockAdjustmentController;
 Route::middleware(['auth', 'verified'])->prefix('inventory')->name('inventory.')->group(function () {
     
     // Resource route otomatis membuat url: index, create, store, edit, update, destroy
+    Route::get('medicines/export-excel', [MedicineController::class, 'exportExcel'])->name('medicines.export_excel');
+
     Route::resource('medicines', MedicineController::class);
     Route::resource('transactions', TransactionController::class)->except(['edit', 'update', 'destroy']);
     // Transaksi stok sebaiknya tidak diedit/hapus sembarangan untuk menjaga integritas data audit.
