@@ -59,15 +59,13 @@ class SickLeaveController extends Controller
         // Ambil data pasien karyawan
         $patients = Patient::where('type', $kategoriKaryawan)->get();
 
-        // Ambil semua NIK pasien yang sudah terdaftar (abaikan yang NIK-nya kosong)
+        // Ambil semua nik pasien yang sudah terdaftar (abaikan yang kosong)
         $registeredNiks = $patients->pluck('nik')->filter()->toArray();
 
-        // Ambil data dari Master Karyawan yang NIK-nya BELUM ADA di tabel Pasien
-        // Asumsi model master karyawan Anda bernama Employee (Sesuaikan jika beda)
+        // Ambil data dari Master Karyawan yang nik-nya BELUM ADA di tabel Pasien
         $employees = Employee::whereNotIn('nik', $registeredNiks)
             ->whereIn('is_active', ['', 'KT', 'KK'])
             ->orderByRaw("CASE WHEN is_active != 'KO' THEN 1 ELSE 0 END")
-            // ->orderBy('nama', 'asc') // Sesuaikan: apakah nama kolomnya 'nama' atau 'name' di DB Anda?
             ->get();
 
         // Buat Collection baru untuk digabungkan ke Dropdown Blade

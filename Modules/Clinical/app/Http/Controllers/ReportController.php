@@ -91,6 +91,10 @@ class ReportController extends Controller
         if ($request->action == 'pdf') {
             $pdf = Pdf::loadView('clinical::reports.pdf_diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
             return $pdf->stream('Laporan-Daftar-Penyakit.pdf');
+        } elseif ($request->action === 'excel') {
+            // Logic generate Excel (Gunakan Laravel Excel / Maatwebsite)
+            $namaFile = 'Laporan_Morbiditas_' . $startDate . '_sd_' . $endDate . '.xlsx';
+            return Excel::download(new \Modules\Clinical\App\Exports\DiseaseExport($data, $grandTotal), $namaFile);
         }
 
         return view('clinical::reports.diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
