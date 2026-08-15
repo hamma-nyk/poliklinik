@@ -2,15 +2,15 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">
                     {{ __('Input Transaksi Stok') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pencatatan barang masuk (pembelian/hibah) dengan data supplier & faktur.</p>
             </div>
             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-indigo-600 cursor-pointer transition-colors"><a href="{{ route('inventory.transactions.index') }}">Transaksi</a></span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors"><a href="{{ route('inventory.transactions.index') }}">Transaksi</a></span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Pengadaan Obat</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Pengadaan Obat</span>
             </div>
         </div>
     </x-slot>
@@ -48,7 +48,7 @@
             ];
         });
     @endphp
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300"
+    <div class="py-6 flex-1 space-y-4"
          x-data="transactionForm(
              {{ Js::from($suppliers) }}, 
              {{ Js::from($medicines) }}
@@ -60,9 +60,9 @@
                 <input type="hidden" name="type" value="in">
 
                 {{-- 1. Informasi Header (Supplier & Faktur) --}}
-                <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8 mb-6">
-                     <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center mb-6">
-                    <span class="bg-indigo-600 w-1.5 h-5 rounded-full mr-3"></span>
+                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-8 mb-6">
+                     <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
+                    <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
                    Informasi Supplier & Faktur
                     </h3>
                     
@@ -71,7 +71,7 @@
                         {{-- SEARCH SUPPLIER (Client Side) --}}
                         {{-- INPUT SUPPLIER (COMBO BOX) --}}
         <div class="relative z-1"> {{-- Z-index tinggi --}}
-            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Supplier <span class="text-red-500">*</span></label>
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-1">Supplier <span class="text-destructive">*</span></label>
             
             <div class="relative">
                 <input type="text" 
@@ -79,7 +79,7 @@
                        @input="filterSuppliers()"
                        @focus="showSupplierDropdown = true; filterSuppliers()" 
                        @click.outside="showSupplierDropdown = false"
-                       class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 pr-10 focus:border-indigo-500 transition-all placeholder-slate-400 cursor-pointer"
+                       class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-10 cursor-pointer"
                        placeholder="Pilih atau cari supplier..." 
                        autocomplete="off">
                 
@@ -94,7 +94,7 @@
             {{-- DROPDOWN LIST --}}
             <div x-show="showSupplierDropdown" 
                  x-transition.opacity.duration.200ms
-                 class="absolute w-full mt-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl shadow-2xl max-h-60 overflow-y-auto z-50">
+                 class="absolute w-full mt-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50">
                 
                 <ul class="py-1">
                     {{-- Opsi Default jika kosong --}}
@@ -104,10 +104,10 @@
 
                     <template x-for="sup in filteredSuppliers" :key="sup.id">
                         <li @click="selectSupplier(sup)" 
-                            class="px-4 py-2.5 hover:bg-indigo-50 dark:hover:bg-slate-600 cursor-pointer border-b border-slate-50 dark:border-slate-600 last:border-0 transition-colors group">
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-sm text-slate-700 dark:text-slate-200 group-hover:text-indigo-700" x-text="sup.name"></span>
-                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full" x-text="sup.phone"></span>
+                            class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+                            <div class="flex justify-between items-center w-full">
+                                <span class="font-medium" x-text="sup.name"></span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 ml-2" x-text="sup.phone"></span>
                             </div>
                         </li>
                     </template>
@@ -117,68 +117,68 @@
 
                         {{-- No Faktur --}}
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">No. Faktur <span class="text-red-500">*</span></label>
-                            <input type="text" name="invoice_number" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 transition-all" required placeholder="INV-001">
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-1">No. Faktur <span class="text-destructive">*</span></label>
+                            <input type="text" name="invoice_number" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required placeholder="INV-001">
                         </div>
 
                         {{-- Tgl Faktur --}}
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Tgl Faktur</label>
-                            <input type="date" name="invoice_date" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 transition-all" required>
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-1">Tgl Faktur</label>
+                            <input type="date" name="invoice_date" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required>
                         </div>
 
                         {{-- Tgl Datang --}}
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Tgl Barang Datang</label>
-                            <input type="date" name="arrival_date" value="{{ date('Y-m-d') }}" class="w-full rounded-xl border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 dark:border-emerald-700 dark:text-slate-100 focus:border-emerald-500 transition-all" required>
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-1">Tgl Barang Datang</label>
+                            <input type="date" name="arrival_date" value="{{ date('Y-m-d') }}" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required>
                             <span class="text-[10px] text-emerald-600 font-bold">Stok bertambah tgl ini</span>
                         </div>
                     </div>
                     
                     <div class="mt-4">
-                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Catatan Tambahan</label>
-                        <input type="text" name="notes" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100" placeholder="Opsional">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-1">Catatan Tambahan</label>
+                        <input type="text" name="notes" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" placeholder="Opsional">
                     </div>
                 </div>
 
                 {{-- 2. Daftar Obat (Searchable Items) --}}
-                <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
+                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-8">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                         <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center">
-                    <span class="bg-emerald-500 w-1.5 h-5 rounded-full mr-3"></span>
+                         <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center mb-0">
+                    <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
                    Daftar Obat
                         </h3>
-                        <button type="button" @click="addItem()" class="inline-flex items-center px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-sm font-bold rounded-xl border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-600 hover:text-white transition-all shadow-sm">
+                        <button type="button" @click="addItem()" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
                             Tambah Baris
                         </button>
                     </div>
 
                     <div class="overflow-visible"> {{-- Visible agar dropdown tidak terpotong --}}
-                        <table class="min-w-full">
-                            <thead>
-                                <tr>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-4/12">Nama Obat</th>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Satuan</th>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/12">Jumlah</th>
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Total Harga (Rp)</th> {{-- Kolom Baru --}}
-                                    <th class="px-2 py-2 text-left text-xs font-bold text-slate-500 uppercase w-2/12">Harga Satuan (@)</th>
+                        <table class="w-full caption-bottom text-sm">
+                            <thead class="[&_tr]:border-b">
+                                <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-4/12">Nama Obat</th>
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-2/12">Satuan</th>
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-1/12">Jumlah</th>
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-2/12">Total Harga (Rp)</th> {{-- Kolom Baru --}}
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-2/12">Harga Satuan (@)</th>
                                     <th class="w-10"></th>
                                 </tr>
                             </thead>
-                            <tbody class="space-y-4">
+                            <tbody class="[&_tr:last-child]:border-0">
     <template x-for="(item, index) in items" :key="index">
-        <tr class="align-top">
+        <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50 align-top">
             
             {{-- KOLOM OBAT (SEARCHABLE + CLEAR BUTTON) --}}
-            <td class="p-2 relative w-5/12">
+            <td class="p-4 align-middle relative w-5/12">
                 <div class="relative">
                     <input type="text" 
                            x-model="item.query"
                            @input="item.showDropdown = true"
                            @focus="item.showDropdown = true" 
                            @click.outside="item.showDropdown = false"
-                           class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 pr-10 text-sm focus:ring-2 focus:ring-indigo-500/20"
+                           class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-8"
                            placeholder="Cari nama / kode obat..." 
                            autocomplete="off">
                     
@@ -202,15 +202,15 @@
 
                 {{-- DROPDOWN HASIL --}}
                 <div x-show="item.showDropdown" 
-                     class="absolute z-50 w-full mt-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl shadow-xl max-h-56 overflow-y-auto">
+                     class="absolute z-50 w-full mt-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-56 overflow-y-auto">
                     <ul class="py-1">
                         <template x-for="med in getFilteredMedicines(item.query)" :key="med.id">
                             <li @click="selectMedicine(index, med)" 
-                                class="px-4 py-2.5 hover:bg-emerald-50 dark:hover:bg-slate-600 cursor-pointer border-b border-slate-50 dark:border-slate-600 last:border-0 group">
-                                <div class="font-bold text-sm text-slate-700 dark:text-slate-200 group-hover:text-emerald-700" x-text="med.name"></div>
-                                <div class="flex justify-between mt-0.5">
-                                    <span class="text-xs text-slate-400 group-hover:text-emerald-600/70" x-text="med.code"></span>
-                                    <span class="text-xs font-bold text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">Stok: <span x-text="med.current_stock"></span></span>
+                                class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex-col items-start">
+                                <div class="font-medium" x-text="med.name"></div>
+                                <div class="flex justify-between w-full mt-0.5">
+                                    <span class="text-xs text-slate-500 dark:text-slate-400" x-text="med.code"></span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400">Stok: <span x-text="med.current_stock"></span></span>
                                 </div>
                             </li>
                         </template>
@@ -224,29 +224,29 @@
             </td>
 
             {{-- KOLOM SATUAN --}}
-            <td class="p-2">
-                <input type="text" x-model="item.unit" readonly class="w-full rounded-xl border-slate-200 bg-slate-100 text-slate-500 text-sm cursor-not-allowed text-center">
+            <td class="p-4 align-middle">
+                <input type="text" x-model="item.unit" readonly class="flex h-9 w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400 font-mono cursor-not-allowed text-center">
             </td>
 
             {{-- KOLOM JUMLAH --}}
-            <td class="p-2">
-                <input type="number" :name="'items['+index+'][quantity]'" x-model="item.quantity" min="1" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-slate-100 text-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+            <td class="p-4 align-middle">
+                <input type="number" :name="'items['+index+'][quantity]'" x-model="item.quantity" min="1" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:focus-visible:ring-slate-300" required>
             </td>
 
             {{-- TOTAL HARGA (INPUT MANUAL) --}}
-            <td class="p-2">
+            <td class="p-4 align-middle">
                 <div class="relative">
                     <span class="absolute left-3 top-2.5 text-slate-400 text-xs">Rp</span>
                     <input type="number" 
                            x-model="item.total_price" 
                            @input="updatePricePerItem(index)" {{-- Hitung saat total berubah --}}
-                           class="w-full rounded-xl border-slate-200 pl-8 text-sm bg-blue-50/50" 
+                           class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:focus-visible:ring-slate-300 pl-8" 
                            placeholder="8000">
                 </div>
             </td>
 
             {{-- HARGA BELI (@) - OTOMATIS --}}
-            <td class="p-2">
+            <td class="p-4 align-middle">
                 <div class="relative">
                     <span class="absolute left-3 top-2.5 text-slate-400 text-xs">Rp</span>
                     <input type="number" 
@@ -254,21 +254,13 @@
                         x-model="item.price" 
                         step="0.01"
                         readonly 
-                        class="w-full rounded-xl border-slate-200 bg-slate-100 pl-8 text-sm font-bold text-indigo-600">
+                        class="flex h-9 w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400 font-mono cursor-not-allowed pl-8">
                 </div>
             </td>
 
-            <!-- {{-- KOLOM HARGA --}}
-            <td class="p-2">
-                <div class="relative">
-                    <span class="absolute left-3 top-2.5 text-slate-400 text-xs">Rp</span>
-                    <input type="number" :name="'items['+index+'][price]'" x-model="item.price" min="0" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-slate-100 pl-8 text-sm focus:border-indigo-500 focus:ring-indigo-500">
-                </div>
-            </td> -->
-
             {{-- TOMBOL HAPUS ROW --}}
-            <td class="p-2 text-center pt-3">
-                <button type="button" @click="removeItem(index)" x-show="items.length > 1" class="text-slate-400 hover:text-red-500 transition bg-transparent hover:bg-red-50 rounded-lg p-2">
+            <td class="p-4 align-middle text-center pt-3">
+                <button type="button" @click="removeItem(index)" x-show="items.length > 1" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 hover:bg-red-100 hover:text-red-600 h-8 w-8 dark:hover:bg-red-900/50 dark:hover:text-red-500 bg-transparent">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </button>
             </td>
@@ -280,9 +272,9 @@
                 </div>
 
                 {{-- Submission --}}
-                <div class="mt-8 flex justify-end gap-4">
-                    <a href="{{ route('inventory.transactions.index') }}" class="px-6 py-3 rounded-xl border border-slate-300 font-bold text-slate-600 hover:bg-slate-100 transition">Batal</a>
-                    <button type="submit" class="px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 shadow-lg transition">SIMPAN DATA</button>
+                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-end gap-3">
+                    <a href="{{ route('inventory.transactions.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">Batal</a>
+                    <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90">SIMPAN DATA</button>
                 </div>
             </form>
         </div>

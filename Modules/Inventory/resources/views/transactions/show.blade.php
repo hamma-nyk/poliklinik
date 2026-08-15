@@ -2,20 +2,20 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">
                     {{ __('Detail Transaksi') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">ID Transaksi: <span class="font-mono font-bold text-indigo-600 dark:text-indigo-400">{{ $transaction->code }}</span></p>
             </div>
             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-indigo-600 cursor-pointer transition-colors"><a href="{{ route('inventory.transactions.index') }}">Transaksi</a></span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors"><a href="{{ route('inventory.transactions.index') }}">Transaksi</a></span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Detail</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Detail</span>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+    <div class="py-6 flex-1 space-y-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-2">
             
             {{-- Tombol Kembali & Print --}}
@@ -23,7 +23,7 @@
     
     {{-- Tombol Kembali: Boxed Style --}}
     <a href="{{ route('inventory.transactions.index') }}" 
-       class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
+       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 w-full sm:w-auto uppercase tracking-widest group">
         <svg class="w-4 h-4 mr-2.5 transition-transform duration-300 group-hover:-translate-x-1" 
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -33,7 +33,7 @@
 
     {{-- Tombol Cetak: Boxed Style --}}
     <button onclick="window.print()" 
-            class="hidden md:inline-flex items-center justify-center px-5 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-600 hover:border-slate-300 dark:hover:border-slate-500 transition-all shadow-sm active:scale-95 uppercase tracking-widest print:hidden group/print">
+            class="hidden md:inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 print:hidden uppercase tracking-widest group/print">
         <svg class="w-4 h-4 mr-2.5 text-slate-400 group-hover/print:text-emerald-500 transition-colors" 
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
@@ -42,92 +42,92 @@
     </button>
 </div>
 
-            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-8">
                 
                 {{-- Header Info --}}
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 border-b border-slate-100 dark:border-slate-700 pb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 pb-8 border-b border-slate-200 dark:border-slate-800">
                     <div class="space-y-1">
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tanggal Transaksi</p>
-                        <p class="font-bold text-lg text-slate-800 dark:text-slate-100">
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tanggal Transaksi</p>
+                        <p class="text-lg font-semibold text-slate-900 dark:text-slate-50">
                             {{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d F Y') }}
                         </p>
                     </div>
                     <div class="space-y-1">
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tipe Mutasi</p>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tipe Mutasi</p>
                         <div class="flex items-center">
                             @if($transaction->type == 'in')
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800/30 uppercase">
-                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span> Stok Masuk
+                                <span class="inline-flex items-center rounded-md border border-transparent bg-emerald-500/10 text-emerald-500 px-2.5 py-0.5 text-xs font-semibold">
+                                    Stok Masuk
                                 </span>
                             @else
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border border-orange-200 dark:border-orange-800/30 uppercase">
-                                    <span class="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></span> Stok Keluar
+                                <span class="inline-flex items-center rounded-md border border-transparent bg-destructive/10 text-destructive px-2.5 py-0.5 text-xs font-semibold">
+                                    Stok Keluar
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="space-y-1">
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Catatan / No. Ref</p>
-                        <p class="text-slate-700 dark:text-slate-300 font-medium">{{ $transaction->notes ?? '-' }}</p>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Catatan / No. Ref</p>
+                        <p class="text-lg font-semibold text-slate-900 dark:text-slate-50">{{ $transaction->notes ?? '-' }}</p>
                     </div>
                 </div>
 
                 {{-- Table Items --}}
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center">
-                        <span class="w-1.5 h-6 bg-indigo-500 rounded-full mr-3"></span>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
+                        <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
                         Rincian Item Obat
                     </h3>
                     
-                    <div class="overflow-hidden border border-slate-200 dark:border-slate-700 rounded-2xl">
-                        <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-                            <thead class="bg-slate-50 dark:bg-slate-700/50">
-                                <tr>
-                                    <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Nama Obat</th>
-                                    <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Jumlah (Qty)</th>
-                                    <th class="px-6 py-4 text-right text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Harga Satuan</th>
-                                    <th class="px-6 py-4 text-right text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Subtotal</th>
+                    <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-md">
+                        <table class="w-full caption-bottom text-sm">
+                            <thead class="[&_tr]:border-b">
+                                <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Nama Obat</th>
+                                    <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400">Jumlah (Qty)</th>
+                                    <th class="h-12 px-4 text-right align-middle font-medium text-slate-500 dark:text-slate-400">Harga Satuan</th>
+                                    <th class="h-12 px-4 text-right align-middle font-medium text-slate-500 dark:text-slate-400">Subtotal</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
+                            <tbody class="[&_tr:last-child]:border-0">
                                 @php $grandTotal = 0; @endphp
                                 @foreach($transaction->items as $item)
                                 @php 
                                     $subtotal = $item->quantity * $item->price_at_moment; 
                                     $grandTotal += $subtotal;
                                 @endphp
-                                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm font-bold text-slate-800 dark:text-slate-200">
+                                <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                    <td class="p-4 align-middle">
+                                        <div class="font-medium text-slate-800 dark:text-slate-200">
                                             {{ $item->medicine->name ?? 'Item Dihapus' }}
                                         </div>
-                                        <div class="text-xs font-mono text-slate-400 dark:text-slate-500 mt-1 uppercase">
+                                        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase">
                                             {{ $item->medicine->code ?? 'N/A' }}
                                             @if($item->medicine && $item->medicine->trashed())
-                                                <span class="ml-2 text-red-500 font-bold italic">(Dihapus dari Master)</span>
+                                                <span class="ml-2 text-destructive font-medium italic">(Dihapus dari Master)</span>
                                             @endif
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <span class="inline-block px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg text-sm font-black text-slate-700 dark:text-slate-200">
+                                    <td class="p-4 align-middle text-center">
+                                        <span class="inline-block px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-sm font-medium text-slate-700 dark:text-slate-200">
                                             {{ $item->quantity }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-right text-sm text-slate-600 dark:text-slate-400 font-medium">
+                                    <td class="p-4 align-middle text-right text-sm text-slate-600 dark:text-slate-400 font-medium">
                                         Rp {{ $item->price_at_moment == floor($item->price_at_moment) 
                                             ? number_format($item->price_at_moment, 0, ',', '.') 
                                             : number_format($item->price_at_moment, 2, ',', '.') }}
                                     </td>
-                                    <td class="px-6 py-4 text-right text-sm font-bold text-slate-800 dark:text-slate-100">
+                                    <td class="p-4 align-middle text-right text-sm font-medium text-slate-800 dark:text-slate-100">
                                         Rp {{ number_format($subtotal, 0, ',', '.') }}
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot class="bg-slate-50 dark:bg-slate-700/50 font-black">
+                            <tfoot class="border-t border-slate-200 dark:border-slate-800 font-medium">
                                 <tr>
-                                    <td colspan="3" class="px-6 py-4 text-right text-slate-500 dark:text-slate-400 uppercase text-xs tracking-widest">Total Keseluruhan</td>
-                                    <td class="px-6 py-4 text-right text-lg text-indigo-600 dark:text-indigo-400">
+                                    <td colspan="3" class="p-4 align-middle text-right text-slate-500 dark:text-slate-400">Total Keseluruhan</td>
+                                    <td class="p-4 align-middle text-right text-lg">
                                         Rp {{ number_format($grandTotal, 0, ',', '.') }}
                                     </td>
                                 </tr>
@@ -137,41 +137,41 @@
                 </div>
 
                 {{-- Referensi Rekam Medis --}}
-                <div class="mt-10 p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase mb-4 block tracking-widest">Sumber / Referensi Transaksi</span>
+                <div class="mt-8 rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
+                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase mb-4 block tracking-wider">Sumber / Referensi Transaksi</span>
                     
                     @if($transaction->medical_record_id && $transaction->medicalRecord)
                         <div class="flex items-start">
-                            <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl text-blue-600 dark:text-blue-400 mr-4">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <div class="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-50 mr-4">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase text-[10px]">Tautan Rekam Medis</p>
-                                <a href="{{ route('clinical.records.index') }}?search={{ $transaction->medicalRecord->code }}" class="text-md font-bold text-blue-600 dark:text-blue-400 hover:underline inline-block">
+                                <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Tautan Rekam Medis</p>
+                                <a href="{{ route('clinical.records.index') }}?search={{ $transaction->medicalRecord->code }}" class="font-medium hover:underline inline-block">
                                     {{ $transaction->medicalRecord->code }} — {{ $transaction->medicalRecord->patient->name }}
                                 </a>
-                                <div class="text-xs text-slate-500 dark:text-slate-400 italic">
-                                    Diagnosa & Resep oleh: <span class="font-bold">{{ $transaction->medicalRecord->doctor->name ?? $transaction->medicalRecord->nurse->nama }}</span>
+                                <div class="text-xs text-slate-500 dark:text-slate-400">
+                                    Diagnosa & Resep oleh: <span class="font-medium">{{ $transaction->medicalRecord->doctor->name ?? $transaction->medicalRecord->nurse->nama }}</span>
                                 </div>
                             </div>
                         </div>
                      @elseif($transaction->lab_check_id && $transaction->labCheck)
                         <div class="flex items-start">
-                            <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl text-blue-600 dark:text-blue-400 mr-4">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <div class="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-50 mr-4">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase text-[10px]">Tautan Cek Lab</p>
-                                <a href="{{ route('clinical.lab.index') }}?search={{ $transaction->labCheck->code }}" class="text-md font-bold text-blue-600 dark:text-blue-400 hover:underline inline-block">
+                                <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Tautan Cek Lab</p>
+                                <a href="{{ route('clinical.lab.index') }}?search={{ $transaction->labCheck->code }}" class="font-medium hover:underline inline-block">
                                     {{ $transaction->labCheck->code }} — {{ $transaction->labCheck->patient->name }}
                                 </a>
-                                <div class="text-xs text-slate-500 dark:text-slate-400 italic">
-                                    Petugas: <span class="font-bold">{{ $transaction->labCheck->doctor->name ?? $transaction->labCheck->nurse->nama }}</span>
+                                <div class="text-xs text-slate-500 dark:text-slate-400">
+                                    Petugas: <span class="font-medium">{{ $transaction->labCheck->doctor->name ?? $transaction->labCheck->nurse->nama }}</span>
                                 </div>
                             </div>
                         </div>
                     @else
-                        <div class="flex items-center text-slate-500 dark:text-slate-400 italic text-sm">
+                        <div class="flex items-center text-slate-500 dark:text-slate-400 text-sm">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             Transaksi diinput secara manual (Logistik Inventaris)
                         </div>

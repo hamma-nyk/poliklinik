@@ -2,25 +2,25 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Input Hasil Lab') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pencatatan Point of Care Testing (POCT)</p>
             </div>
              <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-purple-600 cursor-pointer transition-colors"><a href="{{ route('clinical.lab.index') }}">Laboratorium</a></span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors"><a href="{{ route('clinical.lab.index') }}">Laboratorium</a></span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Cek</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Cek</span>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+    <div class="py-6 flex-1 space-y-4">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
                 
-                <h3 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8 flex items-center">
-                    <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
+                    <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
                     Form Pemeriksaan Spesimen
                 </h3>
 
@@ -28,7 +28,7 @@
                     @csrf
 
                     <div class="mb-8">
-                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Pilih Pasien <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">Pilih Pasien <span class="text-red-500">*</span></label>
                         @php
     // Format data pasien untuk JavaScript
     $patientList = $patients->map(function($p) {
@@ -103,7 +103,7 @@
                @keydown.escape="isOpen = false"
                @input="isOpen = true; selectedId = ''" 
                placeholder="-- Cari Nama / ID Pasien --"
-               class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-purple-500 focus:ring-purple-500 transition-all text-sm py-2.5 pl-4 pr-10"
+               class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300"
                autocomplete="off">
 
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
@@ -123,17 +123,17 @@
          x-transition:leave="transition ease-in duration-75"
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
-         class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 max-h-60 overflow-auto py-1"
+         class="absolute z-50 mt-1 w-full rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 max-h-60 overflow-auto py-1"
          style="display: none;">
 
         <template x-for="item in filteredOptions" :key="item.id">
             <div @click="selectOption(item)"
-                 class="px-4 py-2 text-sm cursor-pointer hover:bg-purple-50 dark:hover:bg-slate-700 transition-colors flex justify-between items-center"
-                 :class="selectedId == item.id ? 'bg-purple-50 text-purple-700 dark:bg-slate-700 dark:text-purple-300 font-bold' : 'text-slate-700 dark:text-slate-200'">
+                 class="px-4 py-2 text-sm cursor-pointer hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 transition-colors flex justify-between items-center"
+                 :class="selectedId == item.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50 font-bold' : 'text-slate-700 dark:text-slate-200'">
                 
                 <span x-text="item.label"></span>
                 
-                <svg x-show="selectedId == item.id" class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <svg x-show="selectedId == item.id" class="w-4 h-4 text-slate-900 dark:text-slate-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
         </template>
 
@@ -146,24 +146,24 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Gula Darah (mg/dL)</label>
+                            <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Gula Darah (mg/dL)</label>
                             <input type="number" name="gula_darah" placeholder="0" 
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:ring-yellow-500 focus:border-yellow-500 transition-all font-bold">
+                                class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                         </div>
                         <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Kolesterol (mg/dL)</label>
+                            <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Kolesterol (mg/dL)</label>
                             <input type="number" name="kolesterol" placeholder="0" 
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:ring-blue-500 focus:border-blue-500 transition-all font-bold">
+                                class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                         </div>
                         <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Asam Urat (mg/dL)</label>
+                            <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Asam Urat (mg/dL)</label>
                             <input type="number" step="0.1" name="asam_urat" placeholder="0.0" 
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-bold">
+                                class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                         </div>
                         <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Tensi Darah (mmHg)</label>
+                            <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Tensi Darah (mmHg)</label>
                             <input type="text" name="tensi" placeholder="120/80" 
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-purple-500 focus:ring-purple-500 transition-all font-bold">
+                                class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                         </div>
                     </div>
 
@@ -262,7 +262,7 @@
 
     {{-- ================= FORM DOKTER ================= --}}
     <div class="relative" @click.outside="docOpen = false">
-        <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">
+        <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
             Dokter Pemeriksa <span x-show="!nurId" class="text-red-500">*</span>
         </label>
         
@@ -272,7 +272,7 @@
             <input type="text" x-model="docSearch" 
                    @click="docOpen = true" @input="docOpen = true; docId = ''" @keydown.escape="docOpen = false"
                    placeholder="-- Cari Dokter --"
-                   class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-sm py-2.5 pl-4 pr-10 focus:ring-blue-500 focus:border-blue-500"
+                   class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300"
                    :class="{'border-red-500': !docId && !nurId, 'border-slate-200': docId || nurId}"
                    autocomplete="off">
             
@@ -289,12 +289,12 @@
 
         {{-- Dropdown Body Dokter --}}
         <div x-show="docOpen" style="display: none;" 
-             class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 max-h-60 overflow-auto py-1">
+             class="absolute z-50 mt-1 w-full rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 max-h-60 overflow-auto py-1">
             <template x-for="item in filteredDoctors" :key="item.id">
-                <div @click="selectDoc(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 flex justify-between items-center"
-                     :class="docId == item.id ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-700 dark:text-slate-200'">
+                <div @click="selectDoc(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex justify-between items-center"
+                     :class="docId == item.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50 font-bold' : 'text-slate-700 dark:text-slate-200'">
                     <span x-text="item.label"></span>
-                    <svg x-show="docId == item.id" class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <svg x-show="docId == item.id" class="w-4 h-4 text-slate-900 dark:text-slate-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                 </div>
             </template>
             <div x-show="filteredDoctors.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">Dokter tidak ditemukan.</div>
@@ -306,7 +306,7 @@
 
     {{-- ================= FORM PERAWAT ================= --}}
     <div class="relative" @click.outside="nurOpen = false">
-        <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">
+        <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
             Perawat / Asisten <span x-show="!docId" class="text-red-500">*</span>
         </label>
         
@@ -316,7 +316,7 @@
             <input type="text" x-model="nurSearch" 
                    @click="nurOpen = true" @input="nurOpen = true; nurId = ''" @keydown.escape="nurOpen = false"
                    placeholder="-- Cari Perawat --"
-                   class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-sm py-2.5 pl-4 pr-10 focus:ring-blue-500 focus:border-blue-500"
+                   class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300"
                    :class="{'border-red-500': !docId && !nurId, 'border-slate-200': docId || nurId}"
                    autocomplete="off">
 
@@ -332,12 +332,12 @@
 
         {{-- Dropdown Body Perawat --}}
         <div x-show="nurOpen" style="display: none;" 
-             class="absolute z-50 mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 max-h-60 overflow-auto py-1">
+             class="absolute z-50 mt-1 w-full rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 max-h-60 overflow-auto py-1">
             <template x-for="item in filteredNurses" :key="item.id">
-                <div @click="selectNur(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 flex justify-between items-center"
-                     :class="nurId == item.id ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-700 dark:text-slate-200'">
+                <div @click="selectNur(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex justify-between items-center"
+                     :class="nurId == item.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50 font-bold' : 'text-slate-700 dark:text-slate-200'">
                     <span x-text="item.label"></span>
-                    <svg x-show="nurId == item.id" class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <svg x-show="nurId == item.id" class="w-4 h-4 text-slate-900 dark:text-slate-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                 </div>
             </template>
             <div x-show="filteredNurses.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">Perawat tidak ditemukan.</div>
@@ -358,7 +358,7 @@
 @endphp
 
 {{-- SECTION PENGGUNAAN BHP / ALAT LAB --}}
-<div class="mb-10 p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700"
+<div class="mb-10 rounded-md border border-slate-200 bg-slate-50 dark:bg-slate-900 dark:border-slate-800 p-6"
      x-data="{
         allMedicines: {{ $medicineList }},
         items: [],
@@ -384,13 +384,11 @@
      }" x-init="addItem()"> {{-- Otomatis tambah 1 baris saat load --}}
 
     <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center">
-            <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.673.337a4 4 0 01-2.509.394L6.47 15.11a2 2 0 00-1.458.342l-1.457 1.1c-.893.673-.985 1.969-.202 2.752l.183.183a2 2 0 002.828 0l1.414-1.414m11.656-5.656l-3.315-3.315a6.5 6.5 0 010-9.192 6.5 6.5 0 019.192 0 6.5 6.5 0 010 9.192l-3.315 3.315"></path>
-            </svg>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center">
+            <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
             Penggunaan BHP / Jarum Spuit
         </h3>
-        <button type="button" @click="addItem()" class="text-[10px] font-black bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg text-purple-600 hover:bg-purple-50 transition-all uppercase">
+        <button type="button" @click="addItem()" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
             + Tambah Alat
         </button>
     </div>
@@ -409,7 +407,7 @@
                                @click="item.isOpen = true"
                                @input="item.isOpen = true; item.medicine_id = ''"
                                placeholder="Cari jarum, spuit, dll..."
-                               class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm py-2 pl-4 pr-10 focus:ring-purple-500">
+                               class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                         
                         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -418,7 +416,7 @@
 
                     {{-- Dropdown Hasil Cari --}}
                     <div x-show="item.isOpen" 
-                         class="absolute z-[60] mt-1 w-full bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-100 dark:border-slate-700 max-h-48 overflow-auto py-1 text-sm">
+                         class="absolute z-[60] mt-1 w-full rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 max-h-48 overflow-auto py-1 text-sm">
                         <template x-for="med in getFiltered(item.search)" :key="med.id">
                             <div @click="
                                     item.medicine_id = med.id;
@@ -426,12 +424,12 @@
                                     item.search = med.label;
                                     item.isOpen = false;
                                  "
-                                 class="px-4 py-2 hover:bg-purple-50 dark:hover:bg-slate-700 cursor-pointer flex justify-between items-center">
+                                 class="px-4 py-2 hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 cursor-pointer flex justify-between items-center">
                                 <div>
                                     <div class="font-bold text-slate-700 dark:text-slate-200" x-text="med.label"></div>
                                     <div class="text-[10px] text-slate-400">Tersedia: <span x-text="med.stock"></span></div>
                                 </div>
-                                <svg x-show="item.medicine_id == med.id" class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                                <svg x-show="item.medicine_id == med.id" class="w-4 h-4 text-slate-900 dark:text-slate-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
                             </div>
                         </template>
                         <div x-show="getFiltered(item.search).length === 0" class="px-4 py-2 text-xs text-slate-400 italic">Alat tidak ditemukan.</div>
@@ -444,7 +442,7 @@
                            :name="'medicines['+index+'][quantity]'" 
                            x-model="item.quantity" 
                            min="1"
-                           class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm py-2 text-center font-bold text-slate-700 dark:text-slate-200">
+                           class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 text-center font-bold text-slate-700 dark:text-slate-200">
                 </div>
 
                 {{-- Tombol Hapus --}}
@@ -473,15 +471,15 @@
                     </div>
 
                     <div class="mb-10">
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2">Interpretasi / Catatan (Opsional)</label>
-                        <textarea name="notes" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-purple-500 focus:ring-purple-500 transition-all text-sm" rows="3" placeholder="Tambahkan catatan jika hasil lab memerlukan perhatian khusus..."></textarea>
+                        <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">Interpretasi / Catatan (Opsional)</label>
+                        <textarea name="notes" class="flex min-h-[80px] w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" rows="3" placeholder="Tambahkan catatan jika hasil lab memerlukan perhatian khusus..."></textarea>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row justify-end items-center gap-4">
-                        <a href="{{ route('clinical.lab.index') }}" class="w-full sm:w-auto bg-slate-100 border border-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 px-4 py-3.5 rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-600 shadow-xl shadow-slate-200 dark:shadow-none transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs">
+                    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-end gap-3">
+                        <a href="{{ route('clinical.lab.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 w-full sm:w-auto">
                             BATAL
                         </a>
-                        <button type="submit" class="w-full sm:w-auto bg-slate-900 dark:bg-purple-600 text-white px-10 py-3.5 rounded-2xl font-bold hover:bg-slate-800 dark:hover:bg-purple-500 shadow-xl shadow-slate-200 dark:shadow-none transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs">
+                        <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 w-full sm:w-auto">
                             Simpan & Cetak Hasil
                         </button>
                     </div>
@@ -489,13 +487,13 @@
 
             </div>
 
-            <div class="mt-6 p-6 bg-purple-50 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-800/30 rounded-2xl flex items-start gap-4">
-                <div class="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg text-purple-600 dark:text-purple-400">
+            <div class="mt-6 p-6 rounded-md border border-slate-200 bg-slate-50 dark:bg-slate-900 dark:border-slate-800 flex items-start gap-4">
+                <div class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="text-xs font-bold text-purple-800 dark:text-purple-300 uppercase tracking-tighter mb-1">Referensi Batas Normal (Dewasa)</h4>
-                    <p class="text-[11px] text-purple-700 dark:text-purple-400/80 leading-relaxed font-medium italic">
+                    <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-1">Referensi Batas Normal (Dewasa)</h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium italic">
                         Gula Darah: < 200 mg/dL (Sewaktu) | Kolesterol: < 200 mg/dL | Asam Urat: L(3.4-7.0), P(2.4-6.0) mg/dL.
                     </p>
                 </div>

@@ -2,26 +2,25 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 transition-all duration-300">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 dark:text-slate-100 leading-tight tracking-tight">
+                <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Penyesuaian Stok') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Koreksi manual inventaris (Rusak, Hilang, atau Temuan)</p>
             </div>
             <div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                <span class="hover:text-indigo-600 cursor-pointer transition-colors">Inventaris</span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors">Inventaris</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Adjustment</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Adjustment</span>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+    <div class="py-6 flex-1 space-y-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
             {{-- Alert Section --}}
             @if(session('success'))
-                <div x-data="{ show: true }" x-show="show" x-transition class="flex items-center p-4 mb-4 text-emerald-800 rounded-xl bg-emerald-50 border border-emerald-200 shadow-sm relative dark:bg-slate-800 dark:text-emerald-400 dark:border-slate-700">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div x-data="{ show: true }" x-show="show" x-transition class="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900 shadow-sm relative dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-200 mb-4 flex items-center">
                     <span class="font-semibold text-sm">{{ session('success') }}</span>
                     <button @click="show = false" class="absolute right-4 text-emerald-600 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-200 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -30,7 +29,7 @@
             @endif
 
             {{-- Toolbar --}}
-            <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
                 <div class="flex items-center gap-4">
                     <div class="p-3 bg-indigo-50 dark:bg-slate-700 rounded-xl text-indigo-600 dark:text-indigo-400 border border-transparent dark:border-slate-600">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -41,39 +40,39 @@
                     </div>
                 </div>
                 <div class="mb-4 flex gap-2">
-                <a href="{{ route('inventory.adjustments.create') }}" class="w-full md:w-auto inline-flex justify-center items-center px-6 py-3 bg-indigo-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-wider">
+                <a href="{{ route('inventory.adjustments.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 w-full md:w-auto uppercase tracking-wider">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
                     Buat Penyesuaian
                 </a>
                 
     {{-- Tombol untuk membuka Modal Filter --}}
     <div x-data="{ openFilter: false }" class="relative">
-        <button @click="openFilter = !openFilter" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-sm hover:bg-indigo-700">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        <button @click="openFilter = !openFilter" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             Laporan Per Periode
         </button>
 
         {{-- Dropdown / Modal Kecil --}}
         <div x-show="openFilter" 
              @click.outside="openFilter = false"
-             class="absolute z-50 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 p-4"
+             class="absolute right-0 z-50 mt-2 w-80 rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-4"
              style="display: none;">
             
             <form action="{{ route('inventory.stock_adjustment.export_period') }}" method="GET" target="_blank">
                 <div class="mb-3">
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Dari Tanggal</label>
-                    <input type="date" name="start_date" class="w-full border-slate-300 rounded-lg text-sm" required value="{{ date('Y-m-01') }}">
+                    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-1 block">Dari Tanggal</label>
+                    <input type="date" name="start_date" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required value="{{ date('Y-m-01') }}">
                 </div>
                 <div class="mb-4">
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Sampai Tanggal</label>
-                    <input type="date" name="end_date" class="w-full border-slate-300 rounded-lg text-sm" required value="{{ date('Y-m-d') }}">
+                    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-1 block">Sampai Tanggal</label>
+                    <input type="date" name="end_date" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required value="{{ date('Y-m-d') }}">
                 </div>
 
                 <div class="flex gap-2">
-                    <button type="submit" name="type" value="pdf" class="flex-1 bg-red-600 text-white text-xs py-2 rounded font-bold hover:bg-red-700">
+                    <button type="submit" name="type" value="pdf" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex-1">
                         PDF
                     </button>
-                    <button type="submit" name="type" value="excel" class="flex-1 bg-green-600 text-white text-xs py-2 rounded font-bold hover:bg-green-700">
+                    <button type="submit" name="type" value="excel" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex-1">
                         Excel
                     </button>
                 </div>
@@ -84,52 +83,49 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead>
-                            <tr class="bg-slate-50/50 dark:bg-slate-800/50">
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tanggal</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Item Obat</th>
-                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tipe Adjustment</th>
-                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Kuantitas</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Alasan / Catatan</th>
+                    <table class="w-full caption-bottom text-sm">
+                        <thead class="[&_tr]:border-b">
+                            <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Tanggal</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Item Obat</th>
+                                <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400">Tipe Adjustment</th>
+                                <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400">Kuantitas</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Alasan / Catatan</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                        <tbody class="[&_tr:last-child]:border-0">
                             @forelse($adjustments as $trx)
                                 @foreach($trx->items as $item)
-                                <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
-                                    <td class="px-8 py-6 whitespace-nowrap">
-                                        <div class="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-tight">{{ \Carbon\Carbon::parse($trx->transaction_date)->format('d M Y') }}</div>
-                                        <div class="text-[10px] text-slate-400 dark:text-slate-500 font-mono">{{ $trx->created_at->format('H:i') }} WIB</div>
+                                <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                    <td class="p-4 align-middle whitespace-nowrap">
+                                        <div class="font-medium">{{ \Carbon\Carbon::parse($trx->transaction_date)->format('d M Y') }}</div>
+                                        <div class="text-xs text-slate-500 dark:text-slate-400">{{ $trx->created_at->format('H:i') }} WIB</div>
                                     </td>
-                                    <td class="px-6 py-6">
-                                        <div class="font-bold text-slate-800 dark:text-slate-200 text-base leading-none mb-1 group-hover:text-indigo-600 transition-colors">{{ $item->medicine->name }}</div>
-                                        <div class="text-[10px] text-slate-400 dark:text-slate-500 font-mono font-semibold tracking-widest uppercase italic">{{ $item->medicine->code }}</div>
+                                    <td class="p-4 align-middle">
+                                        <div class="font-medium">{{ $item->medicine->name }}</div>
+                                        <div class="text-xs text-slate-500 dark:text-slate-400">{{ $item->medicine->code }}</div>
                                     </td>
-                                    <td class="px-6 py-6 text-center">
+                                    <td class="p-4 align-middle text-center">
                                         @if($trx->type == 'in')
-                                            <span class="inline-flex items-center px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-emerald-200 dark:border-emerald-800">
-                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                                            <span class="inline-flex items-center rounded-md border border-transparent bg-emerald-500/10 text-emerald-500 px-2.5 py-0.5 text-xs font-semibold">
                                                 Masuk
                                             </span>
                                         @else
-                                            <span class="inline-flex items-center px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-rose-200 dark:border-rose-800">
-                                                                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-
+                                            <span class="inline-flex items-center rounded-md border border-transparent bg-destructive/10 text-destructive px-2.5 py-0.5 text-xs font-semibold">
                                                 Keluar
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-6 text-center">
+                                    <td class="p-4 align-middle text-center">
                                         <div class="text-md font-bold tabular-nums {{ $trx->type == 'in' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400' }}">
                                             {{ $trx->type == 'in' ? '+' : '-' }}{{ number_format($item->quantity) }}
                                         </div>
                                         <div class="text-[10px] text-slate-400 uppercase font-semibold">{{ $item->medicine->unit }}</div>
                                     </td>
-                                    <td class="px-8 py-6">
-                                        <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border border-slate-100 dark:border-slate-600 text-sm text-slate-600 dark:text-slate-400 italic leading-relaxed">
+                                    <td class="p-4 align-middle">
+                                        <div class="text-sm">
                                             {{ str_replace('Adjustment: ', '', $trx->notes) ?: 'Tanpa catatan khusus' }}
                                         </div>
                                     </td>
@@ -154,7 +150,7 @@
                 
                 {{-- Pagination --}}
                 @if($adjustments->hasPages())
-                    <div class="p-8 border-t border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-700/30 transition-colors">
+                    <div class="border-t border-slate-200 dark:border-slate-800 p-4">
                         {{ $adjustments->links() }}
                     </div>
                 @endif

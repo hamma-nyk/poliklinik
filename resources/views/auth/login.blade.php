@@ -26,40 +26,39 @@
         .delay-300 { animation-delay: 0.3s; }
     </style>
 </head>
-<body class="h-full font-sans antialiased text-slate-900 selection:bg-blue-500 selection:text-white">
+<body class="h-full font-sans antialiased text-slate-950 selection:bg-slate-900 selection:text-white">
 
     <div class="flex min-h-screen">
 
-        <div class="hidden sm:flex sm:w-1/2 bg-slate-900 relative overflow-hidden items-center justify-center">
+        <div class="hidden sm:flex sm:w-1/2 bg-slate-950 relative overflow-hidden items-center justify-center">
             
             <div class="absolute inset-0 z-0">
                 <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=2070&auto=format&fit=crop" 
-                     class="w-full h-full object-cover opacity-50 mix-blend-overlay transition-transform duration-[20s] hover:scale-110 ease-linear" 
+                     class="w-full h-full object-cover opacity-30 mix-blend-overlay transition-transform duration-[20s] hover:scale-110 ease-linear grayscale" 
                      alt="Medical Tech">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-900/50"></div>
             </div>
 
             <div class="relative z-10 p-12 text-white max-w-lg animate-fade-in-up">
                 <div class="flex items-center gap-3 mb-8">
-                    <div class="p-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg">
-                        <svg class="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    <div class="p-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-md shadow-sm">
+                        <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
                     
-                    <span class="text-md font-bold tracking-[0.2em] uppercase text-blue-200 border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full">POLIKLINIK</span>
+                    <span class="text-xs font-semibold tracking-widest uppercase text-slate-300 border border-slate-700 bg-slate-800/50 px-3 py-1 rounded-md">POLIKLINIK</span>
                 </div>
                 
-                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight">
-                     
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-300">PT. Nusantara Building Industries</span>
+                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight text-white">
+                    PT. Nusantara Building Industries
                 </h1>
                 
-                <p class="text-slate-300 text-lg font-light leading-relaxed border-l-2 border-blue-500 pl-6">
+                <p class="text-slate-400 text-lg font-normal leading-relaxed border-l-2 border-slate-700 pl-6">
                     Sistem manajemen klinis terpadu untuk efisiensi operasional dan pemantauan kesehatan karyawan secara real-time.
                 </p>
                 
-                <div class="mt-12 flex gap-6 text-xs font-medium text-slate-400 uppercase tracking-wide">
+                <div class="mt-12 flex gap-6 text-xs font-medium text-slate-500 uppercase tracking-wide">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span> 
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 
                         System Online
                     </div>
                     <div class="flex items-center gap-2">
@@ -71,16 +70,11 @@
         </div>
 
         <div class="w-full sm:w-1/2 flex flex-col justify-center items-center bg-slate-50 relative">
-            
-            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div class="absolute -top-[20%] -right-[10%] w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
-                <div class="absolute top-[40%] -left-[10%] w-72 h-72 bg-cyan-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
-            </div>
 
-            <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-slate-200/50 z-10 mx-4 animate-fade-in-up delay-100 border border-slate-100">
+            <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-xl shadow border border-slate-200 dark:bg-slate-950 dark:border-slate-800 z-10 mx-4 animate-fade-in-up delay-100">
                 
                 <div class="text-center mb-10">
-                    <h2 class="text-2xl font-bold tracking-tight text-slate-900">
+                    <h2 class="text-2xl font-semibold tracking-tight text-slate-900">
                         Sign In
                     </h2>
                     <p class="mt-2 text-sm text-slate-500">
@@ -93,61 +87,46 @@
                 <form method="POST" action="{{ route('login') }}" class="space-y-6">
                     @csrf
 
-                    <!-- <div class="group">
-                        <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Corporate Email</label>
+                    <div class="space-y-2">
+                        <label for="username" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-slate-900">Username</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </div>
-                            <input id="email" name="email" type="email" autocomplete="email" required value="{{ old('email') }}"
-                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-lg leading-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition duration-150 ease-in-out sm:text-sm"
-                                placeholder="user@company.com">
+                            <input id="username" name="username" type="text" autocomplete="username" required value="{{ old('username') }}"
+                                class="flex h-10 w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 pl-9 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                placeholder="Masukkan username">
                         </div>
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div> -->
-
-                    <div class="group">
-                        <label for="username" class="block text-sm font-semibold text-slate-700 mb-2">Username</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />                                </svg>
-                            </div>
-                            <input id="username" name="username" type="text" autocomplete="username" required value="{{ old('email') }}"
-                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-lg leading-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition duration-150 ease-in-out sm:text-sm"
-                                placeholder="user">
-                        </div>
-                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('username')" class="mt-2 text-sm text-destructive" />
                     </div>
 
-                    <div class="group">
-                        <label for="password" class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+                    <div class="space-y-2">
+                        <label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-slate-900">Password</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
                             </div>
                             <input id="password" name="password" type="password" autocomplete="current-password" required
-                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-lg leading-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition duration-150 ease-in-out sm:text-sm"
+                                class="flex h-10 w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 pl-9 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                 placeholder="••••••••">
                         </div>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm text-destructive" />
                     </div>
 
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center">
+                        <div class="flex items-center space-x-2">
                             <input id="remember_me" name="remember" type="checkbox" 
-                                class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer">
-                            <label for="remember_me" class="ml-2 block text-sm text-slate-600 cursor-pointer select-none">Ingat perangkat ini</label>
+                                class="h-4 w-4 shrink-0 rounded-sm border border-slate-900 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-slate-900 cursor-pointer">
+                            <label for="remember_me" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-slate-600 cursor-pointer select-none">Ingat perangkat ini</label>
                         </div>
 
                         @if (Route::has('password.request'))
                             <div class="text-sm">
-                                <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-500 hover:underline">
+                                <a href="{{ route('password.request') }}" class="font-medium text-slate-900 hover:text-slate-700 hover:underline">
                                     Lupa password?
                                 </a>
                             </div>
@@ -156,14 +135,14 @@
 
                     <div>
                         <button type="submit" 
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg shadow-blue-900/20 text-sm font-bold text-white bg-slate-900 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-all duration-300 transform hover:-translate-y-1">
-                            LOG IN
+                            class="inline-flex w-full items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 hover:bg-slate-900/90 h-10 px-4 py-2">
+                            Log In
                         </button>
                     </div>
                 </form>
 
                 <div class="mt-8 text-center animate-fade-in-up delay-200">
-                    <p class="text-xs text-slate-400 leading-relaxed">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                         &copy;2026 IKOIT | PT. Nusantara Building Industries<br>
                         Authorized Personnel Only.
                     </p>

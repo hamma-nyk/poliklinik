@@ -2,25 +2,25 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight text-slate-800 leading-tight dark:text-slate-100">
                     {{ __('Edit Data Obat') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pembaruan informasi produk dan penyesuaian harga jual</p>
             </div>
             <div class="hidden md:flex items-center text-sm text-slate-500 mt-2 md:mt-0 dark:text-slate-400">
-                <span class="hover:text-indigo-600 cursor-pointer transition-colors"><a href="{{ route('inventory.medicines.index') }}">Inventaris</a></span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors"><a href="{{ route('inventory.medicines.index') }}">Inventaris</a></span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Edit Obat</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Edit Obat</span>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+    <div class="py-6 flex-1 space-y-4">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 overflow-hidden p-8">
                 
-                <h3 class="text-[10px] font-bold text-slate-400 dark:text-slate-100 uppercase tracking-[0.2em] flex items-center mb-6">
-                    <span class="bg-amber-500 w-1.5 h-5 rounded-full mr-3"></span>
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
+                    <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
                     Perbarui informasi obat
                 </h3>
 
@@ -31,22 +31,22 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                         {{-- Kode Obat (Read Only) --}}
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Kode Referensi (Sistem)</label>
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Kode Referensi (Sistem)</label>
                             <input type="text" value="{{ $medicine->code }}" disabled 
-                                class="w-full bg-slate-100 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 rounded-xl border-slate-200 dark:border-slate-600 font-mono cursor-not-allowed uppercase">
+                                class="flex h-9 w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400 font-mono cursor-not-allowed uppercase">
                         </div>
 
                         {{-- Nama Obat --}}
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Nama Obat <span class="text-red-500">*</span></label>
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nama Obat <span class="text-destructive">*</span></label>
                             <input type="text" name="name" value="{{ $medicine->name }}"
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all" required>
+                                class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required>
                         </div>
 
                         {{-- Satuan --}}
                         <div class="space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Satuan Terkecil</label>
-                            <select name="unit" class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Satuan Terkecil</label>
+                            <select name="unit" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
                                 @foreach(['Pcs'] as $unit)
                                     <option value="{{ $unit }}" {{ $medicine->unit == $unit ? 'selected' : '' }}>{{ $unit }}</option>
                                 @endforeach
@@ -67,11 +67,11 @@
 
                         {{-- Stok Saat Ini (Disabled) --}}
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-sm font-bold text-slate-400 dark:text-slate-500">Persediaan Saat Ini</label>
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Persediaan Saat Ini</label>
                             <div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-700/30 rounded-xl border border-slate-200 dark:border-slate-700">
                                 <div class="px-5 py-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600">
-                                    <span class="text-xl font-black text-indigo-600 dark:text-indigo-400">{{ $medicine->current_stock }}</span>
-                                    <span class="ml-1 text-xs font-bold text-slate-400 uppercase">{{ $medicine->unit }}</span>
+                                    <span class="text-xl font-black text-slate-900 dark:text-slate-50">{{ $medicine->current_stock }}</span>
+                                    <span class="ml-1 text-xs font-bold text-slate-500 uppercase">{{ $medicine->unit }}</span>
                                 </div>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
                                     Stok dikelola otomatis melalui transaksi <span class="font-bold">Stok Masuk</span> dan <span class="font-bold">Resep Pasien</span>.
@@ -81,21 +81,21 @@
 
                         {{-- Deskripsi --}}
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300">Deskripsi / Catatan Farmasi</label>
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Deskripsi / Catatan Farmasi</label>
                             <textarea name="description" rows="3" 
-                                class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-indigo-500 focus:ring-indigo-500 transition-all">{{ $medicine->description }}</textarea>
+                                class="flex min-h-[80px] w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">{{ $medicine->description }}</textarea>
                         </div>
                     </div>
 
                     {{-- Action Buttons --}}
-                    <div class="mt-10 pt-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row justify-end gap-3">
+                    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-end gap-3">
                         <a href="{{ route('inventory.medicines.index') }}" 
-                            class="inline-flex justify-center items-center px-6 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-100 dark:hover:bg-slate-700 transition duration-200">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
                             Batal
                         </a>
                         <button type="submit" 
-                            class="inline-flex justify-center items-center px-8 py-2.5 rounded-xl bg-slate-900 dark:bg-indigo-600 text-white font-bold hover:bg-indigo-800 dark:hover:bg-indigo-500 shadow-lg dark:shadow-none transition duration-200 transform hover:-translate-y-0.5">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
                             Update Data Obat

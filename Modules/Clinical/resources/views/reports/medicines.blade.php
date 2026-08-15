@@ -2,49 +2,49 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Laporan Pemakaian Obat') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Rekapitulasi pengeluaran resep dan penggunaan logistik medis</p>
             </div>
             <div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                <span class="hover:text-rose-600 cursor-pointer transition-colors">Laporan</span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors">Laporan</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Pemakaian</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Pemakaian</span>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+    <div class="py-6 flex-1 space-y-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
             {{-- Filter Panel --}}
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
                 <form method="GET" action="{{ route('clinical.reports.medicines') }}" class="flex flex-col md:flex-row gap-6 items-end">
                     <div class="w-full md:w-auto space-y-1.5">
-                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Dari Tanggal</label>
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Dari Tanggal</label>
                         <input type="date" name="start_date" value="{{ $startDate }}" 
-                            class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-rose-500 focus:ring-rose-500 text-sm transition-all shadow-sm">
+                            class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                     </div>
                     <div class="w-full md:w-auto space-y-1.5">
-                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Sampai Tanggal</label>
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Sampai Tanggal</label>
                         <input type="date" name="end_date" value="{{ $endDate }}" 
-                            class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-rose-500 focus:ring-rose-500 text-sm transition-all shadow-sm">
+                            class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto">
                         <a href="{{ route('clinical.reports.index') }}" 
-                        class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
-                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
                             Kembali
                         </a>
                         <button type="submit" name="action" value="filter" 
-                            class="flex-1 md:flex-none bg-slate-800 dark:bg-rose-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 dark:hover:bg-rose-700 transition-all shadow-lg shadow-slate-200 dark:shadow-none">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90">
                             Tampilkan
                         </button>
                         <button type="submit" name="action" value="pdf" formtarget="_blank" 
-                            class="flex-1 md:flex-none bg-rose-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-rose-700 transition-all flex items-center justify-center shadow-lg shadow-rose-200 dark:shadow-none">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                             Export PDF
                         </button>
@@ -53,48 +53,48 @@
             </div>
 
             {{-- Table Results --}}
-            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700 transition-all">
-                <div class="px-8 py-5 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div class="flex items-center">
                         <div class="w-2 h-2 bg-rose-500 rounded-full mr-3 animate-pulse"></div>
-                        <span class="font-bold text-slate-700 dark:text-slate-200 uppercase text-xs tracking-wider">
+                        <span class="font-medium text-xs">
                             Periode: {{ \Carbon\Carbon::parse($startDate)->format('d M Y') }} — {{ \Carbon\Carbon::parse($endDate)->format('d M Y') }}
                         </span>
                     </div>
-                    <span class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Laporan Pengeluaran Stok</span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">Laporan Pengeluaran Stok</span>
                 </div>
 
                <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-slate-100 dark:divide-slate-700">
-        <thead>
-    <tr class="bg-slate-50/30 dark:bg-slate-900/20">
+    <table class="w-full caption-bottom text-sm">
+        <thead class="[&_tr]:border-b">
+    <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
         {{-- No kecil saja --}}
-        <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-16">
+        <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400 w-16">
             No
         </th>
         
         {{-- Tanggal Transaksi --}}
-        <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-32">
+        <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-32">
             Tanggal
         </th>
         
         {{-- Referensi (Pasien/Catatan) dibuat lebar --}}
-        <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">
+        <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">
             Referensi / Pasien / Keterangan
         </th>
         
         {{-- Status/Jenis Pasien --}}
-        <th class="px-6 py-4 text-center text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter w-32">
+        <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400 w-32">
             Jenis Pasien
         </th>
         
         {{-- Qty Keluar --}}
-        <th class="px-6 py-4 text-center text-[11px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-tighter bg-rose-50/30 dark:bg-rose-900/10 w-36">
+        <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400 w-36">
             Qty Keluar
         </th>
     </tr>
 </thead>
-        <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
+        <tbody class="[&_tr:last-child]:border-0">
     @php $grandTotalQty = 0; @endphp
 
     @forelse($data as $medicineId => $items)
@@ -106,57 +106,57 @@
         @endphp
 
         {{-- BARIS HEADER PER OBAT --}}
-        <tr class="bg-slate-50/50 dark:bg-slate-900/40">
-            <td colspan="4" class="px-6 py-3 border-l-4 bg-slate-200 dark:bg-rose-900/10 border-rose-600 dark:border-rose-500">
+        <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50 bg-slate-50/50 dark:bg-slate-900/40">
+            <td colspan="4" class="p-4 align-middle">
                 <div class="flex justify-between items-center">
                     <div>
-                        <span class="text-sm font-black text-slate-800 dark:text-slate-100 uppercase">
+                        <span class="text-sm font-medium text-slate-800 dark:text-slate-100 uppercase">
                             {{ $medicine->name ?? 'Obat Dihapus' }}
                         </span>
-                        <span class="text-[10px] text-slate-400 ml-2">({{ $medicine->code ?? '-' }})</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 ml-2">({{ $medicine->code ?? '-' }})</span>
                     </div>
-                    <div class="text-xs font-bold text-rose-600 dark:text-rose-400">
+                    <div class="text-sm font-medium text-slate-900 dark:text-slate-100">
                         Total Keluar: {{ number_format($subtotalQtyPerMedicine, 0, ',', '.') }} {{ $medicine->unit }}
                     </div>
                 </div>
             </td>
-            <td class="px-6 py-3 text-center bg-slate-200 dark:bg-rose-900/10">
+            <td class="p-4 align-middle text-center">
                 {{-- Kosongkan atau isi sisa stok --}}
-                <span class="text-[10px] font-bold text-slate-400">STOK SAAT INI: {{ $medicine->current_stock }}</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">STOK SAAT INI: {{ $medicine->current_stock }}</span>
             </td>
         </tr>
 
         {{-- LOOP DETAIL TRANSAKSI UNTUK OBAT INI --}}
         @foreach($items as $index => $row)
-            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
-                <td class="px-6 py-4 text-center text-xs text-slate-400">{{ $loop->iteration }}</td>
-                <td class="px-6 py-4">
-                    <div class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest">
+            <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                <td class="p-4 align-middle text-center text-xs text-slate-500 dark:text-slate-400">{{ $loop->iteration }}</td>
+                <td class="p-4 align-middle">
+                    <div class="text-xs font-medium text-slate-700 dark:text-slate-300">
                         {{ $row->transaction->transaction_date->format('d M Y') }}
                     </div>
                 </td>
-                <td class="px-6 py-4">
+                <td class="p-4 align-middle">
                     @if($row->transaction->medicalRecord)
-                        <div class="text-xs font-bold text-slate-700 dark:text-slate-200">
+                        <div class="text-sm font-medium text-slate-700 dark:text-slate-200">
                             {{ $row->transaction->medicalRecord->patient->name }}
                         </div>
-                        <div class="text-[9px] text-slate-400 italic">Resep: {{ $row->transaction->medicalRecord->code }}</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 italic">Resep: {{ $row->transaction->medicalRecord->code }}</div>
                     @else
-                        <div class="text-xs text-slate-600 italic">{{ $row->transaction->notes ?? 'Adjustment' }}</div>
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic">{{ $row->transaction->notes ?? 'Adjustment' }}</div>
                     @endif
                 </td>
-                <td class="px-6 py-4 text-center">
+                <td class="p-4 align-middle text-center">
                     @if($row->transaction->medicalRecord?->patient)
-                     <span class="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase {{ $row->transaction->medicalRecord?->patient->type == 'karyawan' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700' }}">
+                     <span class="px-2 py-0.5 rounded text-xs font-medium uppercase border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
                         {{ $row->transaction->medicalRecord?->patient->type ?? 'UMUM' }}
                     </span>
                     @else
-                        <span class="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase bg-green-100 text-green-700">
+                        <span class="px-2 py-0.5 rounded text-xs font-medium uppercase border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
                             ADJ/LAIN
                         </span>
                     @endif
                 </td>
-                <td class="px-6 py-4 text-center font-bold text-slate-700 dark:text-slate-200 text-sm">
+                <td class="p-4 align-middle text-center font-medium text-slate-700 dark:text-slate-200 text-sm">
                     {{ number_format($row->quantity, 0, ',', '.') }}
                 </td>
             </tr>
@@ -164,17 +164,17 @@
 
     @empty
         <tr>
-            <td colspan="5" class="px-6 py-20 text-center text-slate-400 italic">Data tidak ditemukan.</td>
+            <td colspan="5" class="p-4 align-middle py-20 text-center text-slate-500 dark:text-slate-400 italic">Data tidak ditemukan.</td>
         </tr>
     @endforelse
 </tbody>
 
         {{-- FOOTER GRAND TOTAL --}}
 @if($data->isNotEmpty())
-    <tfoot class="bg-slate-200 dark:bg-slate-800 text-white">
-        <tr>
-            <td colspan="4" class="px-8 py-4 text-right text-xs text-slate-400  dark:text-slate-300 font-black uppercase tracking-widest">Grand Total Seluruh Obat Keluar</td>
-            <td class="px-6 py-4 text-center text-lg font-black text-rose-400">
+    <tfoot class="border-t border-slate-200 dark:border-slate-800">
+        <tr class="bg-slate-50 dark:bg-slate-900">
+            <td colspan="4" class="p-4 align-middle text-right text-xs text-slate-500 dark:text-slate-400 font-medium uppercase">Grand Total Seluruh Obat Keluar</td>
+            <td class="p-4 align-middle text-center text-lg font-medium text-slate-900 dark:text-slate-50">
                 {{ number_format($grandTotalQty, 0, ',', '.') }}
             </td>
         </tr>

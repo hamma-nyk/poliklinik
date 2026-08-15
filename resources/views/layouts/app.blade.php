@@ -10,7 +10,7 @@
         <link rel="icon" href="{{ asset('logo.ico') }}" type="icon/ico">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
         <script>
                 // 1. Cek apakah user pernah milih tema sebelumnya?
                 const userTheme = localStorage.getItem('theme');
@@ -35,7 +35,7 @@
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     </head>
     
-    <body class="font-sans antialiased bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-200 transition-colors duration-300">
+    <body class="font-sans antialiased bg-slate-50 dark:bg-neutral-950 text-slate-950 dark:text-slate-50 transition-colors duration-300">
         
         <div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden">
 
@@ -55,7 +55,7 @@
                 </header>
 
                 @if (isset($header))
-                    <header class="bg-white dark:bg-slate-800 shadow-sm z-10 border-b border-transparent dark:border-slate-700 transition-colors duration-300"> 
+                    <header class="bg-white dark:bg-neutral-900 shadow-sm z-10 border-b border-transparent dark:border-neutral-700 transition-colors duration-300"> 
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>

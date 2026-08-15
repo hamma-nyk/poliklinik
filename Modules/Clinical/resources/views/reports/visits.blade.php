@@ -2,49 +2,49 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Laporan Kunjungan Pasien') }}
                 </h2>
                 <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Monitoring volume dan riwayat pelayanan klinis</p>
             </div>
             <div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                <span class="hover:text-blue-600 cursor-pointer transition-colors">Laporan</span>
+                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors">Laporan</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-700 dark:text-slate-200">Kunjungan</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-50">Kunjungan</span>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12 bg-slate-50 min-h-screen dark:bg-slate-900 transition-colors duration-300">
+    <div class="py-6 flex-1 space-y-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
             {{-- Filter Panel --}}
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
                 <form method="GET" action="{{ route('clinical.reports.visits') }}" class="flex flex-col md:flex-row gap-6 items-end">
                     <div class="w-full md:w-auto space-y-1.5">
-                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Dari Tanggal</label>
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Dari Tanggal</label>
                         <input type="date" name="start_date" value="{{ $startDate }}" 
-                            class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 text-sm transition-all shadow-sm">
+                            class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                     </div>
                     <div class="w-full md:w-auto space-y-1.5">
-                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Sampai Tanggal</label>
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Sampai Tanggal</label>
                         <input type="date" name="end_date" value="{{ $endDate }}" 
-                            class="w-full rounded-xl border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 focus:border-blue-500 focus:ring-blue-500 text-sm transition-all shadow-sm">
+                            class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto">
                         <a href="{{ route('clinical.reports.index') }}" 
-                        class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all shadow-sm active:scale-95 uppercase tracking-widest group">
-                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
                             Kembali
                         </a>
                         <button type="submit" name="action" value="filter" 
-                            class="flex-1 md:flex-none bg-slate-800 dark:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 dark:hover:bg-blue-700 transition-all shadow-lg shadow-slate-200 dark:shadow-none">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90">
                             Tampilkan
                         </button>
                         <button type="submit" name="action" value="pdf" formtarget="_blank" 
-                            class="flex-1 md:flex-none bg-rose-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-rose-700 transition-all flex items-center justify-center shadow-lg shadow-rose-200 dark:shadow-none">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                             Export PDF
                         </button>
@@ -53,60 +53,60 @@
             </div>
 
             {{-- Results Table --}}
-            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-2xl border border-slate-200 dark:border-slate-700">
-                <div class="px-8 py-5 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div class="flex items-center">
                         <div class="w-2 h-2 bg-blue-500 rounded-full mr-3 animate-pulse"></div>
-                        <span class="font-bold text-slate-700 dark:text-slate-200">
+                        <span class="font-medium">
                             Total Kunjungan: {{ number_format($data->count(), 0, ',', '.') }} Pasien
                         </span>
                     </div>
-                    <span class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest italic">Data terverifikasi sistem</span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">Data terverifikasi sistem</span>
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-100 dark:divide-slate-700">
-                        <thead>
-                            <tr class="bg-slate-50/30 dark:bg-slate-900/20">
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Waktu Kunjungan</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Identitas Pasien</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Status</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Diagnosa Klinis</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Dokter</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Perawat</th>
-                                <th class="px-6 py-4 text-left text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Terapi Obat (Item & Qty)</th>
+                    <table class="w-full caption-bottom text-sm">
+                        <thead class="[&_tr]:border-b">
+                            <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Waktu Kunjungan</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Identitas Pasien</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Status</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Diagnosa Klinis</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Dokter</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Perawat</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Terapi Obat (Item & Qty)</th>
 
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                        <tbody class="[&_tr:last-child]:border-0">
                             @forelse($data as $row)
-                            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-700/40 transition-colors group">
-                                <td class="px-6 py-5 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">
-                                    <div class="font-bold text-slate-800 dark:text-slate-100 uppercase">{{ $row->created_at->format('d M Y') }}</div>
-                                    <div class="text-[11px] text-slate-400 dark:text-slate-500 font-medium tracking-tight">{{ $row->created_at->format('H:i') }} WIB</div>
+                            <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                <td class="p-4 align-middle text-slate-600 dark:text-slate-300">
+                                    <div class="font-medium text-slate-800 dark:text-slate-100 uppercase">{{ $row->created_at->format('d M Y') }}</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400">{{ $row->created_at->format('H:i') }} WIB</div>
                                 </td>
-                                <td class="px-6 py-5 whitespace-nowrap">
-                                    <div class="text-sm font-bold text-slate-800 dark:text-slate-100">{{ $row->patient->name }}</div>
+                                <td class="p-4 align-middle">
+                                    <div class="text-sm font-medium text-slate-800 dark:text-slate-100">{{ $row->patient->name }}</div>
                                     @if($row->jenis_kunjungan == 'Poli Umum')
-                                    <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-0.5 tracking-tighter"><a href="{{ route('clinical.records.index') }}?search={{ $row->code }}" class="hover:text-amber-600 transition-colors">RM: {{ $row->code }}</a></div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"><a href="{{ route('clinical.records.index') }}?search={{ $row->code }}" class="hover:text-amber-600 transition-colors">RM: {{ $row->code }}</a></div>
                                     @else
-                                    <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-0.5 tracking-tighter"><a href="{{ route('clinical.lab.index') }}?search={{ $row->code }}" class="hover:text-amber-600 transition-colors">LAB: {{ $row->code }}</a></div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"><a href="{{ route('clinical.lab.index') }}?search={{ $row->code }}" class="hover:text-amber-600 transition-colors">LAB: {{ $row->code }}</a></div>
                                     @endif
                                 </td>
-                                <td class="px-6 py-5 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-tighter border {{ $row->patient->type == 'karyawan' ? 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50' : 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800/50' }}">
+                                <td class="p-4 align-middle">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium uppercase border {{ $row->patient->type == 'karyawan' ? 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50' : 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800/50' }}">
                                         {{ $row->patient->type }}
                                     </span>
                                     <br>
-                                    <div class="text-[11px] font-mono text-slate-400 dark:text-slate-500 mt-0.5 tracking-tighter">{{ $row->patient->type == 'karyawan' ? 'NIK:' : 'KTP:' }} {{ $row->patient->nik ?? $row->patient->ktp }}</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ $row->patient->type == 'karyawan' ? 'NIK:' : 'KTP:' }} {{ $row->patient->nik ?? $row->patient->ktp }}</div>
                                 </td>
-                                <td class="px-6 py-5">
+                                <td class="p-4 align-middle">
                                     @if($row->jenis_kunjungan == 'Poli Umum')
                                         <div class="text-sm text-slate-700 dark:text-slate-300 line-clamp-1 max-w-xs font-medium" title="{{ $row->diagnosis->name ?? $row->diagnosa }}">
                                             {{ $row->diagnosis->name ?? $row->diagnosa }}
                                         </div>
                                         @if($row->diagnosis)
-                                        <div class="text-[10px] font-mono text-slate-400 dark:text-slate-500 uppercase">{{ $row->diagnosis->code }}</div>
+                                        <div class="text-xs text-slate-500 dark:text-slate-400 uppercase">{{ $row->diagnosis->code }}</div>
                                         @endif
                                     @else
                                         <span style="font-size: 9px;">
@@ -116,42 +116,42 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-5 whitespace-nowrap">
+                                <td class="p-4 align-middle">
                                     <div class="flex items-center">
                                         @php
                                             $name = $row->doctor->name ?? '-';
                                         @endphp
 
                                         @if($row->doctor == null)
-                                            <span class="text-sm text-slate-400 dark:text-slate-500 italic">-</span>
+                                            <span class="text-sm text-slate-500 dark:text-slate-400 italic">-</span>
                                         @else
-                                        <div class="h-9 w-9 rounded-xl bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 border border-blue-200 dark:border-blue-700 flex items-center justify-center text-xs font-black mr-3 shadow-sm">
+                                        <div class="h-9 w-9 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-xs font-medium mr-3">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div>
-                                            <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
-                                            <div class="text-[10px] text-blue-500 uppercase tracking-widest font-bold">
+                                            <div class="text-sm font-medium text-slate-900 dark:text-slate-200">{{ $name }}</div>
+                                            <div class="text-xs text-slate-500 dark:text-slate-400">
                                                 Dokter
                                             </div>
                                         </div>
                                         @endif
                                     </div>
                                 </td>
-                                <td class="px-6 py-5 whitespace-nowrap">
+                                <td class="p-4 align-middle">
                                     <div class="flex items-center">
                                         @php
                                             $name = $row->nurse->nama ?? '-';
                                         @endphp
 
                                         @if($row->nurse == null)
-                                            <span class="text-sm text-slate-400 dark:text-slate-500 italic">-</span>
+                                            <span class="text-sm text-slate-500 dark:text-slate-400 italic">-</span>
                                         @else
-                                        <div class="h-9 w-9 rounded-xl bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 border border-pink-200 dark:border-pink-700 flex items-center justify-center text-xs font-black mr-3 shadow-sm">
+                                        <div class="h-9 w-9 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-xs font-medium mr-3">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div>
-                                            <div class="text-sm font-bold text-slate-900 dark:text-slate-200">{{ $name }}</div>
-                                            <div class="text-[10px] text-pink-500 uppercase tracking-widest font-bold">
+                                            <div class="text-sm font-medium text-slate-900 dark:text-slate-200">{{ $name }}</div>
+                                            <div class="text-xs text-slate-500 dark:text-slate-400">
                                                 Perawat
                                             </div>
                                         </div>
@@ -159,26 +159,22 @@
                                     </div>
                                 </td>
                                 {{-- KOLOM DETAIL OBAT (RAPID VIEW) --}}
-                                <td class="px-6 py-5 bg-slate-50/30 dark:bg-slate-800/30 min-w-[250px]">
+                                <td class="p-4 align-middle min-w-[250px]">
                                     @if($row->medicineTransactions->isNotEmpty())
                                         <div class="space-y-1.5">
                                             @foreach($row->medicineTransactions as $trans)
                                                 @foreach($trans->items as $item)
-                                                <div class="flex items-start justify-between gap-4 text-[10px] border-b border-slate-100 dark:border-slate-700/50 pb-1 last:border-0 group-hover:border-indigo-200 transition-colors">
+                                                <div class="flex items-start justify-between gap-4 text-xs border-b border-slate-100 dark:border-slate-800 pb-1 last:border-0 transition-colors">
                                                     <div class="flex flex-col">
-                                                        <span class="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-tighter">{{ $item->medicine->name }}</span>
-                                                        <span class="text-slate-400 dark:text-slate-500 italic">{{ number_format($item->quantity) }} {{ $item->medicine->unit }}</span>
+                                                        <span class="font-medium text-slate-700 dark:text-slate-200 uppercase">{{ $item->medicine->name }}</span>
+                                                        <span class="text-slate-500 dark:text-slate-400 italic">{{ number_format($item->quantity) }} {{ $item->medicine->unit }}</span>
                                                     </div>
-                                                    <!-- <div class="text-right flex flex-col">
-                                                        <span class="font-mono text-slate-400 dark:text-slate-500">@ {{ number_format($item->price_at_moment, 0, ',', '.') }}</span>
-                                                        <span class="font-bold text-indigo-600 dark:text-indigo-400 leading-none">Rp{{ number_format($item->quantity * $item->price_at_moment, 0, ',', '.') }}</span>
-                                                    </div> -->
                                                 </div>
                                                 @endforeach
                                             @endforeach
                                         </div>
                                     @else
-                                        <span class="text-[10px] text-slate-400 dark:text-slate-600 italic flex items-center">
+                                        <span class="text-xs text-slate-500 dark:text-slate-400 italic flex items-center">
                                             <svg class="w-3 h-3 mr-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
                                             Tanpa Terapi Obat
                                         </span>
@@ -187,13 +183,10 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-20 text-center">
+                                <td colspan="7" class="p-4 align-middle text-center py-20">
                                     <div class="flex flex-col items-center justify-center">
-                                        <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-full mb-4">
-                                            <svg class="w-12 h-12 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                        </div>
-                                        <h3 class="text-slate-500 dark:text-slate-400 font-bold">Data Tidak Ditemukan</h3>
-                                        <p class="text-slate-400 dark:text-slate-500 text-xs mt-1">Ganti rentang tanggal untuk melihat data lainnya.</p>
+                                        <h3 class="text-slate-500 dark:text-slate-400 font-medium">Data Tidak Ditemukan</h3>
+                                        <p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Ganti rentang tanggal untuk melihat data lainnya.</p>
                                     </div>
                                 </td>
                             </tr>
