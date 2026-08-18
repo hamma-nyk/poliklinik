@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-slate-800">{{ __('Master Departemen (Bagian)') }}</h2>
+        <h2 class="font-semibold text-xl text-neutral-800">{{ __('Master Departemen (Bagian)') }}</h2>
     </x-slot>
 
     <div class="py-12" x-data="{ openImport: false }">
@@ -21,18 +21,18 @@
                 </a>
             </div>
 
-            <div class="bg-white shadow-sm sm:rounded-xl border border-slate-200 overflow-hidden">
+            <div class="bg-white shadow-sm sm:rounded-xl border border-neutral-200 overflow-hidden">
                 <table class="w-full text-sm text-left">
-                    <thead class="bg-slate-100 text-slate-500 uppercase font-bold">
+                    <thead class="bg-neutral-100 text-neutral-500 uppercase font-bold">
                         <tr>
                             <th class="px-6 py-3 w-20">Kode</th>
                             <th class="px-6 py-3">Nama Bagian</th>
                             <th class="px-6 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody class="divide-y divide-neutral-100">
                         @foreach($departments as $dept)
-                        <tr class="hover:bg-slate-50">
+                        <tr class="hover:bg-neutral-50">
                             <td class="px-6 py-4 font-mono font-bold">{{ $dept->code }}</td>
                             <td class="px-6 py-4">{{ $dept->name }}</td>
                             <td class="px-6 py-4 text-right">
@@ -46,7 +46,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="p-4 border-t border-slate-200">
+                <div class="p-4 border-t border-neutral-200">
                     {{ $departments->links() }}
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="flex justify-end gap-2">
-                        <button type="button" @click="openImport = false" class="px-4 py-2 text-slate-500">Batal</button>
+                        <button type="button" @click="openImport = false" class="px-4 py-2 text-neutral-500">Batal</button>
                         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold">Upload</button>
                     </div>
                 </form>

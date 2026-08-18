@@ -7,7 +7,7 @@
             <h2 class="text-lg font-bold text-red-700 dark:text-red-400">
                 {{ __('Hapus Akun') }}
             </h2>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                 {{ __("Setelah akun dihapus, semua data dan sumber daya akan dihapus secara permanen.") }}
             </p>
         </div>
@@ -18,15 +18,15 @@
     </x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6 dark:bg-slate-800">
+        <form method="post" action="{{ route('profile.destroy') }}" class="p-6 dark:bg-neutral-800">
             @csrf
             @method('delete')
 
-            <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100">
+            <h2 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">
                 {{ __('Apakah Anda yakin ingin menghapus akun?') }}
             </h2>
 
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                 {{ __("Setelah akun dihapus, semua data akan hilang permanen. Masukkan password Anda untuk konfirmasi.") }}
             </p>
 
@@ -34,14 +34,14 @@
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
                 <x-text-input id="password" name="password" type="password" 
-                    class="mt-1 block w-3/4 rounded-xl border-red-300 dark:border-red-700 bg-white dark:bg-slate-900 text-red-900 dark:text-red-300 placeholder-red-300 dark:placeholder-red-700 focus:border-red-500 focus:ring-red-500" 
+                    class="mt-1 block w-3/4 rounded-xl border-red-300 dark:border-red-700 bg-white dark:bg-neutral-900 text-red-900 dark:text-red-300 placeholder-red-300 dark:placeholder-red-700 focus:border-red-500 focus:ring-red-500" 
                     placeholder="{{ __('Password') }}" />
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')" class="rounded-xl mr-3 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
+                <x-secondary-button x-on:click="$dispatch('close')" class="rounded-xl mr-3 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600">
                     {{ __('Batal') }}
                 </x-secondary-button>
 

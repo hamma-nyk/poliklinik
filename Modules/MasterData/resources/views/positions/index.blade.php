@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-slate-800">{{ __('Master Jabatan') }}</h2>
+        <h2 class="font-semibold text-xl text-neutral-800">{{ __('Master Jabatan') }}</h2>
     </x-slot>
 
     <div class="py-12" x-data="{ openImport: false }">
@@ -21,24 +21,24 @@
                 </a>
             </div>
 
-            <div class="bg-white shadow-sm sm:rounded-xl border border-slate-200 overflow-hidden">
+            <div class="bg-white shadow-sm sm:rounded-xl border border-neutral-200 overflow-hidden">
                 <table class="w-full text-sm text-left">
-                    <thead class="bg-slate-100 text-slate-500 uppercase font-bold">
+                    <thead class="bg-neutral-100 text-neutral-500 uppercase font-bold">
                         <tr>
                             <th class="px-6 py-3 w-24">Kode</th>
                             <th class="px-6 py-3">Nama Jabatan</th>
                             <th class="px-6 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody class="divide-y divide-neutral-100">
                         @forelse($positions as $pos)
-                        <tr class="hover:bg-slate-50 transition">
+                        <tr class="hover:bg-neutral-50 transition">
                             <td class="px-6 py-4">
-                                <span class="bg-slate-100 text-slate-700 font-mono font-bold px-2 py-1 rounded border border-slate-300 text-xs">
+                                <span class="bg-neutral-100 text-neutral-700 font-mono font-bold px-2 py-1 rounded border border-neutral-300 text-xs">
                                     {{ $pos->code }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 font-semibold text-slate-700">{{ $pos->name }}</td>
+                            <td class="px-6 py-4 font-semibold text-neutral-700">{{ $pos->name }}</td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('master.positions.edit', $pos->id) }}" class="text-blue-600 hover:underline font-bold mr-3">Edit</a>
                                 <form action="{{ route('master.positions.destroy', $pos->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus jabatan ini?');">
@@ -49,14 +49,14 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="px-6 py-8 text-center text-slate-400 italic">
+                            <td colspan="3" class="px-6 py-8 text-center text-neutral-400 italic">
                                 Belum ada data jabatan.
                             </td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div class="p-4 border-t border-slate-200 bg-slate-50">
+                <div class="p-4 border-t border-neutral-200 bg-neutral-50">
                     {{ $positions->links() }}
                 </div>
             </div>
@@ -69,7 +69,7 @@
                  x-transition:enter-end="opacity-100 scale-100"
                  @click.away="openImport = false">
                 
-                <h3 class="text-lg font-bold mb-4 text-slate-800 flex items-center">
+                <h3 class="text-lg font-bold mb-4 text-neutral-800 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     Import Data Jabatan
                 </h3>
@@ -77,8 +77,8 @@
                 <form action="{{ route('master.positions.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
-                        <label class="block text-sm font-bold mb-2 text-slate-600">Pilih File (.xlsx / .csv)</label>
-                        <input type="file" name="file" class="w-full border rounded-lg p-2 text-sm bg-slate-50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
+                        <label class="block text-sm font-bold mb-2 text-neutral-600">Pilih File (.xlsx / .csv)</label>
+                        <input type="file" name="file" class="w-full border rounded-lg p-2 text-sm bg-neutral-50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
                     </div>
 
                     <div class="mb-6 bg-blue-50 p-4 rounded-lg text-xs text-blue-700 border border-blue-100">
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="flex justify-end gap-3">
-                        <button type="button" @click="openImport = false" class="px-4 py-2 text-slate-500 hover:text-slate-700 font-bold">Batal</button>
+                        <button type="button" @click="openImport = false" class="px-4 py-2 text-neutral-500 hover:text-neutral-700 font-bold">Batal</button>
                         <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg font-bold hover:bg-green-700 shadow-lg transition">Upload Data</button>
                     </div>
                 </form>

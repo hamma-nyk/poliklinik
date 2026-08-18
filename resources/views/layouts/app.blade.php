@@ -35,7 +35,7 @@
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     </head>
     
-    <body class="font-sans antialiased bg-slate-50 dark:bg-neutral-950 text-slate-950 dark:text-slate-50 transition-colors duration-300">
+    <body class="font-sans antialiased bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 transition-colors duration-300">
         
         <div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden">
 
@@ -43,15 +43,15 @@
 
             <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
                 
-                <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 md:hidden"> <!-- transition-colors duration-300 -->
+                <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700 md:hidden"> <!-- transition-colors duration-300 -->
                     <div class="flex items-center">
-                        <button @click="sidebarOpen = true" class="text-slate-500 dark:text-slate-400 focus:outline-none hover:text-slate-700 dark:hover:text-slate-200">
+                        <button @click="sidebarOpen = true" class="text-neutral-500 dark:text-neutral-400 focus:outline-none hover:text-neutral-700 dark:hover:text-neutral-200">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
                         </button>
                     </div>
-                    <div class="font-bold text-slate-700 dark:text-slate-200">Poliklinik System</div>
+                    <div class="font-bold text-neutral-700 dark:text-neutral-200">Poliklinik System</div>
                 </header>
 
                 @if (isset($header))

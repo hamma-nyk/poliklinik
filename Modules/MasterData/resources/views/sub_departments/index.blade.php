@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-slate-800">{{ __('Master Sub Bagian') }}</h2>
+        <h2 class="font-semibold text-xl text-neutral-800">{{ __('Master Sub Bagian') }}</h2>
     </x-slot>
 
     <div class="py-12" x-data="{ openImport: false }">
@@ -21,19 +21,19 @@
                 </a>
             </div>
 
-            <div class="bg-white shadow-sm sm:rounded-xl border border-slate-200 overflow-hidden">
+            <div class="bg-white shadow-sm sm:rounded-xl border border-neutral-200 overflow-hidden">
                 <table class="w-full text-sm text-left">
-                    <thead class="bg-slate-100 text-slate-500 uppercase font-bold">
+                    <thead class="bg-neutral-100 text-neutral-500 uppercase font-bold">
                         <tr>
                             <th class="px-6 py-3 w-24">Kode</th>
                             <th class="px-6 py-3">Nama Sub Bagian</th>
                             <th class="px-6 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody class="divide-y divide-neutral-100">
                         @forelse($subDepartments as $item)
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 font-mono font-bold text-slate-700">{{ $item->code }}</td>
+                        <tr class="hover:bg-neutral-50">
+                            <td class="px-6 py-4 font-mono font-bold text-neutral-700">{{ $item->code }}</td>
                             <td class="px-6 py-4">{{ $item->name }}</td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('master.sub-departments.edit', $item->id) }}" class="text-blue-600 hover:underline font-bold mr-3">Edit</a>
@@ -45,12 +45,12 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="px-6 py-6 text-center text-slate-400 italic">Belum ada data sub bagian.</td>
+                            <td colspan="3" class="px-6 py-6 text-center text-neutral-400 italic">Belum ada data sub bagian.</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div class="p-4 border-t border-slate-200">
+                <div class="p-4 border-t border-neutral-200">
                     {{ $subDepartments->links() }}
                 </div>
             </div>
@@ -58,13 +58,13 @@
 
         <div x-show="openImport" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm" x-cloak>
             <div class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6" @click.away="openImport = false">
-                <h3 class="text-lg font-bold mb-4 text-slate-800">Import Sub Bagian</h3>
+                <h3 class="text-lg font-bold mb-4 text-neutral-800">Import Sub Bagian</h3>
                 
                 <form action="{{ route('master.sub-departments.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
-                        <label class="block text-sm font-bold mb-2 text-slate-600">Pilih File (.xlsx / .csv)</label>
-                        <input type="file" name="file" class="w-full border rounded-lg p-2 text-sm bg-slate-50" required>
+                        <label class="block text-sm font-bold mb-2 text-neutral-600">Pilih File (.xlsx / .csv)</label>
+                        <input type="file" name="file" class="w-full border rounded-lg p-2 text-sm bg-neutral-50" required>
                     </div>
 
                     <div class="mb-6 bg-blue-50 p-4 rounded-lg text-xs text-blue-700 border border-blue-100">
@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="flex justify-end gap-3">
-                        <button type="button" @click="openImport = false" class="px-4 py-2 text-slate-500 hover:text-slate-700 font-bold">Batal</button>
+                        <button type="button" @click="openImport = false" class="px-4 py-2 text-neutral-500 hover:text-neutral-700 font-bold">Batal</button>
                         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-700 shadow-lg">Upload Data</button>
                     </div>
                 </form>

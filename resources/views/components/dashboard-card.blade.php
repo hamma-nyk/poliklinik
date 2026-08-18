@@ -1,10 +1,10 @@
 @props(['route', 'label', 'count', 'icon', 'activeColor', 'bgColor', 'darkBgColor', 'hoverBg'])
 
 <a href="{{ route($route) }}" 
-   class="group rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900 {{ $activeColor }}">
+   class="group rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50 transition-all hover:bg-neutral-50 dark:hover:bg-neutral-800 {{ $activeColor }}">
     <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
         <h3 class="tracking-tight text-sm font-medium">{{ $label }}</h3>
-        <div class="h-4 w-4 text-slate-500 dark:text-slate-400">
+        <div class="h-4 w-4 text-neutral-500 dark:text-neutral-400">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $icon }}"></path>
             </svg>

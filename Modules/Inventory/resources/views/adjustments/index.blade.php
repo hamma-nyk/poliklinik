@@ -5,12 +5,12 @@
                 <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Penyesuaian Stok') }}
                 </h2>
-                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Koreksi manual inventaris (Rusak, Hilang, atau Temuan)</p>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Koreksi manual inventaris (Rusak, Hilang, atau Temuan)</p>
             </div>
-            <div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors">Inventaris</span>
+            <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+                <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Inventaris</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-900 dark:text-slate-50">Adjustment</span>
+                <span class="font-semibold text-neutral-900 dark:text-neutral-50">Adjustment</span>
             </div>
         </div>
     </x-slot>
@@ -29,25 +29,25 @@
             @endif
 
             {{-- Toolbar --}}
-            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
                 <div class="flex items-center gap-4">
-                    <div class="p-3 bg-indigo-50 dark:bg-slate-700 rounded-xl text-indigo-600 dark:text-indigo-400 border border-transparent dark:border-slate-600">
+                    <div class="p-3 bg-indigo-50 dark:bg-neutral-700 rounded-xl text-indigo-600 dark:text-indigo-400 border border-transparent dark:border-neutral-600">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-tight">Log Koreksi Stok</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Menampilkan mutasi penyesuaian manual</p>
+                        <h3 class="font-bold text-neutral-800 dark:text-neutral-100 uppercase tracking-tight">Log Koreksi Stok</h3>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Menampilkan mutasi penyesuaian manual</p>
                     </div>
                 </div>
                 <div class="mb-4 flex gap-2">
-                <a href="{{ route('inventory.adjustments.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 w-full md:w-auto uppercase tracking-wider">
+                <a href="{{ route('inventory.adjustments.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full md:w-auto uppercase tracking-wider">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
                     Buat Penyesuaian
                 </a>
                 
     {{-- Tombol untuk membuka Modal Filter --}}
     <div x-data="{ openFilter: false }" class="relative">
-        <button @click="openFilter = !openFilter" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+        <button @click="openFilter = !openFilter" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             Laporan Per Periode
         </button>
@@ -55,24 +55,24 @@
         {{-- Dropdown / Modal Kecil --}}
         <div x-show="openFilter" 
              @click.outside="openFilter = false"
-             class="absolute right-0 z-50 mt-2 w-80 rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-4"
+             class="absolute right-0 z-50 mt-2 w-80 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-4"
              style="display: none;">
             
             <form action="{{ route('inventory.stock_adjustment.export_period') }}" method="GET" target="_blank">
                 <div class="mb-3">
                     <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-1 block">Dari Tanggal</label>
-                    <input type="date" name="start_date" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required value="{{ date('Y-m-01') }}">
+                    <input type="date" name="start_date" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" required value="{{ date('Y-m-01') }}">
                 </div>
                 <div class="mb-4">
                     <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-1 block">Sampai Tanggal</label>
-                    <input type="date" name="end_date" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" required value="{{ date('Y-m-d') }}">
+                    <input type="date" name="end_date" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" required value="{{ date('Y-m-d') }}">
                 </div>
 
                 <div class="flex gap-2">
-                    <button type="submit" name="type" value="pdf" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex-1">
+                    <button type="submit" name="type" value="pdf" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 flex-1">
                         PDF
                     </button>
-                    <button type="submit" name="type" value="excel" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 flex-1">
+                    <button type="submit" name="type" value="excel" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 flex-1">
                         Excel
                     </button>
                 </div>
@@ -83,29 +83,29 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 overflow-hidden transition-all">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Tanggal</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Item Obat</th>
-                                <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400">Tipe Adjustment</th>
-                                <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400">Kuantitas</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Alasan / Catatan</th>
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Tanggal</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Item Obat</th>
+                                <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Tipe Adjustment</th>
+                                <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Kuantitas</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Alasan / Catatan</th>
                             </tr>
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($adjustments as $trx)
                                 @foreach($trx->items as $item)
-                                <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
                                     <td class="p-4 align-middle whitespace-nowrap">
                                         <div class="font-medium">{{ \Carbon\Carbon::parse($trx->transaction_date)->format('d M Y') }}</div>
-                                        <div class="text-xs text-slate-500 dark:text-slate-400">{{ $trx->created_at->format('H:i') }} WIB</div>
+                                        <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $trx->created_at->format('H:i') }} WIB</div>
                                     </td>
                                     <td class="p-4 align-middle">
                                         <div class="font-medium">{{ $item->medicine->name }}</div>
-                                        <div class="text-xs text-slate-500 dark:text-slate-400">{{ $item->medicine->code }}</div>
+                                        <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $item->medicine->code }}</div>
                                     </td>
                                     <td class="p-4 align-middle text-center">
                                         @if($trx->type == 'in')
@@ -122,7 +122,7 @@
                                         <div class="text-md font-bold tabular-nums {{ $trx->type == 'in' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400' }}">
                                             {{ $trx->type == 'in' ? '+' : '-' }}{{ number_format($item->quantity) }}
                                         </div>
-                                        <div class="text-[10px] text-slate-400 uppercase font-semibold">{{ $item->medicine->unit }}</div>
+                                        <div class="text-[10px] text-neutral-400 uppercase font-semibold">{{ $item->medicine->unit }}</div>
                                     </td>
                                     <td class="p-4 align-middle">
                                         <div class="text-sm">
@@ -135,11 +135,11 @@
                                 <tr>
                                     <td colspan="5" class="px-6 py-24 text-center">
                                         <div class="flex flex-col items-center justify-center">
-                                            <div class="p-6 bg-slate-50 dark:bg-slate-700 rounded-full mb-4 text-slate-300 dark:text-slate-500 transition-colors border border-dashed dark:border-slate-600">
+                                            <div class="p-6 bg-neutral-50 dark:bg-neutral-700 rounded-full mb-4 text-neutral-300 dark:text-neutral-500 transition-colors border border-dashed dark:border-neutral-600">
                                                 <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                                             </div>
-                                            <h3 class="text-slate-500 dark:text-slate-400 font-bold text-lg uppercase tracking-tight">Belum ada penyesuaian</h3>
-                                            <p class="text-slate-400 dark:text-slate-500 text-sm mt-1 max-w-xs mx-auto italic leading-relaxed">Semua riwayat koreksi stok manual akan tercatat secara permanen di sini.</p>
+                                            <h3 class="text-neutral-500 dark:text-neutral-400 font-bold text-lg uppercase tracking-tight">Belum ada penyesuaian</h3>
+                                            <p class="text-neutral-400 dark:text-neutral-500 text-sm mt-1 max-w-xs mx-auto italic leading-relaxed">Semua riwayat koreksi stok manual akan tercatat secara permanen di sini.</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -150,7 +150,7 @@
                 
                 {{-- Pagination --}}
                 @if($adjustments->hasPages())
-                    <div class="border-t border-slate-200 dark:border-slate-800 p-4">
+                    <div class="border-t border-neutral-200 dark:border-neutral-800 p-4">
                         {{ $adjustments->links() }}
                     </div>
                 @endif

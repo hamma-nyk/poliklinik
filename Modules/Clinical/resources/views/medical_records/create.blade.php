@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h2 class="text-2xl font-semibold tracking-tight text-slate-800 leading-tight dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 leading-tight dark:text-neutral-100">
                     {{ __('Input Rekam Medis Baru') }}
                 </h2>
-                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Pencatatan klinis, diagnosa, dan peresepan obat</p>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Pencatatan klinis, diagnosa, dan peresepan obat</p>
             </div>
-            <a href="{{ route('clinical.records.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+            <a href="{{ route('clinical.records.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Batal & Kembali
             </a>
@@ -23,9 +23,9 @@
                     
                     {{-- SIDEBAR: IDENTITAS & VITAL --}}
 <div class="lg:col-span-1 space-y-6">
-    <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
-        <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
-            <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
+    <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6 flex items-center">
+            <span class="bg-neutral-900 dark:bg-neutral-50 w-1 h-4 rounded-full mr-3"></span>
             1. Administrasi
         </h3>
         
@@ -104,7 +104,7 @@
                      }"
                      @click.outside="isOpen = false">
 
-                    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-slate-700 dark:text-slate-300">
+                    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-neutral-700 dark:text-neutral-300">
                         Pilih Pasien <span class="text-destructive">*</span>
                     </label>
 
@@ -117,14 +117,14 @@
                                @keydown.escape="isOpen = false"
                                @input="isOpen = true; selectedId = ''" 
                                placeholder="Ketik Nama atau Kode Pasien..."
-                               class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-10 cursor-pointer"
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 pr-10 cursor-pointer"
                                autocomplete="off">
 
                         <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
-                            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-slate-400 hover:text-red-500">
+                            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-neutral-400 hover:text-red-500">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </button>
-                            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-slate-400">
+                            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-neutral-400">
                                 <svg class="w-4 h-4 transform transition-transform" :class="isOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                         </div>
@@ -137,19 +137,19 @@
                          x-transition:leave="transition ease-in duration-75"
                          x-transition:leave-start="opacity-100 scale-100"
                          x-transition:leave-end="opacity-0 scale-95"
-                         class="absolute w-full mt-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1"
+                         class="absolute w-full mt-1 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1"
                          style="display: none;">
                         
                         <template x-for="option in filteredOptions" :key="option.id">
                             <div @click="selectOption(option)"
-                                 class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 justify-between"
-                                 :class="selectedId == option.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50' : 'text-slate-700 dark:text-slate-200'">
+                                 class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 justify-between"
+                                 :class="selectedId == option.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-200'">
                                 <span class="font-medium" x-text="option.label"></span>
                                 <svg x-show="selectedId == option.id" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                         </template>
 
-                        <div x-show="filteredOptions.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">
+                        <div x-show="filteredOptions.length === 0" class="px-4 py-3 text-sm text-neutral-400 italic text-center">
                             Pasien tidak ditemukan.
                         </div>
                     </div>
@@ -250,7 +250,7 @@
 
     {{-- ================= FORM DOKTER ================= --}}
     <div class="relative" @click.outside="docOpen = false">
-        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-slate-700 dark:text-slate-300">
+        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-neutral-700 dark:text-neutral-300">
             Dokter Pemeriksa <span x-show="!nurId" class="text-destructive">*</span>
         </label>
         
@@ -260,16 +260,16 @@
             <input type="text" x-model="docSearch" 
                    @click="docOpen = true" @input="docOpen = true; docId = ''" @keydown.escape="docOpen = false"
                    placeholder="-- Cari Dokter --"
-                   class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-10 cursor-pointer"
-                   :class="{'border-red-500': !docId && !nurId, 'border-slate-200': docId || nurId}"
+                   class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 pr-10 cursor-pointer"
+                   :class="{'border-red-500': !docId && !nurId, 'border-neutral-200': docId || nurId}"
                    autocomplete="off">
             
             {{-- Tombol Clear / Arrow --}}
             <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                <button type="button" x-show="docId || docSearch" @click="clearDoc()" class="text-slate-400 hover:text-red-500">
+                <button type="button" x-show="docId || docSearch" @click="clearDoc()" class="text-neutral-400 hover:text-red-500">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
-                <button type="button" x-show="!docId && !docSearch" @click="docOpen = !docOpen" class="text-slate-400">
+                <button type="button" x-show="!docId && !docSearch" @click="docOpen = !docOpen" class="text-neutral-400">
                     <svg class="w-4 h-4 transition-transform" :class="docOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
             </div>
@@ -277,15 +277,15 @@
 
         {{-- Dropdown Body Dokter --}}
         <div x-show="docOpen" style="display: none;" 
-             class="absolute w-full mt-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1">
+             class="absolute w-full mt-1 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1">
             <template x-for="item in filteredDoctors" :key="item.id">
-                <div @click="selectDoc(item)" class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 justify-between"
-                     :class="docId == item.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50' : 'text-slate-700 dark:text-slate-200'">
+                <div @click="selectDoc(item)" class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 justify-between"
+                     :class="docId == item.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-200'">
                     <span class="font-medium" x-text="item.label"></span>
                     <svg x-show="docId == item.id" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                 </div>
             </template>
-            <div x-show="filteredDoctors.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">Dokter tidak ditemukan.</div>
+            <div x-show="filteredDoctors.length === 0" class="px-4 py-3 text-sm text-neutral-400 italic text-center">Dokter tidak ditemukan.</div>
         </div>
         
         <p x-show="!docId && !nurId" class="text-xs text-red-500 mt-1">Wajib diisi jika tidak memilih perawat.</p>
@@ -294,7 +294,7 @@
 
     {{-- ================= FORM PERAWAT ================= --}}
     <div class="relative" @click.outside="nurOpen = false">
-        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-slate-700 dark:text-slate-300">
+        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-neutral-700 dark:text-neutral-300">
             Perawat / Asisten <span x-show="!docId" class="text-destructive">*</span>
         </label>
         
@@ -304,15 +304,15 @@
             <input type="text" x-model="nurSearch" 
                    @click="nurOpen = true" @input="nurOpen = true; nurId = ''" @keydown.escape="nurOpen = false"
                    placeholder="-- Cari Perawat --"
-                   class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-10 cursor-pointer"
-                   :class="{'border-red-500': !docId && !nurId, 'border-slate-200': docId || nurId}"
+                   class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 pr-10 cursor-pointer"
+                   :class="{'border-red-500': !docId && !nurId, 'border-neutral-200': docId || nurId}"
                    autocomplete="off">
 
             <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                <button type="button" x-show="nurId || nurSearch" @click="clearNur()" class="text-slate-400 hover:text-red-500">
+                <button type="button" x-show="nurId || nurSearch" @click="clearNur()" class="text-neutral-400 hover:text-red-500">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
-                <button type="button" x-show="!nurId && !nurSearch" @click="nurOpen = !nurOpen" class="text-slate-400">
+                <button type="button" x-show="!nurId && !nurSearch" @click="nurOpen = !nurOpen" class="text-neutral-400">
                     <svg class="w-4 h-4 transition-transform" :class="nurOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
             </div>
@@ -320,15 +320,15 @@
 
         {{-- Dropdown Body Perawat --}}
         <div x-show="nurOpen" style="display: none;" 
-             class="absolute w-full mt-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1">
+             class="absolute w-full mt-1 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1">
             <template x-for="item in filteredNurses" :key="item.id">
-                <div @click="selectNur(item)" class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 justify-between"
-                     :class="nurId == item.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50' : 'text-slate-700 dark:text-slate-200'">
+                <div @click="selectNur(item)" class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 justify-between"
+                     :class="nurId == item.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-200'">
                     <span class="font-medium" x-text="item.label"></span>
                     <svg x-show="nurId == item.id" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                 </div>
             </template>
-            <div x-show="filteredNurses.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">Perawat tidak ditemukan.</div>
+            <div x-show="filteredNurses.length === 0" class="px-4 py-3 text-sm text-neutral-400 italic text-center">Perawat tidak ditemukan.</div>
         </div>
 
         <p x-show="!docId && !nurId" class="text-xs text-red-500 mt-1">Wajib diisi jika tidak memilih dokter.</p>
@@ -336,33 +336,33 @@
 
     {{-- Indikator Status Global --}}
     <div class="p-3 rounded-md text-sm flex items-center transition-colors duration-300"
-         :class="(docId || nurId) ? 'bg-emerald-50 text-emerald-900 border border-emerald-200 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-200' : 'bg-slate-100 text-slate-500 border border-slate-200'">
+         :class="(docId || nurId) ? 'bg-emerald-50 text-emerald-900 border border-emerald-200 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-200' : 'bg-neutral-100 text-neutral-500 border border-neutral-200'">
         <svg x-show="docId || nurId" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
         <span x-text="(docId || nurId) ? 'Pemeriksa sudah dipilih (Valid).' : 'Mohon pilih Dokter atau Perawat (Wajib).'"></span>
     </div>
 
 </div>
         </div>
-        <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {{-- 1. Tipe Kunjungan --}}
         <div>
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-slate-700 dark:text-slate-300">
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-neutral-700 dark:text-neutral-300">
                 Tipe Kunjungan / Kejadian
             </label>
             <div class="relative">
-                <select name="visit_type" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
+                <select name="visit_type" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                     <option value="sakit" selected>Sakit (Umum)</option>
                     <option value="kecelakaan_kerja">Kecelakaan Kerja</option>
                 </select>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 italic">Pilih "Kecelakaan Kerja" untuk pelaporan K3.</p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 italic">Pilih "Kecelakaan Kerja" untuk pelaporan K3.</p>
             </div>
         </div>
 
         {{-- 2. Checklist Status (Ijin & Rujuk) --}}
         <div>
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3 block text-slate-700 dark:text-slate-300">
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3 block text-neutral-700 dark:text-neutral-300">
                 Status Tindak Lanjut
             </label>
             
@@ -371,9 +371,9 @@
                 <label class="inline-flex items-center cursor-pointer group">
                     <div class="relative flex items-center">
                         <input type="checkbox" name="is_sick_leave" value="1" 
-                            class="peer h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer transition-all checked:bg-indigo-600">
+                            class="peer h-5 w-5 rounded border-neutral-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer transition-all checked:bg-indigo-600">
                     </div>
-                    <span class="ml-2 text-sm text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 transition-colors font-medium">
+                    <span class="ml-2 text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-indigo-600 transition-colors font-medium">
                         Terbitkan Surat Ijin Sakit (Sick Leave)
                     </span>
                 </label>
@@ -382,9 +382,9 @@
                 <label class="inline-flex items-center cursor-pointer group">
                     <div class="relative flex items-center">
                         <input type="checkbox" name="is_referred" value="1" 
-                            class="peer h-5 w-5 rounded border-slate-300 text-red-600 focus:ring-red-500 cursor-pointer transition-all checked:bg-red-600">
+                            class="peer h-5 w-5 rounded border-neutral-300 text-red-600 focus:ring-red-500 cursor-pointer transition-all checked:bg-red-600">
                     </div>
-                    <span class="ml-2 text-sm text-slate-600 dark:text-slate-400 group-hover:text-red-600 transition-colors font-medium">
+                    <span class="ml-2 text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-red-600 transition-colors font-medium">
                         Dirujuk ke Rumah Sakit
                     </span>
                 </label>
@@ -396,27 +396,27 @@
     </div>
 
     {{-- VITAL SIGNS --}}
-    <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
-        <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
-            <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
+    <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6 flex items-center">
+            <span class="bg-neutral-900 dark:bg-neutral-50 w-1 h-4 rounded-full mr-3"></span>
             2. Tanda Vital
         </h3>
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block">Tensi (mmHg)</label>
-                <input type="text" name="tensi" placeholder="120/80" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                <input type="text" name="tensi" placeholder="120/80" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
             </div>
             <div>
                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block">Suhu (°C)</label>
-                <input type="number" step="0.1" name="suhu_tubuh" placeholder="36.5" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                <input type="number" step="0.1" name="suhu_tubuh" placeholder="36.5" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
             </div>
             <div>
                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block">Berat (Kg)</label>
-                <input type="number" step="0.1" name="berat_badan" placeholder="0" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                <input type="number" step="0.1" name="berat_badan" placeholder="0" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
             </div>
             <div>
                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block">Tinggi (cm)</label>
-                <input type="number" step="0.1" name="tinggi_badan" placeholder="0" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                <input type="number" step="0.1" name="tinggi_badan" placeholder="0" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
             </div>
         </div>
     </div>
@@ -425,22 +425,22 @@
                                
                     {{-- MAIN CONTENT: ANAMNESA & RESEP --}}
                     <div class="lg:col-span-2 space-y-6">
-                        <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
-                            <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6 flex items-center">
-                                <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
+                        <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
+                            <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6 flex items-center">
+                                <span class="bg-neutral-900 dark:bg-neutral-50 w-1 h-4 rounded-full mr-3"></span>
                                 3. Anamnesa & Pemeriksaan
                             </h3>
                             
                             <div class="space-y-6">
                                 <div>
-                                    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-slate-700 dark:text-slate-300">Keluhan Utama (S) <span class="text-destructive">*</span></label>
-                                    <textarea name="keluhan_utama" rows="3" class="flex w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" placeholder="Tuliskan keluhan yang dirasakan pasien..." required></textarea>
+                                    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-neutral-700 dark:text-neutral-300">Keluhan Utama (S) <span class="text-destructive">*</span></label>
+                                    <textarea name="keluhan_utama" rows="3" class="flex w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" placeholder="Tuliskan keluhan yang dirasakan pasien..." required></textarea>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block">Riwayat Penyakit Dahulu</label>
-                                        <textarea name="riwayat_penyakit" rows="2" class="flex w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300"></textarea>
+                                        <textarea name="riwayat_penyakit" rows="2" class="flex w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"></textarea>
                                     </div>
                                     <div>
                                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-red-500">Riwayat Alergi (Kritis)</label>
@@ -448,7 +448,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="border-t border-slate-200 dark:border-slate-800 pt-6">
+                                <div class="border-t border-neutral-200 dark:border-neutral-800 pt-6">
                                     <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3 block flex items-center">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         Diagnosa Utama (A) - ICD 10
@@ -569,14 +569,14 @@
                @keydown.enter.prevent="handleEnter()"
                @input="isOpen = true; selectedId = ''; isNewInput = false" 
                placeholder="Cari Kode atau Nama Penyakit..."
-               class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-10 cursor-pointer"
+               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 pr-10 cursor-pointer"
                autocomplete="off">
 
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
-            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-slate-400 hover:text-red-500">
+            <button type="button" x-show="selectedId || search" @click="clearSelection()" class="text-neutral-400 hover:text-red-500">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-slate-400">
+            <button type="button" x-show="!selectedId && !search" @click="isOpen = !isOpen" class="text-neutral-400">
                 <svg class="w-4 h-4 transform transition-transform" :class="isOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
         </div>
@@ -589,13 +589,13 @@
          x-transition:leave="transition ease-in duration-75"
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
-         class="absolute w-full mt-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1 custom-scrollbar"
+         class="absolute w-full mt-1 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1 custom-scrollbar"
          style="display: none;">
         
         <template x-for="option in filteredOptions" :key="option.id">
             <div @click="selectOption(option)"
-                 class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 justify-between"
-                 :class="selectedId == option.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50' : 'text-slate-700 dark:text-slate-200'">
+                 class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 justify-between"
+                 :class="selectedId == option.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-200'">
                 <span class="font-medium" x-text="option.label"></span>
                 <svg x-show="selectedId == option.id" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
@@ -603,23 +603,23 @@
 
         <div x-show="filteredOptions.length === 0 && search.length > 0" 
              @click="selectNew()"
-             class="px-4 py-3 text-sm cursor-pointer bg-slate-100 dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700">
+             class="px-4 py-3 text-sm cursor-pointer bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700">
             <b>Gunakan Baru:</b> "<span x-text="search"></span>"<br>
-            <span class="text-xs text-slate-500">(Klik atau Tekan Enter)</span>
+            <span class="text-xs text-neutral-500">(Klik atau Tekan Enter)</span>
         </div>
 
-        <div x-show="filteredOptions.length === 0 && search.length === 0" class="px-4 py-3 text-sm text-slate-400 italic text-center">
+        <div x-show="filteredOptions.length === 0 && search.length === 0" class="px-4 py-3 text-sm text-neutral-400 italic text-center">
             Ketik untuk mencari diagnosa...
         </div>
     </div>
 </div>
-<p class="text-xs text-slate-500 dark:text-slate-400 mt-2 italic">
+<p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 italic">
                                         * Jika diagnosa tidak ditemukan, Anda dapat mengetik diagnosa baru dan menekan <span class="font-bold">Enter</span>. Penyakit baru akan tersimpan otomatis.
                                     </p>
                                 </div>
                                 <div>
                                     <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block">Tindakan / Terapi Non-Obat (P)</label>
-                                    <textarea name="tindakan" rows="2" class="flex w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" placeholder="Contoh: Edukasi diet rendah garam, Rawat luka..."></textarea>
+                                    <textarea name="tindakan" rows="2" class="flex w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" placeholder="Contoh: Edukasi diet rendah garam, Rawat luka..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -636,7 +636,7 @@
     });
 @endphp
 
-                        <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6" 
+                        <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6" 
      x-data="{ 
         rows: [], 
         addRow() { 
@@ -648,11 +648,11 @@
      }">
     
     <div class="flex justify-between items-center mb-6">
-        <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center">
-            <span class="bg-slate-900 dark:bg-slate-50 w-1 h-4 rounded-full mr-3"></span>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 flex items-center">
+            <span class="bg-neutral-900 dark:bg-neutral-50 w-1 h-4 rounded-full mr-3"></span>
             4. Resep Obat
         </h3>
-        <button type="button" @click="addRow()" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-8 px-3 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+        <button type="button" @click="addRow()" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             TAMBAH BARIS
         </button>
@@ -660,16 +660,16 @@
 
     <div class="overflow-x-visible"> <table class="w-full caption-bottom text-sm">
             <thead class="[&_tr]:border-b">
-                <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
-                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-5/12">Nama Obat</th>
-                    <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400 w-2/12">Qty</th>
-                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400 w-4/12">Aturan Pakai</th>
-                    <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400 w-1/12"></th>
+                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                    <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 w-5/12">Nama Obat</th>
+                    <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 w-2/12">Qty</th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 w-4/12">Aturan Pakai</th>
+                    <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 w-1/12"></th>
                 </tr>
             </thead>
             <tbody class="[&_tr:last-child]:border-0">
                 <template x-for="(row, index) in rows" :key="index">
-                    <tr class="border-b transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                    <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
                         
                         <td class="p-4 align-top">
                             <div class="relative w-full"
@@ -724,14 +724,14 @@
                                            @keydown.escape="isOpen = false"
                                            @input="isOpen = true"
                                            placeholder="Cari Obat..."
-                                           class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-10 cursor-pointer"
+                                           class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 pr-10 cursor-pointer"
                                            autocomplete="off">
 
                                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer">
-                                        <button type="button" x-show="row.id" @click="clearSelection()" class="text-slate-400 hover:text-red-500 p-1">
+                                        <button type="button" x-show="row.id" @click="clearSelection()" class="text-neutral-400 hover:text-red-500 p-1">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                         </button>
-                                        <button type="button" x-show="!row.id" @click="isOpen = !isOpen" class="text-slate-400 p-1">
+                                        <button type="button" x-show="!row.id" @click="isOpen = !isOpen" class="text-neutral-400 p-1">
                                             <svg class="w-3 h-3 transform transition-transform" :class="isOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </button>
                                     </div>
@@ -741,22 +741,22 @@
                                      x-transition:enter="transition ease-out duration-100"
                                      x-transition:enter-start="opacity-0 scale-95"
                                      x-transition:enter-end="opacity-100 scale-100"
-                                     class="absolute w-full mt-1 min-w-[250px] bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1 text-sm">
+                                     class="absolute w-full mt-1 min-w-[250px] bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-md shadow-md max-h-60 overflow-y-auto z-50 py-1 text-sm">
                                     
                                     <template x-for="item in filteredOptions" :key="item.id">
                                         <div @click="selectOption(item)"
-                                             class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50 justify-between"
-                                             :class="row.id == item.id ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50' : 'text-slate-700 dark:text-slate-200'">
+                                             class="cursor-pointer relative flex w-full select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 justify-between"
+                                             :class="row.id == item.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-200'">
                                             <div class="flex justify-between items-center w-full">
                                                 <span class="font-medium truncate mr-2" x-text="item.label"></span>
-                                                <span class="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                                                <span class="text-xs text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
                                                     Stok: <span x-text="item.stock"></span>
                                                 </span>
                                             </div>
                                         </div>
                                     </template>
                                     
-                                    <div x-show="filteredOptions.length === 0" class="px-3 py-3 text-slate-400 italic text-center">
+                                    <div x-show="filteredOptions.length === 0" class="px-3 py-3 text-neutral-400 italic text-center">
                                         Obat tidak ditemukan.
                                     </div>
                                 </div>
@@ -764,15 +764,15 @@
                         </td>
 
                         <td class="p-4 align-top">
-                            <input type="number" :name="'medicines['+index+'][qty]'" x-model="row.qty" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:focus-visible:ring-slate-300 text-center" min="1">
+                            <input type="number" :name="'medicines['+index+'][qty]'" x-model="row.qty" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:focus-visible:ring-neutral-300 text-center" min="1">
                         </td>
 
                         <td class="p-4 align-top">
-                            <input type="text" :name="'medicines['+index+'][instructions]'" x-model="row.instructions" class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" placeholder="3 x 1 sesudah makan">
+                            <input type="text" :name="'medicines['+index+'][instructions]'" x-model="row.instructions" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" placeholder="3 x 1 sesudah makan">
                         </td>
 
                         <td class="p-4 text-center align-top">
-                            <button type="button" @click="removeRow(index)" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 hover:bg-red-100 hover:text-red-600 h-8 w-8 dark:hover:bg-red-900/50 dark:hover:text-red-500 bg-transparent mt-0.5">
+                            <button type="button" @click="removeRow(index)" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 hover:bg-red-100 hover:text-red-600 h-8 w-8 dark:hover:bg-red-900/50 dark:hover:text-red-500 bg-transparent mt-0.5">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </td>
@@ -782,12 +782,12 @@
         </table>
     </div>
     
-    <div x-show="rows.length === 0" class="text-center py-10 border border-dashed border-slate-200 dark:border-slate-800 rounded-md">
-        <p class="text-slate-400 dark:text-slate-500 text-sm italic">Belum ada obat yang diresepkan.</p>
+    <div x-show="rows.length === 0" class="text-center py-10 border border-dashed border-neutral-200 dark:border-neutral-800 rounded-md">
+        <p class="text-neutral-400 dark:text-neutral-500 text-sm italic">Belum ada obat yang diresepkan.</p>
     </div>
 
-    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-end gap-3">
-        <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 w-full sm:w-auto">
+    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-end gap-3">
+        <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full sm:w-auto">
             Simpan Rekam Medis
         </button>
     </div>

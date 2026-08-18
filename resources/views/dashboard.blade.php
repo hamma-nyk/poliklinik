@@ -5,9 +5,9 @@
                 <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Dashboard') }}
                 </h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Statistik Komprehensif Operasional Klinik</p>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Statistik Komprehensif Operasional Klinik</p>
             </div>
-            <div class="hidden md:flex items-center text-xs text-slate-500 dark:text-slate-400">
+            <div class="hidden md:flex items-center text-xs text-neutral-500 dark:text-neutral-400">
                 <span class="relative flex h-2 w-2 mr-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -25,14 +25,14 @@
                 <div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
                     <h3 class="text-lg font-medium tracking-tight">Performa Klinis</h3>
                     <form action="{{ route('dashboard') }}" method="GET" class="flex items-center space-x-2">
-                        <select name="month" onchange="this.form.submit()" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
+                        <select name="month" onchange="this.form.submit()" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             @foreach(range(1, 12) as $m)
                                 <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>
                                     {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}
                                 </option>
                             @endforeach
                         </select>
-                        <select name="year" onchange="this.form.submit()" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
+                        <select name="year" onchange="this.form.submit()" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             @for($y = date('Y'); $y >= date('Y') - 5; $y--)
                                 <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
                             @endfor
@@ -41,25 +41,25 @@
                 </div>
                 
                 <div class="grid gap-4 md:grid-cols-2">
-                    <a href="{{ route('clinical.records.index') }}" class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900 group">
+                    <a href="{{ route('clinical.records.index') }}" class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50 transition-all hover:bg-neutral-50 dark:hover:bg-neutral-900 group">
                         <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 class="tracking-tight text-sm font-medium">Kunjungan Poli Umum</h3>
-                            <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            <svg class="h-4 w-4 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                         </div>
                         <div class="p-6 pt-0">
                             <div class="text-2xl font-bold">{{ $stats['today_rm'] }}</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Hari ini</p>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Hari ini</p>
                         </div>
                     </a>
 
-                    <a href="{{ route('clinical.lab.index') }}" class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900 group">
+                    <a href="{{ route('clinical.lab.index') }}" class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 transition-all hover:bg-neutral-50 dark:hover:bg-neutral-900 group">
                         <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 class="tracking-tight text-sm font-medium">Kunjungan Lab (POCT)</h3>
-                            <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                            <svg class="h-4 w-4 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                         </div>
                         <div class="p-6 pt-0">
                             <div class="text-2xl font-bold">{{ $stats['today_lab'] }}</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Hari ini</p>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Hari ini</p>
                         </div>
                     </a>
                 </div>
@@ -80,22 +80,22 @@
             <section class="space-y-4">
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                     {{-- K3 --}}
-                    <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50">
+                    <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
                         <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 class="tracking-tight text-sm font-medium">Total Insiden K3</h3>
-                            <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <svg class="h-4 w-4 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                         </div>
                         <div class="p-6 pt-0">
                             <div class="text-2xl font-bold">{{ $kecelakaanCount }}</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bulan ini</p>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Bulan ini</p>
                         </div>
                     </div>
 
                     {{-- Stok Menipis --}}
-                    <a href="{{ route('inventory.medicines.index') }}" class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900 group">
+                    <a href="{{ route('inventory.medicines.index') }}" class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 transition-all hover:bg-neutral-50 dark:hover:bg-neutral-900 group">
                         <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 class="tracking-tight text-sm font-medium">Stok Menipis (≤10)</h3>
-                            <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                            <svg class="h-4 w-4 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                         </div>
                         <div class="p-6 pt-0">
                             <div class="text-2xl font-bold text-destructive">{{ $criticalMedicines->count() }}</div>
@@ -103,10 +103,10 @@
                     </a>
 
                     {{-- Arsip RM --}}
-                    <a href="{{ route('clinical.records.index') }}" class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900 group">
+                    <a href="{{ route('clinical.records.index') }}" class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 transition-all hover:bg-neutral-50 dark:hover:bg-neutral-900 group">
                         <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 class="tracking-tight text-sm font-medium">Total Arsip RM</h3>
-                            <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <svg class="h-4 w-4 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         </div>
                         <div class="p-6 pt-0">
                             <div class="text-2xl font-bold">{{ $stats['total_records'] }}</div>
@@ -114,10 +114,10 @@
                     </a>
 
                     {{-- Arsip Lab --}}
-                    <a href="{{ route('clinical.lab.index') }}" class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900 group">
+                    <a href="{{ route('clinical.lab.index') }}" class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 transition-all hover:bg-neutral-50 dark:hover:bg-neutral-900 group">
                         <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 class="tracking-tight text-sm font-medium">Total Arsip Lab</h3>
-                            <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                            <svg class="h-4 w-4 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                         </div>
                         <div class="p-6 pt-0">
                             <div class="text-2xl font-bold">{{ $stats['total_lab_logs'] ?? 0 }}</div>
@@ -128,17 +128,17 @@
 
             {{-- CHARTS --}}
             <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 lg:col-span-4">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 lg:col-span-4">
                     <div class="flex flex-col space-y-1.5 p-6">
                         <h3 class="font-semibold leading-none tracking-tight">Tren Kunjungan Harian</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Bulan {{ \Carbon\Carbon::create()->month($month)->translatedFormat('F') }}</p>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Bulan {{ \Carbon\Carbon::create()->month($month)->translatedFormat('F') }}</p>
                     </div>
                     <div class="p-6 pt-0">
                         <div id="chart-trend-daily" class="min-h-[300px]"></div>
                     </div>
                 </div>
 
-                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50 lg:col-span-3">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 lg:col-span-3">
                     <div class="flex flex-col space-y-1.5 p-6">
                         <h3 class="font-semibold leading-none tracking-tight">Proporsi Kunjungan K3</h3>
                     </div>
@@ -146,11 +146,11 @@
                         <div id="chart-visit-types" class="min-h-[250px] flex justify-center"></div>
                         <div class="grid grid-cols-2 gap-4 mt-4 text-center">
                             <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Sakit (Umum)</p>
+                                <p class="text-sm text-neutral-500 dark:text-neutral-400">Sakit (Umum)</p>
                                 <p class="text-2xl font-bold">{{ $sakitCount }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Kecelakaan Kerja</p>
+                                <p class="text-sm text-neutral-500 dark:text-neutral-400">Kecelakaan Kerja</p>
                                 <p class="text-2xl font-bold">{{ $kecelakaanCount }}</p>
                             </div>
                         </div>
@@ -159,35 +159,35 @@
             </div>
 
             {{-- TOP 5 DIAGNOSA --}}
-            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50">
-                <div class="flex flex-col space-y-1.5 p-6 border-b border-slate-100 dark:border-slate-800">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
+                <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-100 dark:border-neutral-800">
                     <h3 class="font-semibold leading-none tracking-tight">Top 5 Diagnosa</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Penyakit terbanyak bulan ini</p>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400">Penyakit terbanyak bulan ini</p>
                 </div>
                 <div class="p-0">
                     <div class="relative w-full overflow-auto">
                         <table class="w-full caption-bottom text-sm">
                             <thead class="[&_tr]:border-b">
-                                <tr class="border-b transition-colors dark:border-slate-800">
-                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">No</th>
-                                    <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Diagnosa</th>
-                                    <th class="h-12 px-4 text-right align-middle font-medium text-slate-500 dark:text-slate-400">Jumlah</th>
+                                <tr class="border-b transition-colors dark:border-neutral-800">
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">No</th>
+                                    <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Diagnosa</th>
+                                    <th class="h-12 px-4 text-right align-middle font-medium text-neutral-500 dark:text-neutral-400">Jumlah</th>
                                 </tr>
                             </thead>
                             <tbody class="[&_tr:last-child]:border-0">
                                 @php $diagLabelsArr = $diagLabels ?? []; $diagDataArr = $diagData ?? []; @endphp
                                 @forelse($diagLabelsArr as $i => $label)
-                                <tr class="border-b border-slate-100 transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
-                                    <td class="p-4 align-middle text-slate-500 dark:text-slate-400">{{ $i + 1 }}</td>
+                                <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                    <td class="p-4 align-middle text-neutral-500 dark:text-neutral-400">{{ $i + 1 }}</td>
                                     <td class="p-4 align-middle font-medium">{{ $label }}</td>
                                     <td class="p-4 align-middle text-right">
-                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-slate-200 text-slate-950 dark:border-slate-800 dark:text-slate-50">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-neutral-50">
                                             {{ $diagDataArr[$i] ?? 0 }}
                                         </div>
                                     </td>
                                 </tr>
                                 @empty
-                                <tr><td colspan="3" class="p-4 text-center text-sm text-slate-500">Belum ada data diagnosa.</td></tr>
+                                <tr><td colspan="3" class="p-4 text-center text-sm text-neutral-500">Belum ada data diagnosa.</td></tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -199,11 +199,11 @@
             <div class="grid gap-4 md:grid-cols-2">
                 
                 {{-- Recent Patients --}}
-                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50">
-                    <div class="flex flex-col space-y-1.5 p-6 border-b border-slate-100 dark:border-slate-800">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
+                    <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-100 dark:border-neutral-800">
                         <div class="flex justify-between items-center">
                             <h3 class="font-semibold leading-none tracking-tight">Pasien Terakhir</h3>
-                            <a href="{{ route('clinical.records.index') }}" class="text-xs font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50">
+                            <a href="{{ route('clinical.records.index') }}" class="text-xs font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50">
                                 Lihat Semua
                             </a>
                         </div>
@@ -213,19 +213,19 @@
                             <table class="w-full caption-bottom text-sm">
                                 <tbody class="[&_tr:last-child]:border-0">
                                     @forelse($latestRecords as $rec)
-                                    <tr class="border-b border-slate-100 transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                    <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
                                         <td class="p-4 align-middle">
                                             <div class="font-medium">{{ $rec->patient->name }}</div>
-                                            <div class="text-xs text-slate-500 dark:text-slate-400">{{ $rec->code }}</div>
+                                            <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $rec->code }}</div>
                                         </td>
                                         <td class="p-4 align-middle text-right">
-                                            <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-slate-200 text-slate-950 dark:border-slate-800 dark:text-slate-50">
+                                            <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-neutral-50">
                                                 {{ $rec->created_at->format('H:i') }}
                                             </div>
                                         </td>
                                     </tr>
                                     @empty
-                                    <tr><td colspan="2" class="p-4 text-center text-sm text-slate-500">Belum ada data kunjungan.</td></tr>
+                                    <tr><td colspan="2" class="p-4 text-center text-sm text-neutral-500">Belum ada data kunjungan.</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -234,8 +234,8 @@
                 </div>
 
                 {{-- Critical Stock --}}
-                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-neutral-800 dark:bg-neutral-900 dark:text-slate-50">
-                    <div class="flex flex-col space-y-1.5 p-6 border-b border-slate-100 dark:border-slate-800">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
+                    <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-100 dark:border-neutral-800">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2">
                                 <h3 class="font-semibold leading-none tracking-tight text-destructive">Stok Obat Menipis (≤ 10)</h3>
@@ -250,10 +250,10 @@
                             <table class="w-full caption-bottom text-sm">
                                 <tbody class="[&_tr:last-child]:border-0">
                                     @forelse($criticalMedicines as $med)
-                                    <tr class="border-b border-slate-100 transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                                    <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
                                         <td class="p-4 align-middle">
                                             <div class="font-medium">{{ $med->name }}</div>
-                                            <div class="text-xs text-slate-500 dark:text-slate-400">{{ $med->code }}</div>
+                                            <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $med->code }}</div>
                                         </td>
                                         <td class="p-4 align-middle text-right">
                                             <div class="inline-flex items-center rounded-md border border-transparent bg-destructive/10 text-destructive px-2.5 py-0.5 text-xs font-semibold">
@@ -262,7 +262,7 @@
                                         </td>
                                     </tr>
                                     @empty
-                                    <tr><td colspan="2" class="p-4 text-center text-sm text-slate-500">Stok aman.</td></tr>
+                                    <tr><td colspan="2" class="p-4 text-center text-sm text-neutral-500">Stok aman.</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -277,9 +277,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#f8fafc' : '#020617';
-            const mutedColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? '#1e293b' : '#f1f5f9';
+            const textColor = isDark ? '#fafafa' : '#171717';
+            const mutedColor = isDark ? '#a3a3a3' : '#525252';
+            const gridColor = isDark ? '#262626' : '#f5f5f5';
 
             var optionsTrend = {
                 series: [{ name: "Kunjungan", data: @json($trendData) }],
@@ -291,7 +291,7 @@
                     background: 'transparent'
                 },
                 dataLabels: { enabled: false },
-                stroke: { curve: 'smooth', width: 2, colors: ['#0f172a'] },
+                stroke: { curve: 'smooth', width: 2, colors: ['#171717'] },
                 xaxis: {
                     categories: @json($trendLabels),
                     labels: { style: { colors: mutedColor } },
@@ -304,7 +304,7 @@
                 fill: {
                     type: 'gradient',
                     gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1, stops: [0, 100] },
-                    colors: ['#0f172a']
+                    colors: ['#171717']
                 }
             };
             if(document.querySelector("#chart-trend-daily")) {
@@ -315,7 +315,7 @@
                 series: [{{ $sakitCount }}, {{ $kecelakaanCount }}],
                 labels: ['Sakit Umum', 'Kecelakaan Kerja'],
                 chart: { type: 'donut', height: 250, fontFamily: 'inherit', background: 'transparent' },
-                colors: ['#0f172a', '#ef4444'],
+                colors: ['#171717', '#ef4444'],
                 dataLabels: { enabled: false },
                 legend: { show: false },
                 stroke: { width: 0 },

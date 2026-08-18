@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 transition-all duration-300">
             <div>
-                <h2 class="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">
+                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">
                     {{ __('Buat Surat Keterangan Dokter') }}
                 </h2>
-                <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Arsip digital surat keterangan sakit & izin medis</p>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Arsip digital surat keterangan sakit & izin medis</p>
             </div>
-            <a href="{{ route('clinical.sick-leaves.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-9 px-4 py-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+            <a href="{{ route('clinical.sick-leaves.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
                 Batal
             </a>
         </div>
@@ -18,26 +18,26 @@
             <form action="{{ route('clinical.sick-leaves.store') }}" method="POST">
                 @csrf
                 
-                <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
                     
                     {{-- Header Form --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-b border-slate-200 dark:border-slate-800 pb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-b border-neutral-200 dark:border-neutral-800 pb-8">
                         <div class="space-y-1">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nomor Registrasi Surat</label>
                             <input type="text" name="reg_number" value="{{ $regNumber }}" readonly 
-                                class="flex h-9 w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400 font-mono cursor-not-allowed">
+                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-neutral-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-neutral-800 dark:bg-neutral-800 dark:text-neutral-400 font-mono cursor-not-allowed">
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Kategori Sumber SKD</label>
                             <div class="flex gap-3">
                                 <label class="flex-1 flex items-center p-4 border rounded-md cursor-pointer transition-all duration-200"
-                                    :class="type === 'internal' ? 'border-slate-900 bg-slate-100 dark:border-slate-50 dark:bg-slate-800' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900/50'">
-                                    <input type="radio" name="type" value="internal" x-model="type" class="w-4 h-4 text-slate-900 focus:ring-slate-950 border-slate-300 dark:border-slate-700 dark:bg-slate-950 dark:checked:bg-slate-50 dark:focus:ring-slate-300">
+                                    :class="type === 'internal' ? 'border-neutral-900 bg-neutral-100 dark:border-neutral-50 dark:bg-neutral-800' : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900/50'">
+                                    <input type="radio" name="type" value="internal" x-model="type" class="w-4 h-4 text-neutral-900 focus:ring-neutral-950 border-neutral-300 dark:border-neutral-700 dark:bg-neutral-950 dark:checked:bg-neutral-50 dark:focus:ring-neutral-300">
                                     <span class="block text-sm font-medium leading-none ml-2">Internal</span>
                                 </label>
                                 <label class="flex-1 flex items-center p-4 border rounded-md cursor-pointer transition-all duration-200"
-                                    :class="type === 'external' ? 'border-slate-900 bg-slate-100 dark:border-slate-50 dark:bg-slate-800' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900/50'">
-                                    <input type="radio" name="type" value="external" x-model="type" class="w-4 h-4 text-slate-900 focus:ring-slate-950 border-slate-300 dark:border-slate-700 dark:bg-slate-950 dark:checked:bg-slate-50 dark:focus:ring-slate-300">
+                                    :class="type === 'external' ? 'border-neutral-900 bg-neutral-100 dark:border-neutral-50 dark:bg-neutral-800' : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900/50'">
+                                    <input type="radio" name="type" value="external" x-model="type" class="w-4 h-4 text-neutral-900 focus:ring-neutral-950 border-neutral-300 dark:border-neutral-700 dark:bg-neutral-950 dark:checked:bg-neutral-50 dark:focus:ring-neutral-300">
                                     <span class="block text-sm font-medium leading-none ml-2">Eksternal</span>
                                 </label>
                             </div>
@@ -45,9 +45,9 @@
                     </div>
 
                     {{-- SECTION: INTERNAL (Searchable MR) --}}
-                    <div x-show="type === 'internal'" x-transition class="mb-8 rounded-md border border-slate-200 bg-slate-50 dark:bg-slate-900 dark:border-slate-800 p-6">
+                    <div x-show="type === 'internal'" x-transition class="mb-8 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-800 p-6">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-3">Integrasi Rekam Medis Pasien</label>
-                        <select id="mr_select" name="medical_record_id" x-ref="mrSelect" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
+                        <select id="mr_select" name="medical_record_id" x-ref="mrSelect" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="">-- Cari Nama Pasien atau No. RM --</option>
                             @foreach($internalCandidates as $mr)
                                 <option value="{{ $mr->id }}" data-date="{{ $mr->created_at->format('Y-m-d') }}">
@@ -55,18 +55,18 @@
                                 </option>
                             @endforeach
                         </select>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 flex items-center italic">
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-3 flex items-center italic">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/></svg>
                             Menampilkan data yang ditandai "Ijin Sakit" saat pemeriksaan.
                         </p>
                     </div>
 
                     {{-- SECTION: EXTERNAL (Searchable Patient) --}}
-                    <div x-show="type === 'external'" x-transition class="mb-8 rounded-md border border-slate-200 bg-slate-50 dark:bg-slate-900 dark:border-slate-800 p-6">
+                    <div x-show="type === 'external'" x-transition class="mb-8 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-800 p-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="md:col-span-2">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-3">Data Karyawan / Pasien</label>
-                                <select id="patient_select" name="target_person" x-ref="patientSelect" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
+                                <select id="patient_select" name="target_person" x-ref="patientSelect" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                                     <option value="">-- Ketik Nama atau NIK --</option>
                                     @foreach($externalCandidates as $candidate)
                                         <option value="{{ $candidate['value'] }}">
@@ -78,12 +78,12 @@
                             <div class="space-y-1">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Klinik / RS Penerbit</label>
                                 <input type="text" name="external_clinic_name" placeholder="Nama RS Luar" 
-                                    class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                                    class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                             </div>
                             <div class="space-y-1">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Dokter Luar</label>
                                 <input type="text" name="external_doctor_name" placeholder="Nama Dokter Pemeriksa" 
-                                    class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                                    class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
     <div class="space-y-2">
         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Mulai Tanggal</label>
         <input type="date" name="start_date" x-model="startDate" 
-            class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+            class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
     </div>
 
     {{-- Durasi Izin --}}
@@ -102,9 +102,9 @@
         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Durasi Izin</label>
         <div class="relative flex items-center">
             <input type="number" name="days" x-model="days" min="1" 
-                class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 pr-16 font-bold">
+                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 pr-16 font-bold">
             <div class="absolute right-4 flex items-center pointer-events-none pl-3 h-6">
-                <span class="text-xs font-semibold text-slate-500">Hari</span>
+                <span class="text-xs font-semibold text-neutral-500">Hari</span>
             </div>
         </div>
     </div>
@@ -112,11 +112,11 @@
     {{-- Selesai Tanggal --}}
     <div class="space-y-2">
         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Selesai Tanggal</label>
-        <div class="w-full h-9 px-3 border border-slate-200 dark:border-slate-800 rounded-md flex items-center group transition-colors">
-            <svg class="w-4 h-4 text-slate-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-full h-9 px-3 border border-neutral-200 dark:border-neutral-800 rounded-md flex items-center group transition-colors">
+            <svg class="w-4 h-4 text-neutral-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
-            <span class="text-sm text-slate-600 dark:text-slate-300" x-text="calculateEndDate()"></span>
+            <span class="text-sm text-neutral-600 dark:text-neutral-300" x-text="calculateEndDate()"></span>
         </div>
     </div>
 </div>
@@ -124,15 +124,15 @@
                     <div class="space-y-1">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-2">Diagnosa / Catatan Medis</label>
                         <textarea name="notes" rows="3" 
-                            class="flex min-h-[80px] w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300" 
+                            class="flex min-h-[80px] w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" 
                             placeholder="Tuliskan alasan medis atau diagnosa singkat..."></textarea>
                     </div>
 
                     {{-- Footer Action --}}
-                    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-end gap-3">
-                        <p class="text-xs text-slate-500 italic text-right self-center mr-4">Pastikan data yang diinput sesuai dengan rekam medis atau bukti fisik dari RS luar.</p>
+                    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-end gap-3">
+                        <p class="text-xs text-neutral-500 italic text-right self-center mr-4">Pastikan data yang diinput sesuai dengan rekam medis atau bukti fisik dari RS luar.</p>
                         <button type="submit" 
-                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90">
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90">
                             Simpan & Terbitkan SKD
                         </button>
                     </div>

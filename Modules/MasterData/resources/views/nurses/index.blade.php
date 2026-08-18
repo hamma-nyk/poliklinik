@@ -5,12 +5,12 @@
                 <h2 class="text-2xl font-semibold tracking-tight">
                     {{ __('Data Perawat') }}
                 </h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Manajemen Tenaga Keperawatan & Bidan Klinik</p>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Manajemen Tenaga Keperawatan & Bidan Klinik</p>
             </div>
-            <div class="hidden md:flex items-center text-sm text-slate-500 dark:text-slate-400">
-                <span class="hover:text-slate-900 dark:hover:text-slate-50 cursor-pointer transition-colors">Master Data</span>
+            <div class="hidden md:flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+                <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Master Data</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="font-semibold text-slate-900 dark:text-slate-50">Perawat</span>
+                <span class="font-semibold text-neutral-900 dark:text-neutral-50">Perawat</span>
             </div>
         </div>
     </x-slot>
@@ -30,11 +30,11 @@
             @endif
 
             {{-- Toolbar --}}
-            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4">
                 <form method="GET" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 items-center flex-grow">
                     <div class="relative w-full sm:w-auto">
                         <select name="per_page" onchange="this.form.submit()" 
-                                class="flex h-9 w-full sm:w-24 items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300">
+                                class="flex h-9 w-full sm:w-24 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
@@ -43,17 +43,17 @@
 
                     <div class="relative w-full sm:w-80">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-4 w-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Nama / No STR..." 
-                               class="flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300">
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
                 </form>
 
                 <div class="w-full md:w-auto">
-                    <a href="{{ route('master.nurses.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-slate-50 shadow hover:bg-slate-900/90 h-9 px-4 py-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 w-full md:w-auto">
+                    <a href="{{ route('master.nurses.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full md:w-auto">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                         Tambah Perawat
                     </a>
@@ -61,41 +61,41 @@
             </div>
 
             {{-- Table Card --}}
-            <div class="rounded-xl border border-slate-200 bg-white text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 overflow-hidden">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden">
                 <div class="relative w-full overflow-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b border-slate-200 transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Nama Perawat</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Type</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Nomor STR</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-slate-500 dark:text-slate-400">Kontak</th>
-                                <th class="h-12 px-4 text-center align-middle font-medium text-slate-500 dark:text-slate-400">Status</th>
-                                <th class="h-12 px-4 text-right align-middle font-medium text-slate-500 dark:text-slate-400">Aksi</th>
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nama Perawat</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Type</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nomor STR</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Kontak</th>
+                                <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Status</th>
+                                <th class="h-12 px-4 text-right align-middle font-medium text-neutral-500 dark:text-neutral-400">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($nurses as $nurse)
-                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-100/50 dark:border-slate-800 dark:hover:bg-slate-800/50">
+                            <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
                                 <td class="p-4 align-middle">
                                     <div class="flex items-center gap-3">
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-slate-50 text-xs font-medium dark:border-slate-800 dark:bg-slate-900">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-800 dark:bg-neutral-900">
                                             {{ substr($nurse->nama, 0, 1) }}
                                         </div>
                                         <div class="grid gap-0.5">
                                             <div class="font-medium">{{ $nurse->nama }}</div>
-                                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">{{ $nurse->code ?? 'N/A' }}</div>
+                                            <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono">{{ $nurse->code ?? 'N/A' }}</div>
                                         </div>
                                     </div>
                                 </td>
 
                                 <td class="p-4 align-middle">
                                     @if($nurse->type == 'karyawan')
-                                        <div class="inline-flex items-center rounded-md border border-transparent bg-slate-900 text-slate-50 px-2.5 py-0.5 text-xs font-semibold dark:bg-slate-50 dark:text-slate-900">
+                                        <div class="inline-flex items-center rounded-md border border-transparent bg-neutral-900 text-neutral-50 px-2.5 py-0.5 text-xs font-semibold dark:bg-neutral-50 dark:text-neutral-900">
                                             Internal
                                         </div>
                                     @else
-                                        <div class="inline-flex items-center rounded-md border border-transparent bg-slate-100 text-slate-900 px-2.5 py-0.5 text-xs font-semibold dark:bg-slate-800 dark:text-slate-50">
+                                        <div class="inline-flex items-center rounded-md border border-transparent bg-neutral-100 text-neutral-900 px-2.5 py-0.5 text-xs font-semibold dark:bg-neutral-800 dark:text-neutral-50">
                                             Eksternal
                                         </div>
                                     @endif
@@ -106,7 +106,7 @@
                                 </td>
 
                                 <td class="p-4 align-middle">
-                                    <div class="text-sm text-slate-500 dark:text-slate-400 flex items-center">
+                                    <div class="text-sm text-neutral-500 dark:text-neutral-400 flex items-center">
                                         <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                         {{ $nurse->phone ?? '-' }}
                                     </div>
@@ -119,8 +119,8 @@
                                             Active
                                         </div>
                                     @else
-                                        <div class="inline-flex items-center rounded-md border border-transparent bg-slate-100 text-slate-500 px-2.5 py-0.5 text-xs font-semibold dark:bg-slate-800 dark:text-slate-400">
-                                            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full mr-1.5"></span>
+                                        <div class="inline-flex items-center rounded-md border border-transparent bg-neutral-100 text-neutral-500 px-2.5 py-0.5 text-xs font-semibold dark:bg-neutral-800 dark:text-neutral-400">
+                                            <span class="w-1.5 h-1.5 bg-neutral-400 rounded-full mr-1.5"></span>
                                             Inactive
                                         </div>
                                     @endif
@@ -128,14 +128,14 @@
 
                                 <td class="p-4 align-middle text-right">
                                     <a href="{{ route('master.nurses.edit', $nurse->id) }}" 
-                                       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 h-8 w-8 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50" title="Edit">
+                                       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 w-8 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                     </a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="p-4 text-center text-sm text-slate-500">Belum ada data perawat.</td>
+                                <td colspan="6" class="p-4 text-center text-sm text-neutral-500">Belum ada data perawat.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -143,7 +143,7 @@
                 </div>
 
                 @if($nurses->hasPages())
-                <div class="border-t border-slate-200 dark:border-slate-800 p-4">
+                <div class="border-t border-neutral-200 dark:border-neutral-800 p-4">
                     {{ $nurses->withQueryString()->links() }}
                 </div>
                 @endif
