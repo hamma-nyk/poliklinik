@@ -22,23 +22,23 @@
 
     <div class="py-6 flex-1 space-y-4">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6" x-data="{ format: 'view' }">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6" x-data="{ format: 'view' }">
                 <form action="{{ route('clinical.reports.skd_export') }}" method="POST" target="_blank">
                     @csrf
                     
                     {{-- Input Periode --}}
                     <div class="mb-8">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3 ml-1 block">Rentang Periode Laporan</label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-2xl border border-neutral-100 dark:border-neutral-700">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-neutral-50 dark:bg-neutral-800/50 p-6 rounded-2xl border border-neutral-100 dark:border-neutral-600">
                             <div class="space-y-1.5">
                                 <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-1">Dari Tanggal</span>
                                 <input type="date" name="start_date" value="{{ date('Y-m-01') }}" 
-                                    class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" required>
+                                    class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" required>
                             </div>
                             <div class="space-y-1.5">
                                 <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-1">Sampai Tanggal</span>
                                 <input type="date" name="end_date" value="{{ date('Y-m-t') }}" 
-                                    class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" required>
+                                    class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" required>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-4 ml-1 block">Pilih Format Output</label>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <label class="relative flex flex-col items-center justify-center p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 group"
-                                :class="format === 'view' ? 'border-indigo-500 bg-indigo-50/50 dark:bg-indigo-900/20' : 'border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                :class="format === 'view' ? 'border-indigo-500 bg-indigo-50/50 dark:bg-indigo-900/20' : 'border-neutral-100 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
                                 <input type="radio" name="format" value="view" x-model="format" class="hidden">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-colors"
                                     :class="format === 'view' ? 'bg-indigo-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 group-hover:text-indigo-500'">
@@ -58,7 +58,7 @@
                             </label>
 
                             <label class="relative flex flex-col items-center justify-center p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 group"
-                                :class="format === 'excel' ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' : 'border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                :class="format === 'excel' ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' : 'border-neutral-100 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
                                 <input type="radio" name="format" value="excel" x-model="format" class="hidden">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-colors"
                                     :class="format === 'excel' ? 'bg-emerald-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 group-hover:text-emerald-500'">
@@ -68,7 +68,7 @@
                             </label>
 
                             <label class="relative flex flex-col items-center justify-center p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 group"
-                                :class="format === 'pdf' ? 'border-rose-500 bg-rose-50/50 dark:bg-rose-900/20' : 'border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                :class="format === 'pdf' ? 'border-rose-500 bg-rose-50/50 dark:bg-rose-900/20' : 'border-neutral-100 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
                                 <input type="radio" name="format" value="pdf" x-model="format" class="hidden">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-colors"
                                     :class="format === 'pdf' ? 'bg-rose-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 group-hover:text-rose-500'">
@@ -84,7 +84,7 @@
                         <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
     {{-- Tombol Kembali: Lapis Slate 700 --}}
     <a href="{{ route('clinical.reports.index') }}" 
-       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 w-full sm:w-auto">
+       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 w-full sm:w-auto">
         <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>

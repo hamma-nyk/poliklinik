@@ -28,13 +28,13 @@
             @endif
 
             {{-- Toolbar: Search, Filter & Action --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
                 
                 <form method="GET" action="{{ route('clinical.sick-leaves.index') }}" class="w-full flex flex-col md:flex-row gap-3 items-center flex-grow">
                     {{-- Row Count --}}
                     <div class="relative w-full sm:w-20">
                         <select name="per_page" onchange="this.form.submit()" 
-                                class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+                                class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
@@ -49,13 +49,13 @@
                             </svg>
                         </div>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari No. Surat atau Nama Pasien..." 
-                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
 
                     {{-- Filter Jenis (Optional) --}}
                     <div class="relative w-full md:w-44">
                         <select name="type" onchange="this.form.submit()" 
-                                class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+                                class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="">Semua Jenis SKD</option>
                             <option value="internal" {{ request('type') == 'internal' ? 'selected' : '' }}>Internal (Klinik)</option>
                             <option value="external" {{ request('type') == 'external' ? 'selected' : '' }}>Eksternal (RS Luar)</option>
@@ -72,11 +72,11 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden transition-all">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">No. Surat / Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nama Pasien</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Jenis / Sumber</th>
@@ -86,7 +86,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($letters as $letter)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50 group">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="grid gap-0.5">
                                         <div class="font-medium text-neutral-800 dark:text-neutral-100 uppercase tracking-tight">{{ $letter->reg_number }}</div>
@@ -103,7 +103,7 @@
                                             Internal (Klinik)
                                         </span>
                                     @else
-                                        <span class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-neutral-50">
+                                        <span class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-neutral-200 text-neutral-950 dark:border-neutral-600 dark:text-neutral-50">
                                             Eksternal (RS Luar)
                                         </span>
                                     @endif
@@ -116,12 +116,12 @@
                                 </td>
                                 <td class="p-4 align-middle text-center whitespace-nowrap">
                                     <div class="flex justify-center gap-2">
-                                        <a href="{{ route('clinical.sick-leaves.show', $letter->id) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50" title="Detail">
+                                        <a href="{{ route('clinical.sick-leaves.show', $letter->id) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50" title="Detail">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                         </a>
 
                                         @if($letter->type == 'internal')
-                                            <a href="{{ route('clinical.sick-leaves.print', $letter->id) }}" target="_blank" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50" title="Cetak Surat">
+                                            <a href="{{ route('clinical.sick-leaves.print', $letter->id) }}" target="_blank" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50" title="Cetak Surat">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                                             </a>
                                         @endif
@@ -129,10 +129,10 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
-                                <td colspan="5" class="p-4 align-middle text-center bg-white dark:bg-neutral-950">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <td colspan="5" class="p-4 align-middle text-center bg-white dark:bg-neutral-800">
                                     <div class="flex flex-col items-center justify-center py-10">
-                                        <div class="p-6 bg-neutral-50 dark:bg-neutral-900 rounded-full mb-4 text-neutral-300 dark:text-neutral-600 transition-colors border border-dashed dark:border-neutral-800">
+                                        <div class="p-6 bg-neutral-50 dark:bg-neutral-800 rounded-full mb-4 text-neutral-300 dark:text-neutral-600 transition-colors border border-dashed dark:border-neutral-600">
                                             <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
                                         <h3 class="text-neutral-500 dark:text-neutral-400 font-bold text-lg uppercase tracking-tight">Data tidak ditemukan</h3>
@@ -147,7 +147,7 @@
                 
                 {{-- Pagination Links --}}
                 @if($letters->hasPages())
-                    <div class="border-t border-neutral-200 dark:border-neutral-800 p-4">
+                    <div class="border-t border-neutral-200 dark:border-neutral-600 p-4">
                         {{ $letters->withQueryString()->links() }}
                     </div>
                 @endif

@@ -17,7 +17,7 @@
 
     <div class="py-6 flex-1 space-y-4">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6">
                 
                 <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6 flex items-center">
                     <span class="bg-neutral-900 dark:bg-neutral-50 w-1 h-4 rounded-full mr-3"></span>
@@ -103,7 +103,7 @@
                @keydown.escape="isOpen = false"
                @input="isOpen = true; selectedId = ''" 
                placeholder="-- Cari Nama / ID Pasien --"
-               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
+               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
                autocomplete="off">
 
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
@@ -123,12 +123,12 @@
          x-transition:leave="transition ease-in duration-75"
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
-         class="absolute z-50 mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 max-h-60 overflow-auto py-1"
+         class="absolute z-50 mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 max-h-60 overflow-auto py-1"
          style="display: none;">
 
         <template x-for="item in filteredOptions" :key="item.id">
             <div @click="selectOption(item)"
-                 class="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 transition-colors flex justify-between items-center"
+                 class="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 transition-colors flex justify-between items-center"
                  :class="selectedId == item.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50 font-bold' : 'text-neutral-700 dark:text-neutral-200'">
                 
                 <span x-text="item.label"></span>
@@ -148,22 +148,22 @@
                         <div class="space-y-2">
                             <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Gula Darah (mg/dL)</label>
                             <input type="number" name="gula_darah" placeholder="0" 
-                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Kolesterol (mg/dL)</label>
                             <input type="number" name="kolesterol" placeholder="0" 
-                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Asam Urat (mg/dL)</label>
                             <input type="number" step="0.1" name="asam_urat" placeholder="0.0" 
-                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Tensi Darah (mmHg)</label>
                             <input type="text" name="tensi" placeholder="120/80" 
-                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
                     </div>
 
@@ -272,7 +272,7 @@
             <input type="text" x-model="docSearch" 
                    @click="docOpen = true" @input="docOpen = true; docId = ''" @keydown.escape="docOpen = false"
                    placeholder="-- Cari Dokter --"
-                   class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
+                   class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
                    :class="{'border-red-500': !docId && !nurId, 'border-neutral-200': docId || nurId}"
                    autocomplete="off">
             
@@ -289,9 +289,9 @@
 
         {{-- Dropdown Body Dokter --}}
         <div x-show="docOpen" style="display: none;" 
-             class="absolute z-50 mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 max-h-60 overflow-auto py-1">
+             class="absolute z-50 mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 max-h-60 overflow-auto py-1">
             <template x-for="item in filteredDoctors" :key="item.id">
-                <div @click="selectDoc(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 flex justify-between items-center"
+                <div @click="selectDoc(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 flex justify-between items-center"
                      :class="docId == item.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50 font-bold' : 'text-neutral-700 dark:text-neutral-200'">
                     <span x-text="item.label"></span>
                     <svg x-show="docId == item.id" class="w-4 h-4 text-neutral-900 dark:text-neutral-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -316,7 +316,7 @@
             <input type="text" x-model="nurSearch" 
                    @click="nurOpen = true" @input="nurOpen = true; nurId = ''" @keydown.escape="nurOpen = false"
                    placeholder="-- Cari Perawat --"
-                   class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
+                   class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
                    :class="{'border-red-500': !docId && !nurId, 'border-neutral-200': docId || nurId}"
                    autocomplete="off">
 
@@ -332,9 +332,9 @@
 
         {{-- Dropdown Body Perawat --}}
         <div x-show="nurOpen" style="display: none;" 
-             class="absolute z-50 mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 max-h-60 overflow-auto py-1">
+             class="absolute z-50 mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 max-h-60 overflow-auto py-1">
             <template x-for="item in filteredNurses" :key="item.id">
-                <div @click="selectNur(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 flex justify-between items-center"
+                <div @click="selectNur(item)" class="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 flex justify-between items-center"
                      :class="nurId == item.id ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50 font-bold' : 'text-neutral-700 dark:text-neutral-200'">
                     <span x-text="item.label"></span>
                     <svg x-show="nurId == item.id" class="w-4 h-4 text-neutral-900 dark:text-neutral-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -358,7 +358,7 @@
 @endphp
 
 {{-- SECTION PENGGUNAAN BHP / ALAT LAB --}}
-<div class="mb-10 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-800 p-6"
+<div class="mb-10 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-800 dark:border-neutral-600 p-6"
      x-data="{
         allMedicines: {{ $medicineList }},
         items: [],
@@ -388,7 +388,7 @@
             <span class="bg-neutral-900 dark:bg-neutral-50 w-1 h-4 rounded-full mr-3"></span>
             Penggunaan BHP / Jarum Spuit
         </h3>
-        <button type="button" @click="addItem()" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
+        <button type="button" @click="addItem()" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
             + Tambah Alat
         </button>
     </div>
@@ -407,7 +407,7 @@
                                @click="item.isOpen = true"
                                @input="item.isOpen = true; item.medicine_id = ''"
                                placeholder="Cari jarum, spuit, dll..."
-                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-4 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         
                         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -416,7 +416,7 @@
 
                     {{-- Dropdown Hasil Cari --}}
                     <div x-show="item.isOpen" 
-                         class="absolute z-[60] mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 max-h-48 overflow-auto py-1 text-sm">
+                         class="absolute z-[60] mt-1 w-full rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 max-h-48 overflow-auto py-1 text-sm">
                         <template x-for="med in getFiltered(item.search)" :key="med.id">
                             <div @click="
                                     item.medicine_id = med.id;
@@ -424,7 +424,7 @@
                                     item.search = med.label;
                                     item.isOpen = false;
                                  "
-                                 class="px-4 py-2 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 cursor-pointer flex justify-between items-center">
+                                 class="px-4 py-2 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 cursor-pointer flex justify-between items-center">
                                 <div>
                                     <div class="font-bold text-neutral-700 dark:text-neutral-200" x-text="med.label"></div>
                                     <div class="text-[10px] text-neutral-400">Tersedia: <span x-text="med.stock"></span></div>
@@ -442,7 +442,7 @@
                            :name="'medicines['+index+'][quantity]'" 
                            x-model="item.quantity" 
                            min="1"
-                           class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 text-center font-bold text-neutral-700 dark:text-neutral-200">
+                           class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 text-center font-bold text-neutral-700 dark:text-neutral-200">
                 </div>
 
                 {{-- Tombol Hapus --}}
@@ -472,11 +472,11 @@
 
                     <div class="mb-10">
                         <label class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">Interpretasi / Catatan (Opsional)</label>
-                        <textarea name="notes" class="flex min-h-[80px] w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" rows="3" placeholder="Tambahkan catatan jika hasil lab memerlukan perhatian khusus..."></textarea>
+                        <textarea name="notes" class="flex min-h-[80px] w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" rows="3" placeholder="Tambahkan catatan jika hasil lab memerlukan perhatian khusus..."></textarea>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-end gap-3">
-                        <a href="{{ route('clinical.lab.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 w-full sm:w-auto">
+                    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-600 flex flex-col sm:flex-row justify-end gap-3">
+                        <a href="{{ route('clinical.lab.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 w-full sm:w-auto">
                             BATAL
                         </a>
                         <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full sm:w-auto">
@@ -487,7 +487,7 @@
 
             </div>
 
-            <div class="mt-6 p-6 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-800 flex items-start gap-4">
+            <div class="mt-6 p-6 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-800 dark:border-neutral-600 flex items-start gap-4">
                 <div class="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-lg text-neutral-600 dark:text-neutral-400">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>

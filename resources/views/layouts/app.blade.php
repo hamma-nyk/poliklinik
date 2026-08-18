@@ -35,7 +35,7 @@
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     </head>
     
-    <body class="font-sans antialiased bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 transition-colors duration-300">
+    <body class="font-sans antialiased bg-neutral-50 dark:bg-neutral-900 text-neutral-950 dark:text-neutral-50 transition-colors duration-300">
         
         <div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden">
 
@@ -43,7 +43,7 @@
 
             <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
                 
-                <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700 md:hidden"> <!-- transition-colors duration-300 -->
+                <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-600 md:hidden"> <!-- transition-colors duration-300 -->
                     <div class="flex items-center">
                         <button @click="sidebarOpen = true" class="text-neutral-500 dark:text-neutral-400 focus:outline-none hover:text-neutral-700 dark:hover:text-neutral-200">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,7 +55,7 @@
                 </header>
 
                 @if (isset($header))
-                    <header class="bg-white dark:bg-neutral-900 shadow-sm z-10 border-b border-transparent dark:border-neutral-700 transition-colors duration-300"> 
+                    <header class="bg-white dark:bg-neutral-800 shadow-sm z-10 border-b border-transparent dark:border-neutral-600 transition-colors duration-300"> 
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>

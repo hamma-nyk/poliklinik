@@ -34,7 +34,7 @@
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
                 <x-text-input id="password" name="password" type="password" 
-                    class="mt-1 block w-3/4 rounded-xl border-red-300 dark:border-red-700 bg-white dark:bg-neutral-900 text-red-900 dark:text-red-300 placeholder-red-300 dark:placeholder-red-700 focus:border-red-500 focus:ring-red-500" 
+                    class="mt-1 block w-3/4 rounded-xl border-red-300 dark:border-red-700 bg-white dark:bg-neutral-800 text-red-900 dark:text-red-300 placeholder-red-300 dark:placeholder-red-700 focus:border-red-500 focus:ring-red-500" 
                     placeholder="{{ __('Password') }}" />
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />

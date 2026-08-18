@@ -30,13 +30,13 @@
             @endif
 
             {{-- Toolbar: Search & Action --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 
                 <form method="GET" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 items-center flex-grow">
                     {{-- Row Count --}}
                     <div class="relative w-full sm:w-20">
                         <select name="per_page" onchange="this.form.submit()" 
-                                class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+                                class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
@@ -51,7 +51,7 @@
                             </svg>
                         </div>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari No RM / Pasien / Diagnosa..." 
-                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
                 </form>
 
@@ -64,11 +64,11 @@
             </div>
 
             {{-- Table Container --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Waktu & No. RM</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Pasien</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Diagnosa (ICD-10)</th>
@@ -79,7 +79,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($records as $rm)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 {{-- Kolom 1 --}}
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="text-sm font-bold text-neutral-900 dark:text-neutral-100 uppercase">
@@ -89,7 +89,7 @@
                                         <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                         {{ $rm->created_at->format('H:i') }} WIB
                                     </div>
-                                    <span class="inline-flex items-center rounded-md border border-neutral-200 bg-neutral-50 text-neutral-950 px-2.5 py-0.5 text-xs font-semibold dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50">
+                                    <span class="inline-flex items-center rounded-md border border-neutral-200 bg-neutral-50 text-neutral-950 px-2.5 py-0.5 text-xs font-semibold dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
                                         {{ $rm->code }}
                                     </span>
                                 </td>
@@ -107,7 +107,7 @@
                                         @if($rm->patient->type == 'karyawan')
                                             <span class="inline-flex items-center rounded-md border border-transparent bg-neutral-100 text-neutral-900 px-2.5 py-0.5 text-xs font-semibold dark:bg-neutral-800 dark:text-neutral-50 uppercase">KARYAWAN</span>
                                         @else
-                                            <span class="inline-flex items-center rounded-md border border-neutral-200 px-2.5 py-0.5 text-xs font-semibold text-neutral-950 dark:border-neutral-800 dark:text-neutral-50 uppercase">UMUM</span>
+                                            <span class="inline-flex items-center rounded-md border border-neutral-200 px-2.5 py-0.5 text-xs font-semibold text-neutral-950 dark:border-neutral-600 dark:text-neutral-50 uppercase">UMUM</span>
                                         @endif
                                     </div>
                                 </td>
@@ -116,7 +116,7 @@
                                 <td class="p-4 align-middle">
                                     @if($rm->diagnosis)
                                         <div class="text-sm font-bold text-neutral-900 dark:text-neutral-100">{{ $rm->diagnosis->name }}</div>
-                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-neutral-50 mt-1">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-neutral-200 text-neutral-950 dark:border-neutral-600 dark:text-neutral-50 mt-1">
                                             {{ $rm->diagnosis->code ?? '-' }}
                                         </div>
                                     @else
@@ -139,7 +139,7 @@
                                         @if($rm->doctor == null)
                                             <span class="text-sm text-neutral-400 dark:text-neutral-500 italic">-</span>
                                         @else
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-800 dark:bg-neutral-900 mr-3">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800 mr-3">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div class="grid gap-0.5">
@@ -160,7 +160,7 @@
                                         @if($rm->nurse == null)
                                             <span class="text-sm text-neutral-400 dark:text-neutral-500 italic">-</span>
                                         @else
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-800 dark:bg-neutral-900 mr-3">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800 mr-3">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div class="grid gap-0.5">
@@ -178,7 +178,7 @@
     <div class="flex items-center justify-center gap-2">
         {{-- Button Detail: Boxed dengan Icon & Text --}}
         <a href="{{ route('clinical.records.show', $rm->id) }}" 
-           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
+           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
             
             <svg class="w-4 h-4" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,14 +189,14 @@
         
         {{-- Button Cetak: Icon Only dengan Slate elevation --}}
         <a href="{{ route('clinical.records.print', $rm->id) }}" target="_blank" 
-           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50" 
+           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50" 
            title="Cetak PDF">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
             </svg>
         </a>
         <a href="{{ route('clinical.records.send_wa', $rm->id) }}" 
-   class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50" 
+   class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50" 
    title="Kirim WA">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -224,7 +224,7 @@
 
                 {{-- Pagination Links --}}
                 @if($records->hasPages())
-                <div class="border-t border-neutral-200 dark:border-neutral-800 p-4">
+                <div class="border-t border-neutral-200 dark:border-neutral-600 p-4">
                     {{ $records->withQueryString()->links() }}
                 </div>
                 @endif

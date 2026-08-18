@@ -14,14 +14,14 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-neutral-50 dark:bg-neutral-900 min-h-screen transition-colors duration-300" 
+    <div class="py-12 bg-neutral-50 dark:bg-neutral-800 min-h-screen transition-colors duration-300" 
          x-data="whatsappService()" 
          x-init="initService()">
         
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-8">
             
             {{-- Status Card (Lapis 800) --}}
-            <div class="bg-white dark:bg-neutral-800 rounded-[2.5rem] p-10 shadow-sm border border-neutral-200 dark:border-neutral-700 transition-all">
+            <div class="bg-white dark:bg-neutral-800 rounded-[2.5rem] p-10 shadow-sm border border-neutral-200 dark:border-neutral-600 transition-all">
                 <div class="flex items-center justify-between mb-10">
                     <div class="flex items-center gap-4">
                         <div class="p-3 rounded-2xl" :class="status === 'connected' ? 'bg-emerald-50 dark:bg-emerald-900/30' : 'bg-rose-50 dark:bg-rose-900/30'">
@@ -39,7 +39,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     {{-- QR Section (Lapis 900) --}}
-                    <div class="flex flex-col items-center justify-center p-8 bg-neutral-50 dark:bg-neutral-900/50 rounded-[2rem] border-2 border-dashed border-neutral-200 dark:border-neutral-700 min-h-[350px] transition-all">
+                    <div class="flex flex-col items-center justify-center p-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-[2rem] border-2 border-dashed border-neutral-200 dark:border-neutral-600 min-h-[350px] transition-all">
                         
                         {{-- State: Connected --}}
                         <template x-if="status === 'connected'">
@@ -59,7 +59,7 @@
                             <div class="text-center space-y-6" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4">
                                 <div class="relative inline-block group">
                                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                                    <img :src="qrCode" alt="WA QR Code" class="relative w-56 h-56 border-8 border-white dark:border-neutral-800 shadow-2xl rounded-2xl transition-transform hover:scale-105">
+                                    <img :src="qrCode" alt="WA QR Code" class="relative w-56 h-56 border-8 border-white dark:border-neutral-600 shadow-2xl rounded-2xl transition-transform hover:scale-105">
                                 </div>
                                 <div class="space-y-1">
                                     <p class="text-xs font-bold text-neutral-600 dark:text-neutral-300 uppercase tracking-wider">Otorisasi Perangkat</p>
@@ -71,7 +71,7 @@
                         {{-- State: Loading/Disconnected --}}
                         <template x-if="status === 'disconnected'">
                             <div class="text-center space-y-4">
-                                <div class="w-12 h-12 border-4 border-neutral-200 dark:border-neutral-700 border-t-indigo-500 rounded-full animate-spin mx-auto"></div>
+                                <div class="w-12 h-12 border-4 border-neutral-200 dark:border-neutral-600 border-t-indigo-500 rounded-full animate-spin mx-auto"></div>
                                 <p class="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">Inisialisasi Service...</p>
                             </div>
                         </template>
@@ -87,7 +87,7 @@
                             </p>
                         </div>
                         
-                        <div class="p-6 bg-neutral-100 dark:bg-neutral-700/50 rounded-3xl border border-neutral-200 dark:border-neutral-700 transition-all">
+                        <div class="p-6 bg-neutral-100 dark:bg-neutral-700/50 rounded-3xl border border-neutral-200 dark:border-neutral-600 transition-all">
                             <h4 class="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-2">Internal Endpoint</h4>
                             <p class="text-sm font-bold text-neutral-700 dark:text-neutral-200 font-mono tracking-tight">
                                 http://localhost:<span class="text-indigo-500">3001</span>

@@ -17,7 +17,7 @@
 
     <div class="py-6 flex-1 space-y-4">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6 sm:p-8"
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 sm:p-8"
                  x-data="{ 
                     type: '{{ old('type', $nurse->type) }}',
                  }">
@@ -33,14 +33,14 @@
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3 block">Status Kepegawaian</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <label class="flex items-center p-4 border rounded-md cursor-pointer transition-all duration-200" 
-                                   :class="type == 'karyawan' ? 'border-neutral-900 bg-neutral-100 dark:border-neutral-50 dark:bg-neutral-800' : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900/50'">
-                                <input type="radio" name="type" value="karyawan" x-model="type" class="w-4 h-4 text-neutral-900 focus:ring-neutral-950 border-neutral-300 dark:border-neutral-700 dark:bg-neutral-950 dark:checked:bg-neutral-50 dark:focus:ring-neutral-300">
+                                   :class="type == 'karyawan' ? 'border-neutral-900 bg-neutral-100 dark:border-neutral-50 dark:bg-neutral-800' : 'border-neutral-200 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                <input type="radio" name="type" value="karyawan" x-model="type" class="w-4 h-4 text-neutral-900 focus:ring-neutral-950 border-neutral-300 dark:border-neutral-600 dark:bg-neutral-800 dark:checked:bg-neutral-50 dark:focus:ring-neutral-300">
                                 <span class="ml-3 block text-sm font-medium leading-none">Internal (Karyawan)</span>
                             </label>
                             
                             <label class="flex items-center p-4 border rounded-md cursor-pointer transition-all duration-200"
-                                   :class="type == 'eksternal' ? 'border-neutral-900 bg-neutral-100 dark:border-neutral-50 dark:bg-neutral-800' : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900/50'">
-                                <input type="radio" name="type" value="eksternal" x-model="type" class="w-4 h-4 text-neutral-900 focus:ring-neutral-950 border-neutral-300 dark:border-neutral-700 dark:bg-neutral-950 dark:checked:bg-neutral-50 dark:focus:ring-neutral-300">
+                                   :class="type == 'eksternal' ? 'border-neutral-900 bg-neutral-100 dark:border-neutral-50 dark:bg-neutral-800' : 'border-neutral-200 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                <input type="radio" name="type" value="eksternal" x-model="type" class="w-4 h-4 text-neutral-900 focus:ring-neutral-950 border-neutral-300 dark:border-neutral-600 dark:bg-neutral-800 dark:checked:bg-neutral-50 dark:focus:ring-neutral-300">
                                 <span class="ml-3 block text-sm font-medium leading-none">Eksternal (Mitra/Luar)</span>
                             </label>
                         </div>
@@ -48,7 +48,7 @@
 
                     <div x-show="type == 'karyawan'" class="mb-6 rounded-md border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900 shadow-sm dark:border-sky-800 dark:bg-sky-950 dark:text-sky-200 p-6">
                         <label class="block text-xs font-semibold uppercase tracking-widest text-sky-800 dark:text-sky-400 mb-3 ml-1">Link Data Karyawan</label>
-                        <select id="employee_selector" name="employee_id" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-sky-200 bg-white dark:bg-neutral-950 px-3 py-1 text-sm shadow-sm ring-offset-white focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-sky-800 dark:ring-offset-neutral-950">
+                        <select id="employee_selector" name="employee_id" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-sky-200 bg-white dark:bg-neutral-800 px-3 py-1 text-sm shadow-sm ring-offset-white focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-sky-800 dark:ring-offset-neutral-950">
                             <option value="">-- Pilih Karyawan (Untuk Update Data) --</option>
                             @foreach($employees as $emp)
                                 <option value="{{ $emp->id }}" 
@@ -70,41 +70,41 @@
                             
                             <div class="md:col-span-2 space-y-2">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-neutral-500">ID System (Read Only)</label>
-                                <input type="text" value="{{ $nurse->code }}" disabled class="flex h-9 w-full rounded-md border border-neutral-200 bg-neutral-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-neutral-800 dark:bg-neutral-800 dark:text-neutral-400 font-mono cursor-not-allowed">
+                                <input type="text" value="{{ $nurse->code }}" disabled class="flex h-9 w-full rounded-md border border-neutral-200 bg-neutral-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-400 font-mono cursor-not-allowed">
                             </div>
 
                             <div x-show="type == 'karyawan'" class="space-y-2">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">NIK Perusahaan</label>
-                                <input type="text" name="nik" id="nik" value="{{ old('nik', $nurse->nik) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-neutral-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-neutral-800 dark:bg-neutral-800 dark:text-neutral-400 font-mono" readonly>
+                                <input type="text" name="nik" id="nik" value="{{ old('nik', $nurse->nik) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-neutral-100 px-3 py-1 text-sm shadow-sm transition-colors dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-400 font-mono" readonly>
                             </div>
 
                             <div :class="type == 'eksternal' ? 'col-span-2 space-y-2' : 'space-y-2'">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">KTP</label>
-                                <input type="text" name="ktp" id="ktp" value="{{ old('ktp', $nurse->ktp) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                                <input type="text" name="ktp" id="ktp" value="{{ old('ktp', $nurse->ktp) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                             </div>
                         </div>
 
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nama Lengkap</label>
-                            <input type="text" name="nama" id="nama" value="{{ old('nama', $nurse->nama) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" :readonly="type == 'karyawan'" :class="type == 'karyawan' ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400' : ''" required>
+                            <input type="text" name="nama" id="nama" value="{{ old('nama', $nurse->nama) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" :readonly="type == 'karyawan'" :class="type == 'karyawan' ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400' : ''" required>
                         </div>
 
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nomor STR</label>
-                            <input type="text" name="str" value="{{ old('str', $nurse->str) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                            <input type="text" name="str" value="{{ old('str', $nurse->str) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
 
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nomor Telepon</label>
-                            <input type="text" name="phone" id="phone" value="{{ old('phone', $nurse->phone) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                            <input type="text" name="phone" id="phone" value="{{ old('phone', $nurse->phone) }}" class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
 
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Alamat Domisili</label>
-                            <textarea name="alamat" id="alamat" class="flex min-h-[80px] w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" rows="3">{{ old('alamat', $nurse->alamat) }}</textarea>
+                            <textarea name="alamat" id="alamat" class="flex min-h-[80px] w-full rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300" rows="3">{{ old('alamat', $nurse->alamat) }}</textarea>
                         </div>
 
-                        <div class="mt-4 p-5 bg-neutral-50 dark:bg-neutral-900 rounded-md border border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+                        <div class="mt-4 p-5 bg-neutral-50 dark:bg-neutral-800 rounded-md border border-neutral-200 dark:border-neutral-600 flex items-center justify-between">
                             <div class="pr-4">
                                 <span class="block text-sm font-medium leading-none">Status Aktif</span>
                                 <span class="text-xs text-neutral-500 dark:text-neutral-400">Matikan jika perawat sudah tidak bekerja.</span>
@@ -116,8 +116,8 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-end gap-3">
-                        <a href="{{ route('master.nurses.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">Batal</a>
+                    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-600 flex flex-col sm:flex-row justify-end gap-3">
+                        <a href="{{ route('master.nurses.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">Batal</a>
                         <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90">Simpan Perubahan</button>
                     </div>
                 </form>

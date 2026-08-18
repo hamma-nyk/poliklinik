@@ -20,7 +20,7 @@
             
             {{-- Alert & Action Bar --}}
             <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
-                <div class="flex border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-4 rounded-xl">
+                <div class="flex border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 rounded-xl">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 text-neutral-500 dark:text-neutral-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                         <div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex items-center gap-4">
                 <a href="{{ route('clinical.reports.index') }}" 
-                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
@@ -46,11 +46,11 @@
             </div>
 
             {{-- Table Results --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 w-20">No</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Informasi Item</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Satuan</th>
@@ -60,14 +60,14 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($data as $index => $row)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400">{{ $index + 1 }}</td>
                                 <td class="p-4 align-middle">
                                     <div class="font-medium text-neutral-900 dark:text-neutral-100">{{ $row->name }}</div>
                                     <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 uppercase">{{ $row->code }}</div>
                                 </td>
                                 <td class="p-4 align-middle text-center">
-                                    <span class="px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
+                                    <span class="px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-600">
                                         {{ $row->unit }}
                                     </span>
                                 </td>

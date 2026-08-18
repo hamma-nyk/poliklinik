@@ -71,7 +71,7 @@
 
         <div class="w-full sm:w-1/2 flex flex-col justify-center items-center bg-neutral-50 relative">
 
-            <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-xl shadow border border-neutral-200 dark:bg-neutral-950 dark:border-neutral-800 z-10 mx-4 animate-fade-in-up delay-100">
+            <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-xl shadow border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-600 z-10 mx-4 animate-fade-in-up delay-100">
                 
                 <div class="text-center mb-10">
                     <h2 class="text-2xl font-semibold tracking-tight text-neutral-900">

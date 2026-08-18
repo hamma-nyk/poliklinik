@@ -1,5 +1,5 @@
 <section>
-    <header class="flex items-start gap-4 border-b border-neutral-100 dark:border-neutral-700 pb-4 mb-6">
+    <header class="flex items-start gap-4 border-b border-neutral-100 dark:border-neutral-600 pb-4 mb-6">
         <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
         </div>
@@ -24,7 +24,7 @@
         <div>
             <x-input-label for="name" :value="__('Nama Lengkap')" class="text-neutral-700 dark:text-neutral-300 font-bold" />
             <x-text-input id="name" name="name" type="text" 
-                class="mt-1 block w-full rounded-xl border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-300 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400" 
+                class="mt-1 block w-full rounded-xl border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-300 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400" 
                 :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -32,7 +32,7 @@
         <div>
             <x-input-label for="email" :value="__('Email')" class="text-neutral-700 dark:text-neutral-300 font-bold" />
             <x-text-input id="email" name="email" type="email" 
-                class="mt-1 block w-full rounded-xl border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-300 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400" 
+                class="mt-1 block w-full rounded-xl border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-300 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400" 
                 :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

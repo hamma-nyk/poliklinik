@@ -19,7 +19,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
             {{-- Filter Panel --}}
-            <div class="p-6 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
+            <div class="p-6 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
                 <form method="GET" action="{{ route('inventory.reports.stock_card') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                     
                     <div class="md:col-span-2 space-y-1.5">
@@ -39,14 +39,14 @@
                     <div class="space-y-1.5">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Dari Tanggal</label>
                         <input type="date" name="start_date" value="{{ request('start_date', date('Y-m-01')) }}" 
-                            class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                            class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
 
                     <div class="flex gap-2 items-end">
                         <div class="w-full space-y-1.5">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Sampai Tanggal</label>
                             <input type="date" name="end_date" value="{{ request('end_date', date('Y-m-d')) }}" 
-                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                         </div>
                         <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 flex-shrink-0">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -56,10 +56,10 @@
             </div>
 
             @if(request('medicine_id') && $selectedMedicine)
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
                 
                 {{-- Detail Header --}}
-                <div class="p-6 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="p-6 border-b border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-800/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 rounded-md flex items-center justify-center mr-4">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white dark:bg-neutral-950 px-6 py-3 rounded-md border border-neutral-200 dark:border-neutral-800 shadow-sm text-center md:text-right">
+                    <div class="bg-white dark:bg-neutral-800 px-6 py-3 rounded-md border border-neutral-200 dark:border-neutral-600 shadow-sm text-center md:text-right">
                         <span class="block text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase mb-1">Stok Saat Ini</span>
                         <span class="text-2xl font-bold tabular-nums">{{ $selectedMedicine->current_stock }}</span>
                     </div>
@@ -82,7 +82,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Waktu & Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Deskripsi Transaksi</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 text-center">Masuk</th>
@@ -93,7 +93,7 @@
                         <tbody class="[&_tr:last-child]:border-0">
                             
                             {{-- Baris Stok Awal --}}
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/50">
                                 <td class="p-4 align-middle text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest font-medium" colspan="2">
                                     Stok Awal Per {{ \Carbon\Carbon::parse(request('start_date'))->format('d M Y') }}
                                 </td>
@@ -116,7 +116,7 @@
                                     if($isMasuk) { $currentBalance += $item->quantity; $totalIn += $item->quantity; } 
                                     else { $currentBalance -= $item->quantity; $totalOut += $item->quantity; }
                                 @endphp
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td class="p-4 align-middle whitespace-nowrap">
                                         <div class="font-medium">{{ \Carbon\Carbon::parse($item->transaction->transaction_date)->format('d M Y') }}</div>
                                         <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ \Carbon\Carbon::parse($item->transaction->created_at)->format('H:i') }} WIB</div>
@@ -158,7 +158,7 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td colspan="5" class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400 italic">
                                         Tidak ada aktivitas transaksi pada rentang tanggal ini.
                                     </td>
@@ -166,13 +166,13 @@
                             @endforelse
 
                             {{-- Footer Summary --}}
-                            <!-- <tr class="bg-neutral-50/50 dark:bg-neutral-900/50 border-t-2 border-neutral-100 dark:border-neutral-700">
+                            <!-- <tr class="bg-neutral-50/50 dark:bg-neutral-800/50 border-t-2 border-neutral-100 dark:border-neutral-600">
                                 <td colspan="2" class="px-8 py-5 text-right text-[11px] font-bold text-neutral-500 uppercase tracking-[0.2em]">Total Pergerakan</td>
                                 <td class="px-6 py-5 text-center font-bold text-emerald-600 dark:text-emerald-400">+{{ $totalIn }}</td>
                                 <td class="px-6 py-5 text-center font-bold text-rose-600 dark:text-rose-400">-{{ $totalOut }}</td>
                                 <td class="px-8 py-5 text-center font-bold text-blue-600 dark:text-blue-400 text-lg">{{ $currentBalance }}</td>
                             </tr> -->
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/50">
                                 <td colspan="2" class="p-4 align-middle text-right font-medium">
                                     TOTAL QTY <br>
                                     <span class="text-xs text-neutral-500 dark:text-neutral-400 font-normal">Total Nilai Masuk: Rp {{ number_format($totalValueIn, 0, ',', '.') }}</span>
@@ -190,8 +190,8 @@
             </div>
             @else
                 {{-- State Belum Pilih --}}
-                <div class="flex flex-col items-center justify-center p-20 border border-dashed border-neutral-200 dark:border-neutral-800 rounded-md text-neutral-500 transition-all">
-                    <div class="w-20 h-20 bg-neutral-50 dark:bg-neutral-900 rounded-md flex items-center justify-center mb-6">
+                <div class="flex flex-col items-center justify-center p-20 border border-dashed border-neutral-200 dark:border-neutral-600 rounded-md text-neutral-500 transition-all">
+                    <div class="w-20 h-20 bg-neutral-50 dark:bg-neutral-800 rounded-md flex items-center justify-center mb-6">
                         <svg class="w-10 h-10 text-neutral-400 dark:text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
                     <h3 class="text-xl font-medium tracking-tight">Siap Meninjau Stok?</h3>

@@ -7,7 +7,7 @@
                     <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Silahkan export laporan</p>
                 </div>
             </div>
-             <a href="{{ route('clinical.reports.skd') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
+             <a href="{{ route('clinical.reports.skd') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
                 Kembali ke Filter
             </a>
         </div>
@@ -17,7 +17,7 @@
         <div class="max-w-[100rem] mx-auto sm:px-6 lg:px-8 space-y-6"> {{-- Lebar maksimal untuk data grid --}}
             
             {{-- Dokumen Header Card --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                     <div class="space-y-1">
                         <h3 class="font-medium text-lg uppercase tracking-tight">Arsip Keterangan Sakit Karyawan</h3>
@@ -33,7 +33,7 @@
                             <input type="hidden" name="start_date" value="{{ $startDate }}">
                             <input type="hidden" name="end_date" value="{{ $endDate }}">
                             
-                            <button type="submit" name="format" value="excel" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
+                            <button type="submit" name="format" value="excel" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                 Export Excel
                             </button>
@@ -48,11 +48,11 @@
             </div>
 
             {{-- Table View --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
                 <div class="overflow-x-auto overflow-y-auto max-h-[70vh]"> {{-- Sticky Header Area --}}
                     <table class="w-full caption-bottom text-sm text-left whitespace-nowrap">
-                        <thead class="[&_tr]:border-b sticky top-0 z-10 bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 font-medium">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                        <thead class="[&_tr]:border-b sticky top-0 z-10 bg-neutral-50 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 font-medium">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 align-middle font-medium text-neutral-500 dark:text-neutral-400 text-center">No</th>
                                 <th class="h-12 px-4 align-middle font-medium text-neutral-500 dark:text-neutral-400">Informasi Karyawan</th>
                                 <th class="h-12 px-4 align-middle font-medium text-neutral-500 dark:text-neutral-400">No. Registrasi</th>
@@ -81,7 +81,7 @@
                                 } else { $dokter = $row->external_doctor_name; }
                             @endphp
 
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400">{{ $key + 1 }}</td>
                                 <td class="p-4 align-middle">
                                     <div class="font-medium text-neutral-900 dark:text-neutral-100">{{ $row->patient->name }}</div>
@@ -94,9 +94,9 @@
                                 <td class="p-4 align-middle font-mono text-neutral-600 dark:text-neutral-300">{{ $row->reg_number }}</td>
                                 <td class="p-4 align-middle">
                                     @if($row->type == 'internal')
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 uppercase">Internal</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800 uppercase">Internal</span>
                                     @else
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 uppercase">Eksternal</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800 uppercase">Eksternal</span>
                                     @endif
                                 </td>
                                 <td class="p-4 align-middle text-center">
@@ -107,7 +107,7 @@
                                     </div>
                                 </td>
                                 <td class="p-4 align-middle text-center">
-                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md text-xs font-medium">{{ $row->duration_days }} Hari</span>
+                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 rounded-md text-xs font-medium">{{ $row->duration_days }} Hari</span>
                                 </td>
                                 <td class="p-4 align-middle">
                                     <div class="font-medium">{{ $dokter }}</div>
@@ -119,7 +119,7 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td colspan="9" class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400 py-10">
                                     Data SKD tidak ditemukan untuk periode pencarian ini.
                                 </td>

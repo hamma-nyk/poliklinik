@@ -30,13 +30,13 @@
             @endif
 
             {{-- Toolbar: Search & Action --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 
                 <form method="GET" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 items-center flex-grow">
                     {{-- Per Page --}}
                     <div class="relative w-full sm:w-auto">
                         <select name="per_page" onchange="this.form.submit()" 
-                                class="flex h-9 w-full sm:w-20 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+                                class="flex h-9 w-full sm:w-20 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
@@ -51,7 +51,7 @@
                             </svg>
                         </div>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Pasien / Kode..." 
-                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
                 </form>
 
@@ -64,11 +64,11 @@
             </div>
 
             {{-- Table Container --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden sm:rounded-2xl">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden sm:rounded-2xl">
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm divide-y divide-neutral-100 dark:divide-neutral-700">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-widest text-[11px]">Waktu & Kode</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-widest text-[11px]">Pasien</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-widest text-[11px]">Gula Darah</th>
@@ -81,7 +81,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0 divide-y divide-neutral-100 dark:divide-neutral-700">
                             @forelse($checks as $chk)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50 group">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="text-sm font-bold text-neutral-900 dark:text-neutral-100">{{ $chk->created_at->format('d M Y') }}</div>
                                     <div class="text-[11px] text-neutral-500 dark:text-neutral-500 mb-1.5 font-medium">{{ $chk->created_at->format('H:i') }} WIB</div>
@@ -156,7 +156,7 @@
                                         @if($chk->doctor == null)
                                             <span class="text-sm text-neutral-400 dark:text-neutral-500 italic">-</span>
                                         @else
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-800 dark:bg-neutral-900 mr-3 text-neutral-700 dark:text-neutral-300">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800 mr-3 text-neutral-700 dark:text-neutral-300">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div class="grid gap-0.5">
@@ -177,7 +177,7 @@
                                         @if($chk->nurse == null)
                                             <span class="text-sm text-neutral-400 dark:text-neutral-500 italic">-</span>
                                         @else
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-800 dark:bg-neutral-900 mr-3 text-neutral-700 dark:text-neutral-300">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800 mr-3 text-neutral-700 dark:text-neutral-300">
                                             {{ substr($name, 0, 2) }}
                                         </div>
                                         <div class="grid gap-0.5">
@@ -192,7 +192,7 @@
                                 <td class="p-4 align-middle whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex items-center justify-end gap-1.5">
                                         <a href="{{ route('clinical.lab.print', $chk->id) }}" target="_blank" 
-                                           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50">
+                                           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
                                             <svg class="w-4 h-4 mr-1.5 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                                             Cetak
                                         </a>
@@ -225,7 +225,7 @@
 
                 {{-- Pagination Links --}}
                 @if($checks->hasPages())
-                <div class="border-t border-neutral-200 dark:border-neutral-800 p-4">
+                <div class="border-t border-neutral-200 dark:border-neutral-600 p-4">
                     {{ $checks->withQueryString()->links() }}
                 </div>
                 @endif

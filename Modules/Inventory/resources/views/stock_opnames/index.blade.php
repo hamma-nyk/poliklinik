@@ -30,13 +30,13 @@
             @endif
 
             {{-- Toolbar: Search & Action --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
                 
                 <form method="GET" action="{{ route('inventory.stock-opnames.index') }}" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 items-center flex-grow">
                     {{-- Row Count --}}
                     <div class="relative w-full sm:w-auto">
                         <select name="per_page" onchange="this.form.submit()" 
-                                class="flex h-9 w-full sm:w-20 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+                                class="flex h-9 w-full sm:w-20 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
@@ -51,7 +51,7 @@
                             </svg>
                         </div>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="No. Dokumen / Catatan..." 
-                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
+                               class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
                 </form>
 
@@ -64,11 +64,11 @@
             </div>
 
             {{-- Table Content --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 overflow-hidden transition-all">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden transition-all">
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Waktu & Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">No. Dokumen</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Catatan Penyesuaian</th>
@@ -78,7 +78,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($opnames as $opname)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50 group">
+                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="text-sm font-bold">
                                         {{ \Carbon\Carbon::parse($opname->opname_date)->format('d M Y') }}
@@ -99,14 +99,14 @@
                                 </td>
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-800 dark:bg-neutral-900 mr-3 uppercase">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800 mr-3 uppercase">
                                             {{ substr($opname->creator->name ?? '?', 0, 2) }}
                                         </div>
                                         <span class="grid gap-0.5 font-medium">{{ $opname->creator->name ?? 'Sistem' }}</span>
                                     </div>
                                 </td>
                                 <td class="p-4 align-middle text-center whitespace-nowrap">
-                                    <a href="{{ route('inventory.stock-opnames.show', $opname->id) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 uppercase tracking-widest">
+                                    <a href="{{ route('inventory.stock-opnames.show', $opname->id) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-8 px-3 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 uppercase tracking-widest">
                                         Detail
                                         <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                     </a>
@@ -116,7 +116,7 @@
                             <tr>
                                 <td colspan="5" class="p-4 align-middle text-center py-24">
                                     <div class="flex flex-col items-center justify-center">
-                                        <div class="p-6 rounded-full mb-4 border border-dashed border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400">
+                                        <div class="p-6 rounded-full mb-4 border border-dashed border-neutral-200 dark:border-neutral-600 text-neutral-500 dark:text-neutral-400">
                                             <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
                                         <h3 class="font-semibold text-lg uppercase tracking-tight text-neutral-500 dark:text-neutral-400">Belum ada riwayat</h3>
@@ -131,7 +131,7 @@
                 
                 {{-- Pagination --}}
                 @if($opnames->hasPages())
-                    <div class="border-t border-neutral-200 dark:border-neutral-800 p-4 transition-colors">
+                    <div class="border-t border-neutral-200 dark:border-neutral-600 p-4 transition-colors">
                         {{ $opnames->withQueryString()->links() }}
                     </div>
                 @endif

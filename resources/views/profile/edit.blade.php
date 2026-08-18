@@ -20,19 +20,19 @@
             
             <div class="grid grid-cols-1 gap-6">
                 
-                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6 sm:p-8">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 sm:p-8">
                     <div class="max-w-xl">
                         @include('profile.partials.update-profile-information-form')
                     </div>
                 </div>
 
-                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6 sm:p-8">
+                <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 sm:p-8">
                     <div class="max-w-xl">
                         @include('profile.partials.update-password-form')
                     </div>
                 </div>
 
-                <div class="rounded-xl border border-destructive/20 bg-white text-neutral-950 shadow dark:bg-neutral-950 dark:text-neutral-50 p-6 sm:p-8">
+                <div class="rounded-xl border border-destructive/20 bg-white text-neutral-950 shadow dark:bg-neutral-800 dark:text-neutral-50 p-6 sm:p-8">
                     <div class="max-w-xl">
                         @include('profile.partials.delete-user-form')
                     </div>

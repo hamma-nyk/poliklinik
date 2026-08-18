@@ -23,7 +23,7 @@
     
     {{-- Tombol Kembali: Boxed Style --}}
     <a href="{{ route('inventory.transactions.index') }}" 
-       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 w-full sm:w-auto uppercase tracking-widest group">
+       class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 w-full sm:w-auto uppercase tracking-widest group">
         <svg class="w-4 h-4 mr-2.5 transition-transform duration-300 group-hover:-translate-x-1" 
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -33,7 +33,7 @@
 
     {{-- Tombol Cetak: Boxed Style --}}
     <button onclick="window.print()" 
-            class="hidden md:inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 print:hidden uppercase tracking-widest group/print">
+            class="hidden md:inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 print:hidden uppercase tracking-widest group/print">
         <svg class="w-4 h-4 mr-2.5 text-neutral-400 group-hover/print:text-emerald-500 transition-colors" 
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
@@ -42,10 +42,10 @@
     </button>
 </div>
 
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-8">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-8">
                 
                 {{-- Header Info --}}
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-600">
                     <div class="space-y-1">
                         <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Tanggal Transaksi</p>
                         <p class="text-lg font-semibold text-neutral-900 dark:text-neutral-50">
@@ -79,10 +79,10 @@
                         Rincian Item Obat
                     </h3>
                     
-                    <div class="overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-md">
+                    <div class="overflow-hidden border border-neutral-200 dark:border-neutral-600 rounded-md">
                         <table class="w-full caption-bottom text-sm">
                             <thead class="[&_tr]:border-b">
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nama Obat</th>
                                     <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Jumlah (Qty)</th>
                                     <th class="h-12 px-4 text-right align-middle font-medium text-neutral-500 dark:text-neutral-400">Harga Satuan</th>
@@ -96,7 +96,7 @@
                                     $subtotal = $item->quantity * $item->price_at_moment; 
                                     $grandTotal += $subtotal;
                                 @endphp
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td class="p-4 align-middle">
                                         <div class="font-medium text-neutral-800 dark:text-neutral-200">
                                             {{ $item->medicine->name ?? 'Item Dihapus' }}
@@ -124,7 +124,7 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot class="border-t border-neutral-200 dark:border-neutral-800 font-medium">
+                            <tfoot class="border-t border-neutral-200 dark:border-neutral-600 font-medium">
                                 <tr>
                                     <td colspan="3" class="p-4 align-middle text-right text-neutral-500 dark:text-neutral-400">Total Keseluruhan</td>
                                     <td class="p-4 align-middle text-right text-lg">
@@ -137,12 +137,12 @@
                 </div>
 
                 {{-- Referensi Rekam Medis --}}
-                <div class="mt-8 rounded-md border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 shadow-sm dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50 p-6">
+                <div class="mt-8 rounded-md border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 shadow-sm dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6">
                     <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase mb-4 block tracking-wider">Sumber / Referensi Transaksi</span>
                     
                     @if($transaction->medical_record_id && $transaction->medicalRecord)
                         <div class="flex items-start">
-                            <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50 mr-4">
+                            <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 mr-4">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
                             <div class="space-y-1">
@@ -157,7 +157,7 @@
                         </div>
                      @elseif($transaction->lab_check_id && $transaction->labCheck)
                         <div class="flex items-start">
-                            <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50 mr-4">
+                            <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 mr-4">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
                             <div class="space-y-1">
