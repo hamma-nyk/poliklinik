@@ -50,7 +50,7 @@
                 <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 space-y-8">
                     
                     {{-- Baris 1: Tanggal & Tipe --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-neutral-100 dark:border-neutral-600 pb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-neutral-200 dark:border-neutral-600 pb-8">
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Tanggal Transaksi</label>
                             <input type="date" name="transaction_date" value="{{ date('Y-m-d') }}" 

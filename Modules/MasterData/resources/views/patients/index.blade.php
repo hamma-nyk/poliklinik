@@ -78,7 +78,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($patients as $patient)
-                            <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800">

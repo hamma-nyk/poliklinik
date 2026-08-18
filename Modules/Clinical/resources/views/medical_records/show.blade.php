@@ -173,7 +173,7 @@ function confirmAndDisable(el) {
                         <div class="overflow-hidden border border-neutral-200 dark:border-neutral-600 rounded-md">
                             <table class="w-full caption-bottom text-sm">
                                 <thead class="[&_tr]:border-b bg-neutral-50 dark:bg-neutral-800/50">
-                                    <tr class="border-b transition-colors">
+                                    <tr class="border-b border-neutral-200 transition-colors">
                                         <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Item Obat</th>
                                         <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Qty</th>
                                         <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Aturan Pakai / Instruksi</th>
@@ -181,7 +181,7 @@ function confirmAndDisable(el) {
                                 </thead>
                                 <tbody class="[&_tr:last-child]:border-0 divide-y divide-neutral-200 dark:divide-neutral-800">
                                     @forelse($record->medicines as $item)
-                                    <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:hover:bg-neutral-700/50">
+                                    <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:hover:bg-neutral-700/50">
                                         <td class="p-4 align-middle">
                                             <div class="font-medium text-neutral-900 dark:text-neutral-100">{{ $item->medicine->name ?? 'Item Dihapus' }}</div>
                                             <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono mt-0.5">{{ $item->medicine->code ?? '' }}</div>

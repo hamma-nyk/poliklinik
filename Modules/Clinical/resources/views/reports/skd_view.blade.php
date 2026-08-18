@@ -52,7 +52,7 @@
                 <div class="overflow-x-auto overflow-y-auto max-h-[70vh]"> {{-- Sticky Header Area --}}
                     <table class="w-full caption-bottom text-sm text-left whitespace-nowrap">
                         <thead class="[&_tr]:border-b sticky top-0 z-10 bg-neutral-50 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 font-medium">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 align-middle font-medium text-neutral-500 dark:text-neutral-400 text-center">No</th>
                                 <th class="h-12 px-4 align-middle font-medium text-neutral-500 dark:text-neutral-400">Informasi Karyawan</th>
                                 <th class="h-12 px-4 align-middle font-medium text-neutral-500 dark:text-neutral-400">No. Registrasi</th>
@@ -81,7 +81,7 @@
                                 } else { $dokter = $row->external_doctor_name; }
                             @endphp
 
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400">{{ $key + 1 }}</td>
                                 <td class="p-4 align-middle">
                                     <div class="font-medium text-neutral-900 dark:text-neutral-100">{{ $row->patient->name }}</div>
@@ -119,7 +119,7 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td colspan="9" class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400 py-10">
                                     Data SKD tidak ditemukan untuk periode pencarian ini.
                                 </td>

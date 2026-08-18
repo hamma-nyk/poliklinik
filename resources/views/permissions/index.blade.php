@@ -67,7 +67,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nama Permission</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Guard</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Dibuat Pada</th>
@@ -76,7 +76,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse ($permissions as $permission)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-8 w-8 bg-neutral-100 dark:bg-neutral-700 rounded-lg flex items-center justify-center text-neutral-500 dark:text-neutral-400 mr-3 border border-neutral-200 dark:border-neutral-600 transition-colors group-hover:border-indigo-400">
@@ -114,7 +114,7 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td colspan="4" class="p-4 align-middle text-center py-24">
                                     <div class="flex flex-col items-center justify-center">
                                         <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-full mb-4 text-neutral-300 dark:text-neutral-600 transition-colors">

@@ -131,7 +131,7 @@
             style="display: none;">
             
             {{-- Search Input in Dropdown --}}
-            <div class="p-2 border-b border-neutral-100 dark:border-neutral-600">
+            <div class="p-2 border-b border-neutral-200 dark:border-neutral-600">
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
                         <svg class="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

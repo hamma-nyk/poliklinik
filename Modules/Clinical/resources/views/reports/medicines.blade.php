@@ -67,7 +67,7 @@
                <div class="overflow-x-auto">
     <table class="w-full caption-bottom text-sm">
         <thead class="[&_tr]:border-b">
-    <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+    <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
         {{-- No kecil saja --}}
         <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 w-16">
             No
@@ -106,7 +106,7 @@
         @endphp
 
         {{-- BARIS HEADER PER OBAT --}}
-        <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/40">
+        <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/40">
             <td colspan="4" class="p-4 align-middle">
                 <div class="flex justify-between items-center">
                     <div>
@@ -128,7 +128,7 @@
 
         {{-- LOOP DETAIL TRANSAKSI UNTUK OBAT INI --}}
         @foreach($items as $index => $row)
-            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                 <td class="p-4 align-middle text-center text-xs text-neutral-500 dark:text-neutral-400">{{ $loop->iteration }}</td>
                 <td class="p-4 align-middle">
                     <div class="text-xs font-medium text-neutral-700 dark:text-neutral-300">

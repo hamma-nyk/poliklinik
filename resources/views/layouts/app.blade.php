@@ -55,7 +55,7 @@
                 </header>
 
                 @if (isset($header))
-                    <header class="bg-white dark:bg-neutral-800 shadow-sm z-10 border-b border-transparent dark:border-neutral-600 transition-colors duration-300"> 
+                    <header class="bg-white dark:bg-neutral-800 shadow-sm z-10 border-b border-neutral-200 border-transparent dark:border-neutral-600 transition-colors duration-300"> 
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>

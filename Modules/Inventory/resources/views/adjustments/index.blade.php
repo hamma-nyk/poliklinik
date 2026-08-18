@@ -87,7 +87,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Item Obat</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Tipe Adjustment</th>
@@ -98,7 +98,7 @@
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($adjustments as $trx)
                                 @foreach($trx->items as $item)
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td class="p-4 align-middle whitespace-nowrap">
                                         <div class="font-medium">{{ \Carbon\Carbon::parse($trx->transaction_date)->format('d M Y') }}</div>
                                         <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $trx->created_at->format('H:i') }} WIB</div>

@@ -157,7 +157,7 @@
                     <div class="overflow-visible"> {{-- Visible agar dropdown tidak terpotong --}}
                         <table class="w-full caption-bottom text-sm">
                             <thead class="[&_tr]:border-b">
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 w-4/12">Nama Obat</th>
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 w-2/12">Satuan</th>
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 w-1/12">Jumlah</th>
@@ -168,7 +168,7 @@
                             </thead>
                             <tbody class="[&_tr:last-child]:border-0">
     <template x-for="(item, index) in items" :key="index">
-        <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 align-top">
+        <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 align-top">
             
             {{-- KOLOM OBAT (SEARCHABLE + CLEAR BUTTON) --}}
             <td class="p-4 align-middle relative w-5/12">

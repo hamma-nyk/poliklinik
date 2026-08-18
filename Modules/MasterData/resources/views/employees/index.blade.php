@@ -99,7 +99,7 @@
             </div>
 
             {{-- Table Section --}}
-            <div class="rounded-xl border border-neutral-100 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
                 <div class="relative w-full overflow-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
@@ -115,10 +115,10 @@
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($employees as $emp)
                            
-                            <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle">
                                     <div class="flex items-center gap-3">
-                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-100 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800">
+                                        <div class="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-xs font-medium dark:border-neutral-600 dark:bg-neutral-800">
                                             {{ substr($emp->nama, 0, 1) }}{{ substr(strrchr($emp->nama, " "), 1, 1) }}
                                         </div>
                                         <div class="grid gap-0.5">

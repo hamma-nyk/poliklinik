@@ -29,7 +29,7 @@
                     {{-- Input Periode --}}
                     <div class="mb-8">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3 ml-1 block">Rentang Periode Laporan</label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-neutral-50 dark:bg-neutral-800/50 p-6 rounded-2xl border border-neutral-100 dark:border-neutral-600">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-neutral-50 dark:bg-neutral-800/50 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-600">
                             <div class="space-y-1.5">
                                 <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-1">Dari Tanggal</span>
                                 <input type="date" name="start_date" value="{{ date('Y-m-01') }}" 
@@ -48,7 +48,7 @@
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-4 ml-1 block">Pilih Format Output</label>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <label class="relative flex flex-col items-center justify-center p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 group"
-                                :class="format === 'view' ? 'border-indigo-500 bg-indigo-50/50 dark:bg-indigo-900/20' : 'border-neutral-100 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                :class="format === 'view' ? 'border-indigo-500 bg-indigo-50/50 dark:bg-indigo-900/20' : 'border-neutral-200 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
                                 <input type="radio" name="format" value="view" x-model="format" class="hidden">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-colors"
                                     :class="format === 'view' ? 'bg-indigo-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 group-hover:text-indigo-500'">
@@ -58,7 +58,7 @@
                             </label>
 
                             <label class="relative flex flex-col items-center justify-center p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 group"
-                                :class="format === 'excel' ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' : 'border-neutral-100 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                :class="format === 'excel' ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' : 'border-neutral-200 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
                                 <input type="radio" name="format" value="excel" x-model="format" class="hidden">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-colors"
                                     :class="format === 'excel' ? 'bg-emerald-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 group-hover:text-emerald-500'">
@@ -68,7 +68,7 @@
                             </label>
 
                             <label class="relative flex flex-col items-center justify-center p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 group"
-                                :class="format === 'pdf' ? 'border-rose-500 bg-rose-50/50 dark:bg-rose-900/20' : 'border-neutral-100 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
+                                :class="format === 'pdf' ? 'border-rose-500 bg-rose-50/50 dark:bg-rose-900/20' : 'border-neutral-200 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700/50'">
                                 <input type="radio" name="format" value="pdf" x-model="format" class="hidden">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-colors"
                                     :class="format === 'pdf' ? 'bg-rose-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 group-hover:text-rose-500'">

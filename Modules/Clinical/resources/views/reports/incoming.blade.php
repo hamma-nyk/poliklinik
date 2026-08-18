@@ -67,7 +67,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-    <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+    <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
         {{-- No - Cukup kecil --}}
         <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 w-16">
             No
@@ -108,7 +108,7 @@
         @endphp
 
         {{-- HEADER GRUP OBAT --}}
-        <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/40">
+        <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/40">
             <td colspan="3" class="p-4 align-middle">
                 <div class="flex flex-col">
                     <span class="text-xs text-neutral-500 dark:text-neutral-400">Master Barang</span>
@@ -134,7 +134,7 @@
 
         {{-- DETAIL TRANSAKSI MASUK --}}
         @foreach($group as $row)
-            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                 <td class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400">
                     {{ $loop->iteration }}
                 </td>
@@ -168,7 +168,7 @@
         @endforeach
 
     @empty
-        <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+        <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
             <td colspan="5" class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400 py-10">
                 Data Tidak Ditemukan
             </td>

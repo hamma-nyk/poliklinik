@@ -160,7 +160,7 @@
 
             {{-- TOP 5 DIAGNOSA --}}
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
-                <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-100 dark:border-neutral-600">
+                <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-200 dark:border-neutral-600">
                     <h3 class="font-semibold leading-none tracking-tight">Top 5 Diagnosa</h3>
                     <p class="text-sm text-neutral-500 dark:text-neutral-400">Penyakit terbanyak bulan ini</p>
                 </div>
@@ -168,7 +168,7 @@
                     <div class="relative w-full overflow-auto">
                         <table class="w-full caption-bottom text-sm">
                             <thead class="[&_tr]:border-b">
-                                <tr class="border-b transition-colors dark:border-neutral-600">
+                                <tr class="border-b border-neutral-200 transition-colors dark:border-neutral-600">
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">No</th>
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Diagnosa</th>
                                     <th class="h-12 px-4 text-right align-middle font-medium text-neutral-500 dark:text-neutral-400">Jumlah</th>
@@ -177,7 +177,7 @@
                             <tbody class="[&_tr:last-child]:border-0">
                                 @php $diagLabelsArr = $diagLabels ?? []; $diagDataArr = $diagData ?? []; @endphp
                                 @forelse($diagLabelsArr as $i => $label)
-                                <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td class="p-4 align-middle text-neutral-500 dark:text-neutral-400">{{ $i + 1 }}</td>
                                     <td class="p-4 align-middle font-medium">{{ $label }}</td>
                                     <td class="p-4 align-middle text-right">
@@ -200,7 +200,7 @@
                 
                 {{-- Recent Patients --}}
                 <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
-                    <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-100 dark:border-neutral-600">
+                    <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-200 dark:border-neutral-600">
                         <div class="flex justify-between items-center">
                             <h3 class="font-semibold leading-none tracking-tight">Pasien Terakhir</h3>
                             <a href="{{ route('clinical.records.index') }}" class="text-xs font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50">
@@ -213,7 +213,7 @@
                             <table class="w-full caption-bottom text-sm">
                                 <tbody class="[&_tr:last-child]:border-0">
                                     @forelse($latestRecords as $rec)
-                                    <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                    <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                         <td class="p-4 align-middle">
                                             <div class="font-medium">{{ $rec->patient->name }}</div>
                                             <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $rec->code }}</div>
@@ -235,7 +235,7 @@
 
                 {{-- Critical Stock --}}
                 <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
-                    <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-100 dark:border-neutral-600">
+                    <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-200 dark:border-neutral-600">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2">
                                 <h3 class="font-semibold leading-none tracking-tight text-destructive">Stok Obat Menipis (≤ 10)</h3>
@@ -250,7 +250,7 @@
                             <table class="w-full caption-bottom text-sm">
                                 <tbody class="[&_tr:last-child]:border-0">
                                     @forelse($criticalMedicines as $med)
-                                    <tr class="border-b border-neutral-100 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                    <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                         <td class="p-4 align-middle">
                                             <div class="font-medium">{{ $med->name }}</div>
                                             <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $med->code }}</div>

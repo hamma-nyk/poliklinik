@@ -68,7 +68,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm divide-y divide-neutral-100 dark:divide-neutral-700">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-widest text-[11px]">Waktu & Kode</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-widest text-[11px]">Pasien</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-widest text-[11px]">Gula Darah</th>
@@ -81,7 +81,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0 divide-y divide-neutral-100 dark:divide-neutral-700">
                             @forelse($checks as $chk)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="text-sm font-bold text-neutral-900 dark:text-neutral-100">{{ $chk->created_at->format('d M Y') }}</div>
                                     <div class="text-[11px] text-neutral-500 dark:text-neutral-500 mb-1.5 font-medium">{{ $chk->created_at->format('H:i') }} WIB</div>

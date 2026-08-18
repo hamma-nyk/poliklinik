@@ -69,7 +69,7 @@
                             Periode: {{ \Carbon\Carbon::parse($startDate)->format('d M Y') }} — {{ \Carbon\Carbon::parse($endDate)->format('d M Y') }}
                         </span>
                     </div>
-                    <div class="inline-flex items-center px-4 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-md font-medium text-xs border border-blue-100 dark:border-blue-800/50">
+                    <div class="inline-flex items-center px-4 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-md font-medium text-xs border border-b border-neutral-200lue-100 dark:border-blue-800/50">
                         TOTAL SELURUH KASUS: {{ number_format($grandTotal, 0, ',', '.') }}
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400 w-20">Rank</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Kode & Nama Diagnosa</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Jumlah Kasus</th>
@@ -91,7 +91,7 @@
                                     // Warna progress bar dinamis berdasarkan rank
                                     $barColor = $index < 3 ? 'bg-blue-600' : 'bg-neutral-400 dark:bg-neutral-500';
                                 @endphp
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle text-center">
                                     <span class="text-lg font-bold {{ $index < 3 ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-400' }}">
                                         #{{ $index + 1 }}

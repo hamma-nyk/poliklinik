@@ -124,7 +124,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Item Obat & Kode</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Stok Sistem</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Stok Fisik</th>
@@ -135,7 +135,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @foreach($opname->items as $item)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle">
 									<div class="flex items-center gap-2 mb-1">
 										<div class="font-medium text-base leading-none">

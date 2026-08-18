@@ -117,7 +117,7 @@
          class="absolute z-50 mt-1 w-full bg-white dark:bg-neutral-800 rounded-md shadow-md border border-neutral-200 dark:border-neutral-600 overflow-hidden"
          style="display: none;">
         
-        <div class="p-2 border-b border-neutral-100 dark:border-neutral-600">
+        <div class="p-2 border-b border-neutral-200 dark:border-neutral-600">
             <input x-ref="searchInput" 
                    x-model="search" 
                    type="text" 

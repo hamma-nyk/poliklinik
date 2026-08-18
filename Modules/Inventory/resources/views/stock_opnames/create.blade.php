@@ -46,7 +46,7 @@
 
                 {{-- Tabel Opname --}}
                 <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden mb-8 transition-all">
-                    <div class="p-5 bg-amber-50 dark:bg-amber-900/20 border-b border-amber-100 dark:border-amber-800/30 flex items-center text-amber-800 dark:text-amber-400 text-sm">
+                    <div class="p-5 bg-amber-50 dark:bg-amber-900/20 border-b border-neutral-200 border-amber-100 dark:border-amber-800/30 flex items-center text-amber-800 dark:text-amber-400 text-sm">
                         <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span class="font-medium"><strong>Instruksi:</strong> Masukkan jumlah item yang ditemukan secara fisik. Sistem akan otomatis menghitung selisih dan menyesuaikan stok sistem setelah data disimpan.</span>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full caption-bottom text-sm">
                             <thead class="[&_tr]:border-b">
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Item Obat / Logistik</th>
                                     <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Stok Sistem</th>
                                     <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Stok Fisik</th>
@@ -65,7 +65,7 @@
                             </thead>
                             <tbody class="[&_tr:last-child]:border-0">
                                 @foreach($medicines as $med)
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                     <td class="p-4 align-middle">
                                         <div class="font-bold">{{ $med->name }}</div>
                                         <div class="text-[10px] text-neutral-500 dark:text-neutral-400 font-mono mt-0.5 tracking-tighter uppercase">{{ $med->code }}</div>

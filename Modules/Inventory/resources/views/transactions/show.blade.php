@@ -82,7 +82,7 @@
                     <div class="overflow-hidden border border-neutral-200 dark:border-neutral-600 rounded-md">
                         <table class="w-full caption-bottom text-sm">
                             <thead class="[&_tr]:border-b">
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nama Obat</th>
                                     <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Jumlah (Qty)</th>
                                     <th class="h-12 px-4 text-right align-middle font-medium text-neutral-500 dark:text-neutral-400">Harga Satuan</th>
@@ -96,7 +96,7 @@
                                     $subtotal = $item->quantity * $item->price_at_moment; 
                                     $grandTotal += $subtotal;
                                 @endphp
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td class="p-4 align-middle">
                                         <div class="font-medium text-neutral-800 dark:text-neutral-200">
                                             {{ $item->medicine->name ?? 'Item Dihapus' }}

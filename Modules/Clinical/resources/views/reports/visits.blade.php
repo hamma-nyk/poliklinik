@@ -67,7 +67,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Waktu Kunjungan</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Identitas Pasien</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Status</th>
@@ -80,7 +80,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($data as $row)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle text-neutral-600 dark:text-neutral-300">
                                     <div class="font-medium text-neutral-800 dark:text-neutral-100 uppercase">{{ $row->created_at->format('d M Y') }}</div>
                                     <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ $row->created_at->format('H:i') }} WIB</div>
@@ -94,7 +94,7 @@
                                     @endif
                                 </td>
                                 <td class="p-4 align-middle">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium uppercase border {{ $row->patient->type == 'karyawan' ? 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50' : 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800/50' }}">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium uppercase border {{ $row->patient->type == 'karyawan' ? 'bg-blue-50 text-blue-700 border-b border-neutral-200lue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50' : 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800/50' }}">
                                         {{ $row->patient->type }}
                                     </span>
                                     <br>
@@ -164,7 +164,7 @@
                                         <div class="space-y-1.5">
                                             @foreach($row->medicineTransactions as $trans)
                                                 @foreach($trans->items as $item)
-                                                <div class="flex items-start justify-between gap-4 text-xs border-b border-neutral-100 dark:border-neutral-600 pb-1 last:border-0 transition-colors">
+                                                <div class="flex items-start justify-between gap-4 text-xs border-b border-neutral-200 dark:border-neutral-600 pb-1 last:border-0 transition-colors">
                                                     <div class="flex flex-col">
                                                         <span class="font-medium text-neutral-700 dark:text-neutral-200 uppercase">{{ $item->medicine->name }}</span>
                                                         <span class="text-neutral-500 dark:text-neutral-400 italic">{{ number_format($item->quantity) }} {{ $item->medicine->unit }}</span>

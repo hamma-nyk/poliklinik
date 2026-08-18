@@ -68,7 +68,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Waktu & Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">No. Dokumen</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Catatan Penyesuaian</th>
@@ -78,7 +78,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($opnames as $opname)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="text-sm font-bold">
                                         {{ \Carbon\Carbon::parse($opname->opname_date)->format('d M Y') }}

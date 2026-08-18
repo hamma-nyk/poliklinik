@@ -82,7 +82,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Waktu & Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Deskripsi Transaksi</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 text-center">Masuk</th>
@@ -93,7 +93,7 @@
                         <tbody class="[&_tr:last-child]:border-0">
                             
                             {{-- Baris Stok Awal --}}
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/50">
                                 <td class="p-4 align-middle text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest font-medium" colspan="2">
                                     Stok Awal Per {{ \Carbon\Carbon::parse(request('start_date'))->format('d M Y') }}
                                 </td>
@@ -116,7 +116,7 @@
                                     if($isMasuk) { $currentBalance += $item->quantity; $totalIn += $item->quantity; } 
                                     else { $currentBalance -= $item->quantity; $totalOut += $item->quantity; }
                                 @endphp
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td class="p-4 align-middle whitespace-nowrap">
                                         <div class="font-medium">{{ \Carbon\Carbon::parse($item->transaction->transaction_date)->format('d M Y') }}</div>
                                         <div class="text-xs text-neutral-500 dark:text-neutral-400">{{ \Carbon\Carbon::parse($item->transaction->created_at)->format('H:i') }} WIB</div>
@@ -158,7 +158,7 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                                <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                     <td colspan="5" class="p-4 align-middle text-center text-neutral-500 dark:text-neutral-400 italic">
                                         Tidak ada aktivitas transaksi pada rentang tanggal ini.
                                     </td>
@@ -166,13 +166,13 @@
                             @endforelse
 
                             {{-- Footer Summary --}}
-                            <!-- <tr class="bg-neutral-50/50 dark:bg-neutral-800/50 border-t-2 border-neutral-100 dark:border-neutral-600">
+                            <!-- <tr class="bg-neutral-50/50 dark:bg-neutral-800/50 border-t-2 border-neutral-200 dark:border-neutral-600">
                                 <td colspan="2" class="px-8 py-5 text-right text-[11px] font-bold text-neutral-500 uppercase tracking-[0.2em]">Total Pergerakan</td>
                                 <td class="px-6 py-5 text-center font-bold text-emerald-600 dark:text-emerald-400">+{{ $totalIn }}</td>
                                 <td class="px-6 py-5 text-center font-bold text-rose-600 dark:text-rose-400">-{{ $totalOut }}</td>
                                 <td class="px-8 py-5 text-center font-bold text-blue-600 dark:text-blue-400 text-lg">{{ $currentBalance }}</td>
                             </tr> -->
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/50">
                                 <td colspan="2" class="p-4 align-middle text-right font-medium">
                                     TOTAL QTY <br>
                                     <span class="text-xs text-neutral-500 dark:text-neutral-400 font-normal">Total Nilai Masuk: Rp {{ number_format($totalValueIn, 0, ',', '.') }}</span>

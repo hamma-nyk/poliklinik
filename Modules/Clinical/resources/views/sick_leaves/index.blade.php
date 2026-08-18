@@ -76,7 +76,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">No. Surat / Tanggal</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Nama Pasien</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Jenis / Sumber</th>
@@ -86,7 +86,7 @@
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($letters as $letter)
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50 group">
                                 <td class="p-4 align-middle whitespace-nowrap">
                                     <div class="grid gap-0.5">
                                         <div class="font-medium text-neutral-800 dark:text-neutral-100 uppercase tracking-tight">{{ $letter->reg_number }}</div>
@@ -129,7 +129,7 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr class="border-b transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
+                            <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td colspan="5" class="p-4 align-middle text-center bg-white dark:bg-neutral-800">
                                     <div class="flex flex-col items-center justify-center py-10">
                                         <div class="p-6 bg-neutral-50 dark:bg-neutral-800 rounded-full mb-4 text-neutral-300 dark:text-neutral-600 transition-colors border border-dashed dark:border-neutral-600">
