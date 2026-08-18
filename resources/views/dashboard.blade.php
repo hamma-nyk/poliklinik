@@ -280,6 +280,7 @@
             const textColor = isDark ? '#fafafa' : '#171717';
             const mutedColor = isDark ? '#a3a3a3' : '#525252';
             const gridColor = isDark ? '#262626' : '#f5f5f5';
+            const chartColor = isDark ? '#fafafa' : '#171717';
 
             var optionsTrend = {
                 series: [{ name: "Kunjungan", data: @json($trendData) }],
@@ -291,7 +292,7 @@
                     background: 'transparent'
                 },
                 dataLabels: { enabled: false },
-                stroke: { curve: 'smooth', width: 2, colors: ['#171717'] },
+                stroke: { curve: 'smooth', width: 2, colors: [chartColor] },
                 xaxis: {
                     categories: @json($trendLabels),
                     labels: { style: { colors: mutedColor } },
@@ -304,27 +305,60 @@
                 fill: {
                     type: 'gradient',
                     gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1, stops: [0, 100] },
-                    colors: ['#171717']
+                    colors: [chartColor]
                 }
             };
-            if(document.querySelector("#chart-trend-daily")) {
-                new ApexCharts(document.querySelector("#chart-trend-daily"), optionsTrend).render();
-            }
-
+            
             var optionsDonut = {
                 series: [{{ $sakitCount }}, {{ $kecelakaanCount }}],
                 labels: ['Sakit Umum', 'Kecelakaan Kerja'],
                 chart: { type: 'donut', height: 250, fontFamily: 'inherit', background: 'transparent' },
-                colors: ['#171717', '#ef4444'],
+                colors: [chartColor, '#ef4444'],
                 dataLabels: { enabled: false },
                 legend: { show: false },
                 stroke: { width: 0 },
                 plotOptions: { pie: { donut: { size: '75%' } } },
                 theme: { mode: isDark ? 'dark' : 'light' }
             };
+
+            var chartDonut;
             if(document.querySelector("#chart-visit-types")) {
-                new ApexCharts(document.querySelector("#chart-visit-types"), optionsDonut).render();
+                document.querySelector("#chart-visit-types").innerHTML = ''; // Prevent duplicate
+                chartDonut = new ApexCharts(document.querySelector("#chart-visit-types"), optionsDonut);
+                chartDonut.render();
             }
+
+            var chartTrend;
+            if(document.querySelector("#chart-trend-daily")) {
+                document.querySelector("#chart-trend-daily").innerHTML = ''; // Prevent duplicate on Turbolinks/livewire/refresh
+                chartTrend = new ApexCharts(document.querySelector("#chart-trend-daily"), optionsTrend);
+                chartTrend.render();
+            }
+
+            window.addEventListener('theme-changed', (e) => {
+                const newIsDark = e.detail === 'dark';
+                const newChartColor = newIsDark ? '#fafafa' : '#171717';
+                const newMutedColor = newIsDark ? '#a3a3a3' : '#525252';
+                const newGridColor = newIsDark ? '#262626' : '#f5f5f5';
+
+                if (chartTrend) {
+                    chartTrend.updateOptions({
+                        theme: { mode: newIsDark ? 'dark' : 'light' },
+                        stroke: { colors: [newChartColor] },
+                        fill: { colors: [newChartColor] },
+                        xaxis: { labels: { style: { colors: newMutedColor } } },
+                        yaxis: { labels: { style: { colors: newMutedColor } } },
+                        grid: { borderColor: newGridColor }
+                    });
+                }
+                
+                if (chartDonut) {
+                    chartDonut.updateOptions({
+                        theme: { mode: newIsDark ? 'dark' : 'light' },
+                        colors: [newChartColor, '#ef4444']
+                    });
+                }
+            });
 
 
         });
