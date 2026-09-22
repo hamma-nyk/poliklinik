@@ -91,10 +91,9 @@ class PatientController extends Controller
                 //'nik_ktp' => 'nullable|unique:sc_master.patients,nik_ktp',
                 'ktp' => [
                 'nullable',
-                // Cara Modern & Aman:
-                // Laravel akan cek model Employee, melihat tabel 'sc_master.employees'
-                // dan koneksi 'pgsql', lalu membuat query yang benar otomatis.
-                Rule::unique(Patient::class, 'ktp'),
+                Rule::unique(Patient::class, 'ktp')->where(function ($query) use ($request) {
+                    return $query->where('nik', $request->nik);
+                }),
                 ]
             ]);
 
@@ -133,10 +132,9 @@ class PatientController extends Controller
             //'nik_ktp' => 'nullable|unique:sc_master.patients,nik_ktp,' . $id,
             'ktp' => [
                 'nullable',
-                // Cara Modern & Aman:
-                // Laravel akan cek model Employee, melihat tabel 'sc_master.employees'
-                // dan koneksi 'pgsql', lalu membuat query yang benar otomatis.
-                Rule::unique(Patient::class, 'ktp')->ignore($id),
+                Rule::unique(Patient::class, 'ktp')->where(function ($query) use ($request) {
+                    return $query->where('nik', $request->nik);
+                })->ignore($id),
                 ]
         ]);
 

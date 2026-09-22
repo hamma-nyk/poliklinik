@@ -97,6 +97,11 @@
                                             <span class="inline-flex items-center rounded-md border border-transparent bg-neutral-900 text-neutral-50 px-2.5 py-0.5 text-xs font-semibold dark:bg-neutral-50 dark:text-neutral-900">
                                                 Karyawan
                                             </span>
+                                            @if(empty($patient->employee_id) || ($patient->employee && $patient->employee->is_active == 'KO'))
+                                                <span class="inline-flex items-center rounded-md border border-transparent bg-red-100 text-red-900 px-2.5 py-0.5 text-xs font-semibold dark:bg-red-900 dark:text-red-100 ml-1">
+                                                    OFF
+                                                </span>
+                                            @endif
                                         @else
                                             <span class="inline-flex items-center rounded-md border border-transparent bg-neutral-100 text-neutral-900 px-2.5 py-0.5 text-xs font-semibold dark:bg-neutral-800 dark:text-neutral-50">
                                                 Umum

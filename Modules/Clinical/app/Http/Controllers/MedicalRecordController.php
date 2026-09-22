@@ -54,7 +54,20 @@ class MedicalRecordController extends Controller
     public function create()
     {
         // Data Master untuk Dropdown
-        $patients = Patient::orderBy('name')->get();
+        $patients = Patient::where(function($q) {
+            $q->where('type', '!=', 'karyawan')
+              ->orWhere(function($subQ) {
+                  $subQ->where('type', 'karyawan')
+                       ->whereNotNull('employee_id')
+                       ->whereHas('employee', function($empQ) {
+                           $empQ->where(function($eq) {
+                               $eq->whereNull('is_active')
+                                  ->orWhere('is_active', '')
+                                  ->orWhere('is_active', '!=', 'KO');
+                           });
+                       });
+              });
+        })->orderBy('name')->get();
         $doctors = Doctor::active()->orderBy('name')->get();
         $nurses = Nurse::where('is_active', true)->orderBy('nama')->get();
         $medicines = Medicine::orderBy('name')->get();
