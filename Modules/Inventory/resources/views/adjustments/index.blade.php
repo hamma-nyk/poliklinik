@@ -2,10 +2,17 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 transition-all duration-300">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Penyesuaian Stok') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Koreksi manual inventaris (Rusak, Hilang, atau Temuan)</p>
+=======
+                <h2 class="text-2xl font-semibold tracking-tight">
+                    {{ __('Penyesuaian Stok') }}
+                </h2>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Koreksi manual inventaris (Rusak, Hilang, atau Temuan)</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Inventaris</span>
@@ -15,8 +22,13 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
+=======
+    <div class="py-6 flex-1 space-y-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             {{-- Alert Section --}}
             @if(session('success'))
@@ -29,9 +41,15 @@
             @endif
 
             {{-- Toolbar --}}
+<<<<<<< HEAD
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 transition-all">
                 <div class="flex items-center gap-4">
                     <div class="p-3 bg-indigo-50 dark:bg-neutral-700 rounded-xl text-indigo-600 dark:text-indigo-400 border border-transparent dark:border-neutral-600 shrink-0">
+=======
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-indigo-50 dark:bg-neutral-700 rounded-xl text-indigo-600 dark:text-indigo-400 border border-transparent dark:border-neutral-600">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
                     <div>
@@ -39,15 +57,25 @@
                         <p class="text-xs text-neutral-500 dark:text-neutral-400">Menampilkan mutasi penyesuaian manual</p>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                 <a href="{{ route('inventory.adjustments.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full sm:w-auto uppercase tracking-wider">
+=======
+                <div class="mb-4 flex gap-2">
+                <a href="{{ route('inventory.adjustments.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full md:w-auto uppercase tracking-wider">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
                     Buat Penyesuaian
                 </a>
                 
     {{-- Tombol untuk membuka Modal Filter --}}
+<<<<<<< HEAD
     <div x-data="{ openFilter: false }" class="relative w-full sm:w-auto">
         <button @click="openFilter = !openFilter" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 w-full sm:w-auto">
+=======
+    <div x-data="{ openFilter: false }" class="relative">
+        <button @click="openFilter = !openFilter" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             Laporan Per Periode
         </button>
@@ -55,7 +83,11 @@
         {{-- Dropdown / Modal Kecil --}}
         <div x-show="openFilter" 
              @click.outside="openFilter = false"
+<<<<<<< HEAD
              class="absolute left-0 sm:left-auto sm:right-0 z-50 mt-2 w-full sm:w-80 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow-lg dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4"
+=======
+             class="absolute right-0 z-50 mt-2 w-80 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4"
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
              style="display: none;">
             
             <form action="{{ route('inventory.stock_adjustment.export_period') }}" method="GET" target="_blank">

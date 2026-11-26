@@ -136,6 +136,7 @@ class ReportController extends Controller
             // Logic generate Excel (Gunakan Laravel Excel / Maatwebsite)
             $namaFile = 'Laporan_Morbiditas_' . $startDate . '_sd_' . $endDate . '.xlsx';
             return Excel::download(new \Modules\Clinical\App\Exports\DiseaseExport($data, $grandTotal), $namaFile);
+<<<<<<< HEAD
         } elseif ($request->action === 'excel_detail' && $request->filled('diagnosis_id')) {
             $records = MedicalRecord::with(['patient', 'doctor', 'diagnosis'])
                 ->whereDate('created_at', '>=', $startDate)
@@ -149,6 +150,8 @@ class ReportController extends Controller
             $namaFile = 'Detail_Pasien_' . $safeCode . '_' . $startDate . '_sd_' . $endDate . '.xlsx';
 
             return Excel::download(new \Modules\Clinical\App\Exports\DiseasePatientDetailExport($records), $namaFile);
+=======
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
         }
 
         // 4. Ambil detail pasien per diagnosa untuk tampilan web

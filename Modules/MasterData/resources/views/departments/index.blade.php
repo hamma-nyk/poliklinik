@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+<<<<<<< HEAD
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">{{ __('Master Departemen (Bagian)') }}</h2>
@@ -11,6 +12,9 @@
                 <span class="font-semibold text-neutral-900 dark:text-neutral-50">Departemen</span>
             </div>
         </div>
+=======
+        <h2 class="font-semibold text-xl text-neutral-800">{{ __('Master Departemen (Bagian)') }}</h2>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
     </x-slot>
 
     <div class="space-y-6" x-data="{ openImport: false }">
@@ -22,6 +26,7 @@
             </div>
         @endif
 
+<<<<<<< HEAD
         <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
             <button @click="openImport = true" type="button" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
@@ -51,6 +56,24 @@
                             <td class="p-4 align-middle">{{ $dept->name }}</td>
                             <td class="p-4 align-middle text-right whitespace-nowrap space-x-2">
                                 <a href="{{ route('master.departments.edit', $dept->id) }}" class="inline-flex items-center justify-center rounded-md text-xs font-medium border border-neutral-200 bg-white px-3 py-1.5 hover:bg-neutral-100 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700">Edit</a>
+=======
+            <div class="bg-white shadow-sm sm:rounded-xl border border-neutral-200 overflow-hidden">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-neutral-100 text-neutral-500 uppercase font-bold">
+                        <tr>
+                            <th class="px-6 py-3 w-20">Kode</th>
+                            <th class="px-6 py-3">Nama Bagian</th>
+                            <th class="px-6 py-3 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-100">
+                        @foreach($departments as $dept)
+                        <tr class="hover:bg-neutral-50">
+                            <td class="px-6 py-4 font-mono font-bold">{{ $dept->code }}</td>
+                            <td class="px-6 py-4">{{ $dept->name }}</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{{ route('master.departments.edit', $dept->id) }}" class="text-blue-600 hover:underline font-bold mr-3">Edit</a>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                 <form action="{{ route('master.departments.destroy', $dept->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus data ini?');">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="inline-flex items-center justify-center rounded-md text-xs font-medium border border-red-200 text-red-600 bg-white px-3 py-1.5 hover:bg-red-50 dark:border-red-800 dark:bg-neutral-800 dark:text-red-400 dark:hover:bg-red-950/50">Hapus</button>
@@ -64,6 +87,12 @@
                         @endforelse
                     </tbody>
                 </table>
+<<<<<<< HEAD
+=======
+                <div class="p-4 border-t border-neutral-200">
+                    {{ $departments->links() }}
+                </div>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             @if($departments->hasPages())
             <div class="p-4 border-t border-neutral-200 dark:border-neutral-600">
@@ -94,9 +123,15 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
                     <div class="flex justify-end gap-2 pt-2">
                         <button type="button" @click="openImport = false" class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-neutral-200 dark:border-neutral-600 h-9 px-4 hover:bg-neutral-100 dark:hover:bg-neutral-700">Batal</button>
                         <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-neutral-900 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 h-9 px-4 hover:bg-neutral-900/90">Upload</button>
+=======
+                    <div class="flex justify-end gap-2">
+                        <button type="button" @click="openImport = false" class="px-4 py-2 text-neutral-500">Batal</button>
+                        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold">Upload</button>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                     </div>
                 </form>
             </div>

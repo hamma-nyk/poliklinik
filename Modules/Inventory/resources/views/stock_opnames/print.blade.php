@@ -198,12 +198,20 @@
                 <div class="signer-name">Riya Kumayarini</div>
                 <div>SPV Personalia</div>
             </td>
+<<<<<<< HEAD
             <!--<td>
+=======
+            <td>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 Diketahui,<br>
                 <div class="signature-space"></div>
                 <div class="signer-name">Nur Hidayah</div>
                 <div>Kabag HRD</div>
+<<<<<<< HEAD
             </td>-->
+=======
+            </td>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             <td>
                 Disetujui,<br>
                 <div class="signature-space"></div>

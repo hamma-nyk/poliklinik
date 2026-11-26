@@ -2,10 +2,17 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Laporan Penyakit') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Analisis pola penyakit (Morbiditas) berdasarkan diagnosa ICD-10</p>
+=======
+                <h2 class="text-2xl font-semibold tracking-tight">
+                    {{ __('Laporan Penyakit') }}
+                </h2>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Analisis pola penyakit (Morbiditas) berdasarkan diagnosa ICD-10</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Laporan</span>
@@ -15,6 +22,7 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
             
@@ -22,11 +30,24 @@
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4">
                 <form method="GET" action="{{ route('clinical.reports.diseases') }}" class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end">
                     <div class="w-full lg:w-auto space-y-1.5">
+=======
+    <div class="py-6 flex-1 space-y-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            
+            {{-- Filter Panel --}}
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6">
+                <form method="GET" action="{{ route('clinical.reports.diseases') }}" class="flex flex-col md:flex-row gap-6 items-end">
+                    <div class="w-full md:w-auto space-y-1.5">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Dari Tanggal</label>
                         <input type="date" name="start_date" value="{{ $startDate }}" 
                             class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
+<<<<<<< HEAD
                     <div class="w-full lg:w-auto space-y-1.5">
+=======
+                    <div class="w-full md:w-auto space-y-1.5">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Sampai Tanggal</label>
                         <input type="date" name="end_date" value="{{ $endDate }}" 
                             class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
@@ -61,15 +82,24 @@
             </div>
 
             {{-- Result Card --}}
+<<<<<<< HEAD
             <div x-data="{ openIndex: null }" class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
                 <div class="p-4 sm:p-6 border-b border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-800/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+=======
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
+                <div class="p-6 border-b border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-800/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                     <div class="flex items-center">
                         <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
                         <span class="font-medium text-xs">
                             Periode: {{ \Carbon\Carbon::parse($startDate)->format('d M Y') }} — {{ \Carbon\Carbon::parse($endDate)->format('d M Y') }}
                         </span>
                     </div>
+<<<<<<< HEAD
                     <div class="inline-flex items-center px-4 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-md font-medium text-xs border border-blue-200 dark:border-blue-800/50">
+=======
+                    <div class="inline-flex items-center px-4 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-md font-medium text-xs border border-b border-neutral-200lue-100 dark:border-blue-800/50">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         TOTAL SELURUH KASUS: {{ number_format($grandTotal, 0, ',', '.') }}
                     </div>
                 </div>
@@ -82,7 +112,10 @@
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400">Kode & Nama Diagnosa</th>
                                 <th class="h-12 px-4 text-center align-middle font-medium text-neutral-500 dark:text-neutral-400">Jumlah Kasus</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-neutral-400 w-64">Distribusi Persentase</th>
+<<<<<<< HEAD
                                 <th class="h-12 px-4 text-right align-middle font-medium text-neutral-500 dark:text-neutral-400 w-36">Detail</th>
+=======
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             </tr>
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
@@ -91,7 +124,10 @@
                                     $percent = $grandTotal > 0 ? ($row->total / $grandTotal) * 100 : 0;
                                     // Warna progress bar dinamis berdasarkan rank
                                     $barColor = $index < 3 ? 'bg-blue-600' : 'bg-neutral-400 dark:bg-neutral-500';
+<<<<<<< HEAD
                                     $records = $patientDetails->get($row->diagnosis_id, collect());
+=======
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                 @endphp
                             <tr class="border-b border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-600 dark:hover:bg-neutral-700/50">
                                 <td class="p-4 align-middle text-center">
@@ -101,7 +137,11 @@
                                 </td>
                                 <td class="p-4 align-middle">
                                     <div class="flex items-center">
+<<<<<<< HEAD
                                         <div class="font-mono text-xs font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded-md mr-3 border border-neutral-200 dark:border-neutral-600 uppercase shrink-0">
+=======
+                                        <div class="font-mono text-xs font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded-md mr-3 border border-neutral-200 dark:border-neutral-600 uppercase">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                             {{ $row->diagnosis->code ?? '-' }}
                                         </div>
                                         <div class="text-sm font-medium text-neutral-800 dark:text-neutral-200 group-hover:text-blue-600 transition-colors">
@@ -188,7 +228,11 @@
                             </tr>
                             @empty
                             <tr>
+<<<<<<< HEAD
                                 <td colspan="5" class="p-4 align-middle text-center py-20">
+=======
+                                <td colspan="4" class="p-4 align-middle text-center py-20">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                     <div class="flex flex-col items-center justify-center">
                                         <h3 class="text-neutral-500 dark:text-neutral-400 font-medium">Data Tidak Ditemukan</h3>
                                         <p class="text-neutral-500 dark:text-neutral-400 text-xs mt-1">Belum ada diagnosa yang tercatat pada rentang tanggal tersebut.</p>

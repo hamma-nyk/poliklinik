@@ -2,12 +2,21 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Kartu Stok Obat') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Log mutasi pergerakan item secara mendetail</p>
             </div>
             <div class="hidden md:flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+=======
+                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">
+                    {{ __('Kartu Stok Obat') }}
+                </h2>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Log mutasi pergerakan item secara mendetail</p>
+            </div>
+            <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Inventaris</span>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 <span class="font-semibold text-neutral-900 dark:text-neutral-50">Stock Card</span>
@@ -15,11 +24,19 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
             
             {{-- Filter Panel --}}
             <div class="p-4 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
+=======
+    <div class="py-6 flex-1 space-y-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            
+            {{-- Filter Panel --}}
+            <div class="p-6 rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 <form method="GET" action="{{ route('inventory.reports.stock_card') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                     
                     <div class="md:col-span-2 space-y-1.5">
@@ -56,7 +73,11 @@
             </div>
 
             @if(request('medicine_id') && $selectedMedicine)
+<<<<<<< HEAD
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 overflow-hidden">
+=======
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 
                 {{-- Detail Header --}}
                 <div class="p-6 border-b border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-800/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -216,5 +237,58 @@
         });
     });
 </script>
+<<<<<<< HEAD
+=======
+<style>
+    .select2-container { display: none !important; }
+    .ts-wrapper.single .ts-control { 
+        border-radius: 0.375rem !important; 
+        padding: 0.25rem 0.75rem !important; 
+        height: 36px !important;
+        border-color: #e2e8f0 !important; 
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+        font-size: 0.875rem !important;
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+    }
+    .dark .ts-wrapper.single .ts-control { 
+        border-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .ts-wrapper.single .ts-control input {
+        font-size: 0.875rem !important;
+    }
+    .dark .ts-wrapper.single .ts-control input {
+        color: #f8fafc !important;
+    }
+    .ts-dropdown { 
+        border-radius: 0.375rem !important;
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+        font-size: 0.875rem !important;
+        z-index: 50 !important;
+    }
+    .dark .ts-dropdown { 
+        background-color: #020617 !important; 
+        border-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .ts-dropdown .option {
+        padding: 8px 12px !important;
+    }
+    .ts-dropdown .active { 
+        background-color: #f1f5f9 !important; 
+        color: #0f172a !important; 
+    }
+    .dark .ts-dropdown .active { 
+        background-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .dark .ts-dropdown .option { 
+        color: #cbd5e1; 
+    }
+</style>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
 @endpush
 </x-app-layout>

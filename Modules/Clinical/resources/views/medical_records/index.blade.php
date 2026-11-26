@@ -2,10 +2,17 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Rekam Medis') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Riwayat Pemeriksaan & Diagnosa Pasien</p>
+=======
+                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 leading-tight dark:text-neutral-100">
+                    {{ __('Rekam Medis') }}
+                </h2>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Riwayat Pemeriksaan & Diagnosa Pasien</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="hidden md:flex items-center text-sm text-neutral-500 mt-2 md:mt-0 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Klinis</span>
@@ -15,8 +22,13 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
+=======
+    <div class="py-6 flex-1 space-y-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             {{-- Alert Section --}}
             @if(session('success'))
@@ -30,7 +42,11 @@
             @endif
 
             {{-- Toolbar: Search & Action --}}
+<<<<<<< HEAD
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+=======
+            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 
                 <form method="GET" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 items-center flex-grow">
                     {{-- Row Count --}}

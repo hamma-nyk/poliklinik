@@ -2,10 +2,17 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Data Obat') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Inventaris & Stok Logistik Medis Klinik</p>
+=======
+                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 leading-tight dark:text-neutral-100">
+                    {{ __('Data Obat') }}
+                </h2>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Inventaris & Stok Logistik Medis Klinik</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="hidden md:flex items-center text-sm text-neutral-500 mt-2 md:mt-0 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Inventaris</span>
@@ -15,8 +22,13 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
+=======
+    <div class="py-6 flex-1 space-y-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             {{-- Alert Success --}}
             @if(session('success'))
@@ -36,7 +48,11 @@
                     {{-- Per Page --}}
                     <div class="relative w-full sm:w-auto">
                         <select name="per_page" onchange="this.form.submit()" 
+<<<<<<< HEAD
                                 class="flex h-9 w-full sm:w-20 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+=======
+                                class="flex h-9 w-full sm:w-24 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
@@ -54,6 +70,7 @@
                                class="flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300">
                     </div>
                 </form>
+<<<<<<< HEAD
                 <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                     <a href="{{ route('inventory.medicines.export_excel') }}" target="_blank" 
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white text-neutral-900 shadow-sm hover:bg-neutral-100 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-700 w-full sm:w-auto">
@@ -63,6 +80,17 @@
                         Export Excel Stok
                     </a>
                     <a href="{{ route('inventory.medicines.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full sm:w-auto">
+=======
+                <a href="{{ route('inventory.medicines.export_excel') }}" target="_blank" 
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 mr-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                    </svg>
+                    Export Excel Stok
+                </a>
+                <div class="w-full md:w-auto">
+                    <a href="{{ route('inventory.medicines.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full md:w-auto">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                         Tambah Obat Baru
                     </a>

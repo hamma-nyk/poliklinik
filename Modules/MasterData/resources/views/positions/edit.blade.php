@@ -1,21 +1,37 @@
 <x-app-layout>
     <x-slot name="header">
+<<<<<<< HEAD
         <h2 class="text-2xl font-semibold tracking-tight leading-tight">{{ __('Edit Jabatan') }}</h2>
     </x-slot>
 
     <div class="space-y-6">
         <div class="w-full">
+=======
+        <h2 class="font-semibold text-xl text-neutral-800">{{ __('Edit Jabatan') }}</h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             <div class="bg-white p-8 rounded-xl shadow-sm border border-neutral-200">
                 <form action="{{ route('master.positions.update', $position->id) }}" method="POST">
                     @csrf @method('PUT')
                     
                     <div class="mb-5">
                         <label class="block font-bold mb-2 text-neutral-700">Kode Jabatan</label>
+<<<<<<< HEAD
                         <input type="text" name="code" value="{{ $position->code }}" class="w-full flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm dark:border-neutral-600 uppercase focus:border-blue-500 focus:ring-blue-500 bg-neutral-50 font-mono" required maxlength="10">
                     </div>
                     <div class="mb-8">
                         <label class="block font-bold mb-2 text-neutral-700">Nama Jabatan</label>
                         <input type="text" name="name" value="{{ $position->name }}" class="w-full flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm dark:border-neutral-600 focus:border-blue-500 focus:ring-blue-500" required>
+=======
+                        <input type="text" name="code" value="{{ $position->code }}" class="w-full rounded-lg border-neutral-300 uppercase focus:border-blue-500 focus:ring-blue-500 bg-neutral-50 font-mono" required maxlength="10">
+                    </div>
+                    <div class="mb-8">
+                        <label class="block font-bold mb-2 text-neutral-700">Nama Jabatan</label>
+                        <input type="text" name="name" value="{{ $position->name }}" class="w-full rounded-lg border-neutral-300 focus:border-blue-500 focus:ring-blue-500" required>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                     </div>
                     <div class="flex justify-end gap-3">
                         <a href="{{ route('master.positions.index') }}" class="px-5 py-2.5 rounded-lg border border-neutral-300 text-neutral-600 font-bold hover:bg-neutral-50">Batal</a>

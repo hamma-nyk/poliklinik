@@ -23,16 +23,25 @@
         </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
+<<<<<<< HEAD
     <body class="font-sans text-neutral-900 antialiased bg-neutral-50 dark:bg-neutral-900 dark:text-neutral-50 transition-colors duration-300">
         <canvas id="particles-canvas" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
         <div class="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 py-6 sm:px-6">
+=======
+    <body class="font-sans text-neutral-900 antialiased bg-neutral-50 dark:bg-neutral-900 dark:text-neutral-50">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-neutral-500" />
                 </a>
             </div>
 
+<<<<<<< HEAD
             <div class="w-full sm:max-w-md mt-6 px-6 py-6 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md border border-neutral-200/80 dark:border-neutral-700/60 shadow-lg rounded-xl">
+=======
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 shadow sm:rounded-lg">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 {{ $slot }}
             </div>
         </div>

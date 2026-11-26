@@ -2,10 +2,17 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 transition-all duration-300">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Buat Surat Keterangan Dokter') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Arsip digital surat keterangan sakit & izin medis</p>
+=======
+                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">
+                    {{ __('Buat Surat Keterangan Dokter') }}
+                </h2>
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Arsip digital surat keterangan sakit & izin medis</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <a href="{{ route('clinical.sick-leaves.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 h-9 px-4 py-2 dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:hover:text-neutral-50">
                 Batal
@@ -13,8 +20,13 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6" x-data="skdHandler()">
         <div class="w-full">
+=======
+    <div class="py-6 flex-1 space-y-4" x-data="skdHandler()">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             <form action="{{ route('clinical.sick-leaves.store') }}" method="POST">
                 @csrf
                 
@@ -47,7 +59,11 @@
                     {{-- SECTION: INTERNAL (Searchable MR) --}}
                     <div x-show="type === 'internal'" x-transition class="mb-8 rounded-md border border-neutral-200 bg-neutral-50 dark:bg-neutral-800 dark:border-neutral-600 p-6">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-3">Integrasi Rekam Medis Pasien</label>
+<<<<<<< HEAD
                         <select id="mr_select" name="medical_record_id" x-ref="mrSelect" class="tom-select w-full">
+=======
+                        <select id="mr_select" name="medical_record_id" x-ref="mrSelect" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <option value="">-- Cari Nama Pasien atau No. RM --</option>
                             @foreach($internalCandidates as $mr)
                                 <option value="{{ $mr->id }}" data-date="{{ $mr->created_at->format('Y-m-d') }}">
@@ -66,7 +82,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="md:col-span-2">
                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block mb-3">Data Karyawan / Pasien</label>
+<<<<<<< HEAD
                                 <select id="patient_select" name="target_person" x-ref="patientSelect" class="tom-select w-full">
+=======
+                                <select id="patient_select" name="target_person" x-ref="patientSelect" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                     <option value="">-- Ketik Nama atau NIK --</option>
                                     @foreach($externalCandidates as $candidate)
                                         <option value="{{ $candidate['value'] }}">
@@ -147,6 +167,58 @@
     @push('scripts')
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+<<<<<<< HEAD
+=======
+    <style>
+    .ts-wrapper.single .ts-control { 
+        border-radius: 0.375rem !important; 
+        padding: 0.25rem 0.75rem !important; 
+        height: 36px !important;
+        border-color: #e2e8f0 !important; 
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+        font-size: 0.875rem !important;
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+    }
+    .dark .ts-wrapper.single .ts-control { 
+        border-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .ts-wrapper.single .ts-control input {
+        font-size: 0.875rem !important;
+    }
+    .dark .ts-wrapper.single .ts-control input {
+        color: #f8fafc !important;
+    }
+    .ts-dropdown { 
+        border-radius: 0.375rem !important;
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+        font-size: 0.875rem !important;
+        z-index: 50 !important;
+    }
+    .dark .ts-dropdown { 
+        background-color: #020617 !important; 
+        border-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .ts-dropdown .option {
+        padding: 8px 12px !important;
+    }
+    .ts-dropdown .active { 
+        background-color: #f1f5f9 !important; 
+        color: #0f172a !important; 
+    }
+    .dark .ts-dropdown .active { 
+        background-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .dark .ts-dropdown .option { 
+        color: #cbd5e1; 
+    }
+    </style>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
     <script>
         function skdHandler() {
             return {

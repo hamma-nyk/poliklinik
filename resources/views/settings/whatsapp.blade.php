@@ -1,11 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
+<<<<<<< HEAD
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 transition-all duration-300">
+=======
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 transition-all duration-300">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             <div>
                 <h2 class="font-bold text-2xl text-neutral-800 dark:text-neutral-100 leading-tight tracking-tight">
                     {{ __('WhatsApp Service Gateway') }}
                 </h2>
+<<<<<<< HEAD
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Manajemen koneksi bot notifikasi otomatis</p>
+=======
+                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400 font-medium">Manajemen koneksi bot notifikasi otomatis</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/50 rounded-xl">
                 <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
@@ -14,6 +22,7 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6" 
          x-data="whatsappService()" 
          x-init="initService()">
@@ -25,6 +34,19 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <div class="flex items-center gap-4">
                         <div class="p-3 rounded-xl" :class="status === 'connected' ? 'bg-emerald-50 dark:bg-emerald-900/30' : 'bg-rose-50 dark:bg-rose-900/30'">
+=======
+    <div class="py-12 bg-neutral-50 dark:bg-neutral-800 min-h-screen transition-colors duration-300" 
+         x-data="whatsappService()" 
+         x-init="initService()">
+        
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-8">
+            
+            {{-- Status Card (Lapis 800) --}}
+            <div class="bg-white dark:bg-neutral-800 rounded-[2.5rem] p-10 shadow-sm border border-neutral-200 dark:border-neutral-600 transition-all">
+                <div class="flex items-center justify-between mb-10">
+                    <div class="flex items-center gap-4">
+                        <div class="p-3 rounded-2xl" :class="status === 'connected' ? 'bg-emerald-50 dark:bg-emerald-900/30' : 'bg-rose-50 dark:bg-rose-900/30'">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <div :class="status === 'connected' ? 'bg-emerald-500' : 'bg-rose-500'" 
                                  class="w-3 h-3 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
                         </div>
@@ -39,12 +61,20 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     {{-- QR Section (Lapis 900) --}}
+<<<<<<< HEAD
                     <div class="flex flex-col items-center justify-center p-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl border-2 border-dashed border-neutral-200 dark:border-neutral-600 min-h-[350px] transition-all">
+=======
+                    <div class="flex flex-col items-center justify-center p-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-[2rem] border-2 border-dashed border-neutral-200 dark:border-neutral-600 min-h-[350px] transition-all">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         
                         {{-- State: Connected --}}
                         <template x-if="status === 'connected'">
                             <div class="text-center space-y-4" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-90">
+<<<<<<< HEAD
                                 <div class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 p-6 rounded-xl inline-block shadow-lg shadow-emerald-500/10">
+=======
+                                <div class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 p-6 rounded-[2rem] inline-block shadow-lg shadow-emerald-500/10">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                     <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
                                 </div>
                                 <div>
@@ -58,8 +88,13 @@
                         <template x-if="status === 'qr_ready'">
                             <div class="text-center space-y-6" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4">
                                 <div class="relative inline-block group">
+<<<<<<< HEAD
                                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                                     <img :src="qrCode" alt="WA QR Code" class="relative w-56 h-56 border-8 border-white dark:border-neutral-600 shadow-2xl rounded-xl transition-transform hover:scale-105">
+=======
+                                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                                    <img :src="qrCode" alt="WA QR Code" class="relative w-56 h-56 border-8 border-white dark:border-neutral-600 shadow-2xl rounded-2xl transition-transform hover:scale-105">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                 </div>
                                 <div class="space-y-1">
                                     <p class="text-xs font-bold text-neutral-600 dark:text-neutral-300 uppercase tracking-wider">Otorisasi Perangkat</p>
@@ -79,7 +114,11 @@
 
                     {{-- Info Section (Lapis 700 Area) --}}
                     <div class="space-y-6">
+<<<<<<< HEAD
                         <div class="p-6 bg-indigo-50 dark:bg-neutral-700 rounded-xl border border-indigo-100 dark:border-neutral-600 transition-all">
+=======
+                        <div class="p-6 bg-indigo-50 dark:bg-neutral-700 rounded-3xl border border-indigo-100 dark:border-neutral-600 transition-all">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <h4 class="text-[10px] font-bold text-indigo-400 dark:text-indigo-400 uppercase tracking-[0.2em] mb-2">Engine Status</h4>
                             <p class="text-lg font-bold text-indigo-700 dark:text-indigo-300 capitalize flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]"></span>
@@ -87,7 +126,11 @@
                             </p>
                         </div>
                         
+<<<<<<< HEAD
                         <div class="p-6 bg-neutral-100 dark:bg-neutral-700/50 rounded-xl border border-neutral-200 dark:border-neutral-600 transition-all">
+=======
+                        <div class="p-6 bg-neutral-100 dark:bg-neutral-700/50 rounded-3xl border border-neutral-200 dark:border-neutral-600 transition-all">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <h4 class="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-2">Internal Endpoint</h4>
                             <p class="text-sm font-bold text-neutral-700 dark:text-neutral-200 font-mono tracking-tight">
                                 http://localhost:<span class="text-indigo-500">3001</span>
@@ -105,7 +148,11 @@
             </div>
 
             {{-- Log Section (Lapis 900 Background) --}}
+<<<<<<< HEAD
             <div class="bg-neutral-900 rounded-xl p-8 shadow-2xl border border-neutral-800 overflow-hidden relative group">
+=======
+            <div class="bg-neutral-900 rounded-[2rem] p-8 shadow-2xl border border-neutral-800 overflow-hidden relative group">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
                     <svg class="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
                 </div>

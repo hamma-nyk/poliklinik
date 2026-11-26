@@ -1,11 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
+<<<<<<< HEAD
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Tambah Karyawan Manual') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Pendaftaran karyawan baru ke dalam sistem database</p>
+=======
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold tracking-tight">
+                    {{ __('Tambah Karyawan Manual') }}
+                </h2>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Pendaftaran karyawan baru ke dalam sistem database</p>
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="hidden md:flex items-center text-sm text-neutral-500 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors"><a href="{{ route('master.employees.index') }}">Karyawan</a></span>
@@ -15,8 +24,13 @@
         </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
+=======
+    <div class="py-6 flex-1 space-y-4">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 sm:p-8">
                 
@@ -136,6 +150,63 @@
 </script>
 @endpush
 
+<<<<<<< HEAD
+=======
+{{-- STYLE AGAR MIRIP INPUT BAWAAN --}}
+@push('styles')
+<style>
+    /* TomSelect Dark Mode Styling */
+    .ts-wrapper.single .ts-control { 
+        border-radius: 0.375rem !important; 
+        padding: 0.25rem 0.75rem !important; 
+        height: 36px !important;
+        border-color: #e2e8f0 !important; 
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+        font-size: 0.875rem !important;
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+    }
+    .dark .ts-wrapper.single .ts-control { 
+        border-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .ts-wrapper.single .ts-control input {
+        font-size: 0.875rem !important;
+    }
+    .dark .ts-wrapper.single .ts-control input {
+        color: #f8fafc !important;
+    }
+    .ts-dropdown { 
+        border-radius: 0.375rem !important;
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+        font-size: 0.875rem !important;
+        z-index: 50 !important;
+    }
+    .dark .ts-dropdown { 
+        background-color: #020617 !important; 
+        border-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .ts-dropdown .option {
+        padding: 8px 12px !important;
+    }
+    .ts-dropdown .active { 
+        background-color: #f1f5f9 !important; 
+        color: #0f172a !important; 
+    }
+    .dark .ts-dropdown .active { 
+        background-color: #1e293b !important; 
+        color: #f8fafc !important; 
+    }
+    .dark .ts-dropdown .option { 
+        color: #cbd5e1; 
+    }
+</style>
+@endpush
+
+>>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         {{-- Gender --}}
                         <div class="space-y-2">
                             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Jenis Kelamin</label>
