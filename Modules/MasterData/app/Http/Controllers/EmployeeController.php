@@ -35,7 +35,7 @@ class EmployeeController extends Controller
         $employees = $query
         ->orderByRaw("CASE WHEN is_active != 'KO' THEN 1 ELSE 0 END")
         ->orderBy('nama', 'asc')
-        ->where('is_active', '')
+        ->whereIn('is_active', ['','KT', 'KK'])
         ->paginate($perPage)
         ->onEachSide(1)
         ->withQueryString();

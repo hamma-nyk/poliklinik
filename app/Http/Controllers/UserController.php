@@ -88,4 +88,21 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
     }
+
+    public function destroy(User $user)
+    {
+        // Proteksi: Hanya Superadmin yang boleh menghapus
+        if (!auth()->user()->hasRole('superadmin')) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        // Proteksi: Mencegah superadmin menghapus dirinya sendiri
+        if (auth()->user()->id === $user->id) {
+            return back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'Pengguna berhasil dihapus.');
+    }
 }

@@ -1,0 +1,23 @@
+<x-app-layout title="Edit Tipe MCU">
+    <x-slot name="header">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold tracking-tight leading-tight">{{ __('Edit Tipe MCU') }}</h2>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Sesuaikan tipe MCU dan mapping diagnosa penyakit</p>
+            </div>
+            <div class="hidden md:flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+                <a href="{{ route('master.mcu-types.index') }}" class="hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">Data MCU</a>
+                <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="font-semibold text-neutral-900 dark:text-neutral-50">Edit</span>
+            </div>
+        </div>
+    </x-slot>
+
+    <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6">
+        <form action="{{ route('master.mcu-types.update', $mcuType->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            @include('masterdata::mcu_types._form')
+        </form>
+    </div>
+</x-app-layout>

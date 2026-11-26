@@ -22,7 +22,7 @@
 <body>
 
     <div class="header">
-        <h2>Laporan 10 Besar Penyakit Terbanyak</h2>
+        <h2>Laporan Daftar Penyakit</h2>
         <div class="period">
             Periode: {{ \Carbon\Carbon::parse($startDate)->format('d F Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d F Y') }}
         </div>

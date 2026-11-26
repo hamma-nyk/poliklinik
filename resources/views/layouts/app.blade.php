@@ -10,7 +10,7 @@
         <link rel="icon" href="{{ asset('logo.ico') }}" type="icon/ico">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
         <script>
                 // 1. Cek apakah user pernah milih tema sebelumnya?
                 const userTheme = localStorage.getItem('theme');
@@ -35,36 +35,41 @@
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     </head>
     
-    <body class="font-sans antialiased bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-200 transition-colors duration-300">
+    <body class="font-sans antialiased bg-neutral-50 dark:bg-neutral-900 text-neutral-950 dark:text-neutral-50 transition-colors duration-300">
         
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden">
+        <canvas id="particles-canvas" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+
+        <div x-data="{ sidebarOpen: false }" class="relative z-10 flex h-screen overflow-hidden">
 
             @include('layouts.navigation')
 
-            <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+            <div class="relative flex flex-col flex-1 min-w-0 overflow-hidden">
                 
-                <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 md:hidden"> <!-- transition-colors duration-300 -->
-                    <div class="flex items-center">
-                        <button @click="sidebarOpen = true" class="text-slate-500 dark:text-slate-400 focus:outline-none hover:text-slate-700 dark:hover:text-slate-200">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="font-bold text-slate-700 dark:text-slate-200">Poliklinik System</div>
+                <header class="flex items-center justify-between px-4 py-3 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200/80 dark:border-neutral-700/50 md:hidden shrink-0 transition-colors duration-300">
+                    <button @click="sidebarOpen = true" type="button" aria-label="Buka menu navigasi" class="p-1.5 -ml-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 focus:outline-none transition-colors">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <span class="text-sm font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">Poliklinik System</span>
+                    <div class="w-6"></div>
                 </header>
 
-                @if (isset($header))
-                    <header class="bg-white dark:bg-slate-800 shadow-sm z-10 border-b border-transparent dark:border-slate-700 transition-colors duration-300"> 
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                            {{ $header }}
-                        </div>
-                    </header>
-                @endif
+                <div class="flex-1 overflow-y-auto overflow-x-hidden flex flex-col">
+                    @if (isset($header))
+                        <header class="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-sm z-10 border-b border-neutral-200/80 dark:border-neutral-700/50 transition-colors duration-300 shrink-0 md:h-[84px] flex items-center"> 
+                            <div class="w-full max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+                                {{ $header }}
+                            </div>
+                        </header>
+                    @endif
 
-                <main class="flex-1 p-6">
-                    {{ $slot }}
-                </main>
+                    <main class="flex-1 px-4 py-6 sm:px-6 lg:px-8">
+                        <div class="max-w-7xl mx-auto">
+                            {{ $slot }}
+                        </div>
+                    </main>
+                </div>
             </div>
             
         </div>

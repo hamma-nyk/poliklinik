@@ -17,6 +17,7 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
-        "@tailwindcss/postcss": "^4.1.18"
+        "@tailwindcss/postcss": "^4.1.18",
+        "shadcn-ui": "^0.9.5"
     }
 }

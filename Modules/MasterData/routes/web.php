@@ -10,6 +10,7 @@ use Modules\MasterData\App\Http\Controllers\DepartmentController;
 use Modules\MasterData\App\Http\Controllers\SubDepartmentController;
 use Modules\MasterData\App\Http\Controllers\UnitController;
 use Modules\MasterData\App\Http\Controllers\PositionController;
+use Modules\MasterData\App\Http\Controllers\McuTypeController;
 
 Route::middleware(['auth', 'verified'])->prefix('master')->name('master.')->group(function () {
     Route::resource('masterdatas', MasterDataController::class)->names('masterdata');
@@ -20,6 +21,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->name('master.')->grou
     Route::post('employees/sync', [EmployeeController::class, 'syncData'])->name('employees.sync');
     Route::resource('employees', EmployeeController::class);
     Route::resource('patients', PatientController::class);
+    Route::resource('mcu-types', McuTypeController::class)->except(['show']);
 
     Route::prefix('departments')->name('departments.')->group(function() {
         Route::get('/', [DepartmentController::class, 'index'])->name('index');

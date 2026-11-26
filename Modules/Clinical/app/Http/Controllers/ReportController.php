@@ -64,6 +64,47 @@ class ReportController extends Controller
         return view('clinical::reports.visits', compact('data', 'startDate', 'endDate'));
     }
 
+    // --- 1B. LAPORAN REKAM MEDIS PER PASIEN ---
+    public function patientRecords(Request $request)
+    {
+        $patients = Patient::orderBy('name')->get(['id', 'code', 'name', 'type', 'nik']);
+        $patientId = $request->patient_id;
+        $startDate = $request->start_date;
+        $endDate   = $request->end_date;
+
+        $selectedPatient = $patientId ? Patient::find($patientId) : null;
+        $records = collect();
+        $mcuRecommendations = collect();
+
+        if ($selectedPatient) {
+            $query = MedicalRecord::with(['patient', 'diagnosis', 'doctor', 'nurse'])
+                ->where('patient_id', $selectedPatient->id);
+
+            if ($startDate) {
+                $query->whereDate('created_at', '>=', $startDate);
+            }
+            if ($endDate) {
+                $query->whereDate('created_at', '<=', $endDate);
+            }
+
+            $records = $query->orderByDesc('created_at')->get();
+            $mcuRecommendations = \Modules\Clinical\App\Support\McuRecommendationMapper::summarize($records);
+
+            if ($request->action === 'pdf') {
+                $pdf = Pdf::loadView('clinical::reports.pdf_patient_records', compact('selectedPatient', 'records', 'mcuRecommendations', 'startDate', 'endDate'));
+                return $pdf->stream('Rekam-Medis-' . ($selectedPatient->code ?? $selectedPatient->id) . '.pdf');
+            } elseif ($request->action === 'excel') {
+                $safeName = preg_replace('/[^A-Za-z0-9_-]/', '_', $selectedPatient->name);
+                return Excel::download(
+                    new \Modules\Clinical\App\Exports\PatientMedicalRecordsExport($records),
+                    'Rekam_Medis_' . $safeName . '.xlsx'
+                );
+            }
+        }
+
+        return view('clinical::reports.patient_records', compact('patients', 'selectedPatient', 'records', 'mcuRecommendations', 'startDate', 'endDate'));
+    }
+
     // --- 2. LAPORAN 10 BESAR PENYAKIT ---
     public function diseases(Request $request)
     {
@@ -78,7 +119,7 @@ class ReportController extends Controller
                 ->with('diagnosis')
                 ->groupBy('diagnosis_id')
                 ->orderByDesc('total')
-                ->take(10)
+                // ->take(10)
                 ->get();
 
         // 2. Hitung Total Seluruh Kasus (Untuk penyebut persentase)
@@ -90,10 +131,36 @@ class ReportController extends Controller
         // 3. Export PDF
         if ($request->action == 'pdf') {
             $pdf = Pdf::loadView('clinical::reports.pdf_diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
-            return $pdf->stream('Top-10-Penyakit.pdf');
+            return $pdf->stream('Laporan-Daftar-Penyakit.pdf');
+        } elseif ($request->action === 'excel') {
+            // Logic generate Excel (Gunakan Laravel Excel / Maatwebsite)
+            $namaFile = 'Laporan_Morbiditas_' . $startDate . '_sd_' . $endDate . '.xlsx';
+            return Excel::download(new \Modules\Clinical\App\Exports\DiseaseExport($data, $grandTotal), $namaFile);
+        } elseif ($request->action === 'excel_detail' && $request->filled('diagnosis_id')) {
+            $records = MedicalRecord::with(['patient', 'doctor', 'diagnosis'])
+                ->whereDate('created_at', '>=', $startDate)
+                ->whereDate('created_at', '<=', $endDate)
+                ->where('diagnosis_id', $request->diagnosis_id)
+                ->orderByDesc('created_at')
+                ->get();
+
+            $diagCode = $records->first()?->diagnosis?->code ?? $request->diagnosis_id;
+            $safeCode = preg_replace('/[^A-Za-z0-9_-]/', '_', $diagCode);
+            $namaFile = 'Detail_Pasien_' . $safeCode . '_' . $startDate . '_sd_' . $endDate . '.xlsx';
+
+            return Excel::download(new \Modules\Clinical\App\Exports\DiseasePatientDetailExport($records), $namaFile);
         }
 
-        return view('clinical::reports.diseases', compact('data', 'startDate', 'endDate', 'grandTotal'));
+        // 4. Ambil detail pasien per diagnosa untuk tampilan web
+        $patientDetails = MedicalRecord::with(['patient', 'doctor'])
+                ->whereDate('created_at', '>=', $startDate)
+                ->whereDate('created_at', '<=', $endDate)
+                ->whereNotNull('diagnosis_id')
+                ->orderByDesc('created_at')
+                ->get()
+                ->groupBy('diagnosis_id');
+
+        return view('clinical::reports.diseases', compact('data', 'startDate', 'endDate', 'grandTotal', 'patientDetails'));
     }
 
 public function medicines(Request $request)
