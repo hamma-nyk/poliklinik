@@ -4,17 +4,10 @@
         {{-- Sisi Kiri: Judul & Breadcrumb Style --}}
         <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
             <div>
-<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Detail Stok Opname') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Nomor Stok Opname: {{ $opname->opname_number }}</p>
-=======
-                <h2 class="text-2xl font-semibold tracking-tight">
-                    {{ __('Detail Stok Opname') }}
-                </h2>
-                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Nomor Stok Opname: {{ $opname->opname_number }}</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <!-- <span class="hidden sm:block mx-2 text-neutral-300 dark:text-neutral-600 font-light">/</span>
             <span class="font-mono text-xs md:text-sm text-indigo-600 dark:text-indigo-400 font-black bg-indigo-100/50 dark:bg-indigo-900/40 px-3 py-1.5 rounded-xl border border-indigo-200 dark:border-indigo-800 shadow-sm tracking-tighter uppercase">
@@ -53,13 +46,8 @@
     </div>
 </x-slot>
 
-<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
-=======
-    <div class="py-6 flex-1 space-y-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             {{-- Dokumen Overview Card --}}
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 grid grid-cols-1 md:grid-cols-4 gap-8 transition-all">

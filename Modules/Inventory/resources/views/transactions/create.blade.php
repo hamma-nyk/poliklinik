@@ -2,17 +2,10 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
-<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Input Transaksi Stok') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Pencatatan barang masuk (pembelian/hibah) dengan data supplier & faktur.</p>
-=======
-                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">
-                    {{ __('Input Transaksi Stok') }}
-                </h2>
-                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Pencatatan barang masuk (pembelian/hibah) dengan data supplier & faktur.</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="hidden md:flex items-center text-sm text-neutral-500 mt-2 md:mt-0 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors"><a href="{{ route('inventory.transactions.index') }}">Transaksi</a></span>
@@ -55,11 +48,7 @@
             ];
         });
     @endphp
-<<<<<<< HEAD
     <div class="space-y-6"
-=======
-    <div class="py-6 flex-1 space-y-4"
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
          x-data="transactionForm(
              {{ Js::from($suppliers) }}, 
              {{ Js::from($medicines) }}

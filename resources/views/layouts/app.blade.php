@@ -45,7 +45,6 @@
 
             <div class="relative flex flex-col flex-1 min-w-0 overflow-hidden">
                 
-<<<<<<< HEAD
                 <header class="flex items-center justify-between px-4 py-3 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200/80 dark:border-neutral-700/50 md:hidden shrink-0 transition-colors duration-300">
                     <button @click="sidebarOpen = true" type="button" aria-label="Buka menu navigasi" class="p-1.5 -ml-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 focus:outline-none transition-colors">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,26 +63,6 @@
                             </div>
                         </header>
                     @endif
-=======
-                <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-600 md:hidden"> <!-- transition-colors duration-300 -->
-                    <div class="flex items-center">
-                        <button @click="sidebarOpen = true" class="text-neutral-500 dark:text-neutral-400 focus:outline-none hover:text-neutral-700 dark:hover:text-neutral-200">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="font-bold text-neutral-700 dark:text-neutral-200">Poliklinik System</div>
-                </header>
-
-                @if (isset($header))
-                    <header class="bg-white dark:bg-neutral-800 shadow-sm z-10 border-b border-neutral-200 border-transparent dark:border-neutral-600 transition-colors duration-300"> 
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                            {{ $header }}
-                        </div>
-                    </header>
-                @endif
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
 
                     <main class="flex-1 px-4 py-6 sm:px-6 lg:px-8">
                         <div class="max-w-7xl mx-auto">

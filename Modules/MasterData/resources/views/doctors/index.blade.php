@@ -1,20 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-<<<<<<< HEAD
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Data Dokter') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Manajemen Tenaga Medis & Spesialis Klinik</p>
-=======
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h2 class="text-2xl font-semibold tracking-tight">
-                    {{ __('Data Dokter') }}
-                </h2>
-                <p class="text-sm text-neutral-500 dark:text-neutral-400">Manajemen Tenaga Medis & Spesialis Klinik</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="hidden md:flex items-center text-sm text-neutral-500 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Master Data</span>
@@ -24,13 +15,8 @@
         </div>
     </x-slot>
 
-<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
-=======
-    <div class="py-6 flex-1 space-y-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             {{-- Alert Success --}}
             @if(session('success'))
@@ -50,11 +36,7 @@
                     {{-- Per Page --}}
                     <div class="relative w-full sm:w-auto">
                         <select name="per_page" onchange="this.form.submit()" 
-<<<<<<< HEAD
                                 class="flex h-9 w-full sm:w-20 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
-=======
-                                class="flex h-9 w-full sm:w-24 items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>

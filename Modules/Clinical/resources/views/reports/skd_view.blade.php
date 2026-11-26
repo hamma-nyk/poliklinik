@@ -3,11 +3,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 transition-all duration-300">
             <div class="flex items-center gap-3">
                 <div>
-<<<<<<< HEAD
                     <h2 class="text-2xl font-semibold tracking-tight leading-tight">Preview Laporan SKD</h2>
-=======
-                    <h2 class="text-2xl font-semibold tracking-tight">Preview Laporan SKD</h2>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                     <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Silahkan export laporan</p>
                 </div>
             </div>
@@ -17,7 +13,6 @@
         </div>
     </x-slot>
 
-<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
             
@@ -28,18 +23,6 @@
                         <h3 class="font-medium text-lg uppercase tracking-tight">Arsip Keterangan Sakit Karyawan</h3>
                         <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
                             <svg class="w-4 h-4 text-neutral-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-=======
-    <div class="py-6 flex-1 space-y-4">
-        <div class="max-w-[100rem] mx-auto sm:px-6 lg:px-8 space-y-6"> {{-- Lebar maksimal untuk data grid --}}
-            
-            {{-- Dokumen Header Card --}}
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div class="space-y-1">
-                        <h3 class="font-medium text-lg uppercase tracking-tight">Arsip Keterangan Sakit Karyawan</h3>
-                        <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
-                            <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             <span>Periode: <span class="font-medium">{{ \Carbon\Carbon::parse($startDate)->translatedFormat('d M Y') }}</span> — <span class="font-medium">{{ \Carbon\Carbon::parse($endDate)->translatedFormat('d M Y') }}</span></span>
                         </div>
                     </div>

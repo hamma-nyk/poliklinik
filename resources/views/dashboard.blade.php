@@ -2,17 +2,10 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
             <div>
-<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Dashboard') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Statistik Komprehensif Operasional Klinik</p>
-=======
-                <h2 class="text-2xl font-semibold tracking-tight">
-                    {{ __('Dashboard') }}
-                </h2>
-                <p class="text-sm text-neutral-500 dark:text-neutral-400">Statistik Komprehensif Operasional Klinik</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="hidden md:flex items-center text-xs text-neutral-500 dark:text-neutral-400">
                 <span class="relative flex h-2 w-2 mr-2">
@@ -24,7 +17,6 @@
         </div>
     </x-slot>
 
-<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
             
@@ -34,28 +26,13 @@
                     <h3 class="text-lg font-medium tracking-tight">Performa Klinis</h3>
                     <form action="{{ route('dashboard') }}" method="GET" class="flex items-center gap-2 w-full sm:w-auto">
                         <select name="month" onchange="this.form.submit()" class="flex h-9 w-full sm:w-auto min-w-[135px] items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 pr-8 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
-=======
-    <div class="py-6 flex-1 space-y-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
-            {{-- AKTIVITAS HARI INI (Highlight) --}}
-            <section class="space-y-4">
-                <div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-                    <h3 class="text-lg font-medium tracking-tight">Performa Klinis</h3>
-                    <form action="{{ route('dashboard') }}" method="GET" class="flex items-center space-x-2">
-                        <select name="month" onchange="this.form.submit()" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             @foreach(range(1, 12) as $m)
                                 <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>
                                     {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}
                                 </option>
                             @endforeach
                         </select>
-<<<<<<< HEAD
                         <select name="year" onchange="this.form.submit()" class="flex h-9 w-full sm:w-auto min-w-[90px] items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 pr-8 py-1 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
-=======
-                        <select name="year" onchange="this.form.submit()" class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-neutral-200 bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-600 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                             @for($y = date('Y'); $y >= date('Y') - 5; $y--)
                                 <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
                             @endfor
@@ -154,11 +131,7 @@
                 <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 lg:col-span-4">
                     <div class="flex flex-col space-y-1.5 p-6">
                         <h3 class="font-semibold leading-none tracking-tight">Tren Kunjungan Harian</h3>
-<<<<<<< HEAD
                         <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Bulan {{ \Carbon\Carbon::create()->month($month)->translatedFormat('F') }}</p>
-=======
-                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Bulan {{ \Carbon\Carbon::create()->month($month)->translatedFormat('F') }}</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                     </div>
                     <div class="p-6 pt-0">
                         <div id="chart-trend-daily" class="min-h-[300px]"></div>
@@ -173,19 +146,11 @@
                         <div id="chart-visit-types" class="min-h-[250px] flex justify-center"></div>
                         <div class="grid grid-cols-2 gap-4 mt-4 text-center">
                             <div>
-<<<<<<< HEAD
                                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Sakit (Umum)</p>
                                 <p class="text-2xl font-bold">{{ $sakitCount }}</p>
                             </div>
                             <div>
                                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Kecelakaan Kerja</p>
-=======
-                                <p class="text-sm text-neutral-500 dark:text-neutral-400">Sakit (Umum)</p>
-                                <p class="text-2xl font-bold">{{ $sakitCount }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-neutral-500 dark:text-neutral-400">Kecelakaan Kerja</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                                 <p class="text-2xl font-bold">{{ $kecelakaanCount }}</p>
                             </div>
                         </div>
@@ -197,11 +162,7 @@
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50">
                 <div class="flex flex-col space-y-1.5 p-6 border-b border-neutral-200 dark:border-neutral-600">
                     <h3 class="font-semibold leading-none tracking-tight">Top 5 Diagnosa</h3>
-<<<<<<< HEAD
                     <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Penyakit terbanyak bulan ini</p>
-=======
-                    <p class="text-sm text-neutral-500 dark:text-neutral-400">Penyakit terbanyak bulan ini</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 </div>
                 <div class="p-0">
                     <div class="relative w-full overflow-auto">

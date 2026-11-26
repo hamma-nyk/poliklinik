@@ -2,17 +2,10 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 transition-all duration-300">
             <div>
-<<<<<<< HEAD
                 <h2 class="text-2xl font-semibold tracking-tight leading-tight">
                     {{ __('Surat Keterangan Dokter') }}
                 </h2>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Arsip digital surat keterangan sakit & izin medis</p>
-=======
-                <h2 class="text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">
-                    {{ __('Surat Keterangan Dokter') }}
-                </h2>
-                <p class="text-sm text-neutral-500 mt-1 dark:text-neutral-400">Arsip digital surat keterangan sakit & izin medis</p>
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             </div>
             <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
                 <span class="hover:text-neutral-900 dark:hover:text-neutral-50 cursor-pointer transition-colors">Klinis</span>
@@ -22,13 +15,8 @@
         </div>
     </x-slot>
 
-<<<<<<< HEAD
     <div class="space-y-6">
         <div class="w-full space-y-6">
-=======
-    <div class="py-6 flex-1 space-y-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
             
             {{-- Alert Section --}}
             @if(session('success'))
@@ -40,11 +28,7 @@
             @endif
 
             {{-- Toolbar: Search, Filter & Action --}}
-<<<<<<< HEAD
             <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-4 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
-=======
-            <div class="rounded-xl border border-neutral-200 bg-white text-neutral-950 shadow dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-50 p-6 flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                 
                 <form method="GET" action="{{ route('clinical.sick-leaves.index') }}" class="w-full flex flex-col md:flex-row gap-3 items-center flex-grow">
                     {{-- Row Count --}}
@@ -80,11 +64,7 @@
                 </form>
 
                 <div class="w-full md:w-auto shrink-0">
-<<<<<<< HEAD
                     <a href="{{ route('clinical.sick-leaves.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 w-full md:w-auto">
-=======
-                    <a href="{{ route('clinical.sick-leaves.create') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 h-9 px-4 py-2 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90">
->>>>>>> 23ad60cfbf37ce4acfb2ea1596ac1bb7fee91687
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
                         Buat SKD Baru
                     </a>
