@@ -11,6 +11,7 @@ use Modules\MasterData\App\Http\Controllers\SubDepartmentController;
 use Modules\MasterData\App\Http\Controllers\UnitController;
 use Modules\MasterData\App\Http\Controllers\PositionController;
 use Modules\MasterData\App\Http\Controllers\McuTypeController;
+use Modules\MasterData\App\Http\Controllers\McuFilterController;
 
 Route::middleware(['auth', 'verified'])->prefix('master')->name('master.')->group(function () {
     Route::resource('masterdatas', MasterDataController::class)->names('masterdata');
@@ -22,6 +23,12 @@ Route::middleware(['auth', 'verified'])->prefix('master')->name('master.')->grou
     Route::resource('employees', EmployeeController::class);
     Route::resource('patients', PatientController::class);
     Route::resource('mcu-types', McuTypeController::class)->except(['show']);
+
+    Route::prefix('mcu-filter')->name('mcu-filter.')->group(function () {
+        Route::get('/', [McuFilterController::class, 'index'])->name('index');
+        Route::post('/process', [McuFilterController::class, 'process'])->name('process');
+        Route::get('/export', [McuFilterController::class, 'export'])->name('export');
+    });
 
     Route::prefix('departments')->name('departments.')->group(function() {
         Route::get('/', [DepartmentController::class, 'index'])->name('index');
